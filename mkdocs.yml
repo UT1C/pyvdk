@@ -1,4 +1,4 @@
-site_name: pyVDK
+site_name: pyvdk
 theme: readthedocs
 nav:
     - Home: index.md
