@@ -2,8 +2,7 @@
 name = "pyvdk"
 version = "0.1.0"
 description = "vk toolkit"
-# TODO: edit authors
-authors = ["Your Name <you@example.com>"]
+authors = ["mikk357 <mikk357@yandex.ru>", "lightmanLP <liteman1000@gmail.com>"]
 license = "MIT License"
 
 [tool.poetry.dependencies]
