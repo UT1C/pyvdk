@@ -1,8 +1,13 @@
 from .abc import ABCApi
 
 from requests import Session
+# from requests.exceptions import ...
 
 from .categories.messages import Messages
+from ..custom_logging import log
+
+
+logger = log.getLogger('vk_api')
 
 
 class Api(ABCApi):
@@ -22,8 +27,9 @@ class Api(ABCApi):
                 "access_token": self.__token,
                 "v": self.version
             }
+            logger.debug(f"request {method} {params}")
             with self.session.post(url, params=_params, data=params) as r:
-                # TODO: catch vk error there
+                # TODO: find & throw vk error there
                 return r.json()
 
         # TODO: catch network exceptions there

@@ -126,3 +126,5 @@ dmypy.json
 
 # VS Code
 .vscode/
+
+codegen/

@@ -1,4 +1,8 @@
+from ..custom_logging import log
 from .abc import ABCApi, ABCCategory
+
+
+logger = log.getLogger('vk_api')
 
 
 class Category(ABCCategory):
