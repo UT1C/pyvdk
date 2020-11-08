@@ -5,12 +5,12 @@ from ..rule import ABCRule, MessageTextRule
 from ..types import Message
 from ..vk_api import ABCAPI
 from .event_types import GroupEventType
-
+from .abc import ABCHandler
 
 logger = log.getLogger("event")
 
 
-class Handler:
+class Handler(ABCHandler):
     """
         Класс, хранящий в себе ссылку на функцию-обработчик события,
         и список правил(Rule), когда следует вызывать эту функцию
@@ -54,46 +54,10 @@ class Handler:
                 self.function(obj, *args)
             except Exception:
                 logger.exception("exception occured in handler!")
+                return True  # NOTE: или не тру? я себя захуярил
             else:
                 logger.debug("sucessfully processed")
                 return True
         else:
             logger.info("nah, that event not for me")
             return False
-
-
-class EventHandler:
-
-    api: ABCAPI
-    handlers: Dict[GroupEventType, List[Handler]]
-
-    def __init__(self, api: ABCAPI):
-        self.api = api
-        self.handlers = {i: [] for i in GroupEventType}
-
-    def process(self, event: dict):
-        if event["type"] == GroupEventType.MESSAGE_NEW:
-            obj = Message(self.api, **event["object"])
-        elif event["type"] == GroupEventType.GROUP_JOIN:
-            ... # TODO: сделать больше обрабатываемых типов
-            return  # временно
-        else:
-            ... # если тип не найден
-            return
-
-        for handler in self.handlers[GroupEventType.MESSAGE_NEW]:
-            handling_successful = handler.handle(obj)
-            if handling_successful:
-                break
-
-    def message_new(self, *rules, text: str = None):
-        def wrapper(function):
-
-            _rules = list(i for i in rules if isinstance(i, ABCRule))
-            if text:
-                _rules.append(MessageTextRule(text))
-
-            self.handlers[GroupEventType.MESSAGE_NEW]\
-                .append(Handler(function, *_rules))
-
-        return wrapper

@@ -41,6 +41,8 @@ class API(ABCAPI):
         # TODO: catch network exceptions there
         except Exception as e:
             print(e)
+            # NOTE: не сетевые ошибки - поднимать выше
+            raise
 
     def method(self, method: str, **params) -> dict:
         # FIXME: тут нет фильтрации агрументов, она в Category

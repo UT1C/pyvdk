@@ -1,5 +1,5 @@
 from .custom_logging import log
-from .event import EventHandler
+from .event import View, Labeler
 from .config import Config
 from .vk_api import API
 
@@ -12,12 +12,13 @@ class Bot:
 
     api: API
     __config: Config
-    on: EventHandler
+    on: Labeler
 
     def __init__(self, config: Config) -> None:
         self.__config = config
         self.api = API(self.__config)
-        self.on = EventHandler(self.api)
+        self.view = View(self.api)
+        self.on = Labeler(self.view)
 
     def request_handle(self, request: dict) -> str:
         """ Хендлит реквест от вк и возвращает ответ """
@@ -26,7 +27,7 @@ class Bot:
         response = self.__check(request)
         if response == 'ok':
             logger.info('new event')
-            self.on.process(request)
+            self.view.process(request)
         
         return response
     
