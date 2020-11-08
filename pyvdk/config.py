@@ -7,7 +7,7 @@ class Config:
     """ Конфиг бота """
 
     token: str = None
-    v: str = None
+    v: float = None
     group_id: int = None
     confcode: str = None
     secret: str = None

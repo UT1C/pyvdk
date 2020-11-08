@@ -38,7 +38,8 @@ class TestConfig(unittest.TestCase):
         self.assertEqual(config.confcode, 'foobar')
         self.assertEqual(config.secret, 'barfoo')
         self.assertTrue(isinstance(config.group_id, int))
-    
+        self.assertTrue(isinstance(config.v, float))
+
     def test_from_args(self):
         # Arrange
         config = Config()
@@ -59,3 +60,4 @@ class TestConfig(unittest.TestCase):
         self.assertEqual(config.confcode, 'foobar')
         self.assertEqual(config.secret, 'barfoo')
         self.assertTrue(isinstance(config.group_id, int))
+        self.assertTrue(isinstance(config.v, float))
