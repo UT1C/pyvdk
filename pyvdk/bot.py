@@ -1,24 +1,44 @@
-from .request_handler import RequestHandler
+from .custom_logging import log
+from .event import EventHandler
 from .config import Config
 from .vk_api import API
+
+
+logger = log.getLogger('bot')
 
 
 class Bot:
     """ Основной класс бота """
 
-    __config: Config
-    __request_handler: RequestHandler
     api: API
+    __config: Config
+    __event_handler: EventHandler
 
     def __init__(self, config: Config) -> None:
         self.__config = config
         self.api = API(self.__config)
-        self.__request_handler = RequestHandler(
-            self.__config,
-            self.api
-        )
+        self.__event_handler = EventHandler(self.api)
 
     def request_handle(self, request: dict) -> str:
         """ Хендлит реквест от вк и возвращает ответ """
+        
+        response = self.__check(request)
+        if response == 'ok':
+            logger.info('new event')
+            self.__event_handler.process(request)
+        
+        return response
+    
+    def __check(self, request: dict) -> str:
+        """ Проверяет данные реквеста """
 
-        return self.__request_handler(request).response
+        if request['secret'] != self.__config.secret:
+            logger.debug('secret key is invalid')
+            return 'not ok'
+
+        elif request['type'] == 'confirmation':
+            logger.info('confirmation request')
+            return self.__config.confcode
+
+        else:
+            return 'ok'
