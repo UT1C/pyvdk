@@ -1,4 +1,4 @@
-from .checker import checker
+from .checker import Сhecker
 
 
 class Handler:

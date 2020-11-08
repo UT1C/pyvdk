@@ -34,21 +34,21 @@ class DictToObject:
 
 class Junk:
     """ Some junk utils """
-  
+
     def file_reader(path: str) -> str:
         """ Read text from files """
-  
+
         with open(path, 'r') as file:
             return file.read()
-  
+
     def form_render(path: str, **kwargs) -> str:
         """ Just jinja2 """
-  
+
         file_text = Junk.file_reader(path)
         template = jinja2.Template(file_text)
         return template.render(**kwargs)
-  
+
     def get_chat_id(peer_id: int) -> int:
         """ Get chat id from peer id """
-  
+
         return int(peer_id - 2e9)
