@@ -9,7 +9,7 @@ class RequestHandler:
     response: str
 
     def __init__(self, config: Config) -> None:
-        self.config = Config
+        self.config = config
         self.event_handler = EventHandler(config)
     
     def __call__(self, request: dict) -> str:
