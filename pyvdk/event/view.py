@@ -32,14 +32,13 @@ class View(ABCView):
         logger.debug("forwarding done")
 
     def __create_object(self, event: dict):
-        if event["type"] == GroupEventType.MESSAGE_NEW:
-            return Message(self.api, **event["object"])
-        elif event["type"] == GroupEventType.GROUP_JOIN:
-            ... # TODO: сделать больше обрабатываемых типов
-            return  # временно
+        etype = GroupEventType(event["type"])
+        if etype == GroupEventType.MESSAGE_NEW:
+            return Message(self.api, **event["object"]["message"])
+        elif etype == GroupEventType.GROUP_JOIN:
+            raise Exception("# TODO: ")
         else:
-            ... # если тип не найден
-            return
+            raise Exception("# TODO: ")
 
     def add(self, etype: GroupEventType, handler: ABCHandler):
         logger.debug(f"registered new handler {handler}")
