@@ -1,14 +1,9 @@
 import yaml
+from .abc import ABCConfig
 
 
-class Config:
+class Config(ABCConfig):
     """ Конфиг бота """
-
-    group_id: int
-    secret: str
-    confcode: str
-    token: str
-    v: str
 
     def __init__(self, path: str) -> None:
         self.load(path)
