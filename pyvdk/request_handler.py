@@ -1,5 +1,7 @@
 from .config import Config
 from .event import EventHandler
+from .vk_api import API
+
 
 class RequestHandler:
     """  """
@@ -8,15 +10,15 @@ class RequestHandler:
     config: Config
     response: str
 
-    def __init__(self, config: Config) -> None:
-        self.config = Config
-        self.event_handler = EventHandler(config)
+    def __init__(self, config: Config, api: API) -> None:
+        self.config = config
+        self.event_handler = EventHandler(api)
     
     def __call__(self, request: dict) -> str:
         """ Проверяет поступивший реквест """
         
         if self.check(request):
-            pass  # TODO: call event_handler
+            self.event_handler.process(request)
 
         return self.response
     

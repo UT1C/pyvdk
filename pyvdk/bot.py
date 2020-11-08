@@ -12,8 +12,11 @@ class Bot:
 
     def __init__(self, config: Config) -> None:
         self.__config = config
-        self.__request_handler = RequestHandler(self.__config)
         self.api = API(self.__config)
+        self.__request_handler = RequestHandler(
+            self.__config,
+            self.api
+        )
 
     def request_handle(self, request: dict) -> str:
         """ Хендлит реквест от вк и возвращает ответ """

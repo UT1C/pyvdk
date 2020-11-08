@@ -1,16 +1,16 @@
 import yaml
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 
 @dataclass
 class Config:
     """ Конфиг бота """
 
-    token: str
-    v: str
-    group_id: int
-    confcode: str
-    secret: str
+    token: str = None
+    v: str = None
+    group_id: int = None
+    confcode: str = None
+    secret: str = None
 
     def from_args(self, **kwargs):
         """ Подгружает данные из аргументов """
