@@ -12,12 +12,12 @@ class Bot:
 
     api: API
     __config: Config
-    __event_handler: EventHandler
+    on: EventHandler
 
     def __init__(self, config: Config) -> None:
         self.__config = config
         self.api = API(self.__config)
-        self.__event_handler = EventHandler(self.api)
+        self.on = EventHandler(self.api)
 
     def request_handle(self, request: dict) -> str:
         """ Хендлит реквест от вк и возвращает ответ """
@@ -26,7 +26,7 @@ class Bot:
         response = self.__check(request)
         if response == 'ok':
             logger.info('new event')
-            self.__event_handler.process(request)
+            self.on.process(request)
         
         return response
     
