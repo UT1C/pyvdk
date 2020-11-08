@@ -8,6 +8,7 @@ class Config:
     secret: str
     confcode: str
     token: str
+    v: str
 
     def __init__(self, path: str) -> None:
         self.load(path)
