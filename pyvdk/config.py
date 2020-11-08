@@ -8,8 +8,14 @@ class Config:
     secret: str
     confcode: str
     token: str
+    v: str
 
     def __init__(self, path: str) -> None:
+        self.load(path)
+    
+    def load(self, path: str):
+        """ Подгружает данные из конфига """
+
         with open(path, 'r') as f:
             data = yaml.load(f, Loader=yaml.Loader)
         for k, v in data.items():

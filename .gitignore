@@ -128,3 +128,9 @@ dmypy.json
 .vscode/
 
 codegen/
+
+# poetry
+poetry.lock
+
+# custom
+pyvdk_legacy/
