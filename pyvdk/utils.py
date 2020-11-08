@@ -1,4 +1,5 @@
-from types import Any
+from typing import Any
+import jinja2
 
 
 class DictToObject:
@@ -13,7 +14,7 @@ class DictToObject:
             self.__setattr__(k, selected)
 
     def __repr__(self) -> str:
-        return f"<DictToObject: {self.__dict__}>"
+        return f"<DictToObject: {self._raw_dict}>"
 
     def get(self, attr: str) -> Any:
         """ Get attribute """
@@ -29,3 +30,25 @@ class DictToObject:
         if isinstance(x, (list, tuple)):
             return [DictToObject.type_handle(i) for i in x]
         return x
+
+
+class Junk:
+    """ Some junk utils """
+  
+    def file_reader(path: str) -> str:
+        """ Read text from files """
+  
+        with open(path, 'r') as file:
+            return file.read()
+  
+    def form_render(path: str, **kwargs) -> str:
+        """ Just jinja2 """
+  
+        file_text = Junk.file_reader(path)
+        template = jinja2.Template(file_text)
+        return template.render(**kwargs)
+  
+    def get_chat_id(peer_id: int) -> int:
+        """ Get chat id from peer id """
+  
+        return int(peer_id - 2e9)

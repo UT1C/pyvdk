@@ -126,3 +126,9 @@ dmypy.json
 
 # VS Code
 .vscode/
+
+# poetry
+poetry.lock
+
+# custom
+pyvdk_legacy/
