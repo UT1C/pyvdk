@@ -14,7 +14,7 @@ class RequestHandler:
         self.config = Config
         
         if self.check():
-            pass  # TODO: call eventHandler
+            pass  # TODO: call EventHandler
     
     def check(self) -> bool:
         """ Проверяет данные реквеста """

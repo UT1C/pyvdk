@@ -2,17 +2,17 @@ from abc import ABC, abstractmethod
 
 from requests import Session
 
-from ..config import ABCConfig
+from ..config import Config
 
 
 class ABCAPI(ABC):
 
     API_URL: str  # NOTE: to lowercase ?
-    config: ABCConfig
+    config: Config
     session: Session
 
     @abstractmethod
-    def __init__(self, config: ABCConfig) -> None:
+    def __init__(self, config: Config) -> None:
         ...
 
     @abstractmethod
