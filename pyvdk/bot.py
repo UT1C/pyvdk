@@ -22,6 +22,7 @@ class Bot:
     def request_handle(self, request: dict) -> str:
         """ Хендлит реквест от вк и возвращает ответ """
         
+        logger.debug(f'new request: {request}')
         response = self.__check(request)
         if response == 'ok':
             logger.info('new event')
