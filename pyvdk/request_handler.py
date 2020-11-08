@@ -1,6 +1,10 @@
 from .config import Config
 from .event import EventHandler
 from .vk_api import API
+from .custom_logging import log
+
+
+logger = log.getLogger('request_handler')
 
 
 class RequestHandler:
@@ -18,6 +22,7 @@ class RequestHandler:
         """ Проверяет поступивший реквест """
         
         if self.check(request):
+            logger.info('new event')
             self.event_handler.process(request)
 
         return self.response
@@ -27,10 +32,12 @@ class RequestHandler:
 
         if request['secret'] != self.config.secret:
             self.response = 'not ok'
+            logger.debug('secret key is invalid')
 
         elif request['type'] == 'confirmation':
             self.response = self.config.confcode
-        
+            logger.info('confirmation request')
+
         else:
             self.response = 'ok'
             return True
