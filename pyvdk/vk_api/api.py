@@ -31,7 +31,7 @@ class API(ABCAPI):
             url = self.API_URL + method
             _params = {  # params in url
                 "access_token": self.config.token,
-                "v": self.config.version
+                "v": self.config.v
             }
             logger.debug(f"request {method} {params}")
             with self.session.post(url, params=_params, data=params) as r:
@@ -41,3 +41,9 @@ class API(ABCAPI):
         # TODO: catch network exceptions there
         except Exception as e:
             print(e)
+
+    def method(self, method: str, **params) -> dict:
+        # FIXME: тут нет фильтрации агрументов, она в Category
+        # необходимо куда-то вынести тот код, или импортировать сюда класс
+        # главное не получить цикличный импорт (хотя с abc не должно быть...)
+        return self.request(method, params)
