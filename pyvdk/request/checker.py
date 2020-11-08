@@ -1,7 +1,4 @@
-from .checker import checker
-
-
-class Handler:
+class Checker:
     """  """
 
     def __init__(self) -> None:
