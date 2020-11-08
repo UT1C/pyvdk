@@ -35,12 +35,6 @@ class DictToObject:
 class Junk:
     """ Some junk utils """
 
-    def file_reader(path: str) -> str:
-        """ Read text from files """
-
-        with open(path, 'r') as file:
-            return file.read()
-
     def form_render(path: str, **kwargs) -> str:
         """ Just jinja2 """
 

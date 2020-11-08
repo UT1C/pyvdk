@@ -9,7 +9,7 @@ from .categories import Users
 from .categories import Wall
 
 from ..custom_logging import log
-from ..config import ABCConfig
+from ..config import Config
 
 logger = log.getLogger('vk_api')
 
@@ -17,7 +17,7 @@ logger = log.getLogger('vk_api')
 class API(ABCAPI):
     API_URL = "https://api.vk.com/method/"
 
-    def __init__(self, config: ABCConfig) -> None:
+    def __init__(self, config: Config) -> None:
         self.config = config
         self.session = Session()
 
