@@ -1,28 +1,32 @@
 from .config import Config
-
+from .event import EventHandler
 
 class RequestHandler:
     """  """
 
-    request: dict
+    event_handler: EventHandler
     config: Config
     response: str
 
-
-    def __init__(self, request: dict, config: Config) -> None:
-        self.request = request
+    def __init__(self, config: Config) -> None:
         self.config = Config
-        
-        if self.check():
-            pass  # TODO: call EventHandler
+        self.event_handler = EventHandler(config)
     
-    def check(self) -> bool:
+    def __call__(self, request: dict) -> str:
+        """ Проверяет поступивший реквест """
+        
+        if self.check(request):
+            pass  # TODO: call event_handler
+
+        return self.response
+    
+    def check(self, request: dict) -> bool:
         """ Проверяет данные реквеста """
 
-        if self.request['secret'] != self.config.secret:
+        if request['secret'] != self.config.secret:
             self.response = 'not ok'
 
-        elif self.request['type'] == 'confirmation':
+        elif request['type'] == 'confirmation':
             self.response = self.config.confcode
         
         else:
