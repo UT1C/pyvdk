@@ -8,7 +8,8 @@ from .abc import ABCLabeler, ABCView
 from .event_types import GroupEventType
 from .handler import Handler
 
-logger = log.getLogger("event")
+
+logger = log.getLogger("event/labeler")
 
 
 class Labeler(ABCLabeler):

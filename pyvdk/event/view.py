@@ -6,6 +6,10 @@ from ..types import Message
 from ..vk_api import ABCAPI
 from .abc import ABCView, ABCHandler
 from .event_types import GroupEventType
+from ..custom_logging import log
+
+
+logger = log.getLogger("event/view")
 
 
 class View(ABCView):
@@ -16,12 +20,15 @@ class View(ABCView):
 
     def process(self, event: dict):
 
+        logger.debug("creating object")
         obj = self.__create_object(event)
 
+        logger.debug("forwarding obj in handlers")
         for handler in self.handlers[GroupEventType.MESSAGE_NEW]:
             handling_successful = handler.handle(obj)
             if handling_successful:
                 break
+        logger.debug("forwarding done")
 
     def __create_object(self, event: dict):
         if event["type"] == GroupEventType.MESSAGE_NEW:
@@ -34,4 +41,5 @@ class View(ABCView):
             return
 
     def add(self, etype: GroupEventType, handler: ABCHandler):
+        logger.debug(f"registered new handler {handler}")
         self.handlers[etype].append(handler)

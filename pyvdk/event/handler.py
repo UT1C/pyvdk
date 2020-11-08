@@ -7,7 +7,8 @@ from ..vk_api import ABCAPI
 from .event_types import GroupEventType
 from .abc import ABCHandler
 
-logger = log.getLogger("event")
+
+logger = log.getLogger("event/handler")
 
 
 class Handler(ABCHandler):
@@ -33,8 +34,10 @@ class Handler(ABCHandler):
         )
 
     def handle(self, obj: Any) -> bool:
+        logger.debug(f"called {self}")
         args = list()
         call = False
+        logger.debug("checking rules")
         if self.rules:
             for rule in self.rules:
                 result = rule.check(obj)
@@ -59,5 +62,5 @@ class Handler(ABCHandler):
                 logger.debug("sucessfully processed")
                 return True
         else:
-            logger.info("nah, that event not for me")
+            logger.info("nope, conditions not satisfied")
             return False
