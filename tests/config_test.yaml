@@ -1,0 +1,5 @@
+token: foo
+v: bar
+group_id: 0
+confcode: foobar
+secret: barfoo
