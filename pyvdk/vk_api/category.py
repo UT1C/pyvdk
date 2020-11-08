@@ -1,5 +1,6 @@
+from .abc import ABCAPI, ABCCategory
+
 from ..custom_logging import log
-from .abc import ABCApi, ABCCategory
 
 
 logger = log.getLogger('vk_api')
@@ -7,7 +8,7 @@ logger = log.getLogger('vk_api')
 
 class Category(ABCCategory):
 
-    def __init__(self, api: ABCApi):
+    def __init__(self, api: ABCAPI):
         self.__api = api
         if not hasattr(self, "__name__"):
             self.__name__ = self.__class__.__name__
