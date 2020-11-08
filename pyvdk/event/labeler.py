@@ -16,7 +16,7 @@ class Labeler(ABCLabeler):
     def __init__(self, view: ABCView):
         self.view = view
 
-    def messages_send(self, *rules, **kw):
+    def message_new(self, *rules, **kw):
         def decorator(func):
             _rules = list(i for i in rules if isinstance(i, ABCRule))
 
