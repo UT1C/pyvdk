@@ -22,6 +22,7 @@ class View(ABCView):
 
         logger.debug("creating object")
         obj = self.__create_object(event)
+        logger.debug(f"obj = {obj}")
 
         logger.debug("forwarding obj in handlers")
         for handler in self.handlers[GroupEventType.MESSAGE_NEW]:
