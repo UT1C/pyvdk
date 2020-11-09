@@ -63,7 +63,9 @@ class API(ABCAPI):
             logger.debug(f"request {method} {params}")
             with self.session.post(url, params=_params, data=params) as r:
                 # TODO: find & throw vk error there
-                return r.json()
+                result = r.json()
+                logger.debug(f"response: [{r.status_code}] {result}")
+                return result
 
         # TODO: catch network exceptions there
         except Exception as e:
