@@ -17,12 +17,12 @@ class Bot:
     def __init__(
         self,
         config: Config,
-        default_endpoint: bool = False
+        endpoint_default: bool = False
     ) -> None:
         self.__config = config
         self.api = API(self.__config)
         self.view = View(self.api)
-        self.on = Labeler(self.view, default_endpoint)
+        self.on = Labeler(self.view, endpoint_default)
 
     def request_handle(self, request: dict) -> str:
         """ Handle request from vk and return response """

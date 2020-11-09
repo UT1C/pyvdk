@@ -13,9 +13,9 @@ logger = log.getLogger("event/labeler")
 
 
 class Labeler(ABCLabeler):
-    def __init__(self, view: ABCView, default_endpoint: bool):
+    def __init__(self, view: ABCView, endpoint_default: bool):
         self._view = view
-        self._default_endpoint = default_endpoint
+        self._endpoint_default = endpoint_default
 
     def message_new(
         self,
@@ -40,7 +40,7 @@ class Labeler(ABCLabeler):
                 ...
             
             if endpoint is None:
-                endpoint = self._default_endpoint
+                endpoint = self._endpoint_default
 
             handler = Handler(func, *rules, endpoint=endpoint)
             self._view.add(GroupEventType.MESSAGE_NEW, handler)
