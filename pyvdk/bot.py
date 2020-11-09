@@ -25,7 +25,7 @@ class Bot:
         self.on = Labeler(self.view, default_endpoint)
 
     def request_handle(self, request: dict) -> str:
-        """ Хендлит реквест от вк и возвращает ответ """
+        """ Handle request from vk and return response """
         
         logger.debug(f'new request: {request}')
         response = self.__check(request)
