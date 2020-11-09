@@ -3,14 +3,15 @@ from pyvdk import Bot, Config
 
 
 app = Flask(__name__)
-config = Config(
-    token="token",
-    v=5.103,
-    group_id=0,
-    secret="secret",
-    confcode="confcode"
+bot = Bot(
+    Config(
+        token="token",
+        v=5.103,
+        group_id=0,
+        secret="secret",
+        confcode="confcode"
+    )
 )
-bot = Bot(config)
 
 
 @app.route('/', methods=['POST'])

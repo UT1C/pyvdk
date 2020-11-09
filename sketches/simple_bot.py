@@ -3,8 +3,7 @@ from pyvdk import Bot, Config
 
 
 app = Flask(__name__)
-config = Config().from_yaml('config.yaml')
-bot = Bot(config)
+bot = Bot(Config.from_yaml('config.yaml'))
 
 
 @app.route('/', methods=['POST'])
