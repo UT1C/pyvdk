@@ -12,7 +12,7 @@ def bot_route():
     return bot.request_handle(request.get_json())
 
 
-@bot.on.message_new(text='test')
+@bot.on.message_new(text='/test')
 def test_func(msg: object):
     print('brrrr')
     msg('brrrrrrr')
