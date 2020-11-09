@@ -14,7 +14,11 @@ class Bot:
     on: Labeler
     __config: Config
 
-    def __init__(self, config: Config) -> None:
+    def __init__(
+        self,
+        config: Config,
+        default_endpoint: bool = False
+    ) -> None:
         self.__config = config
         self.api = API(self.__config)
         self.view = View(self.api)
