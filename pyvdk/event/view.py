@@ -13,6 +13,7 @@ logger = log.getLogger("event/view")
 
 
 class View(ABCView):
+    """  """
 
     def __init__(self, api: ABCAPI):
         self.api = api
@@ -31,6 +32,10 @@ class View(ABCView):
                 break
         logger.debug("forwarding done")
 
+    def add(self, etype: GroupEventType, handler: ABCHandler):
+        logger.debug(f"registered new handler {handler}")
+        self.handlers[etype].append(handler)
+
     def __create_object(self, event: dict):
         etype = GroupEventType(event["type"])
         if etype == GroupEventType.MESSAGE_NEW:
@@ -39,7 +44,3 @@ class View(ABCView):
             raise Exception("# TODO: ")
         else:
             raise Exception("# TODO: ")
-
-    def add(self, etype: GroupEventType, handler: ABCHandler):
-        logger.debug(f"registered new handler {handler}")
-        self.handlers[etype].append(handler)
