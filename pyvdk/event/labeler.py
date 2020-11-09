@@ -1,7 +1,7 @@
 from typing import Any, Callable, Dict, List, Tuple
 
 from ..custom_logging import log
-from ..rule import ABCRule, MessageTextRule
+from ..rule import ABCRule, MessageTextRule, RegexRule
 from ..types import Message
 from ..vk_api import ABCAPI
 from .abc import ABCLabeler, ABCView
@@ -22,7 +22,7 @@ class Labeler(ABCLabeler):
         *rules,
         text: str = None,
         lower: bool = True,
-        regex: Any = None,
+        regex: str = None,
         endpoint: bool = None
     ) -> Callable:
         def decorator(func):
@@ -36,9 +36,10 @@ class Labeler(ABCLabeler):
                 )
 
             if regex is not None:
-                # TODO: regexrule there
-                ...
-            
+                _rules.append(
+                    RegexRule(regex)
+                )
+
             if endpoint is None:
                 endpoint = self._endpoint_default
 

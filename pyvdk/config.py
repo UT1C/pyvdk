@@ -6,11 +6,11 @@ from dataclasses import dataclass
 class Config:
     """ Конфиг бота """
 
-    token: str = None
-    v: float = None
-    group_id: int = None
-    confcode: str = None
-    secret: str = None
+    token: str
+    group_id: int
+    confcode: str
+    secret: str
+    v: float = 5.124
 
     def edit_from_args(self, **kwargs):
         """ Подгружает данные из аргументов """

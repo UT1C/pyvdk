@@ -1,17 +1,16 @@
 from flask import Flask, request
-from pyvdk import Bot, Config
+from pyvdk import Bot, Config, Message
+import os
 
 
 app = Flask(__name__)
-bot = Bot(
-    Config(
-        token="token",
-        v=5.103,
-        group_id=0,
-        secret="secret",
-        confcode="confcode"
-    )
+config = Config(
+    token=os.environ["BOT_TOKEN"],
+    secret=os.environ["BOT_SECRET"],
+    confcode=os.environ["BOT_CONFIRMATION_CODE"],
+    group_id=0,
 )
+bot = Bot(config)
 
 
 @app.route('/', methods=['POST'])
@@ -20,6 +19,11 @@ def bot_route():
 
 
 @bot.on.message_new(text='/test')
-def test_func(msg: object):
+def test_func(msg: Message):
     print('brrrr')
-    msg('brrrrrrr', msg.peer_id)
+    msg('brrrrrrr')
+
+
+if __name__ == "__main__":
+    # localhost
+    app.run("127.0.0.1", port=5099)
