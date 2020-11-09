@@ -10,7 +10,7 @@ class Wall(Category):
         """
         <null>
         """
-        return self.__request__("closeComments", locals())
+        return self._request("closeComments", locals())
 
     def create_comment(
         self,
@@ -26,7 +26,7 @@ class Wall(Category):
         """
         Adds a comment to a post on a user wall or community wall.
         """
-        return self.__request__("createComment", locals())
+        return self._request("createComment", locals())
 
     def delete(
         self,
@@ -36,7 +36,7 @@ class Wall(Category):
         """
         Deletes a post from a user wall or community wall.
         """
-        return self.__request__("delete", locals())
+        return self._request("delete", locals())
 
     def delete_comment(
         self,
@@ -46,7 +46,7 @@ class Wall(Category):
         """
         Deletes a comment on a post on a user wall or community wall.
         """
-        return self.__request__("deleteComment", locals())
+        return self._request("deleteComment", locals())
 
     def edit(
         self,
@@ -71,7 +71,7 @@ class Wall(Category):
         """
         Edits a post on a user wall or community wall.
         """
-        return self.__request__("edit", locals())
+        return self._request("edit", locals())
 
     def edit_ads_stealth(
         self,
@@ -91,7 +91,7 @@ class Wall(Category):
         """
         Allows to edit hidden post.
         """
-        return self.__request__("editAdsStealth", locals())
+        return self._request("editAdsStealth", locals())
 
     def edit_comment(
         self,
@@ -103,7 +103,7 @@ class Wall(Category):
         """
         Edits a comment on a user wall or community wall.
         """
-        return self.__request__("editComment", locals())
+        return self._request("editComment", locals())
 
     def get(
         self,
@@ -118,7 +118,7 @@ class Wall(Category):
         """
         Returns a list of posts on a user wall or community wall.
         """
-        return self.__request__("get", locals())
+        return self._request("get", locals())
 
     def get_by_id(
         self,
@@ -130,7 +130,7 @@ class Wall(Category):
         """
         Returns a list of posts from user or community walls by their IDs.
         """
-        return self.__request__("getById", locals())
+        return self._request("getById", locals())
 
     def get_comment(
         self,
@@ -142,7 +142,7 @@ class Wall(Category):
         """
         Returns a comment on a post on a user wall or community wall.
         """
-        return self.__request__("getComment", locals())
+        return self._request("getComment", locals())
 
     def get_comments(
         self,
@@ -163,7 +163,7 @@ class Wall(Category):
         """
         Returns a list of comments on a post on a user wall or community wall.
         """
-        return self.__request__("getComments", locals())
+        return self._request("getComments", locals())
 
     def get_reposts(
         self,
@@ -176,7 +176,7 @@ class Wall(Category):
         """
         Returns information about reposts of a post on user wall or community wall.
         """
-        return self.__request__("getReposts", locals())
+        return self._request("getReposts", locals())
 
     def open_comments(
         self,
@@ -186,7 +186,7 @@ class Wall(Category):
         """
         <null>
         """
-        return self.__request__("openComments", locals())
+        return self._request("openComments", locals())
 
     def pin(
         self,
@@ -196,7 +196,7 @@ class Wall(Category):
         """
         Pins the post on wall.
         """
-        return self.__request__("pin", locals())
+        return self._request("pin", locals())
 
     def post(
         self,
@@ -221,7 +221,7 @@ class Wall(Category):
         """
         Adds a new post on a user wall or community wall. Can also be used to publish suggested or scheduled posts.
         """
-        return self.__request__("post", locals())
+        return self._request("post", locals())
 
     def post_ads_stealth(
         self,
@@ -241,7 +241,7 @@ class Wall(Category):
         """
         Allows to create hidden post which will not be shown on the community's wall and can be used for creating an ad with type "Community post".
         """
-        return self.__request__("postAdsStealth", locals())
+        return self._request("postAdsStealth", locals())
 
     def report_comment(
         self,
@@ -252,7 +252,7 @@ class Wall(Category):
         """
         Reports (submits a complaint about) a comment on a post on a user wall or community wall.
         """
-        return self.__request__("reportComment", locals())
+        return self._request("reportComment", locals())
 
     def report_post(
         self,
@@ -263,7 +263,7 @@ class Wall(Category):
         """
         Reports (submits a complaint about) a post on a user wall or community wall.
         """
-        return self.__request__("reportPost", locals())
+        return self._request("reportPost", locals())
 
     def repost(
         self,
@@ -276,7 +276,7 @@ class Wall(Category):
         """
         Reposts (copies) an object to a user wall or community wall.
         """
-        return self.__request__("repost", locals())
+        return self._request("repost", locals())
 
     def restore(
         self,
@@ -286,7 +286,7 @@ class Wall(Category):
         """
         Restores a post deleted from a user wall or community wall.
         """
-        return self.__request__("restore", locals())
+        return self._request("restore", locals())
 
     def restore_comment(
         self,
@@ -296,7 +296,7 @@ class Wall(Category):
         """
         Restores a comment deleted from a user wall or community wall.
         """
-        return self.__request__("restoreComment", locals())
+        return self._request("restoreComment", locals())
 
     def search(
         self,
@@ -313,7 +313,7 @@ class Wall(Category):
         """
         Allows to search posts on user or community walls.
         """
-        return self.__request__("search", locals())
+        return self._request("search", locals())
 
     def unpin(
         self,
@@ -323,7 +323,7 @@ class Wall(Category):
         """
         Unpins the post on wall.
         """
-        return self.__request__("unpin", locals())
+        return self._request("unpin", locals())
 
 
 # generated at 2020.11.08 08:32:23

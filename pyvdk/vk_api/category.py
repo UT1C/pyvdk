@@ -18,7 +18,7 @@ class Category(ABCCategory):
         if not hasattr(self, "__name__"):
             self.__name__ = self.__class__.__name__
 
-    def __request__(self, method: str, params: dict):
+    def _request(self, method: str, params: dict):
         return self.__api.request(
             f"{self.__name__}.{method}",
             self.prepare_params(params)

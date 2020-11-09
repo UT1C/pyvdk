@@ -34,7 +34,7 @@ class ABCCategory(ABC):
         ...
 
     @abstractmethod
-    def __request__(self, method: str, params: dict) -> dict:
+    def _request(self, method: str, params: dict) -> dict:
         ...
 
 

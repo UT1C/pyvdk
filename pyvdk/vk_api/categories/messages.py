@@ -13,7 +13,7 @@ class Messages(Category):
         """
         Adds a new user to a chat.
         """
-        return self.__request__("addChatUser", locals())
+        return self._request("addChatUser", locals())
 
     def allow_messages_from_group(
         self,
@@ -23,7 +23,7 @@ class Messages(Category):
         """
         Allows sending messages from community to the current user.
         """
-        return self.__request__("allowMessagesFromGroup", locals())
+        return self._request("allowMessagesFromGroup", locals())
 
     def create_chat(
         self,
@@ -34,7 +34,7 @@ class Messages(Category):
         """
         Creates a chat with several participants.
         """
-        return self.__request__("createChat", locals())
+        return self._request("createChat", locals())
 
     def delete(
         self,
@@ -46,7 +46,7 @@ class Messages(Category):
         """
         Deletes one or more messages.
         """
-        return self.__request__("delete", locals())
+        return self._request("delete", locals())
 
     def delete_chat_photo(
         self,
@@ -57,7 +57,7 @@ class Messages(Category):
         """
         Deletes a chat's cover picture.
         """
-        return self.__request__("deleteChatPhoto", locals())
+        return self._request("deleteChatPhoto", locals())
 
     def delete_conversation(
         self,
@@ -68,7 +68,7 @@ class Messages(Category):
         """
         Deletes all private messages in a conversation.
         """
-        return self.__request__("deleteConversation", locals())
+        return self._request("deleteConversation", locals())
 
     def deny_messages_from_group(
         self,
@@ -77,7 +77,7 @@ class Messages(Category):
         """
         Denies sending message from community to the current user.
         """
-        return self.__request__("denyMessagesFromGroup", locals())
+        return self._request("denyMessagesFromGroup", locals())
 
     def edit(
         self,
@@ -98,7 +98,7 @@ class Messages(Category):
         """
         Edits the message.
         """
-        return self.__request__("edit", locals())
+        return self._request("edit", locals())
 
     def edit_chat(
         self,
@@ -109,7 +109,7 @@ class Messages(Category):
         """
         Edits the title of a chat.
         """
-        return self.__request__("editChat", locals())
+        return self._request("editChat", locals())
 
     def get_by_conversation_message_id(
         self,
@@ -122,7 +122,7 @@ class Messages(Category):
         """
         Returns messages by their IDs within the conversation.
         """
-        return self.__request__("getByConversationMessageId", locals())
+        return self._request("getByConversationMessageId", locals())
 
     def get_by_id(
         self,
@@ -135,7 +135,7 @@ class Messages(Category):
         """
         Returns messages by their IDs.
         """
-        return self.__request__("getById", locals())
+        return self._request("getById", locals())
 
     def get_chat_preview(
         self,
@@ -146,7 +146,7 @@ class Messages(Category):
         """
         <null>
         """
-        return self.__request__("getChatPreview", locals())
+        return self._request("getChatPreview", locals())
 
     def get_conversation_members(
         self,
@@ -157,7 +157,7 @@ class Messages(Category):
         """
         Returns a list of IDs of users participating in a chat.
         """
-        return self.__request__("getConversationMembers", locals())
+        return self._request("getConversationMembers", locals())
 
     def get_conversations(
         self,
@@ -173,7 +173,7 @@ class Messages(Category):
         """
         Returns a list of the current user's conversations.
         """
-        return self.__request__("getConversations", locals())
+        return self._request("getConversations", locals())
 
     def get_conversations_by_id(
         self,
@@ -185,7 +185,7 @@ class Messages(Category):
         """
         Returns conversations by their IDs
         """
-        return self.__request__("getConversationsById", locals())
+        return self._request("getConversationsById", locals())
 
     def get_history(
         self,
@@ -203,7 +203,7 @@ class Messages(Category):
         """
         Returns message history for the specified user or group chat.
         """
-        return self.__request__("getHistory", locals())
+        return self._request("getHistory", locals())
 
     def get_history_attachments(
         self,
@@ -222,7 +222,7 @@ class Messages(Category):
         """
         Returns media files from the dialog or group chat.
         """
-        return self.__request__("getHistoryAttachments", locals())
+        return self._request("getHistoryAttachments", locals())
 
     def get_invite_link(
         self,
@@ -233,7 +233,7 @@ class Messages(Category):
         """
         <null>
         """
-        return self.__request__("getInviteLink", locals())
+        return self._request("getInviteLink", locals())
 
     def get_last_activity(
         self,
@@ -242,7 +242,7 @@ class Messages(Category):
         """
         Returns a user's current status and date of last activity.
         """
-        return self.__request__("getLastActivity", locals())
+        return self._request("getLastActivity", locals())
 
     def get_long_poll_history(
         self,
@@ -265,7 +265,7 @@ class Messages(Category):
         """
         Returns updates in user's private messages.
         """
-        return self.__request__("getLongPollHistory", locals())
+        return self._request("getLongPollHistory", locals())
 
     def get_long_poll_server(
         self,
@@ -276,7 +276,7 @@ class Messages(Category):
         """
         Returns data required for connection to a Long Poll server.
         """
-        return self.__request__("getLongPollServer", locals())
+        return self._request("getLongPollServer", locals())
 
     def is_messages_from_group_allowed(
         self,
@@ -286,7 +286,7 @@ class Messages(Category):
         """
         Returns information whether sending messages from the community to current user is allowed.
         """
-        return self.__request__("isMessagesFromGroupAllowed", locals())
+        return self._request("isMessagesFromGroupAllowed", locals())
 
     def join_chat_by_invite_link(
         self,
@@ -295,7 +295,7 @@ class Messages(Category):
         """
         <null>
         """
-        return self.__request__("joinChatByInviteLink", locals())
+        return self._request("joinChatByInviteLink", locals())
 
     def mark_as_answered_conversation(
         self,
@@ -306,7 +306,7 @@ class Messages(Category):
         """
         Marks and unmarks conversations as unanswered.
         """
-        return self.__request__("markAsAnsweredConversation", locals())
+        return self._request("markAsAnsweredConversation", locals())
 
     def mark_as_important(
         self,
@@ -316,7 +316,7 @@ class Messages(Category):
         """
         Marks and unmarks messages as important (starred).
         """
-        return self.__request__("markAsImportant", locals())
+        return self._request("markAsImportant", locals())
 
     def mark_as_important_conversation(
         self,
@@ -327,7 +327,7 @@ class Messages(Category):
         """
         Marks and unmarks conversations as important.
         """
-        return self.__request__("markAsImportantConversation", locals())
+        return self._request("markAsImportantConversation", locals())
 
     def mark_as_read(
         self,
@@ -340,7 +340,7 @@ class Messages(Category):
         """
         Marks messages as read.
         """
-        return self.__request__("markAsRead", locals())
+        return self._request("markAsRead", locals())
 
     def pin(
         self,
@@ -350,7 +350,7 @@ class Messages(Category):
         """
         Pin a message.
         """
-        return self.__request__("pin", locals())
+        return self._request("pin", locals())
 
     def remove_chat_user(
         self,
@@ -362,7 +362,7 @@ class Messages(Category):
         """
         Allows the current user to leave a chat or, if the current user started the chat, allows the user to remove another user from the chat.
         """
-        return self.__request__("removeChatUser", locals())
+        return self._request("removeChatUser", locals())
 
     def restore(
         self,
@@ -372,7 +372,7 @@ class Messages(Category):
         """
         Restores a deleted message.
         """
-        return self.__request__("restore", locals())
+        return self._request("restore", locals())
 
     def search(
         self,
@@ -390,7 +390,7 @@ class Messages(Category):
         """
         Returns a list of the current user's private messages that match search criteria.
         """
-        return self.__request__("search", locals())
+        return self._request("search", locals())
 
     def search_conversations(
         self,
@@ -403,7 +403,7 @@ class Messages(Category):
         """
         Returns a list of the current user's conversations that match search criteria.
         """
-        return self.__request__("searchConversations", locals())
+        return self._request("searchConversations", locals())
 
     def send(
         self,
@@ -433,7 +433,7 @@ class Messages(Category):
         """
         Sends a message.
         """
-        return self.__request__("send", locals())
+        return self._request("send", locals())
 
     def send_message_event_answer(
         self,
@@ -445,7 +445,7 @@ class Messages(Category):
         """
         <null>
         """
-        return self.__request__("sendMessageEventAnswer", locals())
+        return self._request("sendMessageEventAnswer", locals())
 
     def set_activity(
         self,
@@ -457,7 +457,7 @@ class Messages(Category):
         """
         Changes the status of a user as typing in a conversation.
         """
-        return self.__request__("setActivity", locals())
+        return self._request("setActivity", locals())
 
     def set_chat_photo(
         self,
@@ -466,7 +466,7 @@ class Messages(Category):
         """
         Sets a previously-uploaded picture as the cover picture of a chat.
         """
-        return self.__request__("setChatPhoto", locals())
+        return self._request("setChatPhoto", locals())
 
     def unpin(
         self,
@@ -476,7 +476,7 @@ class Messages(Category):
         """
         <null>
         """
-        return self.__request__("unpin", locals())
+        return self._request("unpin", locals())
 
 
 # generated at 2020.11.08 08:32:23

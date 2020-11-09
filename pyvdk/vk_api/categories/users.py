@@ -11,7 +11,7 @@ class Users(Category):
         """
         Returns detailed information on users.
         """
-        return self.__request__("get", locals())
+        return self._request("get", locals())
 
     def get_followers(
         self,
@@ -25,7 +25,7 @@ class Users(Category):
         """
         Returns a list of IDs of followers of the user in question, sorted by date added, most recent first.
         """
-        return self.__request__("getFollowers", locals())
+        return self._request("getFollowers", locals())
 
     def get_subscriptions(
         self,
@@ -39,7 +39,7 @@ class Users(Category):
         """
         Returns a list of IDs of users and communities followed by the user.
         """
-        return self.__request__("getSubscriptions", locals())
+        return self._request("getSubscriptions", locals())
 
     def report(
         self,
@@ -50,7 +50,7 @@ class Users(Category):
         """
         Reports (submits a complain about) a user.
         """
-        return self.__request__("report", locals())
+        return self._request("report", locals())
 
     def search(
         self,
@@ -92,7 +92,7 @@ class Users(Category):
         """
         Returns a list of users matching the search criteria.
         """
-        return self.__request__("search", locals())
+        return self._request("search", locals())
 
 
 # generated at 2020.11.08 08:32:23

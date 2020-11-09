@@ -25,7 +25,7 @@ class Groups(Category):
         """
         <null>
         """
-        return self.__request__("addAddress", locals())
+        return self._request("addAddress", locals())
 
     def add_callback_server(
         self,
@@ -37,7 +37,7 @@ class Groups(Category):
         """
         <null>
         """
-        return self.__request__("addCallbackServer", locals())
+        return self._request("addCallbackServer", locals())
 
     def add_link(
         self,
@@ -48,7 +48,7 @@ class Groups(Category):
         """
         Allows to add a link to the community.
         """
-        return self.__request__("addLink", locals())
+        return self._request("addLink", locals())
 
     def approve_request(
         self,
@@ -58,7 +58,7 @@ class Groups(Category):
         """
         Allows to approve join request to the community.
         """
-        return self.__request__("approveRequest", locals())
+        return self._request("approveRequest", locals())
 
     def ban(
         self,
@@ -72,7 +72,7 @@ class Groups(Category):
         """
         <null>
         """
-        return self.__request__("ban", locals())
+        return self._request("ban", locals())
 
     def create(
         self,
@@ -85,7 +85,7 @@ class Groups(Category):
         """
         Creates a new community.
         """
-        return self.__request__("create", locals())
+        return self._request("create", locals())
 
     def delete_callback_server(
         self,
@@ -95,7 +95,7 @@ class Groups(Category):
         """
         <null>
         """
-        return self.__request__("deleteCallbackServer", locals())
+        return self._request("deleteCallbackServer", locals())
 
     def delete_link(
         self,
@@ -105,7 +105,7 @@ class Groups(Category):
         """
         Allows to delete a link from the community.
         """
-        return self.__request__("deleteLink", locals())
+        return self._request("deleteLink", locals())
 
     def disable_online(
         self,
@@ -114,7 +114,7 @@ class Groups(Category):
         """
         <null>
         """
-        return self.__request__("disableOnline", locals())
+        return self._request("disableOnline", locals())
 
     def edit(
         self,
@@ -167,7 +167,7 @@ class Groups(Category):
         """
         Edits a community.
         """
-        return self.__request__("edit", locals())
+        return self._request("edit", locals())
 
     def edit_address(
         self,
@@ -191,7 +191,7 @@ class Groups(Category):
         """
         <null>
         """
-        return self.__request__("editAddress", locals())
+        return self._request("editAddress", locals())
 
     def edit_callback_server(
         self,
@@ -204,7 +204,7 @@ class Groups(Category):
         """
         <null>
         """
-        return self.__request__("editCallbackServer", locals())
+        return self._request("editCallbackServer", locals())
 
     def edit_link(
         self,
@@ -215,7 +215,7 @@ class Groups(Category):
         """
         Allows to edit a link in the community.
         """
-        return self.__request__("editLink", locals())
+        return self._request("editLink", locals())
 
     def edit_manager(
         self,
@@ -230,7 +230,7 @@ class Groups(Category):
         """
         Allows to add, remove or edit the community manager.
         """
-        return self.__request__("editManager", locals())
+        return self._request("editManager", locals())
 
     def enable_online(
         self,
@@ -239,7 +239,7 @@ class Groups(Category):
         """
         <null>
         """
-        return self.__request__("enableOnline", locals())
+        return self._request("enableOnline", locals())
 
     def get(
         self,
@@ -254,7 +254,7 @@ class Groups(Category):
         """
         Returns a list of the communities to which a user belongs.
         """
-        return self.__request__("get", locals())
+        return self._request("get", locals())
 
     def get_addresses(
         self,
@@ -271,7 +271,7 @@ class Groups(Category):
         """
         Returns a list of community addresses.
         """
-        return self.__request__("getAddresses", locals())
+        return self._request("getAddresses", locals())
 
     def get_banned(
         self,
@@ -285,7 +285,7 @@ class Groups(Category):
         """
         Returns a list of users on a community blacklist.
         """
-        return self.__request__("getBanned", locals())
+        return self._request("getBanned", locals())
 
     def get_by_id(
         self,
@@ -296,7 +296,7 @@ class Groups(Category):
         """
         Returns information about communities by their IDs.
         """
-        return self.__request__("getById", locals())
+        return self._request("getById", locals())
 
     def get_callback_confirmation_code(
         self,
@@ -305,7 +305,7 @@ class Groups(Category):
         """
         Returns Callback API confirmation code for the community.
         """
-        return self.__request__("getCallbackConfirmationCode", locals())
+        return self._request("getCallbackConfirmationCode", locals())
 
     def get_callback_servers(
         self,
@@ -315,7 +315,7 @@ class Groups(Category):
         """
         <null>
         """
-        return self.__request__("getCallbackServers", locals())
+        return self._request("getCallbackServers", locals())
 
     def get_callback_settings(
         self,
@@ -325,7 +325,7 @@ class Groups(Category):
         """
         Returns [vk.com/dev/callback_api|Callback API] notifications settings.
         """
-        return self.__request__("getCallbackSettings", locals())
+        return self._request("getCallbackSettings", locals())
 
     def get_catalog(
         self,
@@ -336,7 +336,7 @@ class Groups(Category):
         """
         Returns communities list for a catalog category.
         """
-        return self.__request__("getCatalog", locals())
+        return self._request("getCatalog", locals())
 
     def get_catalog_info(
         self,
@@ -346,7 +346,7 @@ class Groups(Category):
         """
         Returns categories list for communities catalog
         """
-        return self.__request__("getCatalogInfo", locals())
+        return self._request("getCatalogInfo", locals())
 
     def get_invited_users(
         self,
@@ -359,7 +359,7 @@ class Groups(Category):
         """
         Returns invited users list of a community
         """
-        return self.__request__("getInvitedUsers", locals())
+        return self._request("getInvitedUsers", locals())
 
     def get_invites(
         self,
@@ -370,7 +370,7 @@ class Groups(Category):
         """
         Returns a list of invitations to join communities and events.
         """
-        return self.__request__("getInvites", locals())
+        return self._request("getInvites", locals())
 
     def get_long_poll_server(
         self,
@@ -379,7 +379,7 @@ class Groups(Category):
         """
         Returns the data needed to query a Long Poll server for events
         """
-        return self.__request__("getLongPollServer", locals())
+        return self._request("getLongPollServer", locals())
 
     def get_long_poll_settings(
         self,
@@ -388,7 +388,7 @@ class Groups(Category):
         """
         Returns Long Poll notification settings
         """
-        return self.__request__("getLongPollSettings", locals())
+        return self._request("getLongPollSettings", locals())
 
     def get_members(
         self,
@@ -402,7 +402,7 @@ class Groups(Category):
         """
         Returns a list of community members.
         """
-        return self.__request__("getMembers", locals())
+        return self._request("getMembers", locals())
 
     def get_requests(
         self,
@@ -415,7 +415,7 @@ class Groups(Category):
         """
         Returns a list of requests to the community.
         """
-        return self.__request__("getRequests", locals())
+        return self._request("getRequests", locals())
 
     def get_settings(
         self,
@@ -424,7 +424,7 @@ class Groups(Category):
         """
         Returns community settings.
         """
-        return self.__request__("getSettings", locals())
+        return self._request("getSettings", locals())
 
     def get_token_permissions(
         self,
@@ -432,7 +432,7 @@ class Groups(Category):
         """
         <null>
         """
-        return self.__request__("getTokenPermissions", locals())
+        return self._request("getTokenPermissions", locals())
 
     def invite(
         self,
@@ -442,7 +442,7 @@ class Groups(Category):
         """
         Allows to invite friends to the community.
         """
-        return self.__request__("invite", locals())
+        return self._request("invite", locals())
 
     def is_member(
         self,
@@ -454,7 +454,7 @@ class Groups(Category):
         """
         Returns information specifying whether a user is a member of a community.
         """
-        return self.__request__("isMember", locals())
+        return self._request("isMember", locals())
 
     def join(
         self,
@@ -464,7 +464,7 @@ class Groups(Category):
         """
         With this method you can join the group or public page, and also confirm your participation in an event.
         """
-        return self.__request__("join", locals())
+        return self._request("join", locals())
 
     def leave(
         self,
@@ -473,7 +473,7 @@ class Groups(Category):
         """
         With this method you can leave a group, public page, or event.
         """
-        return self.__request__("leave", locals())
+        return self._request("leave", locals())
 
     def remove_user(
         self,
@@ -483,7 +483,7 @@ class Groups(Category):
         """
         Removes a user from the community.
         """
-        return self.__request__("removeUser", locals())
+        return self._request("removeUser", locals())
 
     def reorder_link(
         self,
@@ -494,7 +494,7 @@ class Groups(Category):
         """
         Allows to reorder links in the community.
         """
-        return self.__request__("reorderLink", locals())
+        return self._request("reorderLink", locals())
 
     def search(
         self,
@@ -512,7 +512,7 @@ class Groups(Category):
         """
         Returns a list of communities matching the search criteria.
         """
-        return self.__request__("search", locals())
+        return self._request("search", locals())
 
     def set_callback_settings(
         self,
@@ -566,7 +566,7 @@ class Groups(Category):
         """
         Allow to set notifications settings for group.
         """
-        return self.__request__("setCallbackSettings", locals())
+        return self._request("setCallbackSettings", locals())
 
     def set_long_poll_settings(
         self,
@@ -619,7 +619,7 @@ class Groups(Category):
         """
         Sets Long Poll notification settings
         """
-        return self.__request__("setLongPollSettings", locals())
+        return self._request("setLongPollSettings", locals())
 
     def unban(
         self,
@@ -629,7 +629,7 @@ class Groups(Category):
         """
         <null>
         """
-        return self.__request__("unban", locals())
+        return self._request("unban", locals())
 
 
 # generated at 2020.11.08 08:32:23
