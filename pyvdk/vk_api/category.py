@@ -16,7 +16,7 @@ class Category(ABCCategory):
     def __init__(self, api: ABCAPI):
         self.__api = api
         if not hasattr(self, "__name__"):
-            self.__name__ = self.__class__.__name__
+            self.__name__ = self.__class__.__name__.lower()
 
     def _request(self, method: str, params: dict):
         return self.__api.request(
