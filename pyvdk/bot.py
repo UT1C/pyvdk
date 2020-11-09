@@ -22,7 +22,7 @@ class Bot:
         self.__config = config
         self.api = API(self.__config)
         self.view = View(self.api)
-        self.on = Labeler(self.view)
+        self.on = Labeler(self.view, default_endpoint)
 
     def request_handle(self, request: dict) -> str:
         """ Хендлит реквест от вк и возвращает ответ """
