@@ -26,8 +26,8 @@ class View(ABCView):
 
         logger.debug("forwarding obj in handlers")
         for handler in self.handlers[GroupEventType.MESSAGE_NEW]:
-            handling_successful = handler.handle(obj)
-            if handling_successful:
+            handled = handler.handle(obj)
+            if handled and handler.endpoint:
                 break
         logger.debug("forwarding done")
 

@@ -6,8 +6,13 @@ import dataclasses
 
 class RuleResult:
     true: bool = False
-    def __init__(self, args: list = None):
+    def __init__(self, *args) -> None:
         self.args = args
+    def update(self, args: list) -> None:
+        """Если правило вернуло аргументы, этот метод
+        добавляет их в список ``args`` (в конец списка) (in-place)
+        """
+        args.extend(self.args)
 
 class ABCRule(ABC):
 
@@ -17,13 +22,11 @@ class ABCRule(ABC):
     class No(RuleResult):
         true: bool = False
 
-    @abstractmethod
     def __init__(self) -> None:
         ...
 
-    @abstractmethod
     def check(self, obj: Any) -> Optional[RuleResult]:
-        ...
+        return self.Ok()
 
     def __repr__(self) -> str:
         return f"<{self.__class__.__name__} at {hex(id(self))}>"
@@ -32,4 +35,4 @@ class ABCRule(ABC):
 class ABCMessageRule(ABCRule):
 
     def check(self, obj: Message) -> Optional[RuleResult]:
-        ...
+        return self.Ok()

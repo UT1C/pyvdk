@@ -23,8 +23,17 @@ class Handler(ABCHandler):
         *rules: ABCRule,
         endpoint: bool = True
     ) -> None:
+        """[summary]
+
+        Args:
+            function (Callable): функция-обработчик
+            *rules (ABCRule): правила, какие события обрабатывать. Если правил 
+                нет, то создаётся всегда истинное.
+            endpoint (bool, optional): Блокирует ли обработчик событие. 
+                Defaults to True.
+        """
         self.function = function
-        self.rules = rules
+        self.rules = rules or (ABCRule(),)
         self.endpoint = endpoint
 
     def __repr__(self) -> str:
@@ -33,25 +42,43 @@ class Handler(ABCHandler):
             f"{repr(self.function.__name__)} at {hex(id(self))}>"
         )
 
-    def handle(self, obj: Any) -> bool:
-        logger.debug(f"called {self}")
-        args = list()
-        call = False
+    def check_rules(self, obj: Any) -> Tuple[bool, List[Any]]:
+        """Метод пропускающий объект через правила
+        Не использовать извне
+
+        Args:
+            obj (Any): объект события
+
+        Returns:
+            Tuple[bool, List[Any]]: флаг, подходит ли объект обработчику, 
+            и список аргументов из правил
+        """
         logger.debug("checking rules")
-        if self.rules:
-            for rule in self.rules:
-                result = rule.check(obj)
-                if result is None:
-                    return False
-                if result.true:
-                    call = True
-                    if result.args:
-                        args.extend(result.args)
-                else:
-                    return False
-        else:
-            call = True
-        if call:
+        flag: bool = True
+        args: list = []
+        for rule in self.rules:
+            result = rule.check(obj)
+            if result is None or not result.true:
+                flag = False
+                break
+            if result.true:
+                result.update(args)
+        logger.debug(f"check result: {flag, args}")
+        return flag, args
+
+
+    def handle(self, obj: Any) -> bool:
+        """[summary]
+
+        Args:
+            obj (Any): объект события
+
+        Returns:
+            bool: было ли событие обработано
+        """
+        logger.debug(f"called {self}")
+        flag, args = self.check_rules(obj)
+        if flag:
             try:
                 logger.debug(f"processing {obj} with {self}")
                 self.function(obj, *args)
@@ -62,5 +89,5 @@ class Handler(ABCHandler):
                 logger.debug("sucessfully processed")
                 return True
         else:
-            logger.info("nope, conditions not satisfied")
+            logger.info("conditions not satisfied")
             return False
