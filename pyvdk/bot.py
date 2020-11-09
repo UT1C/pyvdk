@@ -11,8 +11,8 @@ class Bot:
     """ Основной класс бота """
 
     api: API
-    __config: Config
     on: Labeler
+    __config: Config
 
     def __init__(self, config: Config) -> None:
         self.__config = config

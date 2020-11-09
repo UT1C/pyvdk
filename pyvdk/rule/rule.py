@@ -5,6 +5,8 @@ from .abc import ABCMessageRule, ABCRule, RuleResult
 
 
 class MessageTextRule(ABCMessageRule):
+    """  """
+
     def __init__(self, text: str, lower: bool = True):
         self._text = text.lower() if lower else text
         self._lower = lower
@@ -16,6 +18,8 @@ class MessageTextRule(ABCMessageRule):
 
 
 class RegexRule(ABCMessageRule):
+    """  """
+
     def __init__(self, regex: str):
         self.regex = re.compile(regex)
 

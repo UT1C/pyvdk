@@ -7,6 +7,7 @@ logger = log.getLogger('vk_api')
 
 
 class Category(ABCCategory):
+    """  """
 
     def __init__(self, api: ABCAPI):
         self.__api = api

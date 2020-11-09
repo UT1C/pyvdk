@@ -15,6 +15,8 @@ logger = log.getLogger('vk_api')
 
 
 class API(ABCAPI):
+    """  """
+
     API_URL = "https://api.vk.com/method/"
 
     def __init__(self, config: Config) -> None:

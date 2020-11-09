@@ -5,7 +5,7 @@ from pyvdk import Bot, Config
 app = Flask(__name__)
 config = Config(
     token="",
-    v="5.103",
+    v=5.103,
     group_id=,
     secret="",
     confcode=""
