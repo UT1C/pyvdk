@@ -1,10 +1,10 @@
-from .custom_logging import log
+from . import custom_logging
 from .event import View, Labeler
 from .config import Config
 from .vk_api import API
 
 
-logger = log.getLogger('bot')
+logger = custom_logging.log.getLogger('bot')
 
 
 class Bot:
@@ -17,8 +17,13 @@ class Bot:
     def __init__(
         self,
         config: Config,
-        endpoint_default: bool = False
+        endpoint_default: bool = False,
+        debug: bool = False
     ) -> None:
+
+        if debug:
+            custom_logging.toggle_debug()
+        
         self.__config = config
         self.api = API(self.__config)
         self.view = View(self.api)
