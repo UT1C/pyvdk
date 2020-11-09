@@ -15,11 +15,27 @@ logger = log.getLogger('vk_api')
 
 
 class API(ABCAPI):
-    """  """
+    """Класс для вызовов методов api VK
+
+    Examples:
+
+        api = API(config)
+        r = api.messages.send(
+            message="Сервера сегодня не будет",
+            domain="lightmanlp",
+            random_id=random.getrandbits(64)
+        )
+
+    """
 
     API_URL = "https://api.vk.com/method/"
 
     def __init__(self, config: Config) -> None:
+        """[summary]
+
+        Args:
+            config (Config): [description]
+        """
         self.config = config
         self.session = Session()
 
@@ -29,6 +45,15 @@ class API(ABCAPI):
         self.wall = Wall(self)
 
     def request(self, method: str, params: dict) -> dict:
+        """ Метод для запроса к апи, "лоу-левел"
+
+        Args:
+            method (str): запрашиваемый метод
+            params (dict): параметры запроса (отфильтрованные!)
+
+        Returns:
+            dict: результат запроса
+        """
         try:
             url = self.API_URL + method
             _params = {  # params in url
@@ -48,6 +73,7 @@ class API(ABCAPI):
 
     def method(self, method: str, **params) -> dict:
         # FIXME: тут нет фильтрации агрументов, она в Category
+        raise NotImplementedError()
         # необходимо куда-то вынести тот код, или импортировать сюда класс
         # главное не получить цикличный импорт (хотя с abc не должно быть...)
         return self.request(method, params)
