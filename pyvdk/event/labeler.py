@@ -13,23 +13,36 @@ logger = log.getLogger("event/labeler")
 
 
 class Labeler(ABCLabeler):
-    def __init__(self, view: ABCView):
-        self.view = view
+    def __init__(self, view: ABCView, endpoint_default: bool):
+        self._view = view
+        self._endpoint_default = endpoint_default
 
-    def message_new(self, *rules, **kw):
+    def message_new(
+        self,
+        *rules,
+        text: str = None,
+        lower: bool = True,
+        regex: Any = None,
+        endpoint: bool = None
+    ) -> Callable:
         def decorator(func):
+            nonlocal text, lower, regex, endpoint
+
             _rules = list(i for i in rules if isinstance(i, ABCRule))
 
-            if "text" in kw:
+            if text is not None:
                 _rules.append(
-                    MessageTextRule(kw["text"], lower=kw.get("lower", True))
+                    MessageTextRule(text, lower=lower)
                 )
 
-            if "regex" in kw:
+            if regex is not None:
                 # TODO: regexrule there
                 ...
+            
+            if endpoint is None:
+                endpoint = self._endpoint_default
 
-            handler = Handler(func, *rules)
-            self.view.add(GroupEventType.MESSAGE_NEW, handler)
+            handler = Handler(func, *rules, endpoint=endpoint)
+            self._view.add(GroupEventType.MESSAGE_NEW, handler)
 
         return decorator

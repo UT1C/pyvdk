@@ -14,14 +14,18 @@ class Bot:
     on: Labeler
     __config: Config
 
-    def __init__(self, config: Config) -> None:
+    def __init__(
+        self,
+        config: Config,
+        endpoint_default: bool = False
+    ) -> None:
         self.__config = config
         self.api = API(self.__config)
         self.view = View(self.api)
-        self.on = Labeler(self.view)
+        self.on = Labeler(self.view, endpoint_default)
 
     def request_handle(self, request: dict) -> str:
-        """ Хендлит реквест от вк и возвращает ответ """
+        """ Handle request from vk and return response """
         
         logger.debug(f'new request: {request}')
         response = self.__check(request)

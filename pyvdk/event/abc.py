@@ -39,7 +39,8 @@ class ABCView(ABC):
 
 class ABCLabeler(ABC):
 
-    view: ABCView
+    _view: ABCView
+    _endpoint_default: bool
 
     @abstractmethod
     def __init__(self, view: ABCView):
