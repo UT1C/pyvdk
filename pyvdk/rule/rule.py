@@ -26,4 +26,4 @@ class RegexRule(ABCMessageRule):
     def check(self, msg: Message):
         match = self.regex.match(msg.text)  # noqa
         if match is not None:
-            return self.Ok([match])
+            return self.Ok(match)
