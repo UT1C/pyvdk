@@ -1,8 +1,8 @@
 [tool.poetry]
 name = "pyvdk"
-version = "0.1.0"
+version = "0.0.1"
 description = "vk toolkit"
-authors = ["mikk357 <mikk357@yandex.ru>", "lightmanLP <liteman1000@gmail.com>"]
+authors = ["lightmanLP <liteman1000@gmail.com>", "mikk357 <mikk357@yandex.ru>"]
 license = "MIT License"
 
 [tool.poetry.dependencies]
