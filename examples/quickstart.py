@@ -1,14 +1,13 @@
 from flask import Flask, request
-from pyvdk import Bot, Config, Message
-import os
+from pyvdk import Bot, Config, types
 
 
 app = Flask(__name__)
 config = Config(
-    token=os.environ["BOT_TOKEN"],
-    secret=os.environ["BOT_SECRET"],
-    confcode=os.environ["BOT_CONFIRMATION_CODE"],
-    group_id=0,
+    token='$TOKEN',
+    secret='$SECRET',
+    confcode='$CONFIRMATION_CODE',
+    group_id=0
 )
 bot = Bot(config)
 
@@ -19,8 +18,7 @@ def bot_route():
 
 
 @bot.on.message_new(text='/test')
-def test_func(msg: Message):
-    print('brrrr')
+def test_func(msg: types.Message):
     msg('brrrrrrr')
 
 

@@ -1,5 +1,6 @@
-import yaml
 from dataclasses import dataclass
+import os
+import yaml
 
 
 @dataclass
@@ -34,3 +35,31 @@ class Config:
             data = yaml.load(f, Loader=yaml.Loader)
         
         return cls(**data)
+    
+    @classmethod
+    def from_environ(cls) -> "Config":
+        """
+        Создает объект конфига из переменных окружения.
+
+        Стандартные названия переменных:
+        PYVDK_TOKEN
+        PYVDK_GROUP_ID
+        PYVDK_CONFIRMATION_CODE
+        PYVDK_SECRET
+        PYVDK_API_VERSION
+        """
+
+        envs = {
+            "TOKEN": str,
+            "GROUP_ID": int,
+            "CONFIRMATION_CODE": str,
+            "SECRET": str,
+            "API_VERSION": float
+        }
+        args = list()
+        
+        for env_name, env_type in envs.items():
+            env = env_type(os.environ.get(f"PYVDK_{env_name}"))
+            args.append(env)
+        
+        return cls(*args)
