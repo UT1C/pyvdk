@@ -31,6 +31,7 @@ class Handler(ABCHandler):
             endpoint (bool, optional): Блокирует ли обработчик событие. 
                 Стандартное значение - True.
         """
+
         self.function = function
         self.rules = rules
         self.endpoint = endpoint
@@ -53,18 +54,23 @@ class Handler(ABCHandler):
             Tuple[bool, List[Any]]: флаг, подходит ли объект обработчику, 
             и список аргументов из правил
         """
+        
         logger.debug("checking rules")
         flag: bool = True
         args: list = []
+
         for rule in self.rules:
             logger.debug(f"checking rule {rule}")
             result = rule.check(obj)
             logger.debug(f"result: {result}")
+
             if result is None or not result.correct:
                 flag = False
                 break
+
             if result.correct:
-                result.update(args)
+                result.insert_to(args)
+
         logger.debug(f"check result: {flag, args}")
         return flag, args
 
@@ -78,8 +84,10 @@ class Handler(ABCHandler):
         Returns:
             bool: было ли событие обработано
         """
+
         logger.debug(f"called {self}")
         flag, args = self.check_rules(obj)
+
         if flag:
             try:
                 logger.debug(f"processing {obj} with {self}")

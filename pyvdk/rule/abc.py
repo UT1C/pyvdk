@@ -12,7 +12,7 @@ class RuleResult:
         self.correct = correct
         self.args = args
     
-    def update(self, args: list) -> None:
+    def insert_to(self, args: list) -> None:
         """
         Если правило вернуло аргументы, этот метод
         добавляет их в список ``args`` (в конец списка) (in-place)
