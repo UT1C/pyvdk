@@ -10,6 +10,7 @@ python = "^3.7"
 requests = "^2.24.0"
 pyyaml = "^5.3.1"
 jinja2 = "^2.11.2"
+vbml = "^1.1"
 
 [tool.poetry.dev-dependencies]
 mkdocs = "^1.1.2"

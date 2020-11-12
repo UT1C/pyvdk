@@ -5,18 +5,24 @@ import dataclasses
 
 
 class RuleResult:
-    true: bool = False
+
+    true: bool = False  # NOTE: "correct"
+
     def __init__(self, *args) -> None:
         self.args = args
+    
     def update(self, args: list) -> None:
-        """Если правило вернуло аргументы, этот метод
+        """
+        Если правило вернуло аргументы, этот метод
         добавляет их в список ``args`` (в конец списка) (in-place)
         """
+
         args.extend(self.args)
+
 
 class ABCRule(ABC):
 
-    class Ok(RuleResult):
+    class Ok(RuleResult):  # FIXME: сделать просто один класс и вытащить из этого класса нахуй
         true: bool = True
 
     class No(RuleResult):
