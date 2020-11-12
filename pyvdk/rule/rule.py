@@ -1,3 +1,4 @@
+from typing import Union, List, Optional
 import re
 import vbml
 
@@ -10,35 +11,24 @@ class MessageTextRule(ABCMessageRule):
 
     _text: str
     _lower: bool
-    _toggle_vbml: bool
-    _patcher = vbml.Patcher()
 
     def __init__(
         self,
         text: str,
-        lower: bool = True,
-        toggle_vbml: bool = False
+        lower: bool = True
     ) -> None:
 
         self._text = text.lower() if lower else text
         self._lower = lower
-        self._toggle_vbml = toggle_vbml
 
     def check(self, msg: Message):
         text = msg.text
 
         if self._lower:
             text = text.lower()
-
-        if self._toggle_vbml:
-            pattern = vbml.Pattern(self._text)
-            result = self._patcher.check(pattern, text)
-            if result is not None:
-                return self.Ok(result)
-        
-        else:
-            if text == self._text:
-                return self.Ok()
+            
+        if text == self._text:
+            return self.Ok()
 
 
 class MessageRegexRule(ABCMessageRule):
@@ -64,3 +54,33 @@ class MessageRegexRule(ABCMessageRule):
         
         if match is not None:
             return self.Ok(match)
+
+
+class MessageVBMLRule(ABCMessageRule):
+    """  """
+
+    _patcher = vbml.Patcher()
+    _patterns: List[vbml.Pattern]
+
+    def __init__(
+        self,
+        pattern: Union[str, vbml.Pattern, List[Union[str, vbml.Pattern]]],
+        patcher: Optional[vbml.Patcher] = None,
+        flags: Optional[re.RegexFlag] = None
+    ) -> None:
+
+        if isinstance(pattern, str):
+            self._patterns = list(vbml.Pattern(pattern, flags=flags))
+        elif isinstance(pattern, (list, tuple)):
+            self._patterns = [
+                vbml.Pattern(i, flags=flags) if isinstance(i, str) else i 
+                for i in pattern
+            ]
+        else:
+            self._patterns = list(pattern)
+        
+        if patcher is not None:
+            self._patcher = patcher
+    
+    def check(self, msg: Message):
+        pass  # TODO: check
