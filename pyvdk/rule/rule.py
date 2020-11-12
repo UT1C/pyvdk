@@ -28,7 +28,7 @@ class MessageTextRule(ABCMessageRule):
             text = text.lower()
             
         if text == self._text:
-            return self.Ok()
+            return self.ok()
 
 
 class MessageRegexRule(ABCMessageRule):
@@ -53,7 +53,7 @@ class MessageRegexRule(ABCMessageRule):
             match = self._regex.search(msg.text)
         
         if match is not None:
-            return self.Ok(match)
+            return self.ok(match)
 
 
 class MessageVBMLRule(ABCMessageRule):

@@ -6,9 +6,10 @@ import dataclasses
 
 class RuleResult:
 
-    true: bool = False  # NOTE: "correct"
+    correct: bool
 
-    def __init__(self, *args) -> None:
+    def __init__(self, *args, correct: bool = False) -> None:
+        self.correct = correct
         self.args = args
     
     def update(self, args: list) -> None:
@@ -22,17 +23,19 @@ class RuleResult:
 
 class ABCRule(ABC):
 
-    class Ok(RuleResult):  # FIXME: сделать просто один класс и вытащить из этого класса нахуй
-        true: bool = True
+    @staticmethod
+    def ok(*args):
+        return RuleResult(*args, correct=True)
 
-    class No(RuleResult):
-        true: bool = False
+    @staticmethod
+    def no(*args):
+        return RuleResult(*args)    
 
     def __init__(self) -> None:
         ...
 
     def check(self, obj: Any) -> Optional[RuleResult]:
-        return self.Ok()
+        return self.ok()
 
     def __repr__(self) -> str:
         return f"<{self.__class__.__name__} at {hex(id(self))}>"

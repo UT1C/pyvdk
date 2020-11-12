@@ -58,7 +58,7 @@ class ABCAPI:
 
         # TODO: catch network exceptions there
         except Exception as e:
-            print(e)
+            print(e)  # FIXME: log.exception()  (Возможно, я не уверен)
             # NOTE: не сетевые ошибки - поднимать выше
             raise
 

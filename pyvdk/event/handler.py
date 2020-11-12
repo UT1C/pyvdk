@@ -60,10 +60,10 @@ class Handler(ABCHandler):
             logger.debug(f"checking rule {rule}")
             result = rule.check(obj)
             logger.debug(f"result: {result}")
-            if result is None or not result.true:
+            if result is None or not result.correct:
                 flag = False
                 break
-            if result.true:
+            if result.correct:
                 result.update(args)
         logger.debug(f"check result: {flag, args}")
         return flag, args
@@ -84,7 +84,7 @@ class Handler(ABCHandler):
             try:
                 logger.debug(f"processing {obj} with {self}")
                 self.function(obj, *args)
-            except Exception:
+            except Exception as e:
                 logger.exception("exception occured in handler!")
                 return True  # NOTE: или не тру? я себя захуярил
             else:
