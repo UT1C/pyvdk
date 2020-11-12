@@ -1,4 +1,7 @@
 site_name: pyvdk
+site_author: lightmanLP & mikk357
 theme: readthedocs
+plugins:
+    - search
 nav:
     - Home: index.md
