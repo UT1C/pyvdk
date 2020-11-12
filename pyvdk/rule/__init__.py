@@ -1,5 +1,10 @@
 from .abc import ABCRule, ABCMessageRule
-from .rule import MessageTextRule, MessageRegexRule, MessageVBMLRule, CustomRule
+from .rule import (
+    MessageTextRule,
+    MessageRegexRule,
+    MessageVBMLRule,
+    CustomRule
+)
 
 
 __all__ = (
