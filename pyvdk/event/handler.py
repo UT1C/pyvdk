@@ -27,14 +27,14 @@ class Handler(ABCHandler):
 
         Args:
             function (Callable): функция-обработчик
-            *rules (ABCRule): правила, какие события обрабатывать. Если правил 
-                нет, то создаётся всегда истинное.
+            *rules (ABCRule): правила, какие события обрабатывать.
             endpoint (bool, optional): Блокирует ли обработчик событие. 
-                Defaults to True.
+                Стандартное значение - True.
         """
         self.function = function
-        self.rules = rules or (ABCRule(),)
+        self.rules = rules
         self.endpoint = endpoint
+        logger.debug(f"instantiated {self} with rules {rules}")
 
     def __repr__(self) -> str:
         return (
@@ -57,7 +57,9 @@ class Handler(ABCHandler):
         flag: bool = True
         args: list = []
         for rule in self.rules:
+            logger.debug(f"checking rule {rule}")
             result = rule.check(obj)
+            logger.debug(f"result: {result}")
             if result is None or not result.true:
                 flag = False
                 break
