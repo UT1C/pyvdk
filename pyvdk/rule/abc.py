@@ -12,7 +12,7 @@ class RuleResult:
         self.correct = correct
         self.args = args
     
-    def insert_to(self, args: list) -> None:
+    def add_to(self, args: list) -> None:
         """
         Если правило вернуло аргументы, этот метод
         добавляет их в список ``args`` (в конец списка) (in-place)
@@ -44,4 +44,4 @@ class ABCRule(ABC):
 class ABCMessageRule(ABCRule):
 
     def check(self, obj: Message) -> Optional[RuleResult]:
-        return self.Ok()
+        return self.ok()
