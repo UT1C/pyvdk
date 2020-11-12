@@ -51,7 +51,7 @@ class MessageRegexRule(ABCMessageRule):
             match = self._regex.fullmatch(msg.text)  # noqa
         else:
             match = self._regex.search(msg.text)
-        
+
         if match is not None:
             return self.ok(match)
 
@@ -73,15 +73,15 @@ class MessageVBMLRule(ABCMessageRule):
             self._patterns = list(vbml.Pattern(pattern, flags=flags))
         elif isinstance(pattern, (list, tuple)):
             self._patterns = [
-                vbml.Pattern(i, flags=flags) if isinstance(i, str) else i 
+                vbml.Pattern(i, flags=flags) if isinstance(i, str) else i
                 for i in pattern
             ]
         else:
             self._patterns = list(pattern)
-        
+
         if patcher is not None:
             self._patcher = patcher
-    
+
     def check(self, msg: Message) -> Optional[RuleResult]:
         for i in self._patterns:
             result = self._patcher.check(i, msg.text)
@@ -100,7 +100,7 @@ class CustomRule(ABCRule):
 
     def __init__(self, func: Callable) -> None:
         self._func = func
-    
+
     def check(self, obj: Any) -> Optional[RuleResult]:
         if self._func(obj):
             return self.ok()

@@ -1,7 +1,6 @@
 from ..types import Message
 from abc import ABC, abstractmethod
 from typing import Optional, Any
-import dataclasses
 
 
 class RuleResult:
@@ -29,7 +28,7 @@ class ABCRule(ABC):
 
     @staticmethod
     def no(*args):
-        return RuleResult(*args)    
+        return RuleResult(*args)
 
     def __init__(self) -> None:
         ...
@@ -44,4 +43,4 @@ class ABCRule(ABC):
 class ABCMessageRule(ABCRule):
 
     def check(self, obj: Message) -> Optional[RuleResult]:
-        return self.Ok()
+        return self.ok()
