@@ -27,6 +27,7 @@ class Labeler(ABCLabeler):
     ) -> Callable:
         def decorator(func):
             nonlocal text, lower, regex, endpoint
+            # NOTE: в ожидании бага ( ͡° ͜ʖ ͡°)
 
             _rules = list(i for i in rules if isinstance(i, ABCRule))
 
@@ -43,7 +44,7 @@ class Labeler(ABCLabeler):
             if endpoint is None:
                 endpoint = self._endpoint_default
 
-            handler = Handler(func, *rules, endpoint=endpoint)
+            handler = Handler(func, *_rules, endpoint=endpoint)
             self._view.add(GroupEventType.MESSAGE_NEW, handler)
 
         return decorator
