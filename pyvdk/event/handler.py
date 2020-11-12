@@ -69,7 +69,7 @@ class Handler(ABCHandler):
                 break
 
             if result.correct:
-                result.insert_to(args)
+                result.add_to(args)
 
         logger.debug(f"check result: {flag, args}")
         return flag, args
