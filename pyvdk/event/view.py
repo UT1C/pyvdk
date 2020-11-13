@@ -39,7 +39,7 @@ class View(ABCView):
     def __create_object(self, event: dict):
         etype = GroupEventType(event["type"])
         if etype == GroupEventType.MESSAGE_NEW:
-            return Message(self.api, **event["object"]["message"])
+            return Message(api=self.api, **event["object"]["message"])
         elif etype == GroupEventType.GROUP_JOIN:
             raise Exception("# TODO: ")
         else:

@@ -1,12 +1,11 @@
-from .objects import Message
+from .objects import MessagesMessage
 from ..vk_api import ABCAPI
 import random
 
 
-class Message(Message):
-    def __init__(self, api: ABCAPI, **kwargs):
-        self.api = api
-        super().__init__(**kwargs)
+class Message(MessagesMessage):
+
+    api: ABCAPI
 
     def __call__(
         self,
