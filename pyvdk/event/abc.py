@@ -11,7 +11,9 @@ from .event_types import GroupEventType
 class ABCHandler(ABC):
 
     function: Callable
+    type: GroupEventType
     rules: Tuple[ABCRule, ...]
+    level: int
     endpoint: bool
 
     @abstractmethod
@@ -22,7 +24,7 @@ class ABCHandler(ABC):
 class ABCView(ABC):
 
     api: ABCAPI
-    handlers: Dict[GroupEventType, List[ABCHandler]]
+    handlers: List[ABCHandler]
 
     @abstractmethod
     def __init__(self, api: ABCAPI):

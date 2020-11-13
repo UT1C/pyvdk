@@ -20,8 +20,10 @@ class Handler(ABCHandler):
     def __init__(
         self,
         function: Callable,
+        handler_type: GroupEventType,
         *rules: ABCRule,
-        endpoint: bool = True
+        level: int,
+        endpoint: bool
     ) -> None:
         """[summary]
 
@@ -33,7 +35,9 @@ class Handler(ABCHandler):
         """
 
         self.function = function
+        self.type = handler_type
         self.rules = rules
+        self.level = level
         self.endpoint = endpoint
         logger.debug(f"instantiated {self} with rules {rules}")
 

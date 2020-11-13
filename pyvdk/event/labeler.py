@@ -1,7 +1,13 @@
-from typing import Any, Callable, Dict, List, Tuple
+from typing import Any, Callable, Dict, List, Tuple, Union
+import vbml
 
 from ..logging import log
-from ..rules import ABCRule, MessageTextRule, MessageRegexRule
+from ..rules import (
+    ABCRule,
+    MessageTextRule,
+    MessageRegexRule,
+    MessageVBMLRule
+)
 from ..types import Message
 from ..vk_api import ABCAPI
 from .abc import ABCLabeler, ABCView
@@ -13,6 +19,8 @@ logger = log.getLogger("event/labeler")
 
 
 class Labeler(ABCLabeler):
+    """  """
+    
     def __init__(self, view: ABCView, endpoint_default: bool):
         self._view = view
         self._endpoint_default = endpoint_default
@@ -23,6 +31,8 @@ class Labeler(ABCLabeler):
         text: str = None,
         lower: bool = True,
         regex: str = None,
+        vbml_pattern: Union[vbml.Pattern, str] = None,
+        level: int = 0,
         endpoint: bool = None
     ) -> Callable:
         def decorator(func):
@@ -38,13 +48,24 @@ class Labeler(ABCLabeler):
                 _rules.append(
                     MessageRegexRule(regex)
                 )
+            
+            if vbml_pattern is not None:
+                _rules.append(
+                    MessageVBMLRule(vbml_pattern)
+                )
 
             if endpoint is None:
                 _endpoint = self._endpoint_default
             else:
                 _endpoint = endpoint
 
-            handler = Handler(func, *_rules, endpoint=_endpoint)
-            self._view.add(GroupEventType.MESSAGE_NEW, handler)
+            handler = Handler(
+                func,
+                GroupEventType.MESSAGE_NEW,
+                *_rules,
+                level=level,
+                endpoint=_endpoint
+            )
+            self._view.add(handler)
 
         return decorator

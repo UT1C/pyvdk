@@ -16,7 +16,7 @@ class View(ABCView):
 
     def __init__(self, api: ABCAPI):
         self.api = api
-        self.handlers = {i: [] for i in GroupEventType}
+        self.handlers = list()
 
     def process(self, event: dict):
 
@@ -26,15 +26,20 @@ class View(ABCView):
         logger.debug(f"{vars(obj)}")
 
         logger.debug("forwarding obj in handlers")
-        for handler in self.handlers[GroupEventType.MESSAGE_NEW]:
-            handled = handler.handle(obj)
-            if handled and handler.endpoint:
-                break
+        self.handlers.sort(key=lambda handler: handler.level)
+
+        for handler in self.handlers:
+
+            if handler.type == GroupEventType.MESSAGE_NEW:
+                handled = handler.handle(obj)
+                if handled and handler.endpoint:
+                    break
+        
         logger.debug("forwarding done")
 
-    def add(self, etype: GroupEventType, handler: ABCHandler):
+    def add(self, handler: ABCHandler):
         logger.debug(f"registered new handler {handler}")
-        self.handlers[etype].append(handler)
+        self.handlers.append(handler)
 
     def __create_object(self, event: dict):
         etype = GroupEventType(event["type"])
