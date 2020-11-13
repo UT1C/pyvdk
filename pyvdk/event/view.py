@@ -1,12 +1,11 @@
 from typing import Any, Callable, Dict, List, Tuple
 
-from ..custom_logging import log
+from ..logging import log
 from ..rule import ABCRule, MessageTextRule
 from ..types import Message
 from ..vk_api import ABCAPI
 from .abc import ABCView, ABCHandler
 from .event_types import GroupEventType
-from ..custom_logging import log
 
 
 logger = log.getLogger("event/view")

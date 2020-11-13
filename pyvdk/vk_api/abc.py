@@ -1,7 +1,7 @@
 from requests import Session
 # from requests.exceptions import ...
 
-from ..custom_logging import log
+from ..logging import log
 from ..config import Config
 from ..tools import prepare_params
 

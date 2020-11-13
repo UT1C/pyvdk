@@ -1,6 +1,6 @@
 from typing import Any, Callable, List, Tuple, Dict
 
-from ..custom_logging import log
+from ..logging import log
 from ..rule import ABCRule, MessageTextRule
 from ..types import Message
 from ..vk_api import ABCAPI

@@ -1,4 +1,4 @@
-from ..custom_logging import log
+from ..logging import log
 from ..tools import prepare_params
 from .abc import ABCAPI, ABCCategory
 

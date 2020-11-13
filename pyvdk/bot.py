@@ -1,10 +1,10 @@
-from . import custom_logging
+from . import logging
 from .event import View, Labeler
 from .config import Config
 from .vk_api import API
 
 
-logger = custom_logging.log.getLogger('bot')
+logger = logging.log.getLogger('bot')
 
 
 class Bot:
@@ -22,7 +22,7 @@ class Bot:
     ) -> None:
 
         if debug:
-            custom_logging.toggle_debug()
+            logging.toggle_debug()
         
         self.__config = config
         self.api = API(self.__config)
