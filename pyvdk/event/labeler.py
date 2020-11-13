@@ -1,7 +1,7 @@
 from typing import Any, Callable, Dict, List, Tuple
 
 from ..custom_logging import log
-from ..rule import ABCRule, MessageTextRule, RegexRule
+from ..rule import ABCRule, MessageTextRule, MessageRegexRule
 from ..types import Message
 from ..vk_api import ABCAPI
 from .abc import ABCLabeler, ABCView
@@ -36,7 +36,7 @@ class Labeler(ABCLabeler):
 
             if regex is not None:
                 _rules.append(
-                    RegexRule(regex)
+                    MessageRegexRule(regex)
                 )
 
             if endpoint is None:
