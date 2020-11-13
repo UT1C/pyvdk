@@ -47,7 +47,7 @@ class TestConfig(unittest.TestCase):
         # Act
         config.from_args(
             token='foo',
-            v='bar',
+            v=1.1,
             group_id=0,
             confcode='foobar',
             secret='barfoo'
@@ -55,7 +55,7 @@ class TestConfig(unittest.TestCase):
 
         # Assert
         self.assertEqual(config.token, 'foo')
-        self.assertEqual(config.v, 'bar')
+        self.assertEqual(config.v, 1.1)
         self.assertEqual(config.group_id, 0)
         self.assertEqual(config.confcode, 'foobar')
         self.assertEqual(config.secret, 'barfoo')
