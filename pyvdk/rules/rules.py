@@ -39,11 +39,14 @@ class MessageRegexRule(ABCMessageRule):
 
     def __init__(
         self,
-        regex: str,
+        regex: Union[str, re.Pattern],
         fullmatch: bool = False
     ) -> None:
 
-        self._regex = re.compile(regex)
+        if isinstance(regex, str):
+            self._regex = re.compile(regex)
+        else:
+            self._regex = regex
         self._fullmatch = fullmatch
 
     def check(self, msg: Message) -> Optional[RuleResult]:

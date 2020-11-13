@@ -64,11 +64,11 @@ class Handler(ABCHandler):
             result = rule.check(obj)
             logger.debug(f"result: {result}")
 
-            if result is None or not result.correct:
+            if result is None or not result:
                 flag = False
                 break
 
-            if result.correct:
+            if result:
                 result.add_to(args)
 
         logger.debug(f"check result: {flag, args}")

@@ -11,6 +11,9 @@ class RuleResult:
         self.correct = correct
         self.args = args
     
+    def __bool__(self):
+        return self.correct
+    
     def add_to(self, args: list) -> None:
         """
         Если правило вернуло аргументы, этот метод
