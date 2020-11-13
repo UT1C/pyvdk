@@ -1,7 +1,7 @@
 from typing import Any, Callable, Dict, List, Tuple
 
 from ..logging import log
-from ..rule import ABCRule, MessageTextRule, MessageRegexRule
+from ..rules import ABCRule, MessageTextRule, MessageRegexRule
 from ..types import Message
 from ..vk_api import ABCAPI
 from .abc import ABCLabeler, ABCView

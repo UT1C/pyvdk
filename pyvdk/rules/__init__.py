@@ -1,5 +1,5 @@
 from .abc import ABCRule, ABCMessageRule
-from .rule import (
+from .rules import (
     MessageTextRule,
     MessageRegexRule,
     MessageVBMLRule,

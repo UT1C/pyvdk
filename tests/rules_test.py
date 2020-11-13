@@ -1,5 +1,5 @@
 import unittest
-from pyvdk.rule import (
+from pyvdk.rules import (
     MessageTextRule,
     MessageRegexRule,
     MessageVBMLRule
