@@ -3,9 +3,9 @@ import re
 import unittest
 
 from pyvdk.rules import (
-    MessageTextRule,
-    MessageRegexRule,
-    MessageVBMLRule,
+    TextRule,
+    RegexRule,
+    VBMLRule,
     ABCRule
 )
 from pyvdk.vk_api import ABCAPI
@@ -49,8 +49,8 @@ class RulesTests(unittest.TestCase):
     def test_message_text_rule(self):
         # Arrange
         rules = (
-            MessageTextRule('/foo'),
-            MessageTextRule('/foo', lower=False)
+            TextRule('/foo'),
+            TextRule('/foo', lower=False)
         )
         msgs = (
             message_gen('/Foo'),
@@ -73,8 +73,8 @@ class RulesTests(unittest.TestCase):
     def test_message_regex_rule(self):
         # Arrange
         rules = (
-            MessageRegexRule(r'foobar\d'),
-            MessageRegexRule(re.compile(r'foobar\d'), fullmatch=True)
+            RegexRule(r'foobar\d'),
+            RegexRule(re.compile(r'foobar\d'), fullmatch=True)
         )
         msgs = (
             message_gen('foobar1'),

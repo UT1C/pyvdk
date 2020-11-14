@@ -1,8 +1,8 @@
 from .abc import ABCRule, ABCMessageRule
 from .rules import (
-    MessageTextRule,
-    MessageRegexRule,
-    MessageVBMLRule,
+    TextRule,
+    RegexRule,
+    VBMLRule,
     CustomRule
 )
 
@@ -10,8 +10,8 @@ from .rules import (
 __all__ = (
     "ABCRule",
     "ABCMessageRule",
-    "MessageTextRule",
-    "MessageRegexRule",
-    "MessageVBMLRule",
+    "TextRule",
+    "RegexRule",
+    "VBMLRule",
     "CustomRule"
 )

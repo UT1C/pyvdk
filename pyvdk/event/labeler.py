@@ -4,9 +4,9 @@ import vbml
 from ..logging import log
 from ..rules import (
     ABCRule,
-    MessageTextRule,
-    MessageRegexRule,
-    MessageVBMLRule
+    TextRule,
+    RegexRule,
+    VBMLRule
 )
 from ..types import Message
 from ..vk_api import ABCAPI
@@ -41,17 +41,17 @@ class Labeler(ABCLabeler):
 
             if text is not None:
                 _rules.append(
-                    MessageTextRule(text, lower=lower)
+                    TextRule(text, lower=lower)
                 )
 
             if regex is not None:
                 _rules.append(
-                    MessageRegexRule(regex)
+                    RegexRule(regex)
                 )
             
             if vbml_pattern is not None:
                 _rules.append(
-                    MessageVBMLRule(vbml_pattern)
+                    VBMLRule(vbml_pattern)
                 )
 
             if endpoint is None:

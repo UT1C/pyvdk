@@ -6,7 +6,7 @@ from ..types import Message
 from .abc import ABCMessageRule, ABCRule, RuleResult
 
 
-class MessageTextRule(ABCMessageRule):
+class TextRule(ABCMessageRule):
     """  """
 
     _text: str
@@ -31,7 +31,7 @@ class MessageTextRule(ABCMessageRule):
             return self.ok()
 
 
-class MessageRegexRule(ABCMessageRule):
+class RegexRule(ABCMessageRule):
     """  """
 
     _regex: re.Pattern
@@ -59,7 +59,7 @@ class MessageRegexRule(ABCMessageRule):
             return self.ok(match)
 
 
-class MessageVBMLRule(ABCMessageRule):
+class VBMLRule(ABCMessageRule):
     """  """
 
     _patcher = vbml.Patcher()
