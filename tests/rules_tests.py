@@ -45,7 +45,7 @@ def message_gen(text: str) -> Message:
 fake_api = FakeAPI(0)
 
 
-class TestRules(unittest.TestCase):
+class RulesTests(unittest.TestCase):
     def test_message_text_rule(self):
         # Arrange
         rules = (

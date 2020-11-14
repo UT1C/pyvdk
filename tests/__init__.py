@@ -1,2 +1,2 @@
-#from .config_test import TestConfig
-from .rules_test import TestRules
+from .config_tests import ConfigTests
+from .rules_tests import RulesTests
