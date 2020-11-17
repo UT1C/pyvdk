@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 #
 import enum
-from typing import Any, Dict, Optional, Union
+from typing import Optional, Union, Dict, Any, List
 
 from .abc import Model
+
 
 class AccountAccountCounters(Model):
     app_requests: int
@@ -36,7 +37,7 @@ class AccountInfo(Model):
     lang: int
     no_wall_replies: "BaseBoolInt"
     own_posts_default: "BaseBoolInt"
-    subscriptions: list
+    subscriptions: List[int]
 
 
 class AccountNameRequest(Model):
@@ -77,7 +78,7 @@ class AccountOffer(Model):
 
 class AccountPushConversations(Model):
     count: int
-    items: list
+    items: List['AccountPushConversationsItem']
 
 
 class AccountPushConversationsItem(Model):
@@ -87,25 +88,25 @@ class AccountPushConversationsItem(Model):
 
 
 class AccountPushParams(Model):
-    msg: list
-    chat: list
-    like: list
-    repost: list
-    comment: list
-    mention: list
-    reply: list
-    new_post: list
-    wall_post: list
-    wall_publish: list
-    friend: list
-    friend_found: list
-    friend_accepted: list
-    group_invite: list
-    group_accepted: list
-    birthday: list
-    event_soon: list
-    app_request: list
-    sdk_open: list
+    msg: List['AccountPushParamsMode']
+    chat: List['AccountPushParamsMode']
+    like: List['AccountPushParamsSettings']
+    repost: List['AccountPushParamsSettings']
+    comment: List['AccountPushParamsSettings']
+    mention: List['AccountPushParamsSettings']
+    reply: List['AccountPushParamsOnoff']
+    new_post: List['AccountPushParamsOnoff']
+    wall_post: List['AccountPushParamsOnoff']
+    wall_publish: List['AccountPushParamsOnoff']
+    friend: List['AccountPushParamsOnoff']
+    friend_found: List['AccountPushParamsOnoff']
+    friend_accepted: List['AccountPushParamsOnoff']
+    group_invite: List['AccountPushParamsOnoff']
+    group_accepted: List['AccountPushParamsOnoff']
+    birthday: List['AccountPushParamsOnoff']
+    event_soon: List['AccountPushParamsOnoff']
+    app_request: List['AccountPushParamsOnoff']
+    sdk_open: List['AccountPushParamsOnoff']
 
 
 class AccountPushParamsMode(enum.Enum):
@@ -282,7 +283,7 @@ class AdsCampaignType(enum.Enum):
 class AdsCategory(Model):
     id: int
     name: str
-    subcategories: Optional[list] = None
+    subcategories: Optional[List['BaseObjectWithName']] = None
 
 
 class AdsClient(Model):
@@ -338,13 +339,13 @@ class AdsDemoStats(Model):
 
 
 class AdsDemostatsFormat(Model):
-    age: list
-    cities: list
+    age: List['AdsStatsAge']
+    cities: List['AdsStatsCities']
     day: str
     month: str
     overall: int
-    sex: list
-    sex_age: list
+    sex: List['AdsStatsSex']
+    sex_age: List['AdsStatsSexAge']
 
 
 class AdsFloodStats(Model):
@@ -368,7 +369,7 @@ class AdsLookalikeRequest(Model):
     source_retargeting_group_id: Optional[int] = None
     source_name: Optional[str] = None
     audience_count: Optional[int] = None
-    save_audience_levels: Optional[list] = None
+    save_audience_levels: Optional[List['AdsLookalikeRequestSaveAudienceLevel']] = None
 
 
 class AdsLookalikeRequestSaveAudienceLevel(Model):
@@ -412,11 +413,11 @@ class AdsPromotedPostReach(Model):
 
 class AdsRejectReason(Model):
     comment: str
-    rules: list
+    rules: List['AdsRules']
 
 
 class AdsRules(Model):
-    paragraphs: list
+    paragraphs: List['AdsParagraphs']
     title: str
 
 
@@ -468,8 +469,8 @@ class AdsStatsSexAge(Model):
 
 
 class AdsStatsSexValue(enum.Enum):
-    FEMALE = "f"
-    MALE = "m"
+    FEMALE = 'f'
+    MALE = 'm'
 
 
 class AdsStatsViewsTimes(Model):
@@ -544,7 +545,7 @@ class AdsTargetGroup(Model):
 
 
 class AdsUsers(Model):
-    accesses: list
+    accesses: List['AdsAccesses']
     user_id: int
 
 
@@ -653,7 +654,7 @@ class BaseError(Model):
     error_code: int
     error_msg: str
     error_text: str
-    request_params: list
+    request_params: List['BaseRequestParam']
 
 
 class BaseGeo(Model):
@@ -738,7 +739,7 @@ class BaseLinkButtonAction(Model):
 
 
 class BaseLinkButtonActionType(enum.Enum):
-    OPEN_URL = "open_url"
+    OPEN_URL = 'open_url'
 
 
 class BaseLinkButtonStyle(Model):
@@ -812,10 +813,10 @@ class BaseSex(enum.Enum):
 class BaseSticker(Model):
     sticker_id: int
     product_id: int
-    images: list
-    images_with_background: list
+    images: List['BaseImage']
+    images_with_background: List['BaseImage']
     animation_url: str
-    animations: list
+    animations: List['BaseStickerAnimation']
     is_allowed: bool
 
 
@@ -955,7 +956,7 @@ class BoardTopic(Model):
 
 
 class BoardTopicComment(Model):
-    attachments: Optional[list] = None
+    attachments: Optional[List['WallCommentAttachment']] = None
     date: int
     from_id: int
     id: int
@@ -967,7 +968,7 @@ class BoardTopicComment(Model):
 
 class BoardTopicPoll(Model):
     answer_id: int
-    answers: list
+    answers: List['PollsAnswer']
     created: int
     is_closed: Optional["BaseBoolInt"] = None
     owner_id: int
@@ -1190,7 +1191,7 @@ class CommentThread(Model):
     can_post: Optional[bool] = None
     count: int
     groups_can_post: Optional[bool] = None
-    items: Optional[list] = None
+    items: Optional[List['WallWallComment']] = None
     show_reply_button: Optional[bool] = None
 
 
@@ -1237,7 +1238,7 @@ class DocsDoc(Model):
     preview: Optional["DocsDocPreview"] = None
     is_licensed: Optional["BaseBoolInt"] = None
     access_key: Optional[str] = None
-    tags: Optional[list] = None
+    tags: Optional[List[str]] = None
 
 
 class DocsDocAttachmentType(enum.Enum):
@@ -1257,7 +1258,7 @@ class DocsDocPreviewAudioMsg(Model):
     duration: int
     link_mp3: str
     link_ogg: str
-    waveform: list
+    waveform: List[int]
 
 
 class DocsDocPreviewGraffiti(Model):
@@ -1267,7 +1268,7 @@ class DocsDocPreviewGraffiti(Model):
 
 
 class DocsDocPreviewPhoto(Model):
-    sizes: list
+    sizes: List['DocsDocPreviewPhotoSizes']
 
 
 class DocsDocPreviewPhotoSizes(Model):
@@ -1297,7 +1298,7 @@ class DocsDocUploadResponse(Model):
 class EventsEventAttach(Model):
     address: Optional[str] = None
     button_text: str
-    friends: list
+    friends: List[int]
     id: int
     is_favorite: bool
     member_status: Optional["GroupsGroupFullMemberStatus"] = None
@@ -1311,7 +1312,7 @@ class FaveBookmark(Model):
     post: Optional["WallWallpostFull"] = None
     product: Optional["MarketMarketItem"] = None
     seen: bool
-    tags: list
+    tags: List['FaveTag']
     type: "FaveBookmarkType"
     video: Optional["VideoVideo"] = None
 
@@ -1327,7 +1328,7 @@ class FaveBookmarkType(enum.Enum):
 class FavePage(Model):
     description: str
     group: Optional["GroupsGroupFull"] = None
-    tags: list
+    tags: List['FaveTag']
     type: "FavePageType"
     updated_date: Optional[int] = None
     user: Optional["UsersUserFull"] = None
@@ -1368,7 +1369,7 @@ class FriendsFriendsList(Model):
 
 class FriendsMutualFriend(Model):
     common_count: int
-    common_friends: list
+    common_friends: List[int]
     id: int
 
 
@@ -1380,7 +1381,7 @@ class FriendsRequests(Model):
 
 class FriendsRequestsMutual(Model):
     count: int
-    users: list
+    users: List[int]
 
 
 class FriendsRequestsXtrMessage(Model):
@@ -1529,7 +1530,7 @@ class GroupsCountersGroup(Model):
 
 class GroupsCover(Model):
     enabled: "BaseBoolInt"
-    images: Optional[list] = None
+    images: Optional[List['BaseImage']] = None
 
 
 class GroupsFields(enum.Enum):
@@ -1654,15 +1655,15 @@ class GroupsGroupBanInfo(Model):
 class GroupsGroupCategory(Model):
     id: int
     name: str
-    subcategories: Optional[list] = None
+    subcategories: Optional[List['BaseObjectWithName']] = None
 
 
 class GroupsGroupCategoryFull(Model):
     id: int
     name: str
     page_count: int
-    page_previews: list
-    subcategories: Optional[list] = None
+    page_previews: List['GroupsGroup']
+    subcategories: Optional[List['GroupsGroupCategory']] = None
 
 
 class GroupsGroupCategoryType(Model):
@@ -1736,7 +1737,7 @@ class GroupsGroupPhotos(enum.Enum):
 class GroupsGroupPublicCategoryList(Model):
     id: int
     name: str
-    subcategories: list
+    subcategories: List['GroupsGroupCategoryType']
 
 
 class GroupsGroupRole(enum.Enum):
@@ -1852,7 +1853,7 @@ class GroupsGroupXtrInvitedByType(enum.Enum):
 
 class GroupsGroupsArray(Model):
     count: int
-    items: list
+    items: List[int]
 
 
 class GroupsLinksItem(Model):
@@ -1868,7 +1869,7 @@ class GroupsLinksItem(Model):
 class GroupsLiveCovers(Model):
     is_enabled: bool
     is_scalable: Optional[bool] = None
-    story_ids: Optional[list] = None
+    story_ids: Optional[List[str]] = None
 
 
 class GroupsLongPollEvents(Model):
@@ -1939,7 +1940,7 @@ class GroupsMarketInfo(Model):
 
 class GroupsMemberRole(Model):
     id: int
-    permissions: list
+    permissions: List['GroupsMemberRolePermission']
     role: "GroupsMemberRoleStatus"
 
 
@@ -2161,15 +2162,15 @@ class MediaRestriction(Model):
     blur: Optional["BaseBoolInt"] = None
     can_play: Optional["BaseBoolInt"] = None
     can_preview: Optional["BaseBoolInt"] = None
-    card_icon: Optional[list] = None
-    list_icon: Optional[list] = None
+    card_icon: Optional[List['BaseImage']] = None
+    list_icon: Optional[List['BaseImage']] = None
 
 
 class MessageChatPreview(Model):
     admin_id: int
     joined: bool
     local_id: int
-    members: list
+    members: List[int]
     members_count: int
     title: str
 
@@ -2181,7 +2182,7 @@ class MessagesAudioMessage(Model):
     link_mp3: str
     link_ogg: str
     owner_id: int
-    waveform: list
+    waveform: List[int]
 
 
 class MessagesChat(Model):
@@ -2195,7 +2196,7 @@ class MessagesChat(Model):
     push_settings: Optional["MessagesChatPushSettings"] = None
     title: Optional[str] = None
     type: str
-    users: list
+    users: List[int]
     is_default_photo: Optional[bool] = None
 
 
@@ -2210,7 +2211,7 @@ class MessagesChatFull(Model):
     push_settings: Optional["MessagesChatPushSettings"] = None
     title: Optional[str] = None
     type: str
-    users: list
+    users: List['MessagesUserXtrInvitedBy']
 
 
 class MessagesChatPushSettings(Model):
@@ -2237,7 +2238,7 @@ class MessagesConversation(Model):
     unanswered: Optional[bool] = None
     special_service_type: Optional[str] = None
     message_request_data: Optional["MessagesMessageRequestData"] = None
-    mentions: Optional[list] = None
+    mentions: Optional[List[int]] = None
     current_keyboard: Optional["MessagesKeyboard"] = None
 
 
@@ -2271,11 +2272,11 @@ class MessagesConversationWithMessage(Model):
 
 
 class MessagesForeignMessage(Model):
-    attachments: Optional[list] = None
+    attachments: Optional[List['MessagesMessageAttachment']] = None
     conversation_message_id: Optional[int] = None
     date: int
     from_id: int
-    fwd_messages: Optional[list] = None
+    fwd_messages: Optional[List['MessagesForeignMessage']] = None
     geo: Optional["BaseGeo"] = None
     id: Optional[int] = None
     peer_id: Optional[int] = None
@@ -2330,7 +2331,7 @@ class MessagesHistoryMessageAttachmentType(enum.Enum):
 
 class MessagesKeyboard(Model):
     author_id: Optional[int] = None
-    buttons: list
+    buttons: List[list]
     one_time: bool
     inline: Optional[bool] = None
 
@@ -2357,7 +2358,7 @@ class MessagesLastActivity(Model):
 
 class MessagesLongpollMessages(Model):
     count: int
-    items: list
+    items: List['MessagesMessage']
 
 
 class MessagesLongpollParams(Model):
@@ -2370,12 +2371,12 @@ class MessagesLongpollParams(Model):
 class MessagesMessage(Model):
     action: Optional["MessagesMessageAction"] = None
     admin_author_id: Optional[int] = None
-    attachments: Optional[list] = None
+    attachments: Optional[List['MessagesMessageAttachment']] = None
     conversation_message_id: Optional[int] = None
     date: int
     deleted: Optional["BaseBoolInt"] = None
     from_id: int
-    fwd_messages: Optional[list] = None
+    fwd_messages: Optional[List['MessagesForeignMessage']] = None
     geo: Optional["BaseGeo"] = None
     id: int
     important: Optional[bool] = None
@@ -2466,11 +2467,11 @@ class MessagesMessageRequestData(Model):
 
 
 class MessagesPinnedMessage(Model):
-    attachments: Optional[list] = None
+    attachments: Optional[List['MessagesMessageAttachment']] = None
     conversation_message_id: Optional[int] = None
     date: int
     from_id: int
-    fwd_messages: Optional[list] = None
+    fwd_messages: Optional[List['MessagesForeignMessage']] = None
     geo: Optional["BaseGeo"] = None
     id: int
     peer_id: int
@@ -2504,7 +2505,7 @@ class NewsfeedCommentsFilters(enum.Enum):
 class NewsfeedEventActivity(Model):
     address: Optional[str] = None
     button_text: str
-    friends: list
+    friends: List[int]
     member_status: "GroupsGroupFullMemberStatus"
     text: str
     time: Optional[int] = None
@@ -2525,12 +2526,12 @@ class NewsfeedFilters(enum.Enum):
 
 
 class NewsfeedIgnoreItemType(enum.Enum):
-    POST_ON_THE_WALL = "wall"
-    TAG_ON_A_PHOTO = "tag"
-    PROFILE_PHOTO = "profilephoto"
-    VIDEO = "video"
-    PHOTO = "photo"
-    AUDIO = "audio"
+    POST_ON_THE_WALL = 'wall'
+    TAG_ON_A_PHOTO = 'tag'
+    PROFILE_PHOTO = 'profilephoto'
+    VIDEO = 'video'
+    PHOTO = 'photo'
+    AUDIO = 'audio'
 
 
 class NewsfeedItemAudio(Model):
@@ -2539,7 +2540,7 @@ class NewsfeedItemAudio(Model):
 
 class NewsfeedItemAudioAudio(Model):
     count: int
-    items: list
+    items: List['AudioAudio']
 
 
 class NewsfeedItemBase(Model):
@@ -2558,13 +2559,13 @@ class NewsfeedItemFriend(Model):
 
 class NewsfeedItemFriendFriends(Model):
     count: int
-    items: list
+    items: List['BaseUserId']
 
 
 class NewsfeedItemHolidayRecommendationsBlockHeader(Model):
     title: str
     subtitle: str
-    image: list
+    image: List['BaseImage']
     action: "BaseLinkButtonAction"
 
 
@@ -2574,7 +2575,7 @@ class NewsfeedItemNote(Model):
 
 class NewsfeedItemNoteNotes(Model):
     count: int
-    items: list
+    items: List['NewsfeedNewsfeedNote']
 
 
 class NewsfeedItemPhoto(Model):
@@ -2583,7 +2584,7 @@ class NewsfeedItemPhoto(Model):
 
 class NewsfeedItemPhotoPhotos(Model):
     count: int
-    items: list
+    items: List['NewsfeedNewsfeedPhoto']
 
 
 class NewsfeedItemPhotoTag(Model):
@@ -2592,7 +2593,7 @@ class NewsfeedItemPhotoTag(Model):
 
 class NewsfeedItemPhotoTagPhotoTags(Model):
     count: int
-    items: list
+    items: List['NewsfeedNewsfeedPhoto']
 
 
 class NewsfeedItemPromoButton(Model):
@@ -2621,7 +2622,7 @@ class NewsfeedItemVideo(Model):
 
 class NewsfeedItemVideoVideo(Model):
     count: int
-    items: list
+    items: List['VideoVideo']
 
 
 class NewsfeedItemWallpost(Model):
@@ -2631,7 +2632,7 @@ class NewsfeedItemWallpost(Model):
 class NewsfeedItemWallpostFeedback(Model):
     type: "NewsfeedItemWallpostFeedbackType"
     question: str
-    answers: Optional[list] = None
+    answers: Optional[List['NewsfeedItemWallpostFeedbackAnswer']] = None
     stars_count: Optional[int] = None
     gratitude: Optional[str] = None
 
@@ -2715,7 +2716,7 @@ class NotesNoteComment(Model):
 
 
 class NotificationsFeedback(Model):
-    attachments: list
+    attachments: List['WallWallpostAttachment']
     from_id: int
     geo: "BaseGeo"
     id: int
@@ -2775,7 +2776,7 @@ class OauthError(Model):
 
 
 class OrdersAmount(Model):
-    amounts: list
+    amounts: List['OrdersAmountItem']
     currency: str
 
 
@@ -2865,7 +2866,7 @@ class PagesWikipageHistory(Model):
 
 
 class PhotosCommentXtrPid(Model):
-    attachments: Optional[list] = None
+    attachments: Optional[List['WallCommentAttachment']] = None
     date: int
     from_id: int
     id: int
@@ -2874,7 +2875,7 @@ class PhotosCommentXtrPid(Model):
     reply_to_comment: Optional[int] = None
     reply_to_user: Optional[int] = None
     text: str
-    parents_stack: Optional[list] = None
+    parents_stack: Optional[List[int]] = None
     thread: Optional["CommentThread"] = None
 
 
@@ -2933,7 +2934,7 @@ class PhotosPhoto(Model):
     date: int
     height: Optional[int] = None
     id: int
-    images: Optional[list] = None
+    images: Optional[List['PhotosImage']] = None
     lat: Optional[float] = None
     long: Optional[float] = None
     owner_id: int
@@ -2941,7 +2942,7 @@ class PhotosPhoto(Model):
     can_comment: Optional["BaseBoolInt"] = None
     place: Optional[str] = None
     post_id: Optional[int] = None
-    sizes: Optional[list] = None
+    sizes: Optional[List['PhotosPhotoSizes']] = None
     text: Optional[str] = None
     user_id: Optional[int] = None
     width: Optional[int] = None
@@ -2968,7 +2969,7 @@ class PhotosPhotoAlbumFull(Model):
     id: int
     owner_id: int
     size: int
-    sizes: Optional[list] = None
+    sizes: Optional[List['PhotosPhotoSizes']] = None
     thumb_id: Optional[int] = None
     thumb_is_last: Optional["BaseBoolInt"] = None
     thumb_src: Optional[str] = None
@@ -2985,7 +2986,7 @@ class PhotosPhotoFull(Model):
     date: int
     height: Optional[int] = None
     id: int
-    images: Optional[list] = None
+    images: Optional[List['PhotosImage']] = None
     lat: Optional[float] = None
     likes: Optional["BaseLikes"] = None
     long: Optional[float] = None
@@ -3020,7 +3021,7 @@ class PhotosPhotoFullXtrRealOffset(Model):
     post_id: Optional[int] = None
     real_offset: Optional[int] = None
     reposts: Optional["BaseObjectCount"] = None
-    sizes: Optional[list] = None
+    sizes: Optional[List['PhotosPhotoSizes']] = None
     tags: Optional["BaseObjectCount"] = None
     text: Optional[str] = None
     user_id: Optional[int] = None
@@ -3097,7 +3098,7 @@ class PhotosPhotoXtrRealOffset(Model):
     photo_807: Optional[str] = None
     post_id: Optional[int] = None
     real_offset: Optional[int] = None
-    sizes: Optional[list] = None
+    sizes: Optional[List['PhotosPhotoSizes']] = None
     text: Optional[str] = None
     user_id: Optional[int] = None
     width: Optional[int] = None
@@ -3120,7 +3121,7 @@ class PhotosPhotoXtrTagInfo(Model):
     photo_807: Optional[str] = None
     placer_id: Optional[int] = None
     post_id: Optional[int] = None
-    sizes: Optional[list] = None
+    sizes: Optional[List['PhotosPhotoSizes']] = None
     tag_created: Optional[int] = None
     tag_id: Optional[int] = None
     text: Optional[str] = None
@@ -3131,9 +3132,9 @@ class PhotosPhotoXtrTagInfo(Model):
 class PhotosTagsSuggestionItem(Model):
     title: str
     type: str
-    buttons: list
+    buttons: List['PhotosTagsSuggestionItemButton']
     photo: "PhotosPhoto"
-    tags: list
+    tags: List['PhotosPhotoTag']
 
 
 class PhotosTagsSuggestionItemButton(Model):
@@ -3161,8 +3162,8 @@ class PollsBackground(Model):
     height: int
     id: int
     name: str
-    images: list
-    points: list
+    images: List['BaseImage']
+    points: List['BaseGradientPoint']
     type: str
     width: int
 
@@ -3173,11 +3174,11 @@ class PollsFriend(Model):
 
 class PollsPoll(Model):
     anonymous: "PollsPollAnonymous"
-    friends: Optional[list] = None
+    friends: Optional[List['PollsFriend']] = None
     multiple: bool
     answer_id: Optional[int] = None
     end_date: int
-    answer_ids: Optional[list] = None
+    answer_ids: Optional[List[int]] = None
     closed: bool
     is_board: bool
     can_edit: bool
@@ -3185,7 +3186,7 @@ class PollsPoll(Model):
     can_report: bool
     can_share: bool
     photo: Optional["PollsBackground"] = None
-    answers: list
+    answers: List['PollsAnswer']
     created: int
     id: int
     owner_id: int
@@ -3207,14 +3208,14 @@ class PollsVoters(Model):
 
 class PollsVotersUsers(Model):
     count: int
-    items: list
+    items: List[int]
 
 
 class PrettycardsPrettycard(Model):
     button: Optional[str] = None
     button_text: Optional[str] = None
     card_id: str
-    images: Optional[list] = None
+    images: Optional[List['BaseImage']] = None
     link_url: str
     photo: str
     price: Optional[str] = None
@@ -3309,14 +3310,14 @@ class StatsPeriod(Model):
 
 
 class StatsReach(Model):
-    age: list
-    cities: list
-    countries: list
+    age: List['StatsSexAge']
+    cities: List['StatsCity']
+    countries: List['StatsCountry']
     mobile_reach: int
     reach: int
     reach_subscribers: int
-    sex: list
-    sex_age: list
+    sex: List['StatsSexAge']
+    sex_age: List['StatsSexAge']
 
 
 class StatsSexAge(Model):
@@ -3328,12 +3329,12 @@ class StatsSexAge(Model):
 
 
 class StatsViews(Model):
-    age: list
-    cities: list
-    countries: list
+    age: List['StatsSexAge']
+    cities: List['StatsCity']
+    countries: List['StatsCountry']
     mobile_views: int
-    sex: list
-    sex_age: list
+    sex: List['StatsSexAge']
+    sex_age: List['StatsSexAge']
     views: int
     visitors: int
 
@@ -3352,7 +3353,7 @@ class StatsWallpostStat(Model):
     report: int
     to_group: int
     unsubscribe: int
-    sex_age: list
+    sex_age: List['StatsSexAge']
 
 
 class StatusStatus(Model):
@@ -3371,7 +3372,7 @@ class StoriesClickableArea(Model):
 
 
 class StoriesClickableSticker(Model):
-    clickable_area: list
+    clickable_area: List['StoriesClickableArea']
     id: int
     hashtag: Optional[str] = None
     link_object: Optional["BaseLink"] = None
@@ -3401,15 +3402,15 @@ class StoriesClickableSticker(Model):
 
 
 class StoriesClickableStickers(Model):
-    clickable_stickers: list
+    clickable_stickers: List['StoriesClickableSticker']
     original_height: int
     original_width: int
 
 
 class StoriesFeedItem(Model):
     type: str
-    stories: Optional[list] = None
-    grouped: Optional[list] = None
+    stories: Optional[List['StoriesStory']] = None
+    grouped: Optional[List['StoriesFeedItem']] = None
     app: Optional["AppsAppMin"] = None
     promo_data: Optional["StoriesPromoBlock"] = None
 
@@ -3654,7 +3655,7 @@ class UsersOnlineInfo(Model):
 class UsersPersonal(Model):
     alcohol: int
     inspired_by: str
-    langs: list
+    langs: List[str]
     life_main: int
     people_main: int
     political: int
@@ -3773,13 +3774,13 @@ class UsersUserSettingsXtr(Model):
     relation: Optional["UsersUserRelation"] = None
     relation_partner: Optional["UsersUserMin"] = None
     relation_pending: Optional["BaseBoolInt"] = None
-    relation_requests: Optional[list] = None
+    relation_requests: Optional[List['UsersUserMin']] = None
     screen_name: Optional[str] = None
     sex: Optional["BaseSex"] = None
     status: str
     status_audio: Optional["AudioAudio"] = None
     interests: Optional["AccountUserSettingsInterests"] = None
-    languages: Optional[list] = None
+    languages: Optional[List[str]] = None
 
 
 class UsersUserType(enum.Enum):
@@ -3796,7 +3797,7 @@ class UsersUserXtrType(Model):
 
 class UsersUsersArray(Model):
     count: int
-    items: list
+    items: List[int]
 
 
 class UtilsDomainResolved(Model):
@@ -3834,12 +3835,12 @@ class UtilsLinkCheckedStatus(enum.Enum):
 
 class UtilsLinkStats(Model):
     key: str
-    stats: list
+    stats: List['UtilsStats']
 
 
 class UtilsLinkStatsExtended(Model):
     key: str
-    stats: list
+    stats: List['UtilsStatsExtended']
 
 
 class UtilsShortLink(Model):
@@ -3865,9 +3866,9 @@ class UtilsStatsCountry(Model):
 
 
 class UtilsStatsExtended(Model):
-    cities: list
-    countries: list
-    sex_age: list
+    cities: List['UtilsStatsCity']
+    countries: List['UtilsStatsCountry']
+    sex_age: List['UtilsStatsSexAge']
     timestamp: int
     views: int
 
@@ -3905,7 +3906,7 @@ class VideoVideo(Model):
 class VideoVideoAlbumFull(Model):
     count: int
     id: Optional[int] = None
-    image: Optional[list] = None
+    image: Optional[List['VideoVideoImage']] = None
     image_blur: Optional["BasePropertyExists"] = None
     is_system: Optional["BasePropertyExists"] = None
     owner_id: int
@@ -4035,7 +4036,7 @@ class WallViews(Model):
 
 
 class WallWallComment(Model):
-    attachments: Optional[list] = None
+    attachments: Optional[List['WallCommentAttachment']] = None
     date: int
     from_id: int
     id: int
@@ -4047,13 +4048,13 @@ class WallWallComment(Model):
     thread: Optional["CommentThread"] = None
     post_id: Optional[int] = None
     owner_id: Optional[int] = None
-    parents_stack: Optional[list] = None
+    parents_stack: Optional[List[int]] = None
     deleted: Optional[bool] = None
 
 
 class WallWallpost(Model):
     access_key: str
-    attachments: list
+    attachments: List['WallWallpostAttachment']
     copyright: "WallPostCopyright"
     date: int
     edited: int
@@ -4087,7 +4088,7 @@ class WallWallpostAttachment(Model):
     note: Optional["WallAttachedNote"] = None
     page: Optional["PagesWikipageFull"] = None
     photo: Optional["PhotosPhoto"] = None
-    photos_list: Optional[list] = None
+    photos_list: Optional[List[str]] = None
     poll: Optional["PollsPoll"] = None
     posted_photo: Optional["WallPostedPhoto"] = None
     type: "WallWallpostAttachmentType"
@@ -4118,7 +4119,7 @@ class WallWallpostFull(Model):
 
 
 class WallWallpostToId(Model):
-    attachments: list
+    attachments: List['WallWallpostAttachment']
     comments: "BaseCommentsInfo"
     copy_owner_id: int
     copy_post_id: int
@@ -4153,7 +4154,7 @@ class WidgetsCommentMediaType(enum.Enum):
 class WidgetsCommentReplies(Model):
     can_post: "BaseBoolInt"
     count: int
-    replies: list
+    replies: List['WidgetsCommentRepliesItem']
 
 
 class WidgetsCommentRepliesItem(Model):
@@ -4166,7 +4167,7 @@ class WidgetsCommentRepliesItem(Model):
 
 
 class WidgetsWidgetComment(Model):
-    attachments: Optional[list] = None
+    attachments: Optional[List['WallCommentAttachment']] = None
     can_delete: Optional["BaseBoolInt"] = None
     comments: Optional["WidgetsCommentReplies"] = None
     date: int
@@ -4198,4 +4199,4 @@ class WidgetsWidgetPage(Model):
     url: str
 
 
-[v.update_forward_refs() for v in globals().values() if hasattr(v, "update_forward_refs")]
+
