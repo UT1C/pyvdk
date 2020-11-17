@@ -98,7 +98,7 @@ class Handler(ABCHandler):
                 self.function(obj, *args)
             except Exception as e:
                 logger.exception("exception occured in handler!")
-                return False  # NOTE: или не фалс? мы себя захуярили
+                raise
             else:
                 logger.debug("sucessfully processed")
                 return True
