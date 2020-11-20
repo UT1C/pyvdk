@@ -8,12 +8,12 @@ from .buttons import Button, Row
 class Keyboard:
     """ Объект клавиатуры """
 
-    _buttons: List[Row[Button]]
+    one_time: bool
+    inline: bool
+    _buttons: "List[Row[Button]]"
     _count: int
     _size_limit: Tuple[int, int]
     _count_limit: int
-    _one_time: bool
-    _inline: bool
 
     def __init__(
         self,
@@ -21,8 +21,8 @@ class Keyboard:
         inline: bool = False
     ) -> None:
 
-        self._one_time = one_time
-        self._inline = inline
+        self.one_time = one_time
+        self.inline = inline
 
         if inline:
             self._size_limit = 5, 6
@@ -42,12 +42,21 @@ class Keyboard:
         return self._buttons[value]
     
     def __call__(self) -> str:
-        pass
+        data = {
+            'one_time': self.one_time,
+            'inline': self.inline,
+            'buttons': [
+                row()
+                for row in self._buttons
+                if len(row) > 0
+            ]
+        }
+        return json.dumps(data)
     
     def append(self, button: Button, level: int = 0):
         """  """
 
-        if self._count == self._count_limit:
+        if self._count_limit == self._count:
             logger.warning('The limit on buttons count has been exceeded! Append was ignored.')
             return
         self._count += 1
@@ -60,7 +69,7 @@ class Keyboard:
     def extend(self, buttons: List[Button], level: int = 0):
         """  """
         
-        if self._count + len(buttons) >= self._count_limit:
+        if self._count_limit < self._count + len(buttons):
             logger.warning('The limit on buttons count has been exceeded! Extend was ignored.')
             return
         self._count += len(buttons)
