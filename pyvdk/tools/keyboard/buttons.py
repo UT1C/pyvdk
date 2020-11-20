@@ -51,6 +51,9 @@ class ButtonData:
     - owner_id: int
     - label: str
     - hash: str
+
+    callback:
+    - label: str
     """
 
     B = BLUE = PRIMARY = 'primary'
