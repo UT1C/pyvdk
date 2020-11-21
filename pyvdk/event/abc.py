@@ -12,7 +12,7 @@ class ABCHandler(ABC):
 
     function: Callable
     type: GroupEventType
-    rules: Tuple[ABCRule, ...]
+    rules: List[ABCRule]
     level: int
     endpoint: bool
 
