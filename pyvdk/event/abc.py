@@ -20,6 +20,10 @@ class ABCHandler(ABC):
     def handle(self, obj: Any) -> bool:
         ...
 
+    @abstractmethod
+    def add_rule(self, rule: ABCRule):
+        ...
+
 
 class ABCView(ABC):
 

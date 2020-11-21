@@ -10,7 +10,7 @@ from ..rules import (
 )
 from ..types import Message
 from ..vk_api import ABCAPI
-from .abc import ABCLabeler, ABCView
+from .abc import ABCLabeler, ABCView, ABCHandler
 from .event_types import GroupEventType
 from .handler import Handler
 
@@ -35,7 +35,7 @@ class Labeler(ABCLabeler):
         level: int = 0,
         endpoint: bool = None
     ) -> Callable:
-        def decorator(func):
+        def decorator(func) -> ABCHandler:
 
             _rules = list(i for i in rules if isinstance(i, ABCRule))
 
@@ -67,5 +67,6 @@ class Labeler(ABCLabeler):
                 endpoint=_endpoint
             )
             self._view.add(handler)
+            return handler
 
         return decorator

@@ -36,7 +36,7 @@ class Handler(ABCHandler):
 
         self.function = function
         self.type = handler_type
-        self.rules = rules
+        self.rules = list(rules)
         self.level = level
         self.endpoint = endpoint
         logger.debug(f"instantiated {self} with rules {rules}")
@@ -46,6 +46,15 @@ class Handler(ABCHandler):
             f"<{self.__class__.__name__} "
             f"{repr(self.function.__name__)} at {hex(id(self))}>"
         )
+    
+    def add_rule(self, rule: ABCRule):
+        """Метод добавляющий правило в хендлер
+
+        Args:
+            rule (ABCRule): объект правила
+        """
+
+        self.rules.append(rule)
 
     def check_rules(self, obj: Any) -> Tuple[bool, List[Any]]:
         """Метод пропускающий объект через правила
@@ -77,7 +86,6 @@ class Handler(ABCHandler):
 
         logger.debug(f"check result: {flag, args}")
         return flag, args
-
 
     def handle(self, obj: Any) -> bool:
         """[summary]
