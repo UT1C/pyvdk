@@ -6,9 +6,6 @@ from ..event import ABCHandler
 
 class RulesBunch(ABCRule):
     """  """
-    
-    rules: List[ABCRule]
-    alternative_rule: Optional[ABCRule]
 
     def __init__(
         self,
@@ -16,7 +13,7 @@ class RulesBunch(ABCRule):
         alternative_rule: Optional[ABCRule] = None
     ) -> None:
 
-        self.rules = rules
+        self.rules = list(rules)
         self.alternative_rule = alternative_rule
 
     def __call__(
