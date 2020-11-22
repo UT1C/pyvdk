@@ -26,16 +26,16 @@ class Config:
             data = yaml.load(f, Loader=yaml.Loader)
         for k, v in data.items():
             self.__setattr__(k, v)
-    
+
     @classmethod
     def from_yaml(cls, path: str) -> "Config":
         """ Создает объект конфига из yaml """
 
         with open(path, 'r') as f:
             data = yaml.load(f, Loader=yaml.Loader)
-        
+
         return cls(**data)
-    
+
     @classmethod
     def from_environ(cls) -> "Config":
         """
@@ -57,9 +57,9 @@ class Config:
             "API_VERSION": float
         }
         args = list()
-        
+
         for env_name, env_type in envs.items():
             env = env_type(os.environ.get(f"PYVDK_{env_name}"))
             args.append(env)
-        
+
         return cls(*args)

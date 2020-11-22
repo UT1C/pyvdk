@@ -43,7 +43,7 @@ class RulesBunch(ABCRulesBunch):
             return result
 
         if self.alternative_rule is not None:
-            return self.alternative_rule(obj)
+            return self.alternative_rule.check(obj)
 
     def _check(self, rules: List[ABCRule], obj: Any) -> RuleResult:
         """  """
@@ -51,7 +51,7 @@ class RulesBunch(ABCRulesBunch):
         results = list()
 
         for rule in rules:
-            result = rule(obj)
+            result = rule.check(obj)
             if not result:
                 return self.no()
             else:

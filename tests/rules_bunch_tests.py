@@ -33,7 +33,7 @@ class RulesBunchTests(unittest.TestCase):
     def test_generate_from_rules(self):
         # Arrange
         bunch = (TextRule('foo', lower=False) & TextRule('foo')) | TextRule('bar')
-        
+
         # Act
         act = [
             bunch.check(i)

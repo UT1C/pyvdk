@@ -12,7 +12,7 @@ class Row(list):
     def __init__(self, *args, limit: int) -> None:
         self._limit = limit
         super().__init__(*args)
-    
+
     def __call__(self) -> List[dict]:
         return [i() for i in self]
 
@@ -21,11 +21,11 @@ class Row(list):
             raise self._limit_exception
 
         super().append(value)
-    
+
     def extend(self, values: Iterable[Any]) -> None:
         if self._limit < len(self) + len(values):
             raise self._limit_exception
-        
+
         super().extend(values)
 
 
@@ -72,10 +72,10 @@ class ButtonData:
     }
 
     text = lambda label: {
-            'type': 'text',
-            'label': label
-        }
-    
+        'type': 'text',
+        'label': label
+    }
+
     link = lambda link, label: {
         'type': 'link',
         'link': link,
@@ -85,7 +85,7 @@ class ButtonData:
     location = lambda: {
         type: 'location'
     }
-    
+
     vkpay = lambda hash: {
         'type': 'vkpay',
         'hash': urlencode(hash)
@@ -114,14 +114,14 @@ class Button(ButtonData):
         action: dict,
         payload: Optional[Union[str, dict]] = None
     ) -> None:
-        
+
         self.color = self._colors.get(color, color)
 
         if payload is not None:
             if not isinstance(payload, dict):
                 payload = {'command': payload}
             action.update({'payload': json.dumps(payload)})
-        
+
         self.action = action
 
     def __call__(self) -> dict:

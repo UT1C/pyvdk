@@ -37,10 +37,10 @@ class Keyboard:
             Row(limit=x)
             for i in range(y)
         ]
-    
+
     def __getitem__(self, value: int) -> Row:
         return self._buttons[value]
-    
+
     def __call__(self) -> str:
         data = {
             'one_time': self.one_time,
@@ -52,7 +52,7 @@ class Keyboard:
             ]
         }
         return json.dumps(data)
-    
+
     def append(self, button: Button, level: int = 0):
         """  """
 
@@ -68,7 +68,7 @@ class Keyboard:
 
     def extend(self, buttons: List[Button], level: int = 0):
         """  """
-        
+
         if self._count_limit < self._count + len(buttons):
             logger.warning('The limit on buttons count has been exceeded! Extend was ignored.')
             return
