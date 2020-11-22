@@ -1,12 +1,10 @@
-from typing import Any, Callable, Dict, List, Tuple
+from typing import Any, Dict
 
 from ..logging import log
-from ..rules import ABCRule, TextRule
 from ..types import Message
 from ..vk_api import ABCAPI
-from .abc import ABCView, ABCHandler
+from .abc import ABCHandler, ABCView
 from .event_types import GroupEventType
-
 
 logger = log.getLogger("event/view")
 
@@ -34,18 +32,19 @@ class View(ABCView):
                 handled = handler.handle(obj)
                 if handled and handler.endpoint:
                     break
-        
+
         logger.debug("forwarding done")
 
     def add(self, handler: ABCHandler):
         logger.debug(f"registered new handler {handler}")
         self.handlers.append(handler)
 
-    def __create_object(self, event: dict):
+    def __create_object(self, event: Dict[str, Any]):
         etype = GroupEventType(event["type"])
         if etype == GroupEventType.MESSAGE_NEW:
             return Message(api=self.api, **event["object"]["message"])
+        # FIXME: больше обрабатываемых типов
         elif etype == GroupEventType.GROUP_JOIN:
-            raise Exception("# TODO: ")
+            raise NotImplementedError()
         else:
-            raise Exception("# TODO: ")
+            raise NotImplementedError()

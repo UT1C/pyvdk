@@ -1,26 +1,22 @@
-from typing import Any, Callable, Dict, List, Tuple, Union
-import vbml
+from typing import Any, Callable, List, Union
 
 from ..logging import log
 from ..rules import (
     ABCRule,
-    TextRule,
     RegexRule,
-    VBMLRule
+    TextRule,
+    VBMLRule,
 )
-from ..types import Message
-from ..vk_api import ABCAPI
-from .abc import ABCLabeler, ABCView, ABCHandler
+from .abc import ABCHandler, ABCLabeler, ABCView
 from .event_types import GroupEventType
 from .handler import Handler
-
 
 logger = log.getLogger("event/labeler")
 
 
 class Labeler(ABCLabeler):
     """  """
-    
+
     def __init__(self, view: ABCView, endpoint_default: bool):
         self._view = view
         self._endpoint_default = endpoint_default
@@ -40,19 +36,13 @@ class Labeler(ABCLabeler):
             _rules = list(i for i in rules if isinstance(i, ABCRule))
 
             if text is not None:
-                _rules.append(
-                    TextRule(text, lower=lower)
-                )
+                _rules.append(TextRule(text, lower=lower))
 
             if regex is not None:
-                _rules.append(
-                    RegexRule(regex)
-                )
-            
+                _rules.append(RegexRule(regex))
+
             if pattern is not None:
-                _rules.append(
-                    VBMLRule(pattern)
-                )
+                _rules.append(VBMLRule(pattern))
 
             if endpoint is None:
                 _endpoint = self._endpoint_default

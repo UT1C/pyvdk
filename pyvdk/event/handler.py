@@ -1,20 +1,17 @@
-from typing import Any, Callable, List, Tuple, Dict
+from typing import Any, Callable, Dict, List, Tuple
 
 from ..logging import log
-from ..rules import ABCRule, TextRule
-from ..types import Message
-from ..vk_api import ABCAPI
-from .event_types import GroupEventType
+from ..rules import ABCRule
 from .abc import ABCHandler
-
+from .event_types import GroupEventType
 
 logger = log.getLogger("event/handler")
 
 
 class Handler(ABCHandler):
     """
-        Класс, хранящий в себе ссылку на функцию-обработчик события,
-        и список правил(Rule), когда следует вызывать эту функцию
+    Класс, хранящий в себе ссылку на функцию-обработчик события,
+    и список правил(Rule), когда следует вызывать эту функцию
     """
 
     def __init__(
@@ -23,14 +20,14 @@ class Handler(ABCHandler):
         handler_type: GroupEventType,
         *rules: ABCRule,
         level: int,
-        endpoint: bool
+        endpoint: bool,
     ) -> None:
         """[summary]
 
         Args:
             function (Callable): функция-обработчик
             *rules (ABCRule): правила, какие события обрабатывать.
-            endpoint (bool, optional): Блокирует ли обработчик событие. 
+            endpoint (bool, optional): Блокирует ли обработчик событие.
                 Стандартное значение - True.
         """
 
@@ -46,7 +43,7 @@ class Handler(ABCHandler):
             f"<{self.__class__.__name__} "
             f"{repr(self.function.__name__)} at {hex(id(self))}>"
         )
-    
+
     def add_rule(self, rule: ABCRule):
         """Метод добавляющий правило в хендлер
 
@@ -64,10 +61,10 @@ class Handler(ABCHandler):
             obj (Any): объект события
 
         Returns:
-            Tuple[bool, List[Any]]: флаг, подходит ли объект обработчику, 
+            Tuple[bool, List[Any]]: флаг, подходит ли объект обработчику,
             и список аргументов из правил
         """
-        
+
         logger.debug("checking rules")
         flag: bool = True
         args: list = []
@@ -104,7 +101,7 @@ class Handler(ABCHandler):
             try:
                 logger.debug(f"processing {obj} with {self}")
                 self.function(obj, *args)
-            except Exception as e:
+            except Exception:
                 logger.exception("exception occured in handler!")
                 raise
             else:

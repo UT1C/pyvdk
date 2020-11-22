@@ -1,11 +1,11 @@
+import typing
 from abc import ABC, abstractmethod
-from typing import Any, Callable, Dict, List, Tuple, TYPE_CHECKING
+from typing import Any, Callable, List
 
-from ..logging import log
-from ..types import Message
 from ..vk_api import ABCAPI
 from .event_types import GroupEventType
-if TYPE_CHECKING:
+
+if typing.TYPE_CHECKING:
     from ..rules import ABCRule
 
 
@@ -56,6 +56,7 @@ class ABCLabeler(ABC):
     @abstractmethod
     def message_new(self, *rules, **kwargs):
         ...
+
     # @abstractmethod
     # def message_reply(self, *rules, **kwargs):
     #     ...
