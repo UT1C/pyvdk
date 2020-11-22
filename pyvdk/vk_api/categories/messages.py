@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 #
-from typing import Optional
+from typing import Optional, Union
 
 from ..category import Category
+from ...tools import Keyboard
 
 
 class Messages(Category):
@@ -349,7 +350,7 @@ class Messages(Category):
         forward_messages: Optional[list] = None,
         sticker_id: Optional[int] = None,
         group_id: Optional[int] = None,
-        keyboard: Optional[str] = None,
+        keyboard: Optional[Union[Keyboard, str]] = None,
         payload: Optional[str] = None,
         dont_parse_links: Optional[bool] = None,
         disable_mentions: Optional[bool] = None,
@@ -357,6 +358,8 @@ class Messages(Category):
         subscribe_id: Optional[int] = None,
         **kwargs
     ) -> dict:
+        if isinstance(keyboard, Keyboard):
+            keyboard = keyboard()
         return self._request("send", locals())
 
     def send_message_event_answer(
