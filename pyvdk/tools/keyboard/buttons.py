@@ -1,30 +1,44 @@
-from typing import Any, Iterable, List, Optional, Union
+from typing import Any, Iterable, List, Optional, Union, TYPE_CHECKING
 import json
 from urllib.parse import urlencode
+
+from ..logger import logger
+if TYPE_CHECKING:
+    from .keyboard import Keyboard
 
 
 class Row(list):
     """ Объект строки клавиатуры """
 
-    _limit: int
-    _limit_exception = Exception('Maximum row length exceeded!')
+    limit_exception = Exception('Maximum row length exceeded!')
 
-    def __init__(self, *args, limit: int) -> None:
-        self._limit = limit
+    def __init__(
+        self,
+        *args,
+        keyboard: "Keyboard",
+        limit: int
+    ) -> None:
+
+        self.keyboard = keyboard
+        self.limit = limit
         super().__init__(*args)
 
     def __call__(self) -> List[dict]:
         return [i() for i in self]
 
     def append(self, value: Any) -> None:
-        if self._limit == len(self):
-            raise self._limit_exception
+        if self.limit == len(self):
+            raise self.limit_exception
+
+        self.keyboard._check_count_limit(1)
 
         super().append(value)
 
     def extend(self, values: Iterable[Any]) -> None:
-        if self._limit < len(self) + len(values):
-            raise self._limit_exception
+        if self.limit < len(self) + len(values):
+            raise self.limit_exception
+
+        self.keyboard._check_count_limit(len(values))
 
         super().extend(values)
 

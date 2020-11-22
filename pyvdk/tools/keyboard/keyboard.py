@@ -1,8 +1,10 @@
-from typing import List, Tuple
+from typing import List, Tuple, TYPE_CHECKING
 import json
 
 from ..logger import logger
-from .buttons import Button, Row
+from .buttons import Row
+if TYPE_CHECKING:
+    from .buttons import Button
 
 
 class Keyboard:
@@ -10,10 +12,13 @@ class Keyboard:
 
     one_time: bool
     inline: bool
-    _buttons: "List[Row[Button]]"
-    _count: int
-    _size_limit: Tuple[int, int]
-    _count_limit: int
+    buttons: "List[Row[Button]]"
+    size_limit: Tuple[int, int]
+    count_limit: int
+
+    @property
+    def count(self) -> int:
+        return sum([len(row) for row in self.buttons])
 
     def __init__(
         self,
@@ -25,21 +30,20 @@ class Keyboard:
         self.inline = inline
 
         if inline:
-            self._size_limit = 5, 6
-            self._count_limit = 10
+            self.size_limit = 5, 6
+            self.count_limit = 10
         else:
-            self._size_limit = 5, 10
-            self._count_limit = 40
+            self.size_limit = 5, 10
+            self.count_limit = 40
 
-        x, y = self._size_limit
-        self._count = 0
-        self._buttons = [
-            Row(limit=x)
+        x, y = self.size_limit
+        self.buttons = [
+            Row(keyboard=self, limit=x)
             for i in range(y)
         ]
 
     def __getitem__(self, value: int) -> Row:
-        return self._buttons[value]
+        return self.buttons[value]
 
     def __call__(self) -> str:
         data = {
@@ -47,34 +51,22 @@ class Keyboard:
             'inline': self.inline,
             'buttons': [
                 row()
-                for row in self._buttons
+                for row in self.buttons
                 if len(row) > 0
             ]
         }
         return json.dumps(data)
 
-    def append(self, button: Button, level: int = 0):
+    def append(self, button: "Button", level: int = 0):
+        self.buttons[level].append(button)
+
+    def extend(self, buttons: List["Button"], level: int = 0):
+        self.buttons[level].extend(buttons)
+    
+    def _check_count_limit(self, n: int):
         """  """
 
-        if self._count_limit == self._count:
-            logger.warning('The limit on buttons count has been exceeded! Append was ignored.')
-            return
-        self._count += 1
-
-        try:
-            self._buttons[level].append(button)
-        except Exception as e:
-            logger.exception('Exception occured!')
-
-    def extend(self, buttons: List[Button], level: int = 0):
-        """  """
-
-        if self._count_limit < self._count + len(buttons):
-            logger.warning('The limit on buttons count has been exceeded! Extend was ignored.')
-            return
-        self._count += len(buttons)
-
-        try:
-            self._buttons[level].extend(buttons)
-        except Exception as e:
-            logger.exception('Exception occured!')
+        if self.count + n > self.count_limit:
+            raise Exception(
+                'The limit on buttons count has been exceeded! Extend was ignored.'
+            )
