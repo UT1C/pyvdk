@@ -11,4 +11,5 @@ plugins:
 
 nav:
     - Home: index.md
+    - Введение: intro.md
     - API Reference: api_reference.md
