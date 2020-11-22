@@ -31,7 +31,7 @@ class Labeler(ABCLabeler):
         text: str = None,
         lower: bool = True,
         regex: str = None,
-        vbml_pattern: Union[vbml.Pattern, str] = None,
+        pattern: Union[str, List[str]] = None,
         level: int = 0,
         endpoint: bool = None
     ) -> Callable:
@@ -49,9 +49,9 @@ class Labeler(ABCLabeler):
                     RegexRule(regex)
                 )
             
-            if vbml_pattern is not None:
+            if pattern is not None:
                 _rules.append(
-                    VBMLRule(vbml_pattern)
+                    VBMLRule(pattern)
                 )
 
             if endpoint is None:

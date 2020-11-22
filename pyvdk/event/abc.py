@@ -40,7 +40,7 @@ class ABCView(ABC):
         ...
 
     @abstractmethod
-    def add(self, etype: GroupEventType, handler: ABCHandler):
+    def add(self, handler: ABCHandler):
         ...
 
 

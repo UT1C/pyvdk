@@ -83,20 +83,19 @@ class VBMLRule(MessageRule):
 
     def __init__(
         self,
-        pattern: Union[str, vbml.Pattern, List[Union[str, vbml.Pattern]]],
+        pattern: Union[str, List[str]],
         patcher: Optional[vbml.Patcher] = None,
         flags: Optional[re.RegexFlag] = None
     ) -> None:
 
         if isinstance(pattern, str):
-            self._patterns = list(vbml.Pattern(pattern, flags=flags))
-        elif isinstance(pattern, (list, tuple)):
-            self._patterns = [
-                vbml.Pattern(i, flags=flags) if isinstance(i, str) else i
-                for i in pattern
-            ]
+            _patterns = [pattern]
+        elif isinstance(pattern, list):
+            _patterns = pattern
         else:
-            self._patterns = list(pattern)
+            _patterns = list(pattern)
+
+        self._patterns = [vbml.Pattern(i, flags=flags) for i in _patterns]
 
         if patcher is not None:
             self._patcher = patcher
@@ -104,8 +103,10 @@ class VBMLRule(MessageRule):
     def check(self, msg: Message) -> Optional[RuleResult]:
         for i in self._patterns:
             result = self._patcher.check(i, msg.text)
-            if result:
-                return result
+            if result is True:
+                return self.ok()
+            if isinstance(result, dict):
+                return self.ok(result.values())
 
 
 class CustomRule(Rule):
