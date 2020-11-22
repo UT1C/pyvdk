@@ -1,7 +1,6 @@
 from typing import List, Tuple, TYPE_CHECKING
 import json
 
-from ..logger import logger
 from .buttons import Row
 if TYPE_CHECKING:
     from .buttons import Button

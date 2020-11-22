@@ -2,7 +2,6 @@ from typing import Any, Iterable, List, Optional, Union, TYPE_CHECKING
 import json
 from urllib.parse import urlencode
 
-from ..logger import logger
 if TYPE_CHECKING:
     from .keyboard import Keyboard
 
