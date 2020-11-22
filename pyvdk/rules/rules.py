@@ -9,10 +9,10 @@ from .bunch import RulesBunch
 
 class Rule(ABCRule):
 
-    def __and__(self, rule: "ABCRule") -> "ABCRulesBunch":
+    def __and__(self, rule: ABCRule) -> ABCRulesBunch:
         return RulesBunch(self, rule)
 
-    def __or__(self, rule: "ABCRule") -> "ABCRulesBunch":
+    def __or__(self, rule: ABCRule) -> ABCRulesBunch:
         return RulesBunch(self, alternative_rule=rule)
 
 

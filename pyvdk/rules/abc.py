@@ -1,14 +1,18 @@
-from abc import ABC, abstractmethod
-from typing import TYPE_CHECKING, Any, List, Optional, Type, Union
+from abc import ABC
+from typing import Any, List, Optional, Type, Union
 
 from ..event import ABCHandler
 
 
 class RuleResult:
+    """  """
 
-    correct: bool
+    def __init__(
+        self,
+        *args: Any,
+        correct: bool = False
+    ) -> None:
 
-    def __init__(self, *args, correct: bool = False) -> None:
         self.correct = correct
         self.args = args
     

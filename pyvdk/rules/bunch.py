@@ -31,11 +31,11 @@ class RulesBunch(ABCRulesBunch):
 
         return inp
 
-    def __and__(self, rule: ABCRule) -> "ABCRulesBunch":
+    def __and__(self, rule: ABCRule) -> ABCRulesBunch:
         self.rules.append(rule)
         return self
 
-    def __or__(self, rule: "ABCRule") -> "ABCRulesBunch":
+    def __or__(self, rule: ABCRule) -> ABCRulesBunch:
         return RulesBunch(self, alternative_rule=rule)
 
     def check(self, obj: Any) -> Optional[RuleResult]:
