@@ -1,11 +1,11 @@
 from .abc import ABCRule, ABCMessageRule
-from .bunch import RulesBunch
 from .rules import (
     TextRule,
     RegexRule,
     VBMLRule,
     CustomRule
 )
+from .bunch import RulesBunch
 
 
 __all__ = (

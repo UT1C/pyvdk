@@ -1,18 +1,19 @@
 from abc import ABC, abstractmethod
-from typing import Any, Callable, Dict, List, Tuple
+from typing import Any, Callable, Dict, List, Tuple, TYPE_CHECKING
 
 from ..logging import log
-from ..rules import ABCRule, TextRule
 from ..types import Message
 from ..vk_api import ABCAPI
 from .event_types import GroupEventType
+if TYPE_CHECKING:
+    from ..rules import ABCRule
 
 
 class ABCHandler(ABC):
 
     function: Callable
     type: GroupEventType
-    rules: List[ABCRule]
+    rules: List["ABCRule"]
     level: int
     endpoint: bool
 
@@ -21,7 +22,7 @@ class ABCHandler(ABC):
         ...
 
     @abstractmethod
-    def add_rule(self, rule: ABCRule):
+    def add_rule(self, rule: "ABCRule"):
         ...
 
 

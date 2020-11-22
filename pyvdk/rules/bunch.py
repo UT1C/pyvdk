@@ -1,16 +1,23 @@
 from typing import List, Union, Type, Optional, Any
-from dataclasses import dataclass, field
 
 from .abc import ABCRule, RuleResult
 from ..event import ABCHandler
 
 
-@dataclass
 class RulesBunch(ABCRule):
     """  """
-
+    
     rules: List[ABCRule]
-    alternative_rules: Optional[List[ABCRule]] = field(default_factory=list)
+    alternative_rule: Optional[ABCRule]
+
+    def __init__(
+        self,
+        *rules: ABCRule,
+        alternative_rule: Optional[ABCRule] = None
+    ) -> None:
+
+        self.rules = rules
+        self.alternative_rule = alternative_rule
 
     def __call__(
         self,
@@ -30,20 +37,14 @@ class RulesBunch(ABCRule):
     def __and__(self, rule: ABCRule) -> "RulesBunch":
         self.rules.append(rule)
         return self
-
-    def __or__(self, rule: ABCRule) -> "RulesBunch":
-        self.alternative_rules.append(rule)
-        return self
     
     def check(self, obj: Any) -> Optional[RuleResult]:
         result = self._check(self.rules, obj)
         if result:
             return result
 
-        result = self._check(self.alternative_rules, obj)
-        if result:
-            return result
-
+        if self.alternative_rule is not None:
+            return self.alternative_rule(obj)
     
     def _check(self, rules: List[ABCRule], obj: Any) -> RuleResult:
         """  """
