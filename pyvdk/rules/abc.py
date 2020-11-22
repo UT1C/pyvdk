@@ -1,9 +1,7 @@
-from typing import Optional, Any, TYPE_CHECKING
 from abc import ABC, abstractmethod
+from typing import TYPE_CHECKING, Any, List, Optional, Type, Union
 
-from ..types import Message
-if TYPE_CHECKING:
-    from .bunch import RulesBunch
+from ..event import ABCHandler
 
 
 class RuleResult:
@@ -34,11 +32,11 @@ class ABCRule(ABC):
     def __repr__(self) -> str:
         return f"<{self.__class__.__name__} at {hex(id(self))}>"
 
-    def __and__(self, rule: "ABCRule") -> "RulesBunch":
-        return RulesBunch(self, rule)
+    def __and__(self, rule: "ABCRule") -> "ABCRulesBunch":
+        ...
 
-    def __or__(self, rule: "ABCRule") -> "RulesBunch":
-        return RulesBunch(self, alternative_rule=rule)
+    def __or__(self, rule: "ABCRule") -> "ABCRulesBunch":
+        ...
 
     def check(self, obj: Any) -> Optional[RuleResult]:
         return self.ok()
@@ -51,7 +49,28 @@ class ABCRule(ABC):
     def no(*args):
         return RuleResult(*args)
 
-class ABCMessageRule(ABCRule):
 
-    def check(self, obj: Message) -> Optional[RuleResult]:
-        return self.ok()
+class ABCRulesBunch(ABCRule):
+    """  """
+
+    def __init__(
+        self,
+        *rules: ABCRule,
+        alternative_rule: Optional[ABCRule] = None
+    ) -> None:
+        ...
+
+    def __call__(
+        self,
+        inp: Union[ABCHandler, Type]
+    ) -> Union[ABCHandler, Type]:
+        ...
+
+    def __and__(self, rule: ABCRule) -> "ABCRulesBunch":
+        ...
+
+    def check(self, obj: Any) -> Optional[RuleResult]:
+        ...
+
+    def _check(self, rules: List[ABCRule], obj: Any) -> RuleResult:
+        ...

@@ -1,19 +1,23 @@
-from .abc import ABCRule, ABCMessageRule
+from .abc import ABCRule, ABCRulesBunch
 from .rules import (
+    Rule,
+    MessageRule,
     TextRule,
     RegexRule,
     VBMLRule,
-    CustomRule
+    CustomRule,
 )
 from .bunch import RulesBunch
 
 
 __all__ = (
     "ABCRule",
-    "ABCMessageRule",
+    "Rule",
+    "MessageRule",
+    "ABCRulesBunch",
     "RulesBunch",
     "TextRule",
     "RegexRule",
     "VBMLRule",
-    "CustomRule"
+    "CustomRule",
 )

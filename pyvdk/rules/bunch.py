@@ -1,10 +1,10 @@
 from typing import List, Union, Type, Optional, Any
 
-from .abc import ABCRule, RuleResult
+from .abc import ABCRule, RuleResult, ABCRulesBunch
 from ..event import ABCHandler
 
 
-class RulesBunch(ABCRule):
+class RulesBunch(ABCRulesBunch):
     """  """
 
     def __init__(
@@ -31,10 +31,13 @@ class RulesBunch(ABCRule):
 
         return inp
 
-    def __and__(self, rule: ABCRule) -> "RulesBunch":
+    def __and__(self, rule: ABCRule) -> "ABCRulesBunch":
         self.rules.append(rule)
         return self
-    
+
+    def __or__(self, rule: "ABCRule") -> "ABCRulesBunch":
+        return RulesBunch(self, alternative_rule=rule)
+
     def check(self, obj: Any) -> Optional[RuleResult]:
         result = self._check(self.rules, obj)
         if result:

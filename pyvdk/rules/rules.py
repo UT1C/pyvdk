@@ -3,10 +3,26 @@ import re
 import vbml
 
 from ..types import Message
-from .abc import ABCMessageRule, ABCRule, RuleResult
+from .abc import ABCRule, RuleResult, ABCRulesBunch
+from .bunch import RulesBunch
 
 
-class TextRule(ABCMessageRule):
+class Rule(ABCRule):
+
+    def __and__(self, rule: "ABCRule") -> "ABCRulesBunch":
+        return RulesBunch(self, rule)
+
+    def __or__(self, rule: "ABCRule") -> "ABCRulesBunch":
+        return RulesBunch(self, alternative_rule=rule)
+
+
+class MessageRule(Rule):
+
+    def check(self, obj: Message) -> Optional[RuleResult]:
+        return self.ok()
+
+
+class TextRule(MessageRule):
     """  """
 
     _text: str
@@ -31,7 +47,7 @@ class TextRule(ABCMessageRule):
             return self.ok()
 
 
-class RegexRule(ABCMessageRule):
+class RegexRule(MessageRule):
     """  """
 
     _regex: re.Pattern
@@ -59,7 +75,7 @@ class RegexRule(ABCMessageRule):
             return self.ok(match)
 
 
-class VBMLRule(ABCMessageRule):
+class VBMLRule(MessageRule):
     """  """
 
     _patcher = vbml.Patcher()
@@ -92,7 +108,7 @@ class VBMLRule(ABCMessageRule):
                 return result
 
 
-class CustomRule(ABCRule):
+class CustomRule(Rule):
     """
     Пользовательское правило.
     Принимает единственный аргумент в виде функции или лямбды,
