@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 #
 import enum
-from typing import Optional, Union, Dict, Any, List
+import json
+from typing import Any, Callable, Dict, List, Optional, Union
 
 from .abc import Model
 
@@ -2395,6 +2396,17 @@ class MessagesMessage(Model):
     update_time: Optional[int] = None
     was_listened: Optional[bool] = None
     pinned_at: Optional[int] = None
+
+    def load_payload(
+        self,
+        on_fail: Callable[[str], Union[dict]] = lambda s: {}
+    ) -> Optional[dict]:
+        if self.payload is None:
+            return None
+        try:
+            return json.loads(self.payload)
+        except Exception:
+            return on_fail(self.payload)
 
 
 class MessagesMessageAction(Model):

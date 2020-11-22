@@ -1,9 +1,10 @@
-from typing import Union, List, Optional, Callable, Any
 import re
+from typing import Any, Callable, Dict, List, Optional, Tuple, Union
+
 import vbml
 
 from ..types import Message
-from .abc import ABCRule, RuleResult, ABCRulesBunch
+from .abc import ABCRule, ABCRulesBunch, RuleResult
 from .bunch import RulesBunch
 
 
@@ -107,6 +108,43 @@ class VBMLRule(MessageRule):
                 return self.ok()
             if isinstance(result, dict):
                 return self.ok(*result.values())
+
+
+class PayloadRule(MessageRule):
+    def __init__(self, payload: Union[dict, List[dict]]):
+        if isinstance(payload, dict):
+            payload = [payload]
+        self.payload = payload
+
+    def check(self, message: Message) -> Optional[RuleResult]:
+        if message.load_payload() in self.payload:
+            return self.ok()
+
+
+class PayloadContainsRule(MessageRule):
+    def __init__(self, payload: dict):
+        self.payload = payload
+
+    def check(self, message: Message) -> Optional[RuleResult]:
+        payload = message.load_payload()
+        for k, v in self.payload.items():
+            if payload.get(k) != v:
+                return self.no()
+        return self.ok()
+
+
+class PayloadMapRule(MessageRule):
+    def __init__(self, payload_map: Dict[str, type]):
+        self.payload = payload_map
+
+    def check(self, message: Message) -> Optional[RuleResult]:
+        payload = message.load_payload()
+        for k, v in self.payload.items():
+            if k not in payload:
+                return self.no()
+            elif not isinstance(payload[k], v):
+                return self.no()
+        return self.ok()
 
 
 class CustomRule(Rule):
