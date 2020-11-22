@@ -23,10 +23,9 @@ class RulesBunch(ABCRulesBunch):
 
         if isinstance(inp, ABCHandler):
             inp.add_rule(self)
-        
         else:
             for k, v in inp.__dict__.items():
-                if not k.startswith('_') and isinstance(v, ABCHandler):
+                if not k.startswith("_") and isinstance(v, ABCHandler):
                     v.add_rule(self)
 
         return inp
@@ -45,7 +44,7 @@ class RulesBunch(ABCRulesBunch):
 
         if self.alternative_rule is not None:
             return self.alternative_rule(obj)
-    
+
     def _check(self, rules: List[ABCRule], obj: Any) -> RuleResult:
         """  """
 
@@ -57,5 +56,5 @@ class RulesBunch(ABCRulesBunch):
                 return self.no()
             else:
                 results.append(result.args)
-        
+
         return self.ok(results)

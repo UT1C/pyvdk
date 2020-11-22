@@ -42,7 +42,7 @@ class TextRule(MessageRule):
 
         if self._lower:
             text = text.lower()
-            
+
         if text == self._text:
             return self.ok()
 
@@ -106,7 +106,7 @@ class VBMLRule(MessageRule):
             if result is True:
                 return self.ok()
             if isinstance(result, dict):
-                return self.ok(result.values())
+                return self.ok(*result.values())
 
 
 class CustomRule(Rule):

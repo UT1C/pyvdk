@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import TYPE_CHECKING, Any, List, Optional, Type, Union
+from typing import Any, List, Optional, Type, Union
 
 from ..event import ABCHandler
 
@@ -11,10 +11,10 @@ class RuleResult:
     def __init__(self, *args, correct: bool = False) -> None:
         self.correct = correct
         self.args = args
-    
+
     def __bool__(self):
         return self.correct
-    
+
     def add_to(self, args: list) -> None:
         """
         Если правило вернуло аргументы, этот метод
@@ -25,7 +25,6 @@ class RuleResult:
 
 
 class ABCRule(ABC):
-
     def __init__(self) -> None:
         ...
 
@@ -67,6 +66,9 @@ class ABCRulesBunch(ABCRule):
         ...
 
     def __and__(self, rule: ABCRule) -> "ABCRulesBunch":
+        ...
+
+    def __or__(self, rule: "ABCRule") -> "ABCRulesBunch":
         ...
 
     def check(self, obj: Any) -> Optional[RuleResult]:
