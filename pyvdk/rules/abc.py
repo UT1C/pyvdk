@@ -25,14 +25,23 @@ class RuleResult:
 
         args.extend(self.args)
 
+
+class ABCRule(ABC):
+
+    def __init__(self) -> None:
+        ...
+
+    def __repr__(self) -> str:
+        return f"<{self.__class__.__name__} at {hex(id(self))}>"
+
     def __and__(self, rule: "ABCRule") -> "RulesBunch":
         return RulesBunch(self, rule)
 
     def __or__(self, rule: "ABCRule") -> "RulesBunch":
         return RulesBunch(self, alternative_rule=rule)
 
-
-class ABCRule(ABC):
+    def check(self, obj: Any) -> Optional[RuleResult]:
+        return self.ok()
 
     @staticmethod
     def ok(*args):
@@ -41,16 +50,6 @@ class ABCRule(ABC):
     @staticmethod
     def no(*args):
         return RuleResult(*args)
-
-    def __init__(self) -> None:
-        ...
-
-    def __repr__(self) -> str:
-        return f"<{self.__class__.__name__} at {hex(id(self))}>"
-
-    def check(self, obj: Any) -> Optional[RuleResult]:
-        return self.ok()
-
 
 class ABCMessageRule(ABCRule):
 
