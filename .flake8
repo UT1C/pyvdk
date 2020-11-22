@@ -1,4 +1,4 @@
 [flake8]
 max-line-length = 99
-ignore = W292, F401
+ignore = W292, F401, E731
 exclude = .git, build, dist, venv, .venv, docs, examples, tests, *.egg-info

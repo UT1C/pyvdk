@@ -1,4 +1,5 @@
 from typing import Any
+from pathlib import Path
 import jinja2
 
 
@@ -35,13 +36,15 @@ class DictToObject:
 class Junk:
     """ Some junk utils """
 
+    @staticmethod
     def form_render(path: str, **kwargs) -> str:
         """ Just jinja2 """
 
-        file_text = Junk.file_reader(path)
+        file_text = Path(path).read_text()
         template = jinja2.Template(file_text)
         return template.render(**kwargs)
 
+    @staticmethod
     def get_chat_id(peer_id: int) -> int:
         """ Get chat id from peer id """
 

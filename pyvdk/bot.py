@@ -23,7 +23,7 @@ class Bot:
 
         if debug:
             logging.toggle_debug()
-        
+
         self.__config = config
         self.api = API(self.__config)
         self.view = View(self.api)
@@ -31,15 +31,15 @@ class Bot:
 
     def request_handle(self, request: dict) -> str:
         """ Handle request from vk and return response """
-        
+
         logger.debug(f'new request: {request}')
         response = self.__check(request)
         if response == 'ok':
             logger.info('new event')
             self.view.process(request)
-        
+
         return response
-    
+
     def __check(self, request: dict) -> str:
         """ Проверяет данные реквеста """
 
