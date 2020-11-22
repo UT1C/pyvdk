@@ -44,3 +44,21 @@ class RulesBunchTests(unittest.TestCase):
         self.assertFalse(act[0])
         self.assertTrue(act[1])
         self.assertTrue(act[2])
+    
+    def test_bunch(self):
+        # Arrange
+        bunch = RulesBunch(
+            TextRule('foo'),
+            alternative_rule=TextRule('Foo', lower=False)
+        )
+
+        # Act
+        act = [
+            bunch.check(i)
+            for i in self.mes
+        ]
+
+        # Assert
+        self.assertTrue(act[0])
+        self.assertTrue(act[1])
+        self.assertFalse(act[2])
