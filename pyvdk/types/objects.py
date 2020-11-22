@@ -4199,4 +4199,4 @@ class WidgetsWidgetPage(Model):
     url: str
 
 
-
+[v.update_forward_refs() for v in globals().values() if hasattr(v, "update_forward_refs")]
