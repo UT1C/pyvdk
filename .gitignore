@@ -134,3 +134,4 @@ poetry.lock
 
 # custom
 pyvdk_legacy/
+test.py
