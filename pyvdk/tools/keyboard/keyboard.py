@@ -56,11 +56,11 @@ class Keyboard:
         }
         return json.dumps(data)
 
-    def append(self, button: "Button", level: int = 0):
-        self.buttons[level].append(button)
+    def append(self, button: "Button", row: int = 0):
+        self.buttons[row].append(button)
 
-    def extend(self, buttons: List["Button"], level: int = 0):
-        self.buttons[level].extend(buttons)
+    def extend(self, buttons: List["Button"], row: int = 0):
+        self.buttons[row].extend(buttons)
     
     def _check_count_limit(self, n: int):
         """  """
