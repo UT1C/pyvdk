@@ -35,7 +35,7 @@ class Bot:
         logger.debug(f'new request: {request}')
         response = self.__check(request)
         if response == 'ok':
-            logger.info('new event')
+            logger.info(f"new event, type:{request.get('type')}")
             self.view.process(request)
 
         return response
