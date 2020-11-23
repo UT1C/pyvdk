@@ -22,7 +22,7 @@ class Bot:
     ) -> None:
 
         if debug:
-            logging.toggle_debug()
+            logging.enable_debug()
 
         self.__config = config
         self.api = API(self.__config)

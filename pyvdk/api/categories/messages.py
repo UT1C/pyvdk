@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 #
+import random
 from typing import Optional, Union
 
 from ..category import Category
@@ -360,6 +361,8 @@ class Messages(Category):
     ) -> dict:
         if isinstance(keyboard, Keyboard):
             keyboard = keyboard()
+        if random_id is None:
+            random_id = random.getrandbits(64)
         return self._request("send", locals())
 
     def send_message_event_answer(

@@ -8,6 +8,7 @@ keywords = ["vk", "vk-api", "bot"]
 
 [tool.poetry.urls]
 "Documentation" = "https://pyvdk.readthedocs.io/"
+"Github" = "https://github.com/UT1C/pyvdk"
 
 [tool.poetry.dependencies]
 python = "^3.7"
