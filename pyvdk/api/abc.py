@@ -5,7 +5,7 @@ from ..logging import log
 from ..config import Config
 from ..tools import prepare_params
 
-logger = log.getLogger('vk_api')
+logger = log.getLogger('api')
 
 
 class ABCAPI:

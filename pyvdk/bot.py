@@ -1,7 +1,7 @@
 from . import logging
 from .event import View, Labeler
 from .config import Config
-from .vk_api import API
+from .api import API
 
 
 logger = logging.log.getLogger('bot')
