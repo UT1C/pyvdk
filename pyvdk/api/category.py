@@ -2,7 +2,7 @@ from ..logging import log
 from ..tools import prepare_params
 from .abc import ABCAPI, ABCCategory
 
-logger = log.getLogger("vk_api")
+logger = log.getLogger("api")
 
 
 class Category(ABCCategory):

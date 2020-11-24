@@ -2,7 +2,7 @@ from typing import Any, Dict
 
 from ..logging import log
 from ..types import Message
-from ..vk_api import ABCAPI
+from ..api import ABCAPI
 from .abc import ABCHandler, ABCView
 from .event_types import GroupEventType
 
