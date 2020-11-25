@@ -2,7 +2,6 @@ from typing import List, Union, Type, Optional, Any
 
 from .abc import ABCRule, RuleResult, ABCRulesBunch
 from ..event import ABCHandler
-from ..logging import log
 
 
 class RulesBunch(ABCRulesBunch):
