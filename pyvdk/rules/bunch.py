@@ -2,6 +2,7 @@ from typing import List, Union, Type, Optional, Any
 
 from .abc import ABCRule, RuleResult, ABCRulesBunch
 from ..event import ABCHandler
+from ..logging import log
 
 
 class RulesBunch(ABCRulesBunch):
@@ -57,4 +58,6 @@ class RulesBunch(ABCRulesBunch):
             else:
                 results.append(result.args)
 
-        return self.ok(results)
+        if len(results) > 0:
+            return self.ok(results)
+        return self.ok()
