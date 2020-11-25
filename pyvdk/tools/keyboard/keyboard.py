@@ -61,7 +61,7 @@ class Keyboard:
 
     def extend(self, buttons: List["Button"], row: int = 0):
         self.buttons[row].extend(buttons)
-    
+
     def _check_count_limit(self, n: int):
         """  """
 
