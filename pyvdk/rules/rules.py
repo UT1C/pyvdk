@@ -1,3 +1,4 @@
+import time
 import re
 from typing import Any, Callable, Dict, List, Optional, Tuple, Union
 
@@ -145,6 +146,47 @@ class PayloadMapRule(MessageRule):
             elif not isinstance(payload[k], v):
                 return self.no()
         return self.ok()
+
+
+class CDRule(MessageRule):
+    def __init__(self, cd: int = 8):
+        self.cd = cd
+        self.ts = 0
+
+    def check(self, msg: Message) -> Optional[RuleResult]:
+        if time.time() - self.ts > self.cd:
+            self.ts = time.time()
+            return self.ok()
+
+
+class PeerCDRule(MessageRule):
+    def __init__(self, cd: int = 16):
+        self.cd = cd
+        self.peers = {}
+
+    def check(self, msg: Message) -> Optional[RuleResult]:
+        if msg.peer_id in self.peers:
+            if time.time() - self.peers[msg.peer_id] > self.cd:
+                self.peers[msg.peer_id] = time.time()
+                return self.ok()
+        else:
+            self.peers[msg.peer_id] = time.time()
+            return self.ok()
+
+
+class UserCDRule(MessageRule):
+    def __init__(self, cd: int = 32):
+        self.cd = cd
+        self.users = {}
+
+    def check(self, msg: Message) -> Optional[RuleResult]:
+        if msg.from_id in self.users:
+            if time.time() - self.users[msg.from_id] > self.cd:
+                self.users[msg.from_id] = time.time()
+                return self.ok()
+        else:
+            self.users[msg.from_id] = time.time()
+            return self.ok()
 
 
 class CustomRule(Rule):
