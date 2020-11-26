@@ -1,30 +1,20 @@
 # Вызов методов API
 
-## import
-
-Существует два класса для вызовов методов апи
-
-`ABCAPI` не содержит в себе категорий, и соответственно без подсказок
-```python
-from pyvdk.api import ABCAPI
-```
-
-экземпляр `API` же будет подсказывать имя метода и аргументов
-```python
-from pyvdk.api import API
-```
+[TOC]
 
 ## Создание экземпляра
-
-Для `ABCAPI`/`API` требуется экземпляр [Config](api_reference.md)
+Для `RawAPI`/`API` требуется экземпляр [Config](api_reference.md#config).
 ```python
-api = ABCAPI(config)
+from pyvdk.api import RawAPI, API
+
+
+api = RawAPI(config)
 # или же
 api = API(config)
 ```
 
-## ABCAPI
-
+## RawAPI
+`RawAPI` не содержит в себе категорий, и соответственно без подсказок.
 ```python
 # вызываем https://vk.com/dev/users.get
 r = api.method("users.get", user_ids=[1])["response"][0]
@@ -40,7 +30,12 @@ print("local time:", time.time())
 ```
 
 ## API
+Класс `API` наследуется от `RawAPI`, а значит все методы `RawAPI` доступны.
+```python
 
+```
+
+Экземпляр `API` будет подсказывать имена методов и их аргументов.
 ```python
 # https://vk.com/dev/messages.send
 r = api.messages.send(
@@ -49,5 +44,3 @@ r = api.messages.send(
     random_id=random.getrandbits(64)
 )
 ```
-
-Так же API имеет тот же `ABCAPI.method`.

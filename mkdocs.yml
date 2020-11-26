@@ -9,6 +9,11 @@ theme: readthedocs
 plugins:
     - search
 
+markdown_extensions:
+    - toc:
+        permalink: "#"
+        toc_depth: "2-6"
+
 nav:
     - Основное:
         - Введение: intro.md
