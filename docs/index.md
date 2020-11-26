@@ -7,7 +7,7 @@
     + [Требования](intro.md#требования)
     + [Установка](intro.md#установка)
 + [Вызов методов API](api_methods_call.md)
-    + [Создание экземплера](api_methods_call.md#_1)
+    + [Создание экземпляра](api_methods_call.md#_1)
     + [RawAPI](api_methods_call.md#rawapi)
     + [API](api_methods_call.md#api)
 + [Инструменты](tools.md)
