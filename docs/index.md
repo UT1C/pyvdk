@@ -6,6 +6,7 @@
 + [Введение](intro.md)
     + [Требования](intro.md#требования)
     + [Установка](intro.md#установка)
+    + [Быстрый старт](intro.md#быстрый_старт)
 + [Вызов методов API](api_methods_call.md)
     + [Создание экземпляра](api_methods_call.md#_1)
     + [RawAPI](api_methods_call.md#rawapi)
