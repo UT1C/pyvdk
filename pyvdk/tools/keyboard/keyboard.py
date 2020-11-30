@@ -1,17 +1,16 @@
-from typing import List, Tuple, TYPE_CHECKING
+from typing import List, Tuple
 import json
 
 from .buttons import Row
-if TYPE_CHECKING:
-    from .buttons import Button
+from .abc import ABCButton, ABCKeyboard
 
 
-class Keyboard:
+class Keyboard(ABCKeyboard):
     """ Объект клавиатуры """
 
     one_time: bool
     inline: bool
-    buttons: "List[Row[Button]]"
+    buttons: "List[Row[ABCButton]]"
     size_limit: Tuple[int, int]
     count_limit: int
 
@@ -56,10 +55,10 @@ class Keyboard:
         }
         return json.dumps(data)
 
-    def append(self, button: "Button", row: int = 0):
+    def append(self, button: ABCButton, row: int = 0):
         self.buttons[row].append(button)
 
-    def extend(self, buttons: List["Button"], row: int = 0):
+    def extend(self, buttons: List[ABCButton], row: int = 0):
         self.buttons[row].extend(buttons)
 
     def _check_count_limit(self, n: int):
