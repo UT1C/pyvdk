@@ -1,18 +1,14 @@
-from typing import List, Tuple
+from typing import Iterable, Optional, Union, List
+from collections import deque
 import json
 
-from .buttons import Row
 from .abc import ABCButton, ABCKeyboard
 
 
 class Keyboard(ABCKeyboard):
     """ Объект клавиатуры """
 
-    one_time: bool
-    inline: bool
-    buttons: "List[Row[ABCButton]]"
-    size_limit: Tuple[int, int]
-    count_limit: int
+    __selected_row: int = None
 
     @property
     def count(self) -> int:
@@ -36,35 +32,50 @@ class Keyboard(ABCKeyboard):
 
         x, y = self.size_limit
         self.buttons = [
-            Row(keyboard=self, limit=x)
+            deque(maxlen=x)
             for i in range(y)
         ]
 
-    def __getitem__(self, value: int) -> Row:
-        return self.buttons[value]
+    def __getitem__(self, value: int) -> ABCKeyboard:
+        self.__selected_row = value
+        return self
 
     def __call__(self) -> str:
         data = {
             'one_time': self.one_time,
             'inline': self.inline,
-            'buttons': [
-                row()
-                for row in self.buttons
-                if len(row) > 0
-            ]
+            'buttons': self._get_buttons()
         }
         return json.dumps(data)
 
-    def append(self, button: ABCButton, row: int = 0):
-        self.buttons[row].append(button)
+    def append(self, button: ABCButton, row: Optional[int] = 0):
+        self.buttons[self._get_row(row)].append(button)
+        self._check_count()
 
-    def extend(self, buttons: List[ABCButton], row: int = 0):
-        self.buttons[row].extend(buttons)
+    def appendleft(self, button: ABCButton, row: int = 0):
+        self.buttons[self._get_row(row)].appendleft(button)
+        self._check_count()
 
-    def _check_count_limit(self, n: int):
-        """  """
+    def extend(self, buttons: Iterable[ABCButton], row: int = 0):
+        self.buttons[self._get_row(row)].extend(buttons)
+        self._check_count()
 
-        if self.count + n > self.count_limit:
-            raise Exception(
-                'The limit on buttons count has been exceeded! Extend was ignored.'
-            )
+    def extendleft(self, buttons: Iterable[ABCButton], row: int = 0):
+        self.buttons[self._get_row(row)].extendleft(buttons)
+        self._check_count()
+
+    def _get_row(self, row: Union[int, None]) -> int:
+        if row == 0 and self.__selected_row is not None:
+            row = self.__selected_row
+            self.__selected_row = None
+        return row
+
+    def _get_buttons(self) -> List[List[str]]:
+        return [
+            [button() for button in row]
+            for row in self.buttons
+        ]
+
+    def _check_count(self):
+        if self.count_limit > self.count:
+            raise Exception('Max keyboard length exceeded!')

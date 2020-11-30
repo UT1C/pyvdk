@@ -1,5 +1,5 @@
-from typing import Optional, Union
-from abc import ABC, abstractmethod
+from typing import Optional, Union, Deque, Tuple, Iterable
+from abc import ABC, abstractmethod, abstractproperty
 
 
 class ColorData:
@@ -25,11 +25,47 @@ class ColorData:
 
 
 class ABCKeyboard(ABC, ColorData):
-    ...
+    one_time: bool
+    inline: bool
+    buttons: Deque[Deque["ABCButton"]]
+    size_limit: Tuple[int, int]
+    count_limit: int
 
+    @abstractproperty
+    def count(self) -> int:
+        ...
 
-class ABCRow(ABC):
-    ...
+    @abstractmethod
+    def __init__(
+        self,
+        one_time: bool = False,
+        inline: bool = False
+    ) -> None:
+        ...
+
+    @abstractmethod
+    def __getitem__(self, value: int) -> "ABCKeyboard":
+        ...
+
+    @abstractmethod
+    def __call__(self) -> str:
+        ...
+
+    @abstractmethod
+    def append(self, button: "ABCButton", row: Optional[int] = 0):
+        ...
+
+    @abstractmethod
+    def appendleft(self, button: "ABCButton", row: int = 0):
+        ...
+
+    @abstractmethod
+    def extend(self, buttons: Iterable["ABCButton"], row: int = 0):
+        ...
+
+    @abstractmethod
+    def extendleft(self, buttons: Iterable["ABCButton"], row: int = 0):
+        ...
 
 
 class ABCButton(ABC, ColorData):

@@ -1,45 +1,9 @@
-from typing import Any, Iterable, List, Dict, Optional, Union
+from typing import Any, Dict, Optional, Union
 from urllib.parse import urlencode
 from dataclasses import dataclass
 import json
 
-from .abc import ABCKeyboard, ABCRow, ABCButton
-
-
-class Row(list, ABCRow):
-    """ Объект строки клавиатуры """
-
-    limit_exception = Exception('Maximum row length exceeded!')
-
-    def __init__(
-        self,
-        *args,
-        keyboard: ABCKeyboard,
-        limit: int
-    ) -> None:
-
-        self.keyboard = keyboard
-        self.limit = limit
-        super().__init__(*args)
-
-    def __call__(self) -> List[dict]:
-        return [i() for i in self]
-
-    def append(self, value: Any) -> None:
-        if self.limit == len(self):
-            raise self.limit_exception
-
-        self.keyboard._check_count_limit(1)
-
-        super().append(value)
-
-    def extend(self, values: Iterable[Any]) -> None:
-        if self.limit < len(self) + len(values):
-            raise self.limit_exception
-
-        self.keyboard._check_count_limit(len(values))
-
-        super().extend(values)
+from .abc import ABCButton
 
 
 @dataclass
