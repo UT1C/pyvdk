@@ -20,7 +20,8 @@ class Button(ABCButton):
 
         if payload is not None:
             if not isinstance(payload, dict):
-                payload = json.dumps({'command': payload})
+                payload = {'command': payload}
+            self.payload = json.dumps(payload)
 
     def __call__(self) -> dict:
         action = self.get_action()

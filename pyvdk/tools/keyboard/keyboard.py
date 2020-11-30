@@ -74,8 +74,9 @@ class Keyboard(ABCKeyboard):
         return [
             [button() for button in row]
             for row in self.buttons
+            if len(row) > 0
         ]
 
     def _check_count(self):
-        if self.count_limit > self.count:
+        if self.count_limit < self.count:
             raise Exception('Max keyboard length exceeded!')
