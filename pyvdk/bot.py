@@ -29,8 +29,8 @@ class Bot:
         self.view = View(self.api)
         self.on = Labeler(self.view, endpoint_default)
 
-    def request_handle(self, request: dict) -> str:
-        """ Handle request from vk and return response """
+    def check(self, request: dict) -> str:
+        """ Обрабатывает запрос """
 
         logger.debug(f'new request: {request}')
         response = self.__check(request)
