@@ -1,5 +1,5 @@
 from .objects import MessagesMessage
-from ..vk_api import ABCAPI
+from ..api import ABCAPI
 import random
 
 

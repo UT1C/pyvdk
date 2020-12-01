@@ -2,7 +2,7 @@ import typing
 from abc import ABC, abstractmethod
 from typing import Any, Callable, List
 
-from ..vk_api import ABCAPI
+from ..api import ABCAPI
 from .event_types import GroupEventType
 
 if typing.TYPE_CHECKING:
