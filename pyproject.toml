@@ -4,6 +4,7 @@ version = "0.0.3"
 description = "VK toolkit"
 authors = ["lightmanLP <liteman1000@gmail.com>", "mikk357 <mikk357@yandex.ru>"]
 license = "MIT License"
+readme = "README.md"
 keywords = ["vk", "vk-api", "bot"]
 
 [tool.poetry.urls]
