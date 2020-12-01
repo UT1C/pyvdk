@@ -57,4 +57,6 @@ class RulesBunch(ABCRulesBunch):
             else:
                 results.append(result.args)
 
-        return self.ok(results)
+        if len(results) > 0:
+            return self.ok(results)
+        return self.ok()

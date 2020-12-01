@@ -1,6 +1,6 @@
 import unittest
 import json
-from pyvdk.tools import Keyboard, KeyboardButton
+from pyvdk.tools import Keyboard, TextButton
 
 
 class KeyboardTests(unittest.TestCase):
@@ -8,29 +8,29 @@ class KeyboardTests(unittest.TestCase):
         # Arrange
         keyboard = Keyboard(inline=True)
         b = [
-            KeyboardButton(
+            TextButton(
                 color='w',
-                action=KeyboardButton.text(str(i)),
+                label=str(i),
                 payload=str(i)
             )
             for i in range(6)
         ]
-        
+
+        # Act
+        keyboard.extend(b)
+        keyboard[1].extend(b)
+
         # Assert
         with self.assertRaises(Exception):
-            keyboard.extend(b)
-            keyboard[1].extend(b)
-        
-        with self.assertRaises(Exception):
-            keyboard.extend(b)
-    
+            keyboard[2].extend(b)
+
     def test_structure(self):
         # Arrange
         keyboard = Keyboard(one_time=True)
         b = [
-            KeyboardButton(
+            TextButton(
                 color='w',
-                action=KeyboardButton.text(str(i + 1)),
+                label=str(i + 1),
                 payload=str(i + 1)
             )
             for i in range(3)

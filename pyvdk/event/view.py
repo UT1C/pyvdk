@@ -2,7 +2,7 @@ from typing import Any, Dict
 
 from ..logging import log
 from ..types import Message
-from ..vk_api import ABCAPI
+from ..api import ABCAPI
 from .abc import ABCHandler, ABCView
 from .event_types import GroupEventType
 
@@ -20,14 +20,13 @@ class View(ABCView):
 
         logger.debug("creating object")
         obj = self.__create_object(event)
-        logger.debug(f"obj = {obj}")
-        logger.debug(f"{vars(obj)}")
 
-        logger.debug("forwarding obj in handlers")
+        logger.debug(f"forwarding {repr(obj)} in handlers")
         self.handlers.sort(key=lambda handler: handler.level)
 
         for handler in self.handlers:
 
+            # FIXME: с чем сравнивается тип хендлера?
             if handler.type == GroupEventType.MESSAGE_NEW:
                 handled = handler.handle(obj)
                 if handled and handler.endpoint:

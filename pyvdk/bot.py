@@ -1,7 +1,7 @@
 from . import logging
 from .event import View, Labeler
 from .config import Config
-from .vk_api import API
+from .api import API
 
 
 logger = logging.log.getLogger('bot')
@@ -22,7 +22,7 @@ class Bot:
     ) -> None:
 
         if debug:
-            logging.toggle_debug()
+            logging.enable_debug()
 
         self.__config = config
         self.api = API(self.__config)
@@ -35,7 +35,7 @@ class Bot:
         logger.debug(f'new request: {request}')
         response = self.__check(request)
         if response == 'ok':
-            logger.info('new event')
+            logger.info(f"new event, type:{request.get('type')}")
             self.view.process(request)
 
         return response

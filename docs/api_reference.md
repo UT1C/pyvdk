@@ -1,3 +1,5 @@
 # API Reference
 
+[TOC]
+
 ## Bot
