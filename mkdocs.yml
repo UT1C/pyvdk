@@ -8,6 +8,8 @@ theme: readthedocs
 
 plugins:
     - search
+    - macros:
+        include_dir: .
 
 markdown_extensions:
     - toc:
