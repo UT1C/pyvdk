@@ -112,10 +112,11 @@ class VBMLRule(MessageRule):
 
 
 class PayloadRule(MessageRule):
-    def __init__(self, payload: Union[dict, List[dict]]):
-        if isinstance(payload, dict):
-            payload = [payload]
-        self.payload = payload
+    def __init__(self, *payload: dict):
+        self.payload = [
+            i if isinstance(i, dict) else {"command": i}
+            for i in payload
+        ]
 
     def check(self, message: Message) -> Optional[RuleResult]:
         if message.load_payload() in self.payload:
