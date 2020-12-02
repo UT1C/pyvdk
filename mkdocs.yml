@@ -12,7 +12,9 @@ plugins:
         include_dir: .
 
 markdown_extensions:
+    - footnotes
     - attr_list
+    - admonition
     - toc:
         permalink: "#"
         toc_depth: "1-6"
