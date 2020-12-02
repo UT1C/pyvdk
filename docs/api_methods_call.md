@@ -2,7 +2,7 @@
 
 [TOC]
 
-## Создание экземпляра
+## Создание экземпляра { #create-instance }
 Для `RawAPI`/`API` требуется экземпляр [Config](api_reference.md#config).
 ```python
 from pyvdk.api import RawAPI, API

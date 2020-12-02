@@ -4,15 +4,15 @@
 
 ## Основное
 + [Введение](intro.md)
-    + [Требования](intro.md#_1)
-    + [Установка](intro.md#_2)
-    + [Быстрый старт](intro.md#_3)
+    + [Требования](intro.md#requirements)
+    + [Установка](intro.md#install)
+    + [Быстрый старт](intro.md#quickstart)
 + [Вызов методов API](api_methods_call.md)
-    + [Создание экземпляра](api_methods_call.md#_1)
+    + [Создание экземпляра](api_methods_call.md#create-instance)
     + [RawAPI](api_methods_call.md#rawapi)
     + [API](api_methods_call.md#api)
 + [Инструменты](tools.md)
-    + [Клавиатура](tools.md#_1)
+    + [Клавиатура](tools.md#keyboard)
 + [API Reference](api_reference.md)
 
 ## Дополнительно
