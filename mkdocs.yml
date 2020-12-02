@@ -19,11 +19,6 @@ markdown_extensions:
         permalink: "#"
         toc_depth: "1-6"
 
-markdown_extensions:
-    - toc:
-        permalink: "#"
-        toc_depth: "2-6"
-
 nav:
     - Основное:
         - Введение: intro.md
