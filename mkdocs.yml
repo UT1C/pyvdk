@@ -22,8 +22,8 @@ markdown_extensions:
 nav:
     - Основное:
         - Введение: intro.md
-        - Инструменты: tools.md
         - Вызов методов API: api_methods_call.md
+        - Инструменты: tools.md
         - API Reference: api_reference.md
     - Дополнительно:
         - Changelog: additional\changelog.md
