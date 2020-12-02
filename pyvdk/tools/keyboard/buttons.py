@@ -40,8 +40,8 @@ class TextButton(Button):
 
     def get_action(self) -> dict:
         return {
-        'type': 'text',
-        'label': self.label
+            'type': 'text',
+            'label': self.label
         }
 
 
