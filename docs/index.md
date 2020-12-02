@@ -12,6 +12,7 @@
     + [RawAPI](api_methods_call.md#rawapi)
     + [API](api_methods_call.md#api)
 + [Инструменты](tools.md)
+    + [Клавиатура](tools.md#_1)
 + [API Reference](api_reference.md)
 
 ## Дополнительно

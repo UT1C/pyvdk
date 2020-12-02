@@ -14,7 +14,7 @@ plugins:
 markdown_extensions:
     - toc:
         permalink: "#"
-        toc_depth: "2-6"
+        toc_depth: "1-6"
 
 nav:
     - Основное:
