@@ -49,26 +49,26 @@ class Keyboard(ABCKeyboard):
         return json.dumps(data)
 
     def append(self, button: ABCButton, row: Optional[int] = 0):
-        self.buttons[self._get_row(row)].append(button)
+        self._get_row(row).append(button)
         self._check_count()
 
     def appendleft(self, button: ABCButton, row: int = 0):
-        self.buttons[self._get_row(row)].appendleft(button)
+        self._get_row(row).appendleft(button)
         self._check_count()
 
     def extend(self, buttons: Iterable[ABCButton], row: int = 0):
-        self.buttons[self._get_row(row)].extend(buttons)
+        self._get_row(row).extend(buttons)
         self._check_count()
 
     def extendleft(self, buttons: Iterable[ABCButton], row: int = 0):
-        self.buttons[self._get_row(row)].extendleft(buttons)
+        self._get_row(row).extendleft(buttons)
         self._check_count()
 
     def _get_row(self, row: Union[int, None]) -> int:
         if row == 0 and self.__selected_row is not None:
             row = self.__selected_row
             self.__selected_row = None
-        return row
+        return self.buttons[row]
 
     def _get_buttons(self) -> List[List[str]]:
         return [
