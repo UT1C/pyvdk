@@ -64,7 +64,7 @@ class Keyboard(ABCKeyboard):
         self._get_row(row).extendleft(buttons)
         self._check_count()
 
-    def _get_row(self, row: Union[int, None]) -> int:
+    def _get_row(self, row: Union[int, None]) -> deque:
         if row == 0 and self.__selected_row is not None:
             row = self.__selected_row
             self.__selected_row = None
