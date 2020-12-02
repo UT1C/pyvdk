@@ -1,6 +1,7 @@
+from typing import Any, Callable, Dict, List, Optional, Tuple, Union
+import random
 import time
 import re
-from typing import Any, Callable, Dict, List, Optional, Tuple, Union
 
 import vbml
 
@@ -118,8 +119,8 @@ class PayloadRule(MessageRule):
             for i in payload
         ]
 
-    def check(self, message: Message) -> Optional[RuleResult]:
-        if message.load_payload() in self.payload:
+    def check(self, msg: Message) -> Optional[RuleResult]:
+        if msg.load_payload() in self.payload:
             return self.ok()
 
 
@@ -127,8 +128,8 @@ class PayloadContainsRule(MessageRule):
     def __init__(self, payload: dict):
         self.payload = payload
 
-    def check(self, message: Message) -> Optional[RuleResult]:
-        payload = message.load_payload()
+    def check(self, msg: Message) -> Optional[RuleResult]:
+        payload = msg.load_payload()
         for k, v in self.payload.items():
             if payload.get(k) != v:
                 return self.no()
@@ -139,14 +140,20 @@ class PayloadMapRule(MessageRule):
     def __init__(self, payload_map: Dict[str, type]):
         self.payload = payload_map
 
-    def check(self, message: Message) -> Optional[RuleResult]:
-        payload = message.load_payload()
+    def check(self, msg: Message) -> Optional[RuleResult]:
+        payload = msg.load_payload()
         for k, v in self.payload.items():
             if k not in payload:
                 return self.no()
             elif not isinstance(payload[k], v):
                 return self.no()
         return self.ok()
+
+
+class StartButtonRule(MessageRule):
+    def check(self, msg: Message) -> Optional[RuleResult]:
+        if msg.load_payload() == {'command': 'start'}:
+            return self.ok()
 
 
 class CDRule(MessageRule):
@@ -187,6 +194,17 @@ class UserCDRule(MessageRule):
                 return self.ok()
         else:
             self.users[msg.from_id] = time.time()
+            return self.ok()
+
+
+class RandomRule(Rule):
+    def __init__(self, chance: float) -> None:
+        self.chance = chance
+
+    def check(self, obj: Any) -> Optional[RuleResult]:
+        if self.chance >= 1:
+            return self.ok()
+        elif self.chance >= random.random():
             return self.ok()
 
 
