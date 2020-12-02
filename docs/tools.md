@@ -37,7 +37,7 @@ kb.appendleft(b1)
 Данные о клавиатуре хранятся в виде *collections.deque*, так что нам доступны `appendleft` и `extendleft`.
 
 !!! danger
-    Всвязи с этим, если привысить лимит кнопок в строке, то лишние будут автоматически удалены без предупреждения. Подробнее [здесь](https://docs.python.org/3/library/collections.html#collections.deque).
+    Всвязи с принципом работы *deque*, если привысить лимит кнопок в строке, то лишние будут автоматически удалены без предупреждения. Подробнее [здесь](https://docs.python.org/3/library/collections.html#collections.deque).
 
 В классе `Keyboard` присутствуют константы цветов. Информацию о них можно найти [здесь](api_reference.md#color-data).
 <br>Если указать параметр `payload` строкой, то он будет автоматически обернут в *dict* по формату `{"command": payload}`.
