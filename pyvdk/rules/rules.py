@@ -120,7 +120,7 @@ class PayloadRule(MessageRule):
         ]
 
     def check(self, msg: Message) -> Optional[RuleResult]:
-        if msg.load_payload() in self.payload:
+        if msg.payload in self.payload:
             return self.ok()
 
 
@@ -129,9 +129,8 @@ class PayloadContainsRule(MessageRule):
         self.payload = payload
 
     def check(self, msg: Message) -> Optional[RuleResult]:
-        payload = msg.load_payload()
         for k, v in self.payload.items():
-            if payload.get(k) != v:
+            if msg.payload.get(k) != v:
                 return self.no()
         return self.ok()
 
@@ -141,18 +140,17 @@ class PayloadMapRule(MessageRule):
         self.payload = payload_map
 
     def check(self, msg: Message) -> Optional[RuleResult]:
-        payload = msg.load_payload()
         for k, v in self.payload.items():
-            if k not in payload:
+            if k not in msg.payload:
                 return self.no()
-            elif not isinstance(payload[k], v):
+            elif not isinstance(msg.payload[k], v):
                 return self.no()
         return self.ok()
 
 
 class StartButtonRule(MessageRule):
     def check(self, msg: Message) -> Optional[RuleResult]:
-        if msg.load_payload() == {'command': 'start'}:
+        if msg.payload == {'command': 'start'}:
             return self.ok()
 
 
