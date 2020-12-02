@@ -14,7 +14,9 @@ api = API(config)
 ```
 
 ## RawAPI
+
 `RawAPI` не содержит в себе категорий, и соответственно без подсказок.
+
 ```python
 # вызываем https://vk.com/dev/users.get
 r = api.method("users.get", user_ids=[1])["response"][0]
@@ -30,12 +32,10 @@ print("local time:", time.time())
 ```
 
 ## API
+
 Класс `API` наследуется от `RawAPI`, а значит все методы `RawAPI` доступны.
-```python
+Экземпляр `API` имеет аннотации категорий, методов, и их аргументов.
 
-```
-
-Экземпляр `API` будет подсказывать имена методов и их аргументов.
 ```python
 # https://vk.com/dev/messages.send
 r = api.messages.send(
