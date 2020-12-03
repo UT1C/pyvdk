@@ -16,7 +16,7 @@ kb = Keyboard(one_time=True)
 ```
 
 Теперь создадим и добавим кнопки.
-Полный список кнопок можно найти [здесь](api_reference#buttons).
+Полный список кнопок можно найти [здесь](api_reference.md#buttons).
 
 ```python
 b1 = TextButton(
@@ -39,7 +39,7 @@ kb.appendleft(b1)
 !!! danger
     Всвязи с принципом работы *deque*, если привысить лимит кнопок в строке, то лишние будут автоматически удалены без предупреждения. Подробнее [здесь](https://docs.python.org/3/library/collections.html#collections.deque).
 
-В классе `Keyboard` присутствуют константы цветов. Информацию о них можно найти [здесь](api_reference#color-data).
+В классе `Keyboard` присутствуют константы цветов. Информацию о них можно найти [здесь](api_reference.md#color-data).
 <br>Если указать параметр `payload` строкой, то он будет автоматически обернут в *dict* по формату `{"command": payload}`.
 
 !!! hint
