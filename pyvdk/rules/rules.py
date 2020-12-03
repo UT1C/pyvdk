@@ -157,7 +157,7 @@ class StartButtonRule(MessageRule):
 class CDRule(MessageRule):
     def __init__(self, cd: int = 8):
         self.cd = cd
-        self.ts = 0
+        self.ts = 0.
 
     def check(self, msg: Message) -> Optional[RuleResult]:
         if time.time() - self.ts > self.cd:
@@ -168,7 +168,7 @@ class CDRule(MessageRule):
 class PeerCDRule(MessageRule):
     def __init__(self, cd: int = 16):
         self.cd = cd
-        self.peers = {}
+        self.peers: Dict[int, float] = {}
 
     def check(self, msg: Message) -> Optional[RuleResult]:
         if msg.peer_id in self.peers:
@@ -183,7 +183,7 @@ class PeerCDRule(MessageRule):
 class UserCDRule(MessageRule):
     def __init__(self, cd: int = 32):
         self.cd = cd
-        self.users = {}
+        self.users: Dict[int, float] = {}
 
     def check(self, msg: Message) -> Optional[RuleResult]:
         if msg.from_id in self.users:
