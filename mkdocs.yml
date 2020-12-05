@@ -22,6 +22,8 @@ markdown_extensions:
 nav:
     - Основное:
         - Введение: intro.md
+        - Создание хендлеров: handlers.md
+        - Список правил: rules.md
         - Вызов методов API: api_methods_call.md
         - Инструменты: tools.md
         - API Reference: api_reference.md
