@@ -8,7 +8,7 @@ from .abc import ABCButton, ABCKeyboard
 class Keyboard(ABCKeyboard):
     """ Объект клавиатуры """
 
-    __selected_row: int = None
+    __selected_row: Optional[int] = None
 
     @property
     def count(self) -> int:
