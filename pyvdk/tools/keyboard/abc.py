@@ -1,4 +1,4 @@
-from typing import Optional, Union, Deque, Tuple, Iterable
+from typing import Optional, Union, Deque, Tuple, Iterable, List
 from abc import ABC, abstractmethod, abstractproperty
 
 
@@ -27,7 +27,7 @@ class ColorData:
 class ABCKeyboard(ABC, ColorData):
     one_time: bool
     inline: bool
-    buttons: Deque[Deque["ABCButton"]]
+    buttons: List[Deque["ABCButton"]]
     size_limit: Tuple[int, int]
     count_limit: int
 
