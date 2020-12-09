@@ -85,23 +85,20 @@ json_keyboard = kb()
 
 Для поиска упоминаний в тексте сообщения можно использовать класс `Mention`
 
+![Mention example 1](assets\mention_example1.png)
 ```python
 from pyvdk.tools import Mention
 
-def handler(msg: Message):
-    mention = Mention.find(msg.text)
-    if mention is not None:
-        if mention.user:
-            print(f"mentioned user vk.com/id{mention.id}")
-        elif mention.club:
-            print(f"mentioned club vk.com/club{mention.id}")
+...
+mention = Mention.find(msg.text)
 ```
 
-Можно так же и создавать упоминания
-
+С помощью `Mention` можно так же и создавать упоминания.
 ```python
-def handler(msg: Message):
-    msg(f"{Mention(204697425, text="@макс")}, сервера сегодня не будет")
+from pyvdk.tools import Mention
+
+...
+msg(f"{Mention(204697425, text="@макс")}, сервера сегодня не будет")
 ```
 
-(хотя вручную выходит чуть короче)
+![Mention example 2](assets\mention_example2.png)
