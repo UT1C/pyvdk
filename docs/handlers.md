@@ -38,7 +38,7 @@ def handler2(msg):
 # triggered handler1!
 ```
 
-## Правила { #rules }
+## Применение правил { #rules }
 В качестве позиционных аргументов лейблер принимает правила.
 ```python
 @bot.on.message_new(TextRule(text='/test', lower=False))
