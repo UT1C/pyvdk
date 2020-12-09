@@ -10,4 +10,4 @@
 
 ## Tools { #tools }
 ### Buttons { #buttons }
-#### `TextButton` {#text-button}
+#### `TextButton` { #text-button }
