@@ -6,7 +6,6 @@ repo_url: https://github.com/UT1C/pyvdk
 
 theme:
     name: readthedocs
-    favicon: assets\icon.png
 
 extra_css:
     - assets\css\code.css
