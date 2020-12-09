@@ -83,7 +83,7 @@ json_keyboard = kb()
 
 ## Упоминание (Mention) { #mention }
 
-Для поиска упоминаний в тексте сообщения можно использовать класс `Mention`
+`Mention` можно использовать для поиска упоминаний в тексте сообщения. Классметод `find` находит первое упоминание в тексте.
 
 ![Mention example 1](assets\mention_example1.png)
 ```python
@@ -91,14 +91,15 @@ from pyvdk.tools import Mention
 
 ...
 mention = Mention.find(msg.text)
+print(mention.id, mention.text)  # 1 @durov
 ```
 
-С помощью `Mention` можно так же и создавать упоминания.
+Так же с помощью `Mention` можно создавать упоминания.
 ```python
 from pyvdk.tools import Mention
 
 ...
-msg(f"{Mention(204697425, text="@макс")}, сервера сегодня не будет")
+msg(f"{Mention(204697425, "@макс")}, сервера сегодня не будет")
 ```
 
 ![Mention example 2](assets\mention_example2.png)
