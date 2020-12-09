@@ -6,6 +6,9 @@ repo_url: https://github.com/UT1C/pyvdk
 
 theme: readthedocs
 
+extra_css:
+    - assets\css\code.css
+
 plugins:
     - search
     - macros:
