@@ -22,4 +22,4 @@
 + [API Reference](api_reference.md)
 
 ## Дополнительно
-+ [Changelog](additional\changelog.md)
++ [Changelog](additional\changelog)
