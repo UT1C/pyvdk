@@ -11,6 +11,8 @@
     + [Лейблинг](handlers.md#labeling)
     + [Применение правил](handlers.md#rules)
 + [Правила](rules.md)
+    + [Основная информация](rules.md#main)
+    + [RulesBunch](rules.md#bunch)
 + [Вызов методов API](api_methods_call.md)
     + [Создание экземпляра](api_methods_call.md#create-instance)
     + [RawAPI](api_methods_call.md#rawapi)

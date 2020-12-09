@@ -2,10 +2,12 @@
 
 [TOC]
 
-## `Bot`
+## `Bot` { #bot }
 
-## `Config`
+## `Config` { #config }
 
-## Tools
-### Buttons
-#### `TextButton`
+## Rules { #rules }
+
+## Tools { #tools }
+### Buttons { #buttons }
+#### `TextButton` {#text-button}
