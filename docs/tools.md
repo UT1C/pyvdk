@@ -102,4 +102,4 @@ from pyvdk.tools import Mention
 msg(f"{Mention(204697425, "@макс")}, сервера сегодня не будет")
 ```
 
-![Mention example 2](assets\mention_example2.png)
+![Mention example 2](assets/mention_example2.png)
