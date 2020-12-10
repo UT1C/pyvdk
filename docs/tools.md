@@ -85,7 +85,7 @@ json_keyboard = kb()
 
 `Mention` можно использовать для поиска упоминаний в тексте сообщения. Классметод `find` находит первое упоминание в тексте.
 
-![Mention example 1](assets\mention_example1.png)
+![Mention example 1](assets/mention_example1.png)
 ```python
 from pyvdk.tools import Mention
 
