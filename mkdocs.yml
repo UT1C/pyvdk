@@ -4,8 +4,7 @@ site_author: lightmanLP & mikk357
 repo_name: UT1C/pyvdk
 repo_url: https://github.com/UT1C/pyvdk
 
-theme:
-    name: readthedocs
+theme: readthedocs
 
 extra_css:
     - assets\css\code.css
@@ -19,7 +18,9 @@ markdown_extensions:
     - footnotes
     - attr_list
     - admonition
-    - pymdownx.highlight
+    - pymdownx.highlight:
+        use_pygments: True
+        pygments_style: "emacs"
     - pymdownx.superfences
     - toc:
         permalink: "#"
