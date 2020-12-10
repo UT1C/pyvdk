@@ -38,6 +38,7 @@ class Mention:
                 club=match[1] == "club",
                 text=match[3]
             )
+        return None
 
     def __str__(self) -> str:
         return f"[{'id' if self.user else 'club'}{self.id}|@{self.text}]"
