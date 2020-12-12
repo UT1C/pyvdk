@@ -39,5 +39,16 @@ class Mention:
                 text=match[3]
             )
 
+    @classmethod
+    def finditer(cls, text: str) -> typing.Iterator["Mention"]:
+        iterator = cls.regex.finditer(text)
+        for i in iterator:
+            yield cls(
+                id=int(i[2]),
+                user=i[1] == "id",
+                club=i[1] == "club",
+                text=i[3]
+            )
+
     def __str__(self) -> str:
-        return f"[{'id' if self.user else 'club'}{self.id}|@{self.text}]"
+        return f"[{'id' if self.user else 'club'}{self.id}|{self.text}]"
