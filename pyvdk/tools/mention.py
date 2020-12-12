@@ -38,6 +38,7 @@ class Mention:
                 club=match[1] == "club",
                 text=match[3]
             )
+        return None
 
     @classmethod
     def finditer(cls, text: str) -> typing.Iterator["Mention"]:
