@@ -20,4 +20,3 @@
 #### TextButton { #text-button }
 ::: pyvdk.tools.TextButton
     :docstring:
-    :members:
