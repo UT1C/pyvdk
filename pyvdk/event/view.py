@@ -1,7 +1,7 @@
 from typing import Any, Dict
 
 from ..logging import log
-from ..types import Message
+from ..types import Callback, Message
 from ..api import ABCAPI
 from .abc import ABCHandler, ABCView
 from .event_types import GroupEventType
@@ -16,16 +16,17 @@ class View(ABCView):
         self.api = api
         self.handlers = list()
 
-    def process(self, event: dict):
+    def process(self, event: Callback):
 
         logger.debug("creating object")
         obj = self.__create_object(event)
 
-        logger.debug(f"forwarding {obj} in handlers")
+        logger.debug(f"forwarding {repr(obj)} in handlers")
         self.handlers.sort(key=lambda handler: handler.level)
 
         for handler in self.handlers:
 
+            # FIXME: с чем сравнивается тип хендлера?
             if handler.type == GroupEventType.MESSAGE_NEW:
                 handled = handler.handle(obj)
                 if handled and handler.endpoint:
@@ -37,10 +38,11 @@ class View(ABCView):
         logger.debug(f"registered new handler {handler}")
         self.handlers.append(handler)
 
-    def __create_object(self, event: Dict[str, Any]):
-        etype = GroupEventType(event["type"])
+    def __create_object(self, event: Callback):
+        etype = GroupEventType(event.type)
         if etype == GroupEventType.MESSAGE_NEW:
-            return Message(api=self.api, **event["object"]["message"])
+            data = event.object["message"]
+            return Message(api=self.api, raw_data=data, **data)
         # FIXME: больше обрабатываемых типов
         elif etype == GroupEventType.GROUP_JOIN:
             raise NotImplementedError()

@@ -1,4 +1,8 @@
-from pydantic import BaseModel as Model
+from pydantic import BaseModel
 
 
-Model.Config.arbitrary_types_allowed = True
+class Model(BaseModel):
+    raw_data: dict
+
+    class Config:
+        arbitrary_types_allowed = True

@@ -4,6 +4,8 @@ import enum
 import json
 from typing import Any, Callable, Dict, List, Optional, Union
 
+from pydantic import Json
+
 from .abc import Model
 
 
@@ -2386,7 +2388,7 @@ class MessagesMessage(Model):
     keyboard: Optional["MessagesKeyboard"] = None
     members_count: Optional[int] = None
     out: "BaseBoolInt"
-    payload: Optional[str] = None
+    payload: Optional[Json] = None
     peer_id: int
     random_id: Optional[int] = None
     ref: Optional[str] = None
@@ -2396,17 +2398,6 @@ class MessagesMessage(Model):
     update_time: Optional[int] = None
     was_listened: Optional[bool] = None
     pinned_at: Optional[int] = None
-
-    def load_payload(
-        self,
-        on_fail: Callable[[str], Union[dict]] = lambda s: {}
-    ) -> Optional[dict]:
-        if self.payload is None:
-            return None
-        try:
-            return json.loads(self.payload)
-        except Exception:
-            return on_fail(self.payload)
 
 
 class MessagesMessageAction(Model):

@@ -103,9 +103,8 @@ class Handler(ABCHandler):
             except Exception:
                 logger.exception("exception occured in handler!")
             else:
-                logger.info(f"{self} processed {obj}")
+                logger.info(f"{self} processed {repr(obj)}")
             finally:
                 return True
         else:
-            logger.debug("conditions not satisfied")
             return False

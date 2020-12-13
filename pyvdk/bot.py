@@ -2,7 +2,7 @@ from . import logging
 from .event import View, Labeler
 from .config import Config
 from .api import API
-
+from .types import Callback
 
 logger = logging.log.getLogger('bot')
 
@@ -29,25 +29,26 @@ class Bot:
         self.view = View(self.api)
         self.on = Labeler(self.view, endpoint_default)
 
-    def request_handle(self, request: dict) -> str:
-        """ Handle request from vk and return response """
+    def process(self, request: dict) -> str:
+        """ Обрабатывает запрос """
 
         logger.debug(f'new request: {request}')
-        response = self.__check(request)
+        callback = Callback(**request)
+        response = self.__check(callback)
         if response == 'ok':
-            logger.info(f"new event, type:{request.get('type')}")
-            self.view.process(request)
+            logger.info(f"new event, type:{callback.type}")
+            self.view.process(callback)
 
         return response
 
-    def __check(self, request: dict) -> str:
+    def __check(self, callback: Callback) -> str:
         """ Проверяет данные реквеста """
 
-        if request['secret'] != self.__config.secret:
+        if callback.secret != self.__config.secret:
             logger.debug('secret key is invalid')
             return 'not ok'
 
-        elif request['type'] == 'confirmation':
+        elif callback.type == 'confirmation':
             logger.info('confirmation request')
             return self.__config.confcode
 
