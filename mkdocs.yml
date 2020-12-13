@@ -18,7 +18,8 @@ markdown_extensions:
     - footnotes
     - attr_list
     - admonition
-    - pymdownx.highlight
+    - pymdownx.highlight:
+        use_pygments: False
     - pymdownx.superfences
     - toc:
         permalink: "#"

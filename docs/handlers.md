@@ -49,4 +49,4 @@ def handler2(msg):
 @bot.on.message_new(text='/test')
 ...
 ```
-Подробнее о правилах [здесь](rules.md).
+Подробнее о правилах можно узнать [здесь](rules.md).
