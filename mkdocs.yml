@@ -4,7 +4,12 @@ site_author: lightmanLP & mikk357
 repo_name: UT1C/pyvdk
 repo_url: https://github.com/UT1C/pyvdk
 
-theme: readthedocs
+theme:
+    name: readthedocs
+    highlightjs: True
+    hljs_style: "default"
+    hljs_languages:
+        - python
 
 extra_css:
     - assets/css/code.css
