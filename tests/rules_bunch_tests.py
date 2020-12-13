@@ -1,5 +1,5 @@
 import unittest
-from pyvdk.vk_api import ABCAPI
+from pyvdk.api import ABCAPI
 from pyvdk.types import Message
 from pyvdk.rules import (
     RulesBunch,
@@ -16,7 +16,8 @@ class FakeAPI(ABCAPI):
             id=1,
             out=1,
             peer_id=1,
-            api=self
+            api=self,
+            raw_data={'foo': 'bar'}
         )
 
 
@@ -44,7 +45,7 @@ class RulesBunchTests(unittest.TestCase):
         self.assertFalse(act[0])
         self.assertTrue(act[1])
         self.assertTrue(act[2])
-    
+
     def test_bunch(self):
         # Arrange
         bunch = RulesBunch(

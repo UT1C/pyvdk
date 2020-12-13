@@ -1,0 +1,7 @@
+requests==2.24.0
+pyyaml==5.3.1
+jinja2==2.11.2
+vbml==1.1
+pydantic==1.7.2
+mkdocs-macros-plugin==0.5.0
+mkautodoc==0.1.0

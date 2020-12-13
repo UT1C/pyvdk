@@ -8,7 +8,7 @@ log.basicConfig(
 )
 
 
-def toggle_debug():
+def enable_debug():
     """ Toggle debug mode """
 
     log.root.setLevel(log.DEBUG)

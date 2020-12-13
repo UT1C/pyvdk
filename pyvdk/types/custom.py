@@ -1,6 +1,24 @@
-from .objects import MessagesMessage
-from ..vk_api import ABCAPI
 import random
+from typing import Any, Dict, Optional
+
+from ..api import ABCAPI
+from .abc import Model
+from .objects import MessagesMessage
+
+
+class Callback:
+    type: str
+    object: Optional[Dict[str, Any]]
+    group_id: int
+    secret: Optional[str]
+    event_id: Optional[str]
+
+    def __init__(self, **kw):
+        for k, v in kw.items():
+            if k in self.__annotations__:
+                self.__setattr__(k, v)
+            else:
+                raise Exception(f"{self.__class__.__name__}.{k} not annotated")
 
 
 class Message(MessagesMessage):

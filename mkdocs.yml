@@ -4,12 +4,40 @@ site_author: lightmanLP & mikk357
 repo_name: UT1C/pyvdk
 repo_url: https://github.com/UT1C/pyvdk
 
-theme: readthedocs
+theme:
+    name: readthedocs
+    highlightjs: True
+    hljs_languages:
+        - python
+
+extra_css:
+    - assets/css/default.min.css
+    - assets/css/autodoc.css
 
 plugins:
     - search
+    - macros:
+        include_dir: .
+
+markdown_extensions:
+    - footnotes
+    - attr_list
+    - admonition
+    - mkautodoc
+    - pymdownx.highlight:
+        use_pygments: False
+    - pymdownx.superfences
+    - toc:
+        permalink: "#"
+        toc_depth: "1-6"
 
 nav:
-    - Home: index.md
-    - Введение: intro.md
-    - API Reference: api_reference.md
+    - Основное:
+        - Введение: intro.md
+        - Создание хендлеров: handlers.md
+        - Правила: rules.md
+        - Вызов методов API: api_methods_call.md
+        - Инструменты: tools.md
+        - API Reference: api_reference.md
+    - Дополнительно:
+        - Changelog: additional/changelog.md

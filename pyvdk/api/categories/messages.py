@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 #
+import random
 from typing import Optional, Union
 
 from ..category import Category
-from ...tools import Keyboard
+from ...tools import ABCKeyboard
 
 
 class Messages(Category):
@@ -82,9 +83,11 @@ class Messages(Category):
         message_id: Optional[int] = None,
         conversation_message_id: Optional[int] = None,
         template: Optional[str] = None,
-        keyboard: Optional[str] = None,
+        keyboard: Optional[Union[ABCKeyboard, str]] = None,
         **kwargs
     ) -> dict:
+        if isinstance(keyboard, ABCKeyboard):
+            keyboard = keyboard()
         return self._request("edit", locals())
 
     def edit_chat(
@@ -350,7 +353,7 @@ class Messages(Category):
         forward_messages: Optional[list] = None,
         sticker_id: Optional[int] = None,
         group_id: Optional[int] = None,
-        keyboard: Optional[Union[Keyboard, str]] = None,
+        keyboard: Optional[Union[ABCKeyboard, str]] = None,
         payload: Optional[str] = None,
         dont_parse_links: Optional[bool] = None,
         disable_mentions: Optional[bool] = None,
@@ -358,8 +361,10 @@ class Messages(Category):
         subscribe_id: Optional[int] = None,
         **kwargs
     ) -> dict:
-        if isinstance(keyboard, Keyboard):
+        if isinstance(keyboard, ABCKeyboard):
             keyboard = keyboard()
+        if random_id is None:
+            random_id = random.getrandbits(64)
         return self._request("send", locals())
 
     def send_message_event_answer(

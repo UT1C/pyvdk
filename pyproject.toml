@@ -4,10 +4,12 @@ version = "0.0.3"
 description = "VK toolkit"
 authors = ["lightmanLP <liteman1000@gmail.com>", "mikk357 <mikk357@yandex.ru>"]
 license = "MIT License"
+readme = "README.md"
 keywords = ["vk", "vk-api", "bot"]
 
 [tool.poetry.urls]
 "Documentation" = "https://pyvdk.readthedocs.io/"
+"Github" = "https://github.com/UT1C/pyvdk"
 
 [tool.poetry.dependencies]
 python = "^3.7"
@@ -19,6 +21,8 @@ pydantic = "^1.7.2"
 
 [tool.poetry.dev-dependencies]
 mkdocs = "^1.1.2"
+mkdocs-macros-plugin = "^0.5.0"
+mkautodoc = "^0.1.0"
 flake8 = "^3.8.4"
 black = "^20.8b1"
 

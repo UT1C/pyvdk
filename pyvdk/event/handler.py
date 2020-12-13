@@ -70,9 +70,8 @@ class Handler(ABCHandler):
         args: list = []
 
         for rule in self.rules:
-            logger.debug(f"checking rule {rule}")
             result = rule.check(obj)
-            logger.debug(f"result: {result}")
+            logger.debug(f"rule: {rule} result: {result}")
 
             if result is None or not result:
                 flag = False
@@ -103,10 +102,9 @@ class Handler(ABCHandler):
                 self.function(obj, *args)
             except Exception:
                 logger.exception("exception occured in handler!")
-                raise
             else:
-                logger.debug("sucessfully processed")
+                logger.info(f"{self} processed {repr(obj)}")
+            finally:
                 return True
         else:
-            logger.info("conditions not satisfied")
             return False
