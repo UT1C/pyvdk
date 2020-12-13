@@ -2,12 +2,22 @@
 
 [TOC]
 
-## `Bot` { #bot }
+## Bot { #bot }
 
-## `Config` { #config }
+::: pyvdk.Bot
+    :docstring:
+    :members:
+
+## Config { #config }
+::: pyvdk.Config
+    :docstring:
+    :members:
 
 ## Rules { #rules }
 
 ## Tools { #tools }
 ### Buttons { #buttons }
-#### `TextButton` { #text-button }
+#### TextButton { #text-button }
+::: pyvdk.tools.TextButton
+    :docstring:
+    :members:

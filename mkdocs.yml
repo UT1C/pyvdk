@@ -11,7 +11,8 @@ theme:
         - python
 
 extra_css:
-    - assets/css/code.css
+    - assets/css/default.min.css
+    - assets/css/autodoc.css
 
 plugins:
     - search
@@ -22,6 +23,7 @@ markdown_extensions:
     - footnotes
     - attr_list
     - admonition
+    - mkautodoc
     - pymdownx.highlight:
         use_pygments: False
     - pymdownx.superfences
