@@ -7,7 +7,6 @@ repo_url: https://github.com/UT1C/pyvdk
 theme:
     name: readthedocs
     highlightjs: True
-    hljs_style: "default"
     hljs_languages:
         - python
 
