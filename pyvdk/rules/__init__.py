@@ -5,6 +5,14 @@ from .rules import (
     TextRule,
     RegexRule,
     VBMLRule,
+    PayloadRule,
+    PayloadContainsRule,
+    PayloadMapRule,
+    StartButtonRule,
+    CDRule,
+    PeerCDRule,
+    UserCDRule,
+    RandomRule,
     CustomRule,
 )
 from .bunch import RulesBunch
@@ -19,5 +27,13 @@ __all__ = (
     "TextRule",
     "RegexRule",
     "VBMLRule",
+    "PayloadRule",
+    "PayloadContainsRule",
+    "PayloadMapRule",
+    "StartButtonRule",
+    "CDRule",
+    "PeerCDRule",
+    "UserCDRule",
+    "RandomRule",
     "CustomRule",
 )

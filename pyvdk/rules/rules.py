@@ -1,6 +1,7 @@
+from typing import Any, Callable, Dict, List, Optional, Tuple, Union
+import random
 import time
 import re
-from typing import Any, Callable, Dict, List, Optional, Tuple, Union
 
 import vbml
 
@@ -118,8 +119,8 @@ class PayloadRule(MessageRule):
             for i in payload
         ]
 
-    def check(self, message: Message) -> Optional[RuleResult]:
-        if message.load_payload() in self.payload:
+    def check(self, msg: Message) -> Optional[RuleResult]:
+        if msg.payload in self.payload:
             return self.ok()
 
 
@@ -127,11 +128,10 @@ class PayloadContainsRule(MessageRule):
     def __init__(self, payload: dict):
         self.payload = payload
 
-    def check(self, message: Message) -> Optional[RuleResult]:
-        payload = message.load_payload()
+    def check(self, msg: Message) -> Optional[RuleResult]:
         for k, v in self.payload.items():
-            if payload.get(k) != v:
-                return self.no()
+            if msg.payload.get(k) != v:
+                return self.wrong()
         return self.ok()
 
 
@@ -139,20 +139,25 @@ class PayloadMapRule(MessageRule):
     def __init__(self, payload_map: Dict[str, type]):
         self.payload = payload_map
 
-    def check(self, message: Message) -> Optional[RuleResult]:
-        payload = message.load_payload()
+    def check(self, msg: Message) -> Optional[RuleResult]:
         for k, v in self.payload.items():
-            if k not in payload:
-                return self.no()
-            elif not isinstance(payload[k], v):
-                return self.no()
+            if k not in msg.payload:
+                return self.wrong()
+            elif not isinstance(msg.payload[k], v):
+                return self.wrong()
         return self.ok()
+
+
+class StartButtonRule(MessageRule):
+    def check(self, msg: Message) -> Optional[RuleResult]:
+        if msg.payload == {'command': 'start'}:
+            return self.ok()
 
 
 class CDRule(MessageRule):
     def __init__(self, cd: int = 8):
         self.cd = cd
-        self.ts = 0
+        self.ts = 0.
 
     def check(self, msg: Message) -> Optional[RuleResult]:
         if time.time() - self.ts > self.cd:
@@ -163,7 +168,7 @@ class CDRule(MessageRule):
 class PeerCDRule(MessageRule):
     def __init__(self, cd: int = 16):
         self.cd = cd
-        self.peers = {}
+        self.peers: Dict[int, float] = {}
 
     def check(self, msg: Message) -> Optional[RuleResult]:
         if msg.peer_id in self.peers:
@@ -178,7 +183,7 @@ class PeerCDRule(MessageRule):
 class UserCDRule(MessageRule):
     def __init__(self, cd: int = 32):
         self.cd = cd
-        self.users = {}
+        self.users: Dict[int, float] = {}
 
     def check(self, msg: Message) -> Optional[RuleResult]:
         if msg.from_id in self.users:
@@ -187,6 +192,17 @@ class UserCDRule(MessageRule):
                 return self.ok()
         else:
             self.users[msg.from_id] = time.time()
+            return self.ok()
+
+
+class RandomRule(Rule):
+    def __init__(self, chance: float) -> None:
+        self.chance = chance
+
+    def check(self, obj: Any) -> Optional[RuleResult]:
+        if self.chance >= 1:
+            return self.ok()
+        elif self.chance >= random.random():
             return self.ok()
 
 

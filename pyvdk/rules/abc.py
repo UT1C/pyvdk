@@ -45,11 +45,11 @@ class ABCRule(ABC):
         return self.ok()
 
     @staticmethod
-    def ok(*args):
+    def ok(*args) -> RuleResult:
         return RuleResult(*args, correct=True)
 
     @staticmethod
-    def no(*args):
+    def wrong(*args) -> RuleResult:
         return RuleResult(*args)
 
 
