@@ -4,9 +4,15 @@
 
 Модуль `tools` содержит вспомогательные инструменты для генерации таких объектов, как клавиатура.
 
+<<<<<<< HEAD
 ## Клавиатура { #keyboard }
 С pyvdk легко создать клавиатуру.
 Импортируем клавиатуру и кнопки, создаем объект клавиатуры.
+=======
+## Клавиатура (Keyboard) { #keyboard }
+С pyvdk можно легко создать клавиатуру.
+<br>Сперва импортируем класс `Keyboard` и нужные виды кнопок, создаем объект клавиатуры.
+>>>>>>> doc-dev
 
 ```python
 from pyvdk.tools import Keyboard, TextButton
@@ -37,9 +43,15 @@ kb.appendleft(b1)
 Данные о клавиатуре хранятся в виде *collections.deque*, так что нам доступны `appendleft` и `extendleft`.
 
 !!! danger
+<<<<<<< HEAD
     Всвязи с этим, если привысить лимит кнопок в строке, то лишние будут автоматически удалены без предупреждения. Подробнее [здесь](https://docs.python.org/3/library/collections.html#collections.deque).
 
 В классе `Keyboard` присутствуют константы цветов. Информацию о них можно найти [здесь](api_reference.md#color-data).
+=======
+    Всвязи с принципом работы *deque*, если привысить лимит кнопок в строке, то лишние будут автоматически удалены без предупреждения. Подробнее [здесь](https://docs.python.org/3/library/collections.html#collections.deque).
+
+В клавиатуре и кнопоках присутствуют константы цветов. Информацию о них можно найти [здесь](api_reference.md#color-data).
+>>>>>>> doc-dev
 <br>Если указать параметр `payload` строкой, то он будет автоматически обернут в *dict* по формату `{"command": payload}`.
 
 !!! hint
@@ -47,11 +59,15 @@ kb.appendleft(b1)
     <br>`color="w"`
     <br>`color="white"`
 
+<<<<<<< HEAD
 !!! note
     Константы цветов так же доступны из класса кнопки.
     <br>`TextButton.RED`
 
 Кнопки можно добавлять в определенную строку через `keyboard[row: int]`. Строки нумеруются сверху вниз, от 0 до текущего лимита.
+=======
+Кнопки можно добавлять в определенную строку через `keyboard[row: int]`. Строки нумеруются сверху вниз, от 0 до текущего лимита. Пустые строки автоматически удаляются из клавиатуры.
+>>>>>>> doc-dev
 
 ```python
 row = (
@@ -70,9 +86,12 @@ row = (
 kb[1].extend(row)
 ```
 
+<<<<<<< HEAD
 !!! hint
     Пустые строки автоматически удаляются из клавиатуры.
 
+=======
+>>>>>>> doc-dev
 !!! note
     Для добавления кнопок так же можно просто указать параметр `row` у данных методов.
     <br>`kb.append(button, row=3)`
@@ -87,3 +106,26 @@ msg(..., keyboard=kb)
 ```python
 json_keyboard = kb()
 ```
+
+## Упоминание (Mention) { #mention }
+
+`Mention` можно использовать для поиска упоминаний в тексте сообщения. Классметод `find` находит первое упоминание в тексте.
+
+![Mention example 1](assets/mention_example1.png)
+```python
+from pyvdk.tools import Mention
+
+...
+mention = Mention.find(msg.text)
+print(mention.id, mention.text)  # 1 @durov
+```
+
+Так же с помощью `Mention` можно создавать упоминания.
+```python
+from pyvdk.tools import Mention
+
+...
+msg(f"{Mention(204697425, "@макс")}, сервера сегодня не будет")
+```
+
+![Mention example 2](assets/mention_example2.png)
