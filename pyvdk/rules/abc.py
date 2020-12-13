@@ -49,7 +49,7 @@ class ABCRule(ABC):
         return RuleResult(*args, correct=True)
 
     @staticmethod
-    def no(*args) -> RuleResult:
+    def wrong(*args) -> RuleResult:
         return RuleResult(*args)
 
 

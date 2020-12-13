@@ -53,7 +53,7 @@ class RulesBunch(ABCRulesBunch):
         for rule in rules:
             result = rule.check(obj)
             if not result:
-                return self.no()
+                return self.wrong()
             else:
                 results.append(result.args)
 

@@ -131,7 +131,7 @@ class PayloadContainsRule(MessageRule):
     def check(self, msg: Message) -> Optional[RuleResult]:
         for k, v in self.payload.items():
             if msg.payload.get(k) != v:
-                return self.no()
+                return self.wrong()
         return self.ok()
 
 
@@ -142,9 +142,9 @@ class PayloadMapRule(MessageRule):
     def check(self, msg: Message) -> Optional[RuleResult]:
         for k, v in self.payload.items():
             if k not in msg.payload:
-                return self.no()
+                return self.wrong()
             elif not isinstance(msg.payload[k], v):
-                return self.no()
+                return self.wrong()
         return self.ok()
 
 
