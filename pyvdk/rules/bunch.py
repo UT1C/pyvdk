@@ -10,11 +10,13 @@ class RulesBunch(ABCRulesBunch):
     def __init__(
         self,
         *rules: ABCRule,
-        alternative_rule: Optional[ABCRule] = None
+        alternative_rule: Optional[ABCRule] = None,
+        alternative_operation_type: Optional[str] = "or"
     ) -> None:
 
         self.rules = list(rules)
         self.alternative_rule = alternative_rule
+        self.alternative_operation_type = alternative_operation_type
 
     def __call__(
         self,
@@ -37,13 +39,38 @@ class RulesBunch(ABCRulesBunch):
     def __or__(self, rule: ABCRule) -> ABCRulesBunch:
         return RulesBunch(self, alternative_rule=rule)
 
+    def __eq__(self, rule: ABCRule) -> ABCRulesBunch:
+        return RulesBunch(
+            self,
+            alternative_rule=rule,
+            alternative_operation_type="eq"
+        )
+
+    def __ne__(self, rule: ABCRule) -> ABCRulesBunch:
+        return RulesBunch(
+            self,
+            alternative_rule=rule,
+            alternative_operation_type="ne"
+        )
+
     def check(self, obj: Any) -> Optional[RuleResult]:
         result = self._check(self.rules, obj)
         if result:
             return result
 
         if self.alternative_rule is not None:
-            return self.alternative_rule.check(obj)
+            alt_result = self.alternative_rule.check(obj)
+
+            if self.alternative_operation_type == "or":
+                return alt_result
+
+            elif self.alternative_operation_type == "eq":
+                if bool(result) == bool(alt_result):
+                    return alt_result
+
+            elif self.alternative_operation_type == "ne":
+                if bool(result) != bool(alt_result):
+                    return alt_result
 
     def _check(self, rules: List[ABCRule], obj: Any) -> RuleResult:
         """  """

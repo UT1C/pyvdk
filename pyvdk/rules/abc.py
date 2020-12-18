@@ -14,7 +14,7 @@ class RuleResult:
     ) -> None:
 
         self.correct = correct
-        self.args = args
+        self.args = list(args)
 
     def __bool__(self):
         return self.correct
@@ -26,6 +26,11 @@ class RuleResult:
         """
 
         args.extend(self.args)
+
+    def merge(self, rule_result: "RuleResult"):
+        """  """
+
+        self.args.extend(rule_result.args)
 
 
 class ABCRule(ABC):
@@ -39,6 +44,12 @@ class ABCRule(ABC):
         ...
 
     def __or__(self, rule: "ABCRule") -> "ABCRulesBunch":
+        ...
+
+    def __eq__(self, rule: "ABCRule") -> "ABCRulesBunch":
+        ...
+
+    def __ne__(self, rule: "ABCRule") -> "ABCRulesBunch":
         ...
 
     def check(self, obj: Any) -> Optional[RuleResult]:
@@ -56,10 +67,15 @@ class ABCRule(ABC):
 class ABCRulesBunch(ABCRule):
     """  """
 
+    rules: List[ABCRule]
+    alternative_rule: Optional[ABCRule]
+    alternative_operation_type: str
+
     def __init__(
         self,
         *rules: ABCRule,
-        alternative_rule: Optional[ABCRule] = None
+        alternative_rule: Optional[ABCRule] = None,
+        alternative_operation_type: Optional[str] = "or"
     ) -> None:
         ...
 
@@ -72,7 +88,13 @@ class ABCRulesBunch(ABCRule):
     def __and__(self, rule: ABCRule) -> "ABCRulesBunch":
         ...
 
-    def __or__(self, rule: "ABCRule") -> "ABCRulesBunch":
+    def __or__(self, rule: ABCRule) -> "ABCRulesBunch":
+        ...
+
+    def __eq__(self, rule: ABCRule) -> "ABCRulesBunch":
+        ...
+
+    def __ne__(self, rule: ABCRule) -> "ABCRulesBunch":
         ...
 
     def check(self, obj: Any) -> Optional[RuleResult]:

@@ -63,3 +63,12 @@ class RulesBunchTests(unittest.TestCase):
         self.assertTrue(act[0])
         self.assertTrue(act[1])
         self.assertFalse(act[2])
+
+    def test_all_operations_check(self):
+        # Arrange
+        rule = TextRule("Foo", lower=False)
+        bunch = rule & ((rule != rule) | (rule == rule))
+        mes = self.mes[0]
+
+        # Act
+        bunch.check(mes)
