@@ -1,4 +1,4 @@
-from typing import List, Union, Type, Optional, Any
+from typing import List, Union, Type, Optional, Any, Callable
 
 from .abc import ABCRule, RuleResult, ABCRulesBunch
 from ..event import ABCHandler
@@ -11,12 +11,14 @@ class RulesBunch(ABCRulesBunch):
         self,
         *rules: ABCRule,
         alternative_rule: Optional[ABCRule] = None,
-        alternative_operation_type: Optional[str] = None
+        alternative_operation_type: Optional[str] = None,
+        invert: Optional[bool] = False
     ) -> None:
 
         self.rules = list(rules)
         self.alternative_rule = alternative_rule
         self.alternative_operation_type = alternative_operation_type
+        self.invert = invert
 
     def __call__(
         self,
@@ -64,9 +66,17 @@ class RulesBunch(ABCRulesBunch):
             alternative_operation_type="ne"
         )
 
+    def __invert__(self) -> ABCRulesBunch:
+        return RulesBunch(
+            self,
+            invert=True
+        )
+
     def check(self, obj: Any) -> Optional[RuleResult]:
         result = self._check(self.rules, obj)
         if self.alternative_operation_type is None and result:
+            if self.invert:
+                return self.wrong()
             return result
 
         if self.alternative_rule is not None:
@@ -85,8 +95,12 @@ class RulesBunch(ABCRulesBunch):
                     self.alternative_operation_type == "ne"
                     and not (bool(result) != bool(alt_result))
             ):
+                if self.invert:
+                    return self.ok()
                 return self.wrong()
 
+            if self.invert:
+                return self.wrong()
             return RuleResult.from_results(result, alt_result)
 
     def _check(self, rules: List[ABCRule], obj: Any) -> RuleResult:

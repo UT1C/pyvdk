@@ -57,7 +57,7 @@ class RulesBunchTests(unittest.TestCase):
     def test_all_operations_check(self):
         # Arrange
         rule = TextRule("Foo", lower=False)
-        bunch = rule & ((rule != rule) | (rule == rule)) ^ (rule != rule)
+        bunch = rule & ((rule != rule) | (rule == rule)) ^ ~rule
         mes = self.mes[0]
 
         # Act

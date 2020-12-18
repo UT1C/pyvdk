@@ -68,6 +68,9 @@ class ABCRule(ABC):
     def __ne__(self, rule: "ABCRule") -> "ABCRulesBunch":
         ...
 
+    def __invert__(self) -> "ABCRulesBunch":
+        ...
+
     def check(self, obj: Any) -> Optional[RuleResult]:
         return self.ok()
 
@@ -86,12 +89,14 @@ class ABCRulesBunch(ABCRule):
     rules: List[ABCRule]
     alternative_rule: Optional[ABCRule]
     alternative_operation_type: Optional[str]
+    invert: bool
 
     def __init__(
         self,
         *rules: ABCRule,
         alternative_rule: Optional[ABCRule] = None,
-        alternative_operation_type: Optional[str] = None
+        alternative_operation_type: Optional[str] = None,
+        invert: Optional[bool] = False
     ) -> None:
         ...
 
@@ -114,6 +119,9 @@ class ABCRulesBunch(ABCRule):
         ...
 
     def __ne__(self, rule: ABCRule) -> "ABCRulesBunch":
+        ...
+
+    def __invert__(self) -> "ABCRulesBunch":
         ...
 
     def check(self, obj: Any) -> Optional[RuleResult]:

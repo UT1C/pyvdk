@@ -43,6 +43,12 @@ class Rule(ABCRule):
             alternative_operation_type="ne"
         )
 
+    def __invert__(self) -> ABCRulesBunch:
+        return RulesBunch(
+            self,
+            invert=True
+        )
+
 
 class MessageRule(Rule):
 
