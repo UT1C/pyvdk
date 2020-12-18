@@ -19,6 +19,9 @@ class RuleResult:
     def __bool__(self):
         return self.correct
 
+    def __iter__(self):
+        return iter(self.args)
+
     def add_to(self, args: list) -> None:
         """
         Если правило вернуло аргументы, этот метод
@@ -32,6 +35,16 @@ class RuleResult:
 
         self.args.extend(rule_result.args)
 
+    @classmethod
+    def from_results(cls, *args: "RuleResult") -> "RuleResult":
+        results = list()
+
+        for i in args:
+            if i is not None:
+                results.extend(i)
+
+        return cls(*results, correct=True)
+
 
 class ABCRule(ABC):
     def __init__(self) -> None:
@@ -44,6 +57,9 @@ class ABCRule(ABC):
         ...
 
     def __or__(self, rule: "ABCRule") -> "ABCRulesBunch":
+        ...
+
+    def __xor__(self, rule: "ABCRule") -> "ABCRulesBunch":
         ...
 
     def __eq__(self, rule: "ABCRule") -> "ABCRulesBunch":
@@ -69,13 +85,13 @@ class ABCRulesBunch(ABCRule):
 
     rules: List[ABCRule]
     alternative_rule: Optional[ABCRule]
-    alternative_operation_type: str
+    alternative_operation_type: Optional[str]
 
     def __init__(
         self,
         *rules: ABCRule,
         alternative_rule: Optional[ABCRule] = None,
-        alternative_operation_type: Optional[str] = "or"
+        alternative_operation_type: Optional[str] = None
     ) -> None:
         ...
 
@@ -89,6 +105,9 @@ class ABCRulesBunch(ABCRule):
         ...
 
     def __or__(self, rule: ABCRule) -> "ABCRulesBunch":
+        ...
+
+    def __xor__(self, rule: ABCRule) -> "ABCRulesBunch":
         ...
 
     def __eq__(self, rule: ABCRule) -> "ABCRulesBunch":

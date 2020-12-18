@@ -33,41 +33,31 @@ class RulesBunchTests(unittest.TestCase):
 
     def test_generate_from_rules(self):
         # Arrange
-        bunch = (TextRule('foo', lower=False) & TextRule('foo')) | TextRule('bar')
+        bunch1 = TextRule('foo') | TextRule('Foo', lower=False)
+        bunch2 = (TextRule('foo', lower=False) & TextRule('foo')) | TextRule('bar')
 
         # Act
-        act = [
-            bunch.check(i)
+        act1 = [
+            bunch1.check(i)
+            for i in self.mes
+        ]
+        act2 = [
+            bunch2.check(i)
             for i in self.mes
         ]
 
         # Assert
-        self.assertFalse(act[0])
-        self.assertTrue(act[1])
-        self.assertTrue(act[2])
-
-    def test_bunch(self):
-        # Arrange
-        bunch = RulesBunch(
-            TextRule('foo'),
-            alternative_rule=TextRule('Foo', lower=False)
-        )
-
-        # Act
-        act = [
-            bunch.check(i)
-            for i in self.mes
-        ]
-
-        # Assert
-        self.assertTrue(act[0])
-        self.assertTrue(act[1])
-        self.assertFalse(act[2])
+        self.assertTrue(act1[0])
+        self.assertTrue(act1[1])
+        self.assertFalse(act1[2])
+        self.assertFalse(act2[0])
+        self.assertTrue(act2[1])
+        self.assertTrue(act2[2])
 
     def test_all_operations_check(self):
         # Arrange
         rule = TextRule("Foo", lower=False)
-        bunch = rule & ((rule != rule) | (rule == rule))
+        bunch = rule & ((rule != rule) | (rule == rule)) ^ (rule != rule)
         mes = self.mes[0]
 
         # Act

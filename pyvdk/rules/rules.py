@@ -16,7 +16,18 @@ class Rule(ABCRule):
         return RulesBunch(self, rule)
 
     def __or__(self, rule: ABCRule) -> ABCRulesBunch:
-        return RulesBunch(self, alternative_rule=rule)
+        return RulesBunch(
+            self,
+            alternative_rule=rule,
+            alternative_operation_type="or"
+        )
+
+    def __xor__(self, rule: "ABCRule") -> "ABCRulesBunch":
+        return RulesBunch(
+            self,
+            alternative_rule=rule,
+            alternative_operation_type="xor"
+        )
 
     def __eq__(self, rule: ABCRule) -> ABCRulesBunch:
         return RulesBunch(

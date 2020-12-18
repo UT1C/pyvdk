@@ -11,7 +11,7 @@ class RulesBunch(ABCRulesBunch):
         self,
         *rules: ABCRule,
         alternative_rule: Optional[ABCRule] = None,
-        alternative_operation_type: Optional[str] = "or"
+        alternative_operation_type: Optional[str] = None
     ) -> None:
 
         self.rules = list(rules)
@@ -37,7 +37,18 @@ class RulesBunch(ABCRulesBunch):
         return self
 
     def __or__(self, rule: ABCRule) -> ABCRulesBunch:
-        return RulesBunch(self, alternative_rule=rule)
+        return RulesBunch(
+            self,
+            alternative_rule=rule,
+            alternative_operation_type="or"
+        )
+
+    def __xor__(self, rule: ABCRule) -> ABCRulesBunch:
+        return RulesBunch(
+            self,
+            alternative_rule=rule,
+            alternative_operation_type="xor"
+        )
 
     def __eq__(self, rule: ABCRule) -> ABCRulesBunch:
         return RulesBunch(
@@ -55,22 +66,28 @@ class RulesBunch(ABCRulesBunch):
 
     def check(self, obj: Any) -> Optional[RuleResult]:
         result = self._check(self.rules, obj)
-        if result:
+        if self.alternative_operation_type is None and result:
             return result
 
         if self.alternative_rule is not None:
             alt_result = self.alternative_rule.check(obj)
 
-            if self.alternative_operation_type == "or":
-                return alt_result
+            if (
+                    self.alternative_operation_type == "or"
+                    and not (bool(result) or bool(alt_result))
+            ) or (
+                    self.alternative_operation_type == "xor"
+                    and not (bool(result) ^ bool(alt_result))
+            ) or (
+                    self.alternative_operation_type == "eq"
+                    and not (bool(result) == bool(alt_result))
+            ) or (
+                    self.alternative_operation_type == "ne"
+                    and not (bool(result) != bool(alt_result))
+            ):
+                return self.wrong()
 
-            elif self.alternative_operation_type == "eq":
-                if bool(result) == bool(alt_result):
-                    return alt_result
-
-            elif self.alternative_operation_type == "ne":
-                if bool(result) != bool(alt_result):
-                    return alt_result
+            return RuleResult.from_results(result, alt_result)
 
     def _check(self, rules: List[ABCRule], obj: Any) -> RuleResult:
         """  """
