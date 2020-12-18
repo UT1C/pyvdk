@@ -71,4 +71,7 @@ class RulesBunchTests(unittest.TestCase):
         mes = self.mes[0]
 
         # Act
-        bunch.check(mes)
+        result = bunch.check(mes)
+
+        # Assert
+        self.assertTrue(result)
