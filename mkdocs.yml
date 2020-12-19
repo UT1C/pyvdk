@@ -6,13 +6,14 @@ repo_url: https://github.com/UT1C/pyvdk
 
 theme:
     name: readthedocs
-    highlightjs: True
+    highlightjs: false
     hljs_languages:
         - python
 
 extra_css:
-    - assets/css/default.min.css
     - assets/css/autodoc.css
+    - assets/css/codehilite/extra.css
+    - assets/css/codehilite/themes/friendly.css
 
 plugins:
     - search
@@ -20,13 +21,14 @@ plugins:
         include_dir: .
 
 markdown_extensions:
+    - pymdownx.highlight:
+        use_pygments: false
     - footnotes
     - attr_list
     - admonition
+    - codehilite:
+        guess_lang: false
     - mkautodoc
-    - pymdownx.highlight:
-        use_pygments: False
-    - pymdownx.superfences
     - toc:
         permalink: "#"
         toc_depth: "1-6"

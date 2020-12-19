@@ -14,12 +14,13 @@ TextRule('Foo', lower=False)
 ```
 Полный список правил можно найти [здесь](api_reference.md#rules).
 
-Так же разные правила можно совмещать, используя побитовые операции. При этом образуется `RulesBunch`.
+Так же разные правила можно совмещать, используя логические операторы. При этом образуется `RulesBunch`.
 
 ```python
-bunch = rule1 & rule2 | rule3
+# rule and ((rule != rule) or (rule == rule)) xor not rule
+bunch = rule & ((rule != rule) | (rule == rule)) ^ ~rule
 ```
-Побитовые операторы, доступные для работы с правилами на данный момент: `&`, `|`.
+Операторы, доступные для работы с правилами на данный момент: `&`, `|`, `^`, `~`, `==`, `!=`.
 
 ## RulesBunch { #bunch }
 Сам по себе `RulesBunch` является сгруппированным пучком правил. Его можно применять как обычное правило или как декоратор. Условием выполнения хендлера становятся выполнение условий, указанных при лейблинге, и условий банча.
@@ -28,7 +29,7 @@ bunch = rule1 & rule2 | rule3
 from pyvdk.rules import RulesBunch
 
 ...
-bunch = RulesBunch(rule1, rule2, alternative_rule=rule3)  # эквивалент rule1 & rule2 | rule3
+bunch = RulesBunch(rule1, rule2)  # эквивалент rule1 & rule2
 ...
 
 @bot.on.message_new(bunch, text="foo")
