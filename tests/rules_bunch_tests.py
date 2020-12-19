@@ -1,5 +1,5 @@
 import unittest
-from pyvdk.api import ABCAPI
+from pyvdk.api import RawAPI
 from pyvdk.types import Message
 from pyvdk.rules import (
     RulesBunch,
@@ -7,7 +7,7 @@ from pyvdk.rules import (
 )
 
 
-class FakeAPI(ABCAPI):
+class FakeAPI(RawAPI):
     def message_gen(self, text: str) -> Message:
         return Message(
             text=text,
