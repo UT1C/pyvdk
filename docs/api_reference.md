@@ -13,6 +13,8 @@
     :docstring:
     :members:
 
+## Event { #event }
+
 ## Rules { #rules }
 
 ## Tools { #tools }
