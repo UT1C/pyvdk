@@ -403,27 +403,27 @@
 ::: pyvdk.tools.TextButton
     :docstring:
 
-#### LinkButton { #Link-button }
+#### LinkButton { #link-button }
 
 ::: pyvdk.tools.LinkButton
     :docstring:
 
-#### LocationButton { #Location-button }
+#### LocationButton { #location-button }
 
 ::: pyvdk.tools.LocationButton
     :docstring:
 
-#### VKPayButton { #VKPay-button }
+#### VKPayButton { #vk-pay-button }
 
 ::: pyvdk.tools.VKPayButton
     :docstring:
 
-#### AppButton { #App-button }
+#### AppButton { #app-button }
 
 ::: pyvdk.tools.AppButton
     :docstring:
 
-#### CallbackButton { #Callback-button }
+#### CallbackButton { #callback-button }
 
 ::: pyvdk.tools.CallbackButton
     :docstring:
