@@ -1,11 +1,62 @@
-from .abc import ABCAPI
+from requests import Session
 
 from ..config import Config
-
 from . import categories
+from .abc import ABCAPI
+from ..tools import prepare_params
+from ..logging import log
 
 
-class API(ABCAPI):
+logger = log.getLogger("api")
+
+
+class RawAPI(ABCAPI):
+    """Класс для вызовов методов api VK
+    """
+
+    def __init__(self, config: Config) -> None:
+        """[summary]
+
+        Args:
+            config (Config): [description]
+        """
+        self.config = config
+        self.session = Session()
+
+    def request(self, method: str, params: dict) -> dict:
+        """ Метод для запроса к апи, "лоу-левел"
+
+        Args:
+            method (str): запрашиваемый метод
+            params (dict): параметры запроса (отфильтрованные!)
+
+        Returns:
+            dict: результат запроса
+        """
+        try:
+            url = self.API_URL + method
+            _params = {  # params in url
+                "access_token": self.config.token,
+                "v": self.config.v
+            }
+            logger.debug(f"request {method} {params}")
+            with self.session.post(url, params=_params, data=params) as r:
+                # TODO: find & throw vk error there
+                result = r.json()
+                logger.debug(f"response: [{r.status_code}] {result}")
+                return result
+
+        # TODO: catch network exceptions there
+        except Exception as e:
+            print(e)  # FIXME: log.exception()  (Возможно, я не уверен)
+            # NOTE: не сетевые ошибки - поднимать выше
+            raise
+
+    def method(self, method: str, **params) -> dict:
+        return self.request(method, prepare_params(params))
+
+
+class API(RawAPI):
     def __init__(self, config: Config) -> None:
         super().__init__(config)
 

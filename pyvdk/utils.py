@@ -47,7 +47,3 @@ def get_chat_id(peer_id: int) -> int:
     """ Получает chat_id из peer_id """
 
     return peer_id - 2e9
-
-
-def gen_alias(id: int, label: str) -> str:
-    return f"[{id}|{label}]"

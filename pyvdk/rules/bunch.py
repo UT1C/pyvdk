@@ -1,4 +1,4 @@
-from typing import List, Union, Type, Optional, Any
+from typing import List, Union, Type, Optional, Any, Callable
 
 from .abc import ABCRule, RuleResult, ABCRulesBunch
 from ..event import ABCHandler
@@ -10,11 +10,15 @@ class RulesBunch(ABCRulesBunch):
     def __init__(
         self,
         *rules: ABCRule,
-        alternative_rule: Optional[ABCRule] = None
+        alternative_rule: Optional[ABCRule] = None,
+        alternative_operation_type: Optional[str] = None,
+        invert: Optional[bool] = False
     ) -> None:
 
         self.rules = list(rules)
         self.alternative_rule = alternative_rule
+        self.alternative_operation_type = alternative_operation_type
+        self.invert = invert
 
     def __call__(
         self,
@@ -35,15 +39,60 @@ class RulesBunch(ABCRulesBunch):
         return self
 
     def __or__(self, rule: ABCRule) -> ABCRulesBunch:
-        return RulesBunch(self, alternative_rule=rule)
+        return RulesBunch(
+            self,
+            alternative_rule=rule,
+            alternative_operation_type="or"
+        )
+
+    def __xor__(self, rule: ABCRule) -> ABCRulesBunch:
+        return RulesBunch(
+            self,
+            alternative_rule=rule,
+            alternative_operation_type="xor"
+        )
+
+    def __eq__(self, rule: ABCRule) -> ABCRulesBunch:
+        return RulesBunch(
+            self,
+            alternative_rule=rule,
+            alternative_operation_type="eq"
+        )
+
+    def __ne__(self, rule: ABCRule) -> ABCRulesBunch:
+        return RulesBunch(
+            self,
+            alternative_rule=rule,
+            alternative_operation_type="ne"
+        )
+
+    def __invert__(self) -> ABCRulesBunch:
+        return RulesBunch(
+            self,
+            invert=True
+        )
 
     def check(self, obj: Any) -> Optional[RuleResult]:
         result = self._check(self.rules, obj)
-        if result:
+        if self.alternative_operation_type is None and result:
+            if self.invert:
+                return self.wrong()
             return result
 
         if self.alternative_rule is not None:
-            return self.alternative_rule.check(obj)
+            alt_result = self.alternative_rule.check(obj)
+            operation = bool(result).__getattribute__(
+                f"__{self.alternative_operation_type}__"
+            )
+
+            if not operation(bool(alt_result)):
+                if self.invert:
+                    return self.ok()
+                return self.wrong()
+
+            if self.invert:
+                return self.wrong()
+            return RuleResult.from_results(result, alt_result)
 
     def _check(self, rules: List[ABCRule], obj: Any) -> RuleResult:
         """  """

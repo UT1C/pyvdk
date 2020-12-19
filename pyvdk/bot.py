@@ -1,7 +1,14 @@
+from typing import Optional
+
 from . import logging
-from .event import View, Labeler
+from .event import (
+    ABCView,
+    ABCLabeler,
+    View,
+    Labeler
+)
 from .config import Config
-from .api import API
+from .api import API, ABCAPI
 from .types import Callback
 
 logger = logging.log.getLogger('bot')
@@ -10,8 +17,9 @@ logger = logging.log.getLogger('bot')
 class Bot:
     """ Основной класс бота """
 
-    api: API
-    on: Labeler
+    api: ABCAPI
+    view: ABCView
+    on: ABCLabeler
     __config: Config
 
     def __init__(
@@ -29,6 +37,13 @@ class Bot:
         self.view = View(self.api)
         self.on = Labeler(self.view, endpoint_default)
 
+    def add(self, *blueprints: "Blueprint"):
+        """ Добавляет хендлеры из блюпринтов в бота """
+
+        for bp in blueprints:
+            bp.api = self.api
+            self.view.handlers.extend(bp.view.handlers)
+
     def process(self, request: dict) -> str:
         """ Обрабатывает запрос """
 
@@ -36,7 +51,7 @@ class Bot:
         callback = Callback(**request)
         response = self.__check(callback)
         if response == 'ok':
-            logger.info(f"new event, type:{callback.type}")
+            logger.info(f"new event, type: {callback.type}")
             self.view.process(callback)
 
         return response
@@ -54,3 +69,16 @@ class Bot:
 
         else:
             return 'ok'
+
+
+class Blueprint:
+    """  """
+
+    api: Optional[ABCAPI]
+    view: ABCView
+    on: ABCLabeler
+
+    def __init__(self, endpoint_default: bool = False) -> None:
+        self.api = None
+        self.view = View(None)
+        self.on = Labeler(self.view, endpoint_default)
