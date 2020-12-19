@@ -1,3 +1,5 @@
+from typing import Optional
+
 from . import logging
 from .event import (
     ABCView,
@@ -39,6 +41,7 @@ class Bot:
         """ Добавляет хендлеры из блюпринтов в бота """
 
         for bp in blueprints:
+            bp.api = self.api
             self.view.handlers.extend(bp.view.handlers)
 
     def process(self, request: dict) -> str:
@@ -71,9 +74,11 @@ class Bot:
 class Blueprint:
     """  """
 
+    api: Optional[ABCAPI]
     view: ABCView
     on: ABCLabeler
 
     def __init__(self, endpoint_default: bool = False) -> None:
+        self.api = None
         self.view = View(None)
         self.on = Labeler(self.view, endpoint_default)
