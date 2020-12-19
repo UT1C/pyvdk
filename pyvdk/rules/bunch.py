@@ -81,20 +81,11 @@ class RulesBunch(ABCRulesBunch):
 
         if self.alternative_rule is not None:
             alt_result = self.alternative_rule.check(obj)
+            operation = bool(result).__getattribute__(
+                f"__{self.alternative_operation_type}__"
+            )
 
-            if (
-                    self.alternative_operation_type == "or"
-                    and not (bool(result) or bool(alt_result))
-            ) or (
-                    self.alternative_operation_type == "xor"
-                    and not (bool(result) ^ bool(alt_result))
-            ) or (
-                    self.alternative_operation_type == "eq"
-                    and not (bool(result) == bool(alt_result))
-            ) or (
-                    self.alternative_operation_type == "ne"
-                    and not (bool(result) != bool(alt_result))
-            ):
+            if not operation(bool(alt_result)):
                 if self.invert:
                     return self.ok()
                 return self.wrong()
