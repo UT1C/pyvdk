@@ -14,10 +14,13 @@ class RuleResult:
     ) -> None:
 
         self.correct = correct
-        self.args = args
+        self.args = list(args)
 
     def __bool__(self):
         return self.correct
+
+    def __iter__(self):
+        return iter(self.args)
 
     def add_to(self, args: list) -> None:
         """
@@ -26,6 +29,21 @@ class RuleResult:
         """
 
         args.extend(self.args)
+
+    def merge(self, rule_result: "RuleResult"):
+        """  """
+
+        self.args.extend(rule_result.args)
+
+    @classmethod
+    def from_results(cls, *args: "RuleResult") -> "RuleResult":
+        results = list()
+
+        for i in args:
+            if i is not None:
+                results.extend(i)
+
+        return cls(*results, correct=True)
 
 
 class ABCRule(ABC):
@@ -39,6 +57,18 @@ class ABCRule(ABC):
         ...
 
     def __or__(self, rule: "ABCRule") -> "ABCRulesBunch":
+        ...
+
+    def __xor__(self, rule: "ABCRule") -> "ABCRulesBunch":
+        ...
+
+    def __eq__(self, rule: "ABCRule") -> "ABCRulesBunch":
+        ...
+
+    def __ne__(self, rule: "ABCRule") -> "ABCRulesBunch":
+        ...
+
+    def __invert__(self) -> "ABCRulesBunch":
         ...
 
     def check(self, obj: Any) -> Optional[RuleResult]:
@@ -56,10 +86,17 @@ class ABCRule(ABC):
 class ABCRulesBunch(ABCRule):
     """  """
 
+    rules: List[ABCRule]
+    alternative_rule: Optional[ABCRule]
+    alternative_operation_type: Optional[str]
+    invert: bool
+
     def __init__(
         self,
         *rules: ABCRule,
-        alternative_rule: Optional[ABCRule] = None
+        alternative_rule: Optional[ABCRule] = None,
+        alternative_operation_type: Optional[str] = None,
+        invert: Optional[bool] = False
     ) -> None:
         ...
 
@@ -72,7 +109,19 @@ class ABCRulesBunch(ABCRule):
     def __and__(self, rule: ABCRule) -> "ABCRulesBunch":
         ...
 
-    def __or__(self, rule: "ABCRule") -> "ABCRulesBunch":
+    def __or__(self, rule: ABCRule) -> "ABCRulesBunch":
+        ...
+
+    def __xor__(self, rule: ABCRule) -> "ABCRulesBunch":
+        ...
+
+    def __eq__(self, rule: ABCRule) -> "ABCRulesBunch":
+        ...
+
+    def __ne__(self, rule: ABCRule) -> "ABCRulesBunch":
+        ...
+
+    def __invert__(self) -> "ABCRulesBunch":
         ...
 
     def check(self, obj: Any) -> Optional[RuleResult]:
