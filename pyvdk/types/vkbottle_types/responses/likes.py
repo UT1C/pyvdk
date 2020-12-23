@@ -1,6 +1,6 @@
 from typing import Optional, List
 
-from vkbottle_types.objects import UsersUserMin, BaseBoolInt
+from ..objects import UsersUserMin, BaseBoolInt
 from .base_response import BaseResponse
 
 

@@ -1,6 +1,6 @@
 from typing import Optional, List
 
-from vkbottle_types.objects import PollsVoters, PollsPoll, BaseBoolInt
+from ..objects import PollsVoters, PollsPoll, BaseBoolInt
 from .base_response import BaseResponse
 
 

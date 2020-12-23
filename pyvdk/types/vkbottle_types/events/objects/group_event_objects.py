@@ -1,5 +1,5 @@
 from .base_event_object import BaseEventObject
-from vkbottle_types.objects import (
+from ...objects import (
     WallWallComment,
     WallWallpost,
     BoardTopicComment,

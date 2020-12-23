@@ -1,6 +1,6 @@
 from typing import Optional, List
 
-from vkbottle_types.objects import WidgetsWidgetPage, WidgetsWidgetComment
+from ..objects import WidgetsWidgetPage, WidgetsWidgetComment
 from .base_response import BaseResponse
 
 

@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from typing import Optional
-from vkbottle_types.state import StatePeer
+from ...state import StatePeer
 
 
 class BaseEventObject(BaseModel):

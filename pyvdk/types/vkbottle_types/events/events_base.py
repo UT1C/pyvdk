@@ -3,7 +3,7 @@ from .enum import GroupEventType
 
 
 if TYPE_CHECKING:
-    from .typings import GroupTypes, UserTypes
+    from .typings import GroupTypes
     from .bot_events import BaseGroupEvent
 
 

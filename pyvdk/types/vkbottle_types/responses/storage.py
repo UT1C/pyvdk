@@ -1,6 +1,6 @@
 from typing import Optional, List
 
-from vkbottle_types.objects import StorageValue
+from ..objects import StorageValue
 from .base_response import BaseResponse
 
 

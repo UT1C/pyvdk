@@ -1,7 +1,7 @@
 import typing
 from typing import Optional, List, Union
 
-from vkbottle_types.objects import (
+from ..objects import (
     GroupsGroupFull,
     GroupsGroup,
     MessagesMessage,

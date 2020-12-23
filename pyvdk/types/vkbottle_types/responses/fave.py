@@ -1,6 +1,6 @@
 from typing import Optional, List
 
-from vkbottle_types.objects import (
+from ..objects import (
     FaveBookmark,
     UsersUserFull,
     GroupsGroup,

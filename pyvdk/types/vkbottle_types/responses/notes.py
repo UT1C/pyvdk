@@ -1,6 +1,6 @@
 from typing import Optional, List
 
-from vkbottle_types.objects import NotesNoteComment, NotesNote
+from ..objects import NotesNoteComment, NotesNote
 from .base_response import BaseResponse
 
 

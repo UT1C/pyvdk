@@ -2,10 +2,10 @@ from .enum import GroupEventType
 from .objects import BaseEventObject, group_event_objects
 from .events_base import EventsBase
 from pydantic import BaseModel
-from typing import Optional, Any, Union, TYPE_CHECKING
+from typing import Optional, Any, TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from ....api import ABCAPI, API
+    from ....api import ABCAPI
 
 
 class BaseGroupEvent(BaseModel):

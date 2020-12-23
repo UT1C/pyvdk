@@ -1,6 +1,6 @@
 from typing import Optional, List
 
-from vkbottle_types.objects import PrettyCardsPrettyCard
+from ..objects import PrettyCardsPrettyCard
 from .base_response import BaseResponse
 
 

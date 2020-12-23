@@ -1,6 +1,6 @@
 from typing import Optional, List
 
-from vkbottle_types.objects import StatsWallpostStat, StatsPeriod
+from ..objects import StatsWallpostStat, StatsPeriod
 from .base_response import BaseResponse
 
 

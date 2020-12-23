@@ -1,2 +1,2 @@
-from .events import GroupTypes, UserTypes
+from .events import GroupTypes
 from .state import StatePeer, BaseStateGroup
