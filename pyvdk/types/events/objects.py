@@ -1,5 +1,5 @@
-from .base_event_object import BaseEventObject
-from ...objects import (
+from pydantic import BaseModel
+from ..objects import (
     WallWallComment,
     WallWallpost,
     BoardTopicComment,
@@ -18,7 +18,7 @@ import enum
 from typing import Optional, Any, Union, Callable
 
 
-class MessageNewObject(BaseEventObject):
+class MessageNewObject(BaseModel):
     message: Optional[MessagesMessage] = None
     client_info: Optional[MessagesClientInfo] = None
 
@@ -27,24 +27,24 @@ class MessageObject(MessagesMessage):
     pass
 
 
-class MessageAllowObject(BaseEventObject):
+class MessageAllowObject(BaseModel):
     user_id: Optional[int] = None
     key: Optional[str] = None
     api: Optional[list] = None
 
 
-class MessageTypingStateObject(BaseEventObject):
+class MessageTypingStateObject(BaseModel):
     state: Optional[str] = None
     from_id: Optional[int] = None
     to_id: Optional[int] = None
     api: Optional[list] = None
 
 
-class MessageDenyObject(BaseEventObject):
+class MessageDenyObject(BaseModel):
     user_id: Optional[int] = None
 
 
-class MessageEventObject(BaseEventObject):
+class MessageEventObject(BaseModel):
     user_id: Optional[int] = None
     peer_id: Optional[int] = None
     event_id: Optional[str] = None
@@ -78,7 +78,7 @@ class PhotoCommentObject(WallWallComment):
     photo_owner_id: Optional[int] = None
 
 
-class PhotoCommentDeleteObject(BaseEventObject):
+class PhotoCommentDeleteObject(BaseModel):
     owner_id: Optional[int] = None
     id: Optional[int] = None
     user_id: Optional[int] = None
@@ -98,7 +98,7 @@ class VideoCommentObject(WallWallComment):
     video_owner_id: Optional[int] = None
 
 
-class VideoCommentDeleteObject(BaseEventObject):
+class VideoCommentDeleteObject(BaseModel):
     owner_id: Optional[int] = None
     id: Optional[int] = None
     user_id: Optional[int] = None
@@ -115,7 +115,7 @@ class WallReplyNewObject(WallWallComment):
     api: Optional[list] = None
 
 
-class WallReplyDeleteObject(BaseEventObject):
+class WallReplyDeleteObject(BaseModel):
     owner_id: Optional[int] = None
     id: Optional[int] = None
     user_id: Optional[int] = None
@@ -123,7 +123,7 @@ class WallReplyDeleteObject(BaseEventObject):
     post_id: Optional[int] = None
 
 
-class LikeObject(BaseEventObject):
+class LikeObject(BaseModel):
     liker_id: Optional[int] = None
     object_type: Optional[ObjectType] = None
     object_owner_id: Optional[int] = None
@@ -137,7 +137,7 @@ class BoardPostNewObject(BoardTopicComment):
     topic_owner_id: Optional[int] = None
 
 
-class BoardPostDeleteObject(BaseEventObject):
+class BoardPostDeleteObject(BaseModel):
     topic_id: Optional[int] = None
     id: Optional[int] = None
 
@@ -147,24 +147,24 @@ class MarketCommentNewObject(WallWallComment):
     item_id: Optional[int] = None
 
 
-class MarketCommentDeleteObject(BaseEventObject):
+class MarketCommentDeleteObject(BaseModel):
     owner_id: Optional[int] = None
     id: Optional[int] = None
     user_id: Optional[int] = None
     item_id: Optional[int] = None
 
 
-class GroupLeaveObject(BaseEventObject):
+class GroupLeaveObject(BaseModel):
     user_id: Optional[int] = None
     self: Optional[int] = None
 
 
-class GroupJoinObject(BaseEventObject):
+class GroupJoinObject(BaseModel):
     user_id: Optional[int] = None
     join_type: Optional[CallbackGroupJoinType] = None
 
 
-class UserBlockObject(BaseEventObject):
+class UserBlockObject(BaseModel):
     admin_id: Optional[int] = None
     user_id: Optional[int] = None
     unblock_data: Optional[int] = None
@@ -172,20 +172,20 @@ class UserBlockObject(BaseEventObject):
     comment: Optional[str] = None
 
 
-class UserUnblockObject(BaseEventObject):
+class UserUnblockObject(BaseModel):
     admin_id: Optional[int] = None
     user_id: Optional[int] = None
     by_end_date: Optional[int] = None
 
 
-class PollVoteNewObject(BaseEventObject):
+class PollVoteNewObject(BaseModel):
     owner_id: Optional[int] = None
     poll_id: Optional[int] = None
     option_id: Optional[int] = None
     user_id: Optional[int] = None
 
 
-class GroupOfficersEditObject(BaseEventObject):
+class GroupOfficersEditObject(BaseModel):
     admin_id: Optional[int] = None
     user_id: Optional[int] = None
     level_old: Optional[GroupsGroupAdminLevel] = None
@@ -212,18 +212,18 @@ class GroupChangeSettingsChangesSectionNameObject(enum.Enum):
     ENABLE_SECTION = GroupChangeSettingsChangesSectionEnableObject
 
 
-class GroupChangeSettingsChangesObject(BaseEventObject):
+class GroupChangeSettingsChangesObject(BaseModel):
     section_name: Optional[GroupChangeSettingsChangesSectionNameObject] = None
     old_value: Any = None
     new_value: Any = None
 
 
-class GroupChangeSettingsObject(BaseEventObject):
+class GroupChangeSettingsObject(BaseModel):
     user_id: Optional[int] = None
     changes: Optional[GroupChangeSettingsChangesObject] = None
 
 
-class GroupChangePhotoObject(BaseEventObject):
+class GroupChangePhotoObject(BaseModel):
     user_id: Optional[int] = None
     photo: Optional[PhotosPhoto] = None
 
@@ -232,21 +232,21 @@ class MarketOrderObject(MarketOrder):
     pass
 
 
-class VkPayTransactionObject(BaseEventObject):
+class VkPayTransactionObject(BaseModel):
     from_id: Optional[int] = None
     amount: Optional[int] = None
     description: Optional[str] = None
     date: Optional[int] = None
 
 
-class AppPayloadObject(BaseEventObject):
+class AppPayloadObject(BaseModel):
     user_id: Optional[int] = None
     app_id: Optional[int] = None
     payload: Optional[str] = None
     group_id: Optional[int] = None
 
 
-class DonutSubscriptionObject(BaseEventObject):
+class DonutSubscriptionObject(BaseModel):
     user_id: Optional[int] = None
 
 
@@ -274,12 +274,12 @@ class DonutSubscriptionPriceChangedObject(DonutSubscriptionObject):
     amount_diff_without_fee: Optional[float] = None
 
 
-class DonutMoneyWithdrawObject(BaseEventObject):
+class DonutMoneyWithdrawObject(BaseModel):
     amount: Optional[float] = None
     amount_without_fee: Optional[float] = None
 
 
-class DonutMoneyWithdrawErrorObject(BaseEventObject):
+class DonutMoneyWithdrawErrorObject(BaseModel):
     reason: Optional[str] = None
 
 

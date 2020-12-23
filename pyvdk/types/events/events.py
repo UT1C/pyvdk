@@ -1,5 +1,5 @@
 from .enum import GroupEventType
-from .objects import BaseEventObject, group_event_objects
+from . import objects
 from .events_base import EventsBase
 from pydantic import BaseModel
 from typing import Optional, Any, TYPE_CHECKING
@@ -10,7 +10,7 @@ if TYPE_CHECKING:
 
 class BaseGroupEvent(BaseModel):
     type: Optional[GroupEventType] = None
-    object: Optional[BaseEventObject] = None
+    object: Optional[BaseModel] = None
     group_id: Optional[int] = None
     unprepared_ctx_api: Optional[Any] = None
 
@@ -20,159 +20,159 @@ class BaseGroupEvent(BaseModel):
 
 
 class Message(BaseGroupEvent):
-    object: "group_event_objects.MessageObject"
+    object: "objects.MessageObject"
 
 
 class MessageNew(BaseGroupEvent):
-    object: "group_event_objects.MessageNewObject"
+    object: "objects.MessageNewObject"
 
 
 class MessageAllow(BaseGroupEvent):
-    object: "group_event_objects.MessageAllowObject"
+    object: "objects.MessageAllowObject"
 
 
 class MessageTypingState(BaseGroupEvent):
-    object: "group_event_objects.MessageTypingStateObject"
+    object: "objects.MessageTypingStateObject"
 
 
 class MessageDeny(BaseGroupEvent):
-    object: "group_event_objects.MessageDenyObject"
+    object: "objects.MessageDenyObject"
 
 
 class MessageEvent(BaseGroupEvent):
-    object: "group_event_objects.MessageEventObject"
+    object: "objects.MessageEventObject"
 
 
 class PhotoNew(BaseGroupEvent):
-    object: "group_event_objects.PhotosPhoto"
+    object: "objects.PhotosPhoto"
 
 
 class PhotoComment(BaseGroupEvent):
-    object: "group_event_objects.PhotoCommentObject"
+    object: "objects.PhotoCommentObject"
 
 
 class PhotoCommentDelete(BaseGroupEvent):
-    object: "group_event_objects.PhotoCommentDeleteObject"
+    object: "objects.PhotoCommentDeleteObject"
 
 
 class AudioNew(BaseGroupEvent):
-    object: "group_event_objects.AudioNewObject"
+    object: "objects.AudioNewObject"
 
 
 class VideoNew(BaseGroupEvent):
-    object: "group_event_objects.VideoNewObject"
+    object: "objects.VideoNewObject"
 
 
 class VideoComment(BaseGroupEvent):
-    object: "group_event_objects.VideoCommentObject"
+    object: "objects.VideoCommentObject"
 
 
 class VideoCommentDelete(BaseGroupEvent):
-    object: "group_event_objects.VideoCommentDeleteObject"
+    object: "objects.VideoCommentDeleteObject"
 
 
 class WallPostNew(BaseGroupEvent):
-    object: "group_event_objects.WallPostNewObject"
+    object: "objects.WallPostNewObject"
 
 
 class WallReply(BaseGroupEvent):
-    object: "group_event_objects.WallReplyNewObject"
+    object: "objects.WallReplyNewObject"
 
 
 class WallReplyDelete(BaseGroupEvent):
-    object: "group_event_objects.WallReplyDeleteObject"
+    object: "objects.WallReplyDeleteObject"
 
 
 class Like(BaseGroupEvent):
-    object: "group_event_objects.LikeObject"
+    object: "objects.LikeObject"
 
 
 class BoardPost(BaseGroupEvent):
-    object: "group_event_objects.BoardPostNewObject"
+    object: "objects.BoardPostNewObject"
 
 
 class BoardPostDelete(BaseGroupEvent):
-    object: "group_event_objects.BoardPostDeleteObject"
+    object: "objects.BoardPostDeleteObject"
 
 
 class MarketOrder(BaseGroupEvent):
-    object: "group_event_objects.MarketOrderObject"
+    object: "objects.MarketOrderObject"
 
 
 class MarketComment(BaseGroupEvent):
-    object: "group_event_objects.MarketCommentNewObject"
+    object: "objects.MarketCommentNewObject"
 
 
 class MarketCommentDelete(BaseGroupEvent):
-    object: "group_event_objects.MarketCommentDeleteObject"
+    object: "objects.MarketCommentDeleteObject"
 
 
 class GroupLeave(BaseGroupEvent):
-    object: "group_event_objects.GroupLeaveObject"
+    object: "objects.GroupLeaveObject"
 
 
 class GroupJoin(BaseGroupEvent):
-    object: "group_event_objects.GroupJoinObject"
+    object: "objects.GroupJoinObject"
 
 
 class UserBlock(BaseGroupEvent):
-    object: "group_event_objects.UserBlockObject"
+    object: "objects.UserBlockObject"
 
 
 class UserUnblock(BaseGroupEvent):
-    object: "group_event_objects.UserUnblockObject"
+    object: "objects.UserUnblockObject"
 
 
 class PollVoteNew(BaseGroupEvent):
-    object: "group_event_objects.PollVoteNewObject"
+    object: "objects.PollVoteNewObject"
 
 
 class GroupOfficersEdit(BaseGroupEvent):
-    object: "group_event_objects.GroupOfficersEditObject"
+    object: "objects.GroupOfficersEditObject"
 
 
 class GroupChangeSettings(BaseGroupEvent):
-    object: "group_event_objects.GroupChangeSettingsObject"
+    object: "objects.GroupChangeSettingsObject"
 
 
 class GroupChangePhoto(BaseGroupEvent):
-    object: "group_event_objects.GroupChangePhotoObject"
+    object: "objects.GroupChangePhotoObject"
 
 
 class VkPayTransaction(BaseGroupEvent):
-    object: "group_event_objects.VkPayTransactionObject"
+    object: "objects.VkPayTransactionObject"
 
 
 class AppPayload(BaseGroupEvent):
-    object: "group_event_objects.AppPayloadObject"
+    object: "objects.AppPayloadObject"
 
 
 class DonutSubscriptionCreate(BaseGroupEvent):
-    object: "group_event_objects.DonutSubscriptionCreateObject"
+    object: "objects.DonutSubscriptionCreateObject"
 
 
 class DonutSubscriptionProlonged(BaseGroupEvent):
-    object: "group_event_objects.DonutSubscriptionProlongedObject"
+    object: "objects.DonutSubscriptionProlongedObject"
 
 
 class DonutSubscriptionExpired(BaseGroupEvent):
-    object: "group_event_objects.DonutSubscriptionExpiredObject"
+    object: "objects.DonutSubscriptionExpiredObject"
 
 
 class DonutSubscriptionCancelled(BaseGroupEvent):
-    object: "group_event_objects.DonutSubscriptionCancelledObject"
+    object: "objects.DonutSubscriptionCancelledObject"
 
 
 class DonutSubscriptionPriceChanged(BaseGroupEvent):
-    object: "group_event_objects.DonutSubscriptionPriceChangedObject"
+    object: "objects.DonutSubscriptionPriceChangedObject"
 
 
 class DonutMoneyWithdraw(BaseGroupEvent):
-    object: "group_event_objects.DonutMoneyWithdrawObject"
+    object: "objects.DonutMoneyWithdrawObject"
 
 
 class DonutMoneyWithdrawError(BaseGroupEvent):
-    object: "group_event_objects.DonutMoneyWithdrawErrorObject"
+    object: "objects.DonutMoneyWithdrawErrorObject"
 
 
 Message.update_forward_refs()
