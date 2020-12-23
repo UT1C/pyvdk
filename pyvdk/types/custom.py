@@ -2,7 +2,6 @@ import random
 from typing import Any, Dict, Optional
 
 from ..api import ABCAPI
-from .abc import Model
 from .objects import MessagesMessage
 
 

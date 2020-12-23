@@ -10,7 +10,7 @@ class EventsBase:
     events_registered: Dict[
         GroupEventType,
         Type["GroupTypes.UnifiedTypes"],
-    ] = {}
+    ] = dict()
 
     def __init__(
         self,
