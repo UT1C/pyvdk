@@ -3,7 +3,7 @@ from typing import Any, Callable, Dict, List, Tuple
 from ..logging import log
 from ..rules import ABCRule
 from .abc import ABCHandler
-from .event_types import GroupEventType
+from ..types.events import GroupEventType
 
 logger = log.getLogger("event/handler")
 

@@ -4,7 +4,7 @@ from ..logging import log
 from ..types import Callback, Message
 from ..api import ABCAPI
 from .abc import ABCHandler, ABCView
-from .event_types import GroupEventType
+from ..types.events import GroupEventType
 
 logger = log.getLogger("event/view")
 

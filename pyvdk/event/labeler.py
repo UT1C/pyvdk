@@ -8,7 +8,7 @@ from ..rules import (
     VBMLRule,
 )
 from .abc import ABCHandler, ABCLabeler, ABCView
-from .event_types import GroupEventType
+from ..types.events import GroupEventType
 from .handler import Handler
 
 logger = log.getLogger("event/labeler")

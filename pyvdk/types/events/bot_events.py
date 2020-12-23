@@ -5,7 +5,7 @@ from pydantic import BaseModel
 from typing import Optional, Any, TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from ....api import ABCAPI
+    from ...api import ABCAPI
 
 
 class BaseGroupEvent(BaseModel):

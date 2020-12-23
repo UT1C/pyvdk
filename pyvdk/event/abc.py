@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 from typing import Any, Callable, List
 
 from ..api import ABCAPI
-from .event_types import GroupEventType
+from ..types.events import GroupEventType
 
 if typing.TYPE_CHECKING:
     from ..rules import ABCRule
