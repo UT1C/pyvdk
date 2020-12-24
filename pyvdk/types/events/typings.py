@@ -1,5 +1,6 @@
-from . import events
 from typing import Union
+
+from . import events
 
 
 class GroupTypes:

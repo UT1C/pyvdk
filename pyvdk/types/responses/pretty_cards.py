@@ -1,45 +1,45 @@
 from typing import Optional, List
 
 from ..objects import PrettyCardsPrettyCard
-from .base_response import BaseResponse
+from ..abc import Model
 
 
-class CreateResponse(BaseResponse):
+class CreateResponse(Model):
     response: Optional["CreateResponseModel"] = None
 
 
-class DeleteResponse(BaseResponse):
+class DeleteResponse(Model):
     response: Optional["DeleteResponseModel"] = None
 
 
-class EditResponse(BaseResponse):
+class EditResponse(Model):
     response: Optional["EditResponseModel"] = None
 
 
-class GetByIdResponse(BaseResponse):
+class GetByIdResponse(Model):
     response: Optional["GetByIdResponseModel"] = None
 
 
-class GetUploadURLResponse(BaseResponse):
+class GetUploadURLResponse(Model):
     response: Optional["GetUploadURLResponseModel"] = None
 
 
-class GetResponse(BaseResponse):
+class GetResponse(Model):
     response: Optional["GetResponseModel"] = None
 
 
-class CreateResponseModel(BaseResponse):
+class CreateResponseModel(Model):
     owner_id: Optional[int] = None
     card_id: Optional[str] = None
 
 
-class DeleteResponseModel(BaseResponse):
+class DeleteResponseModel(Model):
     owner_id: Optional[int] = None
     card_id: Optional[str] = None
     error: Optional[str] = None
 
 
-class EditResponseModel(BaseResponse):
+class EditResponseModel(Model):
     owner_id: Optional[int] = None
     card_id: Optional[str] = None
 
@@ -50,7 +50,7 @@ GetByIdResponseModel = List[PrettyCardsPrettyCard]
 GetUploadURLResponseModel = str
 
 
-class GetResponseModel(BaseResponse):
+class GetResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["PrettyCardsPrettyCard"]] = None
 

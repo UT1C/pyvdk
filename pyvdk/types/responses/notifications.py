@@ -10,22 +10,22 @@ from ..objects import (
     BaseBoolInt,
     NotificationsSendMessageItem,
 )
-from .base_response import BaseResponse
+from ..abc import Model
 
 
-class GetResponse(BaseResponse):
+class GetResponse(Model):
     response: Optional["GetResponseModel"] = None
 
 
-class MarkAsViewedResponse(BaseResponse):
+class MarkAsViewedResponse(Model):
     response: Optional["MarkAsViewedResponseModel"] = None
 
 
-class SendMessageResponse(BaseResponse):
+class SendMessageResponse(Model):
     response: Optional["SendMessageResponseModel"] = None
 
 
-class GetResponseModel(BaseResponse):
+class GetResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["NotificationsNotificationItem"]] = None
     profiles: Optional[List["UsersUser"]] = None

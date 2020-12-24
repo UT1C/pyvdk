@@ -1,22 +1,22 @@
 from typing import Optional, List
 
 from ..objects import StorageValue
-from .base_response import BaseResponse
+from ..abc import Model
 
 
-class GetKeysResponse(BaseResponse):
+class GetKeysResponse(Model):
     response: Optional["GetKeysResponseModel"] = None
 
 
-class GetResponse(BaseResponse):
+class GetResponse(Model):
     response: Optional["GetResponseModel"] = None
 
 
-class GetV5110Response(BaseResponse):
+class GetV5110Response(Model):
     response: Optional["GetV5110ResponseModel"] = None
 
 
-class GetWithKeysResponse(BaseResponse):
+class GetWithKeysResponse(Model):
     response: Optional["GetWithKeysResponseModel"] = None
 
 

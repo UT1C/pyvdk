@@ -8,82 +8,82 @@ from ..objects import (
     GroupsGroup,
     WallWallpostFull,
 )
-from .base_response import BaseResponse
+from ..abc import Model
 
 
-class CreateCommentResponse(BaseResponse):
+class CreateCommentResponse(Model):
     response: Optional["CreateCommentResponseModel"] = None
 
 
-class EditResponse(BaseResponse):
+class EditResponse(Model):
     response: Optional["EditResponseModel"] = None
 
 
-class GetByIdExtendedResponse(BaseResponse):
+class GetByIdExtendedResponse(Model):
     response: Optional["GetByIdExtendedResponseModel"] = None
 
 
-class GetByIdResponse(BaseResponse):
+class GetByIdResponse(Model):
     response: Optional["GetByIdResponseModel"] = None
 
 
-class GetCommentExtendedResponse(BaseResponse):
+class GetCommentExtendedResponse(Model):
     response: Optional["GetCommentExtendedResponseModel"] = None
 
 
-class GetCommentResponse(BaseResponse):
+class GetCommentResponse(Model):
     response: Optional["GetCommentResponseModel"] = None
 
 
-class GetCommentsExtendedResponse(BaseResponse):
+class GetCommentsExtendedResponse(Model):
     response: Optional["GetCommentsExtendedResponseModel"] = None
 
 
-class GetCommentsResponse(BaseResponse):
+class GetCommentsResponse(Model):
     response: Optional["GetCommentsResponseModel"] = None
 
 
-class GetRepostsResponse(BaseResponse):
+class GetRepostsResponse(Model):
     response: Optional["GetRepostsResponseModel"] = None
 
 
-class GetExtendedResponse(BaseResponse):
+class GetExtendedResponse(Model):
     response: Optional["GetExtendedResponseModel"] = None
 
 
-class GetResponse(BaseResponse):
+class GetResponse(Model):
     response: Optional["GetResponseModel"] = None
 
 
-class PostAdsStealthResponse(BaseResponse):
+class PostAdsStealthResponse(Model):
     response: Optional["PostAdsStealthResponseModel"] = None
 
 
-class PostResponse(BaseResponse):
+class PostResponse(Model):
     response: Optional["PostResponseModel"] = None
 
 
-class RepostResponse(BaseResponse):
+class RepostResponse(Model):
     response: Optional["RepostResponseModel"] = None
 
 
-class SearchExtendedResponse(BaseResponse):
+class SearchExtendedResponse(Model):
     response: Optional["SearchExtendedResponseModel"] = None
 
 
-class SearchResponse(BaseResponse):
+class SearchResponse(Model):
     response: Optional["SearchResponseModel"] = None
 
 
-class CreateCommentResponseModel(BaseResponse):
+class CreateCommentResponseModel(Model):
     comment_id: Optional[int] = None
 
 
-class EditResponseModel(BaseResponse):
+class EditResponseModel(Model):
     post_id: Optional[int] = None
 
 
-class GetByIdExtendedResponseModel(BaseResponse):
+class GetByIdExtendedResponseModel(Model):
     items: Optional[List["WallWallpostFull"]] = None
     profiles: Optional[List["UsersUserFull"]] = None
     groups: Optional[List["GroupsGroupFull"]] = None
@@ -92,17 +92,17 @@ class GetByIdExtendedResponseModel(BaseResponse):
 GetByIdResponseModel = List[WallWallpostFull]
 
 
-class GetCommentExtendedResponseModel(BaseResponse):
+class GetCommentExtendedResponseModel(Model):
     items: Optional[List["WallWallComment"]] = None
     profiles: Optional[List["UsersUser"]] = None
     groups: Optional[List["GroupsGroup"]] = None
 
 
-class GetCommentResponseModel(BaseResponse):
+class GetCommentResponseModel(Model):
     items: Optional[List["WallWallComment"]] = None
 
 
-class GetCommentsExtendedResponseModel(BaseResponse):
+class GetCommentsExtendedResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["WallWallComment"]] = None
     show_reply_button: Optional[bool] = None
@@ -113,7 +113,7 @@ class GetCommentsExtendedResponseModel(BaseResponse):
     groups: Optional[List["GroupsGroup"]] = None
 
 
-class GetCommentsResponseModel(BaseResponse):
+class GetCommentsResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["WallWallComment"]] = None
     can_post: Optional[bool] = None
@@ -121,47 +121,47 @@ class GetCommentsResponseModel(BaseResponse):
     current_level_count: Optional[int] = None
 
 
-class GetRepostsResponseModel(BaseResponse):
+class GetRepostsResponseModel(Model):
     items: Optional[List["WallWallpostFull"]] = None
     profiles: Optional[List["UsersUser"]] = None
     groups: Optional[List["GroupsGroup"]] = None
 
 
-class GetExtendedResponseModel(BaseResponse):
+class GetExtendedResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["WallWallpostFull"]] = None
     profiles: Optional[List["UsersUserFull"]] = None
     groups: Optional[List["GroupsGroupFull"]] = None
 
 
-class GetResponseModel(BaseResponse):
+class GetResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["WallWallpostFull"]] = None
 
 
-class PostAdsStealthResponseModel(BaseResponse):
+class PostAdsStealthResponseModel(Model):
     post_id: Optional[int] = None
 
 
-class PostResponseModel(BaseResponse):
+class PostResponseModel(Model):
     post_id: Optional[int] = None
 
 
-class RepostResponseModel(BaseResponse):
+class RepostResponseModel(Model):
     success: Optional[int] = None
     post_id: Optional[int] = None
     reposts_count: Optional[int] = None
     likes_count: Optional[int] = None
 
 
-class SearchExtendedResponseModel(BaseResponse):
+class SearchExtendedResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["WallWallpostFull"]] = None
     profiles: Optional[List["UsersUserFull"]] = None
     groups: Optional[List["GroupsGroupFull"]] = None
 
 
-class SearchResponseModel(BaseResponse):
+class SearchResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["WallWallpostFull"]] = None
 

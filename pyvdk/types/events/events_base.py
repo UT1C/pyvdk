@@ -1,4 +1,5 @@
 from typing import Union, Dict, Type, Callable, Any, TYPE_CHECKING
+
 from .enum import GroupEventType
 
 if TYPE_CHECKING:

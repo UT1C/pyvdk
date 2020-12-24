@@ -8,74 +8,74 @@ from ..objects import (
     MarketMarketAlbum,
     BaseBoolInt,
 )
-from .base_response import BaseResponse
+from ..abc import Model
 
 
-class AddAlbumResponse(BaseResponse):
+class AddAlbumResponse(Model):
     response: Optional["AddAlbumResponseModel"] = None
 
 
-class AddResponse(BaseResponse):
+class AddResponse(Model):
     response: Optional["AddResponseModel"] = None
 
 
-class CreateCommentResponse(BaseResponse):
+class CreateCommentResponse(Model):
     response: Optional["CreateCommentResponseModel"] = None
 
 
-class DeleteCommentResponse(BaseResponse):
+class DeleteCommentResponse(Model):
     response: Optional["DeleteCommentResponseModel"] = None
 
 
-class GetAlbumByIdResponse(BaseResponse):
+class GetAlbumByIdResponse(Model):
     response: Optional["GetAlbumByIdResponseModel"] = None
 
 
-class GetAlbumsResponse(BaseResponse):
+class GetAlbumsResponse(Model):
     response: Optional["GetAlbumsResponseModel"] = None
 
 
-class GetByIdExtendedResponse(BaseResponse):
+class GetByIdExtendedResponse(Model):
     response: Optional["GetByIdExtendedResponseModel"] = None
 
 
-class GetByIdResponse(BaseResponse):
+class GetByIdResponse(Model):
     response: Optional["GetByIdResponseModel"] = None
 
 
-class GetCategoriesResponse(BaseResponse):
+class GetCategoriesResponse(Model):
     response: Optional["GetCategoriesResponseModel"] = None
 
 
-class GetCommentsResponse(BaseResponse):
+class GetCommentsResponse(Model):
     response: Optional["GetCommentsResponseModel"] = None
 
 
-class GetExtendedResponse(BaseResponse):
+class GetExtendedResponse(Model):
     response: Optional["GetExtendedResponseModel"] = None
 
 
-class GetResponse(BaseResponse):
+class GetResponse(Model):
     response: Optional["GetResponseModel"] = None
 
 
-class RestoreCommentResponse(BaseResponse):
+class RestoreCommentResponse(Model):
     response: Optional["RestoreCommentResponseModel"] = None
 
 
-class SearchExtendedResponse(BaseResponse):
+class SearchExtendedResponse(Model):
     response: Optional["SearchExtendedResponseModel"] = None
 
 
-class SearchResponse(BaseResponse):
+class SearchResponse(Model):
     response: Optional["SearchResponseModel"] = None
 
 
-class AddAlbumResponseModel(BaseResponse):
+class AddAlbumResponseModel(Model):
     market_album_id: Optional[int] = None
 
 
-class AddResponseModel(BaseResponse):
+class AddResponseModel(Model):
     market_item_id: Optional[int] = None
 
 
@@ -84,42 +84,42 @@ CreateCommentResponseModel = int
 DeleteCommentResponseModel = Optional[BaseBoolInt]
 
 
-class GetAlbumByIdResponseModel(BaseResponse):
+class GetAlbumByIdResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["MarketMarketAlbum"]] = None
 
 
-class GetAlbumsResponseModel(BaseResponse):
+class GetAlbumsResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["MarketMarketAlbum"]] = None
 
 
-class GetByIdExtendedResponseModel(BaseResponse):
+class GetByIdExtendedResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["MarketMarketItemFull"]] = None
 
 
-class GetByIdResponseModel(BaseResponse):
+class GetByIdResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["MarketMarketItem"]] = None
 
 
-class GetCategoriesResponseModel(BaseResponse):
+class GetCategoriesResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["MarketMarketCategory"]] = None
 
 
-class GetCommentsResponseModel(BaseResponse):
+class GetCommentsResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["WallWallComment"]] = None
 
 
-class GetExtendedResponseModel(BaseResponse):
+class GetExtendedResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["MarketMarketItemFull"]] = None
 
 
-class GetResponseModel(BaseResponse):
+class GetResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["MarketMarketItem"]] = None
 
@@ -127,12 +127,12 @@ class GetResponseModel(BaseResponse):
 RestoreCommentResponseModel = Optional[BaseBoolInt]
 
 
-class SearchExtendedResponseModel(BaseResponse):
+class SearchExtendedResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["MarketMarketItemFull"]] = None
 
 
-class SearchResponseModel(BaseResponse):
+class SearchResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["MarketMarketItem"]] = None
 

@@ -8,45 +8,45 @@ from ..objects import (
     DocsDoc,
     BaseUploadServer,
 )
-from .base_response import BaseResponse
+from ..abc import Model
 
 
-class AddResponse(BaseResponse):
+class AddResponse(Model):
     response: Optional["AddResponseModel"] = None
 
 
-class GetByIdResponse(BaseResponse):
+class GetByIdResponse(Model):
     response: Optional["GetByIdResponseModel"] = None
 
 
-class GetTypesResponse(BaseResponse):
+class GetTypesResponse(Model):
     response: Optional["GetTypesResponseModel"] = None
 
 
-class GetUploadServer(BaseResponse):
+class GetUploadServer(Model):
     response: Optional["GetUploadServerModel"] = None
 
 
-class GetResponse(BaseResponse):
+class GetResponse(Model):
     response: Optional["GetResponseModel"] = None
 
 
-class SaveResponse(BaseResponse):
+class SaveResponse(Model):
     response: Optional["SaveResponseModel"] = None
 
 
-class SearchResponse(BaseResponse):
+class SearchResponse(Model):
     response: Optional["SearchResponseModel"] = None
 
 
-class AddResponseModel(BaseResponse):
+class AddResponseModel(Model):
     id: Optional[int] = None
 
 
 GetByIdResponseModel = List[DocsDoc]
 
 
-class GetTypesResponseModel(BaseResponse):
+class GetTypesResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["DocsDocTypes"]] = None
 
@@ -54,19 +54,19 @@ class GetTypesResponseModel(BaseResponse):
 GetUploadServerModel = Optional[BaseUploadServer]
 
 
-class GetResponseModel(BaseResponse):
+class GetResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["DocsDoc"]] = None
 
 
-class SaveResponseModel(BaseResponse):
+class SaveResponseModel(Model):
     type: Optional["DocsDocAttachmentType"] = None
     audio_message: Optional["MessagesAudioMessage"] = None
     doc: Optional["DocsDoc"] = None
     graffiti: Optional["MessagesGraffiti"] = None
 
 
-class SearchResponseModel(BaseResponse):
+class SearchResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["DocsDoc"]] = None
 

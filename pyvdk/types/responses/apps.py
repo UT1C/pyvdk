@@ -7,63 +7,63 @@ from ..objects import (
     UsersUserFull,
     AppsApp,
 )
-from .base_response import BaseResponse
+from ..abc import Model
 
 
-class GetCatalogResponse(BaseResponse):
+class GetCatalogResponse(Model):
     response: Optional["GetCatalogResponseModel"] = None
 
 
-class GetFriendsListResponse(BaseResponse):
+class GetFriendsListResponse(Model):
     response: Optional["GetFriendsListResponseModel"] = None
 
 
-class GetLeaderboardExtendedResponse(BaseResponse):
+class GetLeaderboardExtendedResponse(Model):
     response: Optional["GetLeaderboardExtendedResponseModel"] = None
 
 
-class GetLeaderboardResponse(BaseResponse):
+class GetLeaderboardResponse(Model):
     response: Optional["GetLeaderboardResponseModel"] = None
 
 
-class GetScopesResponse(BaseResponse):
+class GetScopesResponse(Model):
     response: Optional["GetScopesResponseModel"] = None
 
 
-class GetScoreResponse(BaseResponse):
+class GetScoreResponse(Model):
     response: Optional["GetScoreResponseModel"] = None
 
 
-class GetResponse(BaseResponse):
+class GetResponse(Model):
     response: Optional["GetResponseModel"] = None
 
 
-class SendRequestResponse(BaseResponse):
+class SendRequestResponse(Model):
     response: Optional["SendRequestResponseModel"] = None
 
 
-class GetCatalogResponseModel(BaseResponse):
+class GetCatalogResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["AppsApp"]] = None
 
 
-class GetFriendsListResponseModel(BaseResponse):
+class GetFriendsListResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["UsersUserFull"]] = None
 
 
-class GetLeaderboardExtendedResponseModel(BaseResponse):
+class GetLeaderboardExtendedResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["AppsLeaderboard"]] = None
     profiles: Optional[List["UsersUserMin"]] = None
 
 
-class GetLeaderboardResponseModel(BaseResponse):
+class GetLeaderboardResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["AppsLeaderboard"]] = None
 
 
-class GetScopesResponseModel(BaseResponse):
+class GetScopesResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["AppsScope"]] = None
 
@@ -71,7 +71,7 @@ class GetScopesResponseModel(BaseResponse):
 GetScoreResponseModel = int
 
 
-class GetResponseModel(BaseResponse):
+class GetResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["AppsApp"]] = None
 

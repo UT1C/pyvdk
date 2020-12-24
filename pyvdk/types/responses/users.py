@@ -7,49 +7,49 @@ from ..objects import (
     GroupsGroupsArray,
     UsersSubscriptionsItem,
 )
-from .base_response import BaseResponse
+from ..abc import Model
 
 
-class GetFollowersFieldsResponse(BaseResponse):
+class GetFollowersFieldsResponse(Model):
     response: Optional["GetFollowersFieldsResponseModel"] = None
 
 
-class GetFollowersResponse(BaseResponse):
+class GetFollowersResponse(Model):
     response: Optional["GetFollowersResponseModel"] = None
 
 
-class GetSubscriptionsExtendedResponse(BaseResponse):
+class GetSubscriptionsExtendedResponse(Model):
     response: Optional["GetSubscriptionsExtendedResponseModel"] = None
 
 
-class GetSubscriptionsResponse(BaseResponse):
+class GetSubscriptionsResponse(Model):
     response: Optional["GetSubscriptionsResponseModel"] = None
 
 
-class GetResponse(BaseResponse):
+class GetResponse(Model):
     response: Optional["GetResponseModel"] = None
 
 
-class SearchResponse(BaseResponse):
+class SearchResponse(Model):
     response: Optional["SearchResponseModel"] = None
 
 
-class GetFollowersFieldsResponseModel(BaseResponse):
+class GetFollowersFieldsResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["UsersUserFull"]] = None
 
 
-class GetFollowersResponseModel(BaseResponse):
+class GetFollowersResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List[int]] = None
 
 
-class GetSubscriptionsExtendedResponseModel(BaseResponse):
+class GetSubscriptionsExtendedResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["UsersSubscriptionsItem"]] = None
 
 
-class GetSubscriptionsResponseModel(BaseResponse):
+class GetSubscriptionsResponseModel(Model):
     users: Optional["UsersUsersArray"] = None
     groups: Optional["GroupsGroupsArray"] = None
 
@@ -57,7 +57,7 @@ class GetSubscriptionsResponseModel(BaseResponse):
 GetResponseModel = List[UsersUserXtrCounters]
 
 
-class SearchResponseModel(BaseResponse):
+class SearchResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["UsersUserFull"]] = None
 

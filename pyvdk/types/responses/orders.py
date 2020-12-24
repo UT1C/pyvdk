@@ -6,38 +6,38 @@ from ..objects import (
     OrdersSubscription,
     BaseBoolInt,
 )
-from .base_response import BaseResponse
+from ..abc import Model
 
 
-class CancelSubscriptionResponse(BaseResponse):
+class CancelSubscriptionResponse(Model):
     response: Optional["CancelSubscriptionResponseModel"] = None
 
 
-class ChangeStateResponse(BaseResponse):
+class ChangeStateResponse(Model):
     response: Optional["ChangeStateResponseModel"] = None
 
 
-class GetAmountResponse(BaseResponse):
+class GetAmountResponse(Model):
     response: Optional["GetAmountResponseModel"] = None
 
 
-class GetByIdResponse(BaseResponse):
+class GetByIdResponse(Model):
     response: Optional["GetByIdResponseModel"] = None
 
 
-class GetUserSubscriptionByIdResponse(BaseResponse):
+class GetUserSubscriptionByIdResponse(Model):
     response: Optional["GetUserSubscriptionByIdResponseModel"] = None
 
 
-class GetUserSubscriptionsResponse(BaseResponse):
+class GetUserSubscriptionsResponse(Model):
     response: Optional["GetUserSubscriptionsResponseModel"] = None
 
 
-class GetResponse(BaseResponse):
+class GetResponse(Model):
     response: Optional["GetResponseModel"] = None
 
 
-class UpdateSubscriptionResponse(BaseResponse):
+class UpdateSubscriptionResponse(Model):
     response: Optional["UpdateSubscriptionResponseModel"] = None
 
 
@@ -52,7 +52,7 @@ GetByIdResponseModel = List[OrdersOrder]
 GetUserSubscriptionByIdResponseModel = Optional[OrdersSubscription]
 
 
-class GetUserSubscriptionsResponseModel(BaseResponse):
+class GetUserSubscriptionsResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["OrdersSubscription"]] = None
 

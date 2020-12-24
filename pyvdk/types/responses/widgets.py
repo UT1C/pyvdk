@@ -1,23 +1,23 @@
 from typing import Optional, List
 
 from ..objects import WidgetsWidgetPage, WidgetsWidgetComment
-from .base_response import BaseResponse
+from ..abc import Model
 
 
-class GetCommentsResponse(BaseResponse):
+class GetCommentsResponse(Model):
     response: Optional["GetCommentsResponseModel"] = None
 
 
-class GetPagesResponse(BaseResponse):
+class GetPagesResponse(Model):
     response: Optional["GetPagesResponseModel"] = None
 
 
-class GetCommentsResponseModel(BaseResponse):
+class GetCommentsResponseModel(Model):
     count: Optional[int] = None
     posts: Optional[List["WidgetsWidgetComment"]] = None
 
 
-class GetPagesResponseModel(BaseResponse):
+class GetPagesResponseModel(Model):
     count: Optional[int] = None
     pages: Optional[List["WidgetsWidgetPage"]] = None
 

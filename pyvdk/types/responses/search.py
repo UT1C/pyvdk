@@ -1,14 +1,14 @@
 from typing import Optional, List
 
 from ..objects import SearchHint
-from .base_response import BaseResponse
+from ..abc import Model
 
 
-class GetHintsResponse(BaseResponse):
+class GetHintsResponse(Model):
     response: Optional["GetHintsResponseModel"] = None
 
 
-class GetHintsResponseModel(BaseResponse):
+class GetHintsResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["SearchHint"]] = None
     suggested_queries: Optional[List[str]] = None

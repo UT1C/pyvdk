@@ -11,51 +11,51 @@ from ..objects import (
     BaseBoolInt,
     AccountAccountCounters,
 )
-from .base_response import BaseResponse
+from ..abc import Model
 
 
-class ChangePasswordResponse(BaseResponse):
+class ChangePasswordResponse(Model):
     response: Optional["ChangePasswordResponseModel"] = None
 
 
-class GetActiveOffersResponse(BaseResponse):
+class GetActiveOffersResponse(Model):
     response: Optional["GetActiveOffersResponseModel"] = None
 
 
-class GetAppPermissionsResponse(BaseResponse):
+class GetAppPermissionsResponse(Model):
     response: Optional["GetAppPermissionsResponseModel"] = None
 
 
-class GetBannedResponse(BaseResponse):
+class GetBannedResponse(Model):
     response: Optional["GetBannedResponseModel"] = None
 
 
-class GetCountersResponse(BaseResponse):
+class GetCountersResponse(Model):
     response: Optional["GetCountersResponseModel"] = None
 
 
-class GetInfoResponse(BaseResponse):
+class GetInfoResponse(Model):
     response: Optional["GetInfoResponseModel"] = None
 
 
-class GetProfileInfoResponse(BaseResponse):
+class GetProfileInfoResponse(Model):
     response: Optional["GetProfileInfoResponseModel"] = None
 
 
-class GetPushSettingsResponse(BaseResponse):
+class GetPushSettingsResponse(Model):
     response: Optional["GetPushSettingsResponseModel"] = None
 
 
-class SaveProfileInfoResponse(BaseResponse):
+class SaveProfileInfoResponse(Model):
     response: Optional["SaveProfileInfoResponseModel"] = None
 
 
-class ChangePasswordResponseModel(BaseResponse):
+class ChangePasswordResponseModel(Model):
     token: Optional[str] = None
     secret: Optional[str] = None
 
 
-class GetActiveOffersResponseModel(BaseResponse):
+class GetActiveOffersResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["AccountOffer"]] = None
 
@@ -63,7 +63,7 @@ class GetActiveOffersResponseModel(BaseResponse):
 GetAppPermissionsResponseModel = int
 
 
-class GetBannedResponseModel(BaseResponse):
+class GetBannedResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List[int]] = None
     profiles: Optional[List["UsersUserMin"]] = None
@@ -79,7 +79,7 @@ GetProfileInfoResponseModel = Optional[AccountUserSettings]
 GetPushSettingsResponseModel = Optional[AccountPushSettings]
 
 
-class SaveProfileInfoResponseModel(BaseResponse):
+class SaveProfileInfoResponseModel(Model):
     changed: Optional["BaseBoolInt"] = None
     name_request: Optional["AccountNameRequest"] = None
 

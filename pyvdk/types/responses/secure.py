@@ -6,34 +6,34 @@ from ..objects import (
     SecureLevel,
     SecureSmsNotification,
 )
-from .base_response import BaseResponse
+from ..abc import Model
 
 
-class CheckTokenResponse(BaseResponse):
+class CheckTokenResponse(Model):
     response: Optional["CheckTokenResponseModel"] = None
 
 
-class GetAppBalanceResponse(BaseResponse):
+class GetAppBalanceResponse(Model):
     response: Optional["GetAppBalanceResponseModel"] = None
 
 
-class GetSMSHistoryResponse(BaseResponse):
+class GetSMSHistoryResponse(Model):
     response: Optional["GetSMSHistoryResponseModel"] = None
 
 
-class GetTransactionsHistoryResponse(BaseResponse):
+class GetTransactionsHistoryResponse(Model):
     response: Optional["GetTransactionsHistoryResponseModel"] = None
 
 
-class GetUserLevelResponse(BaseResponse):
+class GetUserLevelResponse(Model):
     response: Optional["GetUserLevelResponseModel"] = None
 
 
-class GiveEventStickerResponse(BaseResponse):
+class GiveEventStickerResponse(Model):
     response: Optional["GiveEventStickerResponseModel"] = None
 
 
-class SendNotificationResponse(BaseResponse):
+class SendNotificationResponse(Model):
     response: Optional["SendNotificationResponseModel"] = None
 
 
@@ -48,7 +48,7 @@ GetTransactionsHistoryResponseModel = List[SecureTransaction]
 GetUserLevelResponseModel = List[SecureLevel]
 
 
-class GiveEventStickerResponseModel(BaseResponse):
+class GiveEventStickerResponseModel(Model):
     user_id: Optional[int] = None
     status: Optional[str] = None
 

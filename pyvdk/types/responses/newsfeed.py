@@ -10,90 +10,90 @@ from ..objects import (
     NewsfeedListFull,
     NewsfeedList,
 )
-from .base_response import BaseResponse
+from ..abc import Model
 
 
-class GetBannedExtendedResponse(BaseResponse):
+class GetBannedExtendedResponse(Model):
     response: Optional["GetBannedExtendedResponseModel"] = None
 
 
-class GetBannedResponse(BaseResponse):
+class GetBannedResponse(Model):
     response: Optional["GetBannedResponseModel"] = None
 
 
-class GetCommentsResponse(BaseResponse):
+class GetCommentsResponse(Model):
     response: Optional["GetCommentsResponseModel"] = None
 
 
-class GetListsExtendedResponse(BaseResponse):
+class GetListsExtendedResponse(Model):
     response: Optional["GetListsExtendedResponseModel"] = None
 
 
-class GetListsResponse(BaseResponse):
+class GetListsResponse(Model):
     response: Optional["GetListsResponseModel"] = None
 
 
-class GetMentionsResponse(BaseResponse):
+class GetMentionsResponse(Model):
     response: Optional["GetMentionsResponseModel"] = None
 
 
-class GetRecommendedResponse(BaseResponse):
+class GetRecommendedResponse(Model):
     response: Optional["GetRecommendedResponseModel"] = None
 
 
-class GetSuggestedSourcesResponse(BaseResponse):
+class GetSuggestedSourcesResponse(Model):
     response: Optional["GetSuggestedSourcesResponseModel"] = None
 
 
-class GetResponse(BaseResponse):
+class GetResponse(Model):
     response: Optional["GetResponseModel"] = None
 
 
-class SaveListResponse(BaseResponse):
+class SaveListResponse(Model):
     response: Optional["SaveListResponseModel"] = None
 
 
-class SearchExtendedResponse(BaseResponse):
+class SearchExtendedResponse(Model):
     response: Optional["SearchExtendedResponseModel"] = None
 
 
-class SearchResponse(BaseResponse):
+class SearchResponse(Model):
     response: Optional["SearchResponseModel"] = None
 
 
-class GetBannedExtendedResponseModel(BaseResponse):
+class GetBannedExtendedResponseModel(Model):
     groups: Optional[List["UsersUserFull"]] = None
     profiles: Optional[List["GroupsGroupFull"]] = None
 
 
-class GetBannedResponseModel(BaseResponse):
+class GetBannedResponseModel(Model):
     groups: Optional[List[int]] = None
     members: Optional[List[int]] = None
 
 
-class GetCommentsResponseModel(BaseResponse):
+class GetCommentsResponseModel(Model):
     items: Optional[List["NewsfeedNewsfeedItem"]] = None
     profiles: Optional[List["UsersUserFull"]] = None
     groups: Optional[List["GroupsGroupFull"]] = None
     next_from: Optional[str] = None
 
 
-class GetListsExtendedResponseModel(BaseResponse):
+class GetListsExtendedResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["NewsfeedListFull"]] = None
 
 
-class GetListsResponseModel(BaseResponse):
+class GetListsResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["NewsfeedList"]] = None
 
 
-class GetMentionsResponseModel(BaseResponse):
+class GetMentionsResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["WallWallpostToId"]] = None
 
 
-class GetRecommendedResponseModel(BaseResponse):
+class GetRecommendedResponseModel(Model):
     items: Optional[List["NewsfeedNewsfeedItem"]] = None
     profiles: Optional[List["UsersUserFull"]] = None
     groups: Optional[List["GroupsGroupFull"]] = None
@@ -101,12 +101,12 @@ class GetRecommendedResponseModel(BaseResponse):
     next_from: Optional[str] = None
 
 
-class GetSuggestedSourcesResponseModel(BaseResponse):
+class GetSuggestedSourcesResponseModel(Model):
     count: Optional[int] = None
     items: Optional[Union["GroupsGroupFull", "UsersUserXtrType"]] = None
 
 
-class GetResponseModel(BaseResponse):
+class GetResponseModel(Model):
     items: Optional[List["NewsfeedNewsfeedItem"]] = None
     profiles: Optional[List["UsersUserFull"]] = None
     groups: Optional[List["GroupsGroupFull"]] = None
@@ -116,7 +116,7 @@ class GetResponseModel(BaseResponse):
 SaveListResponseModel = int
 
 
-class SearchExtendedResponseModel(BaseResponse):
+class SearchExtendedResponseModel(Model):
     items: Optional[List["WallWallpostFull"]] = None
     profiles: Optional[List["UsersUserFull"]] = None
     groups: Optional[List["GroupsGroupFull"]] = None
@@ -126,7 +126,7 @@ class SearchExtendedResponseModel(BaseResponse):
     total_count: Optional[int] = None
 
 
-class SearchResponseModel(BaseResponse):
+class SearchResponseModel(Model):
     items: Optional[List["WallWallpostFull"]] = None
     suggested_queries: Optional[List[str]] = None
     next_from: Optional[str] = None

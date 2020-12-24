@@ -1,48 +1,48 @@
 from typing import Optional, List
 
 from ..objects import UsersUserMin, BaseBoolInt
-from .base_response import BaseResponse
+from ..abc import Model
 
 
-class AddResponse(BaseResponse):
+class AddResponse(Model):
     response: Optional["AddResponseModel"] = None
 
 
-class DeleteResponse(BaseResponse):
+class DeleteResponse(Model):
     response: Optional["DeleteResponseModel"] = None
 
 
-class GetListExtendedResponse(BaseResponse):
+class GetListExtendedResponse(Model):
     response: Optional["GetListExtendedResponseModel"] = None
 
 
-class GetListResponse(BaseResponse):
+class GetListResponse(Model):
     response: Optional["GetListResponseModel"] = None
 
 
-class IsLikedResponse(BaseResponse):
+class IsLikedResponse(Model):
     response: Optional["IsLikedResponseModel"] = None
 
 
-class AddResponseModel(BaseResponse):
+class AddResponseModel(Model):
     likes: Optional[int] = None
 
 
-class DeleteResponseModel(BaseResponse):
+class DeleteResponseModel(Model):
     likes: Optional[int] = None
 
 
-class GetListExtendedResponseModel(BaseResponse):
+class GetListExtendedResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["UsersUserMin"]] = None
 
 
-class GetListResponseModel(BaseResponse):
+class GetListResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List[int]] = None
 
 
-class IsLikedResponseModel(BaseResponse):
+class IsLikedResponseModel(Model):
     liked: Optional["BaseBoolInt"] = None
     copied: Optional["BaseBoolInt"] = None
 

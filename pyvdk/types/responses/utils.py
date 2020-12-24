@@ -8,41 +8,41 @@ from ..objects import (
     UtilsLastShortenedLink,
     UtilsDomainResolved,
 )
-from .base_response import BaseResponse
+from ..abc import Model
 
 
-class CheckLinkResponse(BaseResponse):
+class CheckLinkResponse(Model):
     response: Optional["CheckLinkResponseModel"] = None
 
 
-class GetLastShortenedLinksResponse(BaseResponse):
+class GetLastShortenedLinksResponse(Model):
     response: Optional["GetLastShortenedLinksResponseModel"] = None
 
 
-class GetLinkStatsExtendedResponse(BaseResponse):
+class GetLinkStatsExtendedResponse(Model):
     response: Optional["GetLinkStatsExtendedResponseModel"] = None
 
 
-class GetLinkStatsResponse(BaseResponse):
+class GetLinkStatsResponse(Model):
     response: Optional["GetLinkStatsResponseModel"] = None
 
 
-class GetServerTimeResponse(BaseResponse):
+class GetServerTimeResponse(Model):
     response: Optional["GetServerTimeResponseModel"] = None
 
 
-class GetShortLinkResponse(BaseResponse):
+class GetShortLinkResponse(Model):
     response: Optional["GetShortLinkResponseModel"] = None
 
 
-class ResolveScreenNameResponse(BaseResponse):
+class ResolveScreenNameResponse(Model):
     response: Optional["ResolveScreenNameResponseModel"] = None
 
 
 CheckLinkResponseModel = Optional[UtilsLinkChecked]
 
 
-class GetLastShortenedLinksResponseModel(BaseResponse):
+class GetLastShortenedLinksResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["UtilsLastShortenedLink"]] = None
 

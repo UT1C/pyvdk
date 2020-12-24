@@ -1,18 +1,18 @@
 from typing import Optional
 
 from ..objects import BaseUploadServer, BaseBoolInt
-from .base_response import BaseResponse
+from ..abc import Model
 
 
-class BoolResponse(BaseResponse):
+class BoolResponse(Model):
     response: Optional["BoolResponseModel"] = None
 
 
-class GetUploadServerResponse(BaseResponse):
+class GetUploadServerResponse(Model):
     response: Optional["GetUploadServerResponseModel"] = None
 
 
-class OkResponse(BaseResponse):
+class OkResponse(Model):
     response: Optional["OkResponseModel"] = None
 
 

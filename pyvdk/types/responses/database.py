@@ -10,58 +10,58 @@ from ..objects import (
     DatabaseStation,
     DatabaseRegion,
 )
-from .base_response import BaseResponse
+from ..abc import Model
 
 
-class GetChairsResponse(BaseResponse):
+class GetChairsResponse(Model):
     response: Optional["GetChairsResponseModel"] = None
 
 
-class GetCitiesByIdResponse(BaseResponse):
+class GetCitiesByIdResponse(Model):
     response: Optional["GetCitiesByIdResponseModel"] = None
 
 
-class GetCitiesResponse(BaseResponse):
+class GetCitiesResponse(Model):
     response: Optional["GetCitiesResponseModel"] = None
 
 
-class GetCountriesByIdResponse(BaseResponse):
+class GetCountriesByIdResponse(Model):
     response: Optional["GetCountriesByIdResponseModel"] = None
 
 
-class GetCountriesResponse(BaseResponse):
+class GetCountriesResponse(Model):
     response: Optional["GetCountriesResponseModel"] = None
 
 
-class GetFacultiesResponse(BaseResponse):
+class GetFacultiesResponse(Model):
     response: Optional["GetFacultiesResponseModel"] = None
 
 
-class GetMetroStationsByIdResponse(BaseResponse):
+class GetMetroStationsByIdResponse(Model):
     response: Optional["GetMetroStationsByIdResponseModel"] = None
 
 
-class GetMetroStationsResponse(BaseResponse):
+class GetMetroStationsResponse(Model):
     response: Optional["GetMetroStationsResponseModel"] = None
 
 
-class GetRegionsResponse(BaseResponse):
+class GetRegionsResponse(Model):
     response: Optional["GetRegionsResponseModel"] = None
 
 
-class GetSchoolClassesResponse(BaseResponse):
+class GetSchoolClassesResponse(Model):
     response: Optional["GetSchoolClassesResponseModel"] = None
 
 
-class GetSchoolsResponse(BaseResponse):
+class GetSchoolsResponse(Model):
     response: Optional["GetSchoolsResponseModel"] = None
 
 
-class GetUniversitiesResponse(BaseResponse):
+class GetUniversitiesResponse(Model):
     response: Optional["GetUniversitiesResponseModel"] = None
 
 
-class GetChairsResponseModel(BaseResponse):
+class GetChairsResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["BaseObject"]] = None
 
@@ -69,7 +69,7 @@ class GetChairsResponseModel(BaseResponse):
 GetCitiesByIdResponseModel = List[BaseObject]
 
 
-class GetCitiesResponseModel(BaseResponse):
+class GetCitiesResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["DatabaseCity"]] = None
 
@@ -77,12 +77,12 @@ class GetCitiesResponseModel(BaseResponse):
 GetCountriesByIdResponseModel = List[BaseCountry]
 
 
-class GetCountriesResponseModel(BaseResponse):
+class GetCountriesResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["BaseCountry"]] = None
 
 
-class GetFacultiesResponseModel(BaseResponse):
+class GetFacultiesResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["DatabaseFaculty"]] = None
 
@@ -90,12 +90,12 @@ class GetFacultiesResponseModel(BaseResponse):
 GetMetroStationsByIdResponseModel = List[DatabaseStation]
 
 
-class GetMetroStationsResponseModel(BaseResponse):
+class GetMetroStationsResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["DatabaseStation"]] = None
 
 
-class GetRegionsResponseModel(BaseResponse):
+class GetRegionsResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["DatabaseRegion"]] = None
 
@@ -103,12 +103,12 @@ class GetRegionsResponseModel(BaseResponse):
 GetSchoolClassesResponseModel = List[List[Union[str, int]]]
 
 
-class GetSchoolsResponseModel(BaseResponse):
+class GetSchoolsResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["DatabaseSchool"]] = None
 
 
-class GetUniversitiesResponseModel(BaseResponse):
+class GetUniversitiesResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["DatabaseUniversity"]] = None
 

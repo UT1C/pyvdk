@@ -1,13 +1,13 @@
 from typing import Optional
 
-from .base_response import BaseResponse
+from ..abc import Model
 
 
-class RestoreResponse(BaseResponse):
+class RestoreResponse(Model):
     response: Optional["RestoreResponseModel"] = None
 
 
-class RestoreResponseModel(BaseResponse):
+class RestoreResponseModel(Model):
     success: Optional[int] = None
     sid: Optional[str] = None
 

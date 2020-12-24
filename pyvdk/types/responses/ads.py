@@ -24,158 +24,158 @@ from ..objects import (
     AdsLinkStatus,
     AdsClient,
 )
-from .base_response import BaseResponse
+from ..abc import Model
 
 
-class AddOfficeUsersResponse(BaseResponse):
+class AddOfficeUsersResponse(Model):
     response: Optional["AddOfficeUsersResponseModel"] = None
 
 
-class CheckLinkResponse(BaseResponse):
+class CheckLinkResponse(Model):
     response: Optional["CheckLinkResponseModel"] = None
 
 
-class CreateAdsResponse(BaseResponse):
+class CreateAdsResponse(Model):
     response: Optional["CreateAdsResponseModel"] = None
 
 
-class CreateCampaignsResponse(BaseResponse):
+class CreateCampaignsResponse(Model):
     response: Optional["CreateCampaignsResponseModel"] = None
 
 
-class CreateClientsResponse(BaseResponse):
+class CreateClientsResponse(Model):
     response: Optional["CreateClientsResponseModel"] = None
 
 
-class CreateTargetGroupResponse(BaseResponse):
+class CreateTargetGroupResponse(Model):
     response: Optional["CreateTargetGroupResponseModel"] = None
 
 
-class DeleteAdsResponse(BaseResponse):
+class DeleteAdsResponse(Model):
     response: Optional["DeleteAdsResponseModel"] = None
 
 
-class DeleteCampaignsResponse(BaseResponse):
+class DeleteCampaignsResponse(Model):
     response: Optional["DeleteCampaignsResponseModel"] = None
 
 
-class DeleteClientsResponse(BaseResponse):
+class DeleteClientsResponse(Model):
     response: Optional["DeleteClientsResponseModel"] = None
 
 
-class GetAccountsResponse(BaseResponse):
+class GetAccountsResponse(Model):
     response: Optional["GetAccountsResponseModel"] = None
 
 
-class GetAdsLayoutResponse(BaseResponse):
+class GetAdsLayoutResponse(Model):
     response: Optional["GetAdsLayoutResponseModel"] = None
 
 
-class GetAdsTargetingResponse(BaseResponse):
+class GetAdsTargetingResponse(Model):
     response: Optional["GetAdsTargetingResponseModel"] = None
 
 
-class GetAdsResponse(BaseResponse):
+class GetAdsResponse(Model):
     response: Optional["GetAdsResponseModel"] = None
 
 
-class GetBudgetResponse(BaseResponse):
+class GetBudgetResponse(Model):
     response: Optional["GetBudgetResponseModel"] = None
 
 
-class GetCampaignsResponse(BaseResponse):
+class GetCampaignsResponse(Model):
     response: Optional["GetCampaignsResponseModel"] = None
 
 
-class GetCategoriesResponse(BaseResponse):
+class GetCategoriesResponse(Model):
     response: Optional["GetCategoriesResponseModel"] = None
 
 
-class GetClientsResponse(BaseResponse):
+class GetClientsResponse(Model):
     response: Optional["GetClientsResponseModel"] = None
 
 
-class GetDemographicsResponse(BaseResponse):
+class GetDemographicsResponse(Model):
     response: Optional["GetDemographicsResponseModel"] = None
 
 
-class GetFloodStatsResponse(BaseResponse):
+class GetFloodStatsResponse(Model):
     response: Optional["GetFloodStatsResponseModel"] = None
 
 
-class GetLookalikeRequestsResponse(BaseResponse):
+class GetLookalikeRequestsResponse(Model):
     response: Optional["GetLookalikeRequestsResponseModel"] = None
 
 
-class GetMusiciansResponse(BaseResponse):
+class GetMusiciansResponse(Model):
     response: Optional["GetMusiciansResponseModel"] = None
 
 
-class GetOfficeUsersResponse(BaseResponse):
+class GetOfficeUsersResponse(Model):
     response: Optional["GetOfficeUsersResponseModel"] = None
 
 
-class GetPostsReachResponse(BaseResponse):
+class GetPostsReachResponse(Model):
     response: Optional["GetPostsReachResponseModel"] = None
 
 
-class GetRejectionReasonResponse(BaseResponse):
+class GetRejectionReasonResponse(Model):
     response: Optional["GetRejectionReasonResponseModel"] = None
 
 
-class GetStatisticsResponse(BaseResponse):
+class GetStatisticsResponse(Model):
     response: Optional["GetStatisticsResponseModel"] = None
 
 
-class GetSuggestionsCitiesResponse(BaseResponse):
+class GetSuggestionsCitiesResponse(Model):
     response: Optional["GetSuggestionsCitiesResponseModel"] = None
 
 
-class GetSuggestionsRegionsResponse(BaseResponse):
+class GetSuggestionsRegionsResponse(Model):
     response: Optional["GetSuggestionsRegionsResponseModel"] = None
 
 
-class GetSuggestionsResponse(BaseResponse):
+class GetSuggestionsResponse(Model):
     response: Optional["GetSuggestionsResponseModel"] = None
 
 
-class GetSuggestionsSchoolsResponse(BaseResponse):
+class GetSuggestionsSchoolsResponse(Model):
     response: Optional["GetSuggestionsSchoolsResponseModel"] = None
 
 
-class GetTargetGroupsResponse(BaseResponse):
+class GetTargetGroupsResponse(Model):
     response: Optional["GetTargetGroupsResponseModel"] = None
 
 
-class GetTargetingStatsResponse(BaseResponse):
+class GetTargetingStatsResponse(Model):
     response: Optional["GetTargetingStatsResponseModel"] = None
 
 
-class GetUploadURLResponse(BaseResponse):
+class GetUploadURLResponse(Model):
     response: Optional["GetUploadURLResponseModel"] = None
 
 
-class GetVideoUploadURLResponse(BaseResponse):
+class GetVideoUploadURLResponse(Model):
     response: Optional["GetVideoUploadURLResponseModel"] = None
 
 
-class ImportTargetContactsResponse(BaseResponse):
+class ImportTargetContactsResponse(Model):
     response: Optional["ImportTargetContactsResponseModel"] = None
 
 
-class RemoveOfficeUsersResponse(BaseResponse):
+class RemoveOfficeUsersResponse(Model):
     response: Optional["RemoveOfficeUsersResponseModel"] = None
 
 
-class UpdateAdsResponse(BaseResponse):
+class UpdateAdsResponse(Model):
     response: Optional["UpdateAdsResponseModel"] = None
 
 
-class UpdateCampaignsResponse(BaseResponse):
+class UpdateCampaignsResponse(Model):
     response: Optional["UpdateCampaignsResponseModel"] = None
 
 
-class UpdateClientsResponse(BaseResponse):
+class UpdateClientsResponse(Model):
     response: Optional["UpdateClientsResponseModel"] = None
 
 
@@ -191,7 +191,7 @@ CreateCampaignsResponseModel = List[int]
 CreateClientsResponseModel = List[int]
 
 
-class CreateTargetGroupResponseModel(BaseResponse):
+class CreateTargetGroupResponseModel(Model):
     id: Optional[int] = None
     pixel: Optional[str] = None
 
@@ -218,7 +218,7 @@ GetBudgetResponseModel = int
 GetCampaignsResponseModel = List[AdsCampaign]
 
 
-class GetCategoriesResponseModel(BaseResponse):
+class GetCategoriesResponseModel(Model):
     v1: Optional[List["AdsCategory"]] = None
     v2: Optional[List["AdsCategory"]] = None
 
@@ -230,12 +230,12 @@ GetDemographicsResponseModel = List[AdsDemoStats]
 GetFloodStatsResponseModel = Optional[AdsFloodStats]
 
 
-class GetLookalikeRequestsResponseModel(BaseResponse):
+class GetLookalikeRequestsResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["AdsLookalikeRequest"]] = None
 
 
-class GetMusiciansResponseModel(BaseResponse):
+class GetMusiciansResponseModel(Model):
     items: Optional[List["AdsMusician"]] = None
 
 

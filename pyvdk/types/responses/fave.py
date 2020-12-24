@@ -7,50 +7,50 @@ from ..objects import (
     FaveTag,
     FavePage,
 )
-from .base_response import BaseResponse
+from ..abc import Model
 
 
-class AddTagResponse(BaseResponse):
+class AddTagResponse(Model):
     response: Optional["AddTagResponseModel"] = None
 
 
-class GetPagesResponse(BaseResponse):
+class GetPagesResponse(Model):
     response: Optional["GetPagesResponseModel"] = None
 
 
-class GetTagsResponse(BaseResponse):
+class GetTagsResponse(Model):
     response: Optional["GetTagsResponseModel"] = None
 
 
-class GetExtendedResponse(BaseResponse):
+class GetExtendedResponse(Model):
     response: Optional["GetExtendedResponseModel"] = None
 
 
-class GetResponse(BaseResponse):
+class GetResponse(Model):
     response: Optional["GetResponseModel"] = None
 
 
 AddTagResponseModel = Optional[FaveTag]
 
 
-class GetPagesResponseModel(BaseResponse):
+class GetPagesResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["FavePage"]] = None
 
 
-class GetTagsResponseModel(BaseResponse):
+class GetTagsResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["FaveTag"]] = None
 
 
-class GetExtendedResponseModel(BaseResponse):
+class GetExtendedResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["FaveBookmark"]] = None
     profiles: Optional[List["UsersUserFull"]] = None
     groups: Optional[List["GroupsGroup"]] = None
 
 
-class GetResponseModel(BaseResponse):
+class GetResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["FaveBookmark"]] = None
 

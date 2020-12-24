@@ -11,90 +11,90 @@ from ..objects import (
     FriendsFriendsList,
     FriendsRequests,
 )
-from .base_response import BaseResponse
+from ..abc import Model
 
 
-class AddListResponse(BaseResponse):
+class AddListResponse(Model):
     response: Optional["AddListResponseModel"] = None
 
 
-class AddResponse(BaseResponse):
+class AddResponse(Model):
     response: Optional["AddResponseModel"] = None
 
 
-class AreFriendsExtendedResponse(BaseResponse):
+class AreFriendsExtendedResponse(Model):
     response: Optional["AreFriendsExtendedResponseModel"] = None
 
 
-class AreFriendsResponse(BaseResponse):
+class AreFriendsResponse(Model):
     response: Optional["AreFriendsResponseModel"] = None
 
 
-class DeleteResponse(BaseResponse):
+class DeleteResponse(Model):
     response: Optional["DeleteResponseModel"] = None
 
 
-class GetAppUsersResponse(BaseResponse):
+class GetAppUsersResponse(Model):
     response: Optional["GetAppUsersResponseModel"] = None
 
 
-class GetByPhonesResponse(BaseResponse):
+class GetByPhonesResponse(Model):
     response: Optional["GetByPhonesResponseModel"] = None
 
 
-class GetListsResponse(BaseResponse):
+class GetListsResponse(Model):
     response: Optional["GetListsResponseModel"] = None
 
 
-class GetMutualResponse(BaseResponse):
+class GetMutualResponse(Model):
     response: Optional["GetMutualResponseModel"] = None
 
 
-class GetMutualTargetUidsResponse(BaseResponse):
+class GetMutualTargetUidsResponse(Model):
     response: Optional["GetMutualTargetUidsResponseModel"] = None
 
 
-class GetOnlineOnlineMobileResponse(BaseResponse):
+class GetOnlineOnlineMobileResponse(Model):
     response: Optional["GetOnlineOnlineMobileResponseModel"] = None
 
 
-class GetOnlineResponse(BaseResponse):
+class GetOnlineResponse(Model):
     response: Optional["GetOnlineResponseModel"] = None
 
 
-class GetRecentResponse(BaseResponse):
+class GetRecentResponse(Model):
     response: Optional["GetRecentResponseModel"] = None
 
 
-class GetRequestsExtendedResponse(BaseResponse):
+class GetRequestsExtendedResponse(Model):
     response: Optional["GetRequestsExtendedResponseModel"] = None
 
 
-class GetRequestsNeedMutualResponse(BaseResponse):
+class GetRequestsNeedMutualResponse(Model):
     response: Optional["GetRequestsNeedMutualResponseModel"] = None
 
 
-class GetRequestsResponse(BaseResponse):
+class GetRequestsResponse(Model):
     response: Optional["GetRequestsResponseModel"] = None
 
 
-class GetSuggestionsResponse(BaseResponse):
+class GetSuggestionsResponse(Model):
     response: Optional["GetSuggestionsResponseModel"] = None
 
 
-class GetFieldsResponse(BaseResponse):
+class GetFieldsResponse(Model):
     response: Optional["GetFieldsResponseModel"] = None
 
 
-class GetResponse(BaseResponse):
+class GetResponse(Model):
     response: Optional["GetResponseModel"] = None
 
 
-class SearchResponse(BaseResponse):
+class SearchResponse(Model):
     response: Optional["SearchResponseModel"] = None
 
 
-class AddListResponseModel(BaseResponse):
+class AddListResponseModel(Model):
     list_id: Optional[int] = None
 
 
@@ -105,7 +105,7 @@ AreFriendsExtendedResponseModel = List[FriendsFriendExtendedStatus]
 AreFriendsResponseModel = List[FriendsFriendStatus]
 
 
-class DeleteResponseModel(BaseResponse):
+class DeleteResponseModel(Model):
     success: Optional[int] = None
     friend_deleted: Optional[int] = None
     out_request_deleted: Optional[int] = None
@@ -118,7 +118,7 @@ GetAppUsersResponseModel = List[int]
 GetByPhonesResponseModel = List[FriendsUserXtrPhone]
 
 
-class GetListsResponseModel(BaseResponse):
+class GetListsResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["FriendsFriendsList"]] = None
 
@@ -128,7 +128,7 @@ GetMutualResponseModel = List[int]
 GetMutualTargetUidsResponseModel = List[FriendsMutualFriend]
 
 
-class GetOnlineOnlineMobileResponseModel(BaseResponse):
+class GetOnlineOnlineMobileResponseModel(Model):
     online: Optional[List[int]] = None
     online_mobile: Optional[List[int]] = None
 
@@ -139,38 +139,38 @@ GetOnlineResponseModel = List[int]
 GetRecentResponseModel = List[int]
 
 
-class GetRequestsExtendedResponseModel(BaseResponse):
+class GetRequestsExtendedResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["FriendsRequestsXtrMessage"]] = None
 
 
-class GetRequestsNeedMutualResponseModel(BaseResponse):
+class GetRequestsNeedMutualResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["FriendsRequests"]] = None
 
 
-class GetRequestsResponseModel(BaseResponse):
+class GetRequestsResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List[int]] = None
     count_unread: Optional[int] = None
 
 
-class GetSuggestionsResponseModel(BaseResponse):
+class GetSuggestionsResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["UsersUserFull"]] = None
 
 
-class GetFieldsResponseModel(BaseResponse):
+class GetFieldsResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["FriendsUserXtrLists"]] = None
 
 
-class GetResponseModel(BaseResponse):
+class GetResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List[int]] = None
 
 
-class SearchResponseModel(BaseResponse):
+class SearchResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["UsersUserFull"]] = None
 

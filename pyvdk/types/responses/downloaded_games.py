@@ -1,13 +1,13 @@
 from typing import Optional
 
-from .base_response import BaseResponse
+from ..abc import Model
 
 
-class PaidStatusResponse(BaseResponse):
+class PaidStatusResponse(Model):
     response: Optional["PaidStatusResponseModel"] = None
 
 
-class PaidStatusResponseModel(BaseResponse):
+class PaidStatusResponseModel(Model):
     is_paid: Optional[bool] = None
 
 

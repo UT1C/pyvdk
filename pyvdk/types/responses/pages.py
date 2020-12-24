@@ -5,34 +5,34 @@ from ..objects import (
     PagesWikipageHistory,
     PagesWikipage,
 )
-from .base_response import BaseResponse
+from ..abc import Model
 
 
-class GetHistoryResponse(BaseResponse):
+class GetHistoryResponse(Model):
     response: Optional["GetHistoryResponseModel"] = None
 
 
-class GetTitlesResponse(BaseResponse):
+class GetTitlesResponse(Model):
     response: Optional["GetTitlesResponseModel"] = None
 
 
-class GetVersionResponse(BaseResponse):
+class GetVersionResponse(Model):
     response: Optional["GetVersionResponseModel"] = None
 
 
-class GetResponse(BaseResponse):
+class GetResponse(Model):
     response: Optional["GetResponseModel"] = None
 
 
-class ParseWikiResponse(BaseResponse):
+class ParseWikiResponse(Model):
     response: Optional["ParseWikiResponseModel"] = None
 
 
-class SaveAccessResponse(BaseResponse):
+class SaveAccessResponse(Model):
     response: Optional["SaveAccessResponseModel"] = None
 
 
-class SaveResponse(BaseResponse):
+class SaveResponse(Model):
     response: Optional["SaveResponseModel"] = None
 
 

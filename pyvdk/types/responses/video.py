@@ -10,70 +10,70 @@ from ..objects import (
     BaseBoolInt,
     VideoVideoAlbumFull,
 )
-from .base_response import BaseResponse
+from ..abc import Model
 
 
-class AddAlbumResponse(BaseResponse):
+class AddAlbumResponse(Model):
     response: Optional["AddAlbumResponseModel"] = None
 
 
-class CreateCommentResponse(BaseResponse):
+class CreateCommentResponse(Model):
     response: Optional["CreateCommentResponseModel"] = None
 
 
-class GetAlbumByIdResponse(BaseResponse):
+class GetAlbumByIdResponse(Model):
     response: Optional["GetAlbumByIdResponseModel"] = None
 
 
-class GetAlbumsByVideoExtendedResponse(BaseResponse):
+class GetAlbumsByVideoExtendedResponse(Model):
     response: Optional["GetAlbumsByVideoExtendedResponseModel"] = None
 
 
-class GetAlbumsByVideoResponse(BaseResponse):
+class GetAlbumsByVideoResponse(Model):
     response: Optional["GetAlbumsByVideoResponseModel"] = None
 
 
-class GetAlbumsExtendedResponse(BaseResponse):
+class GetAlbumsExtendedResponse(Model):
     response: Optional["GetAlbumsExtendedResponseModel"] = None
 
 
-class GetAlbumsResponse(BaseResponse):
+class GetAlbumsResponse(Model):
     response: Optional["GetAlbumsResponseModel"] = None
 
 
-class GetCommentsExtendedResponse(BaseResponse):
+class GetCommentsExtendedResponse(Model):
     response: Optional["GetCommentsExtendedResponseModel"] = None
 
 
-class GetCommentsResponse(BaseResponse):
+class GetCommentsResponse(Model):
     response: Optional["GetCommentsResponseModel"] = None
 
 
-class GetExtendedResponse(BaseResponse):
+class GetExtendedResponse(Model):
     response: Optional["GetExtendedResponseModel"] = None
 
 
-class GetResponse(BaseResponse):
+class GetResponse(Model):
     response: Optional["GetResponseModel"] = None
 
 
-class RestoreCommentResponse(BaseResponse):
+class RestoreCommentResponse(Model):
     response: Optional["RestoreCommentResponseModel"] = None
 
 
-class SaveResponse(BaseResponse):
+class SaveResponse(Model):
     response: Optional["SaveResponseModel"] = None
 
 
-class SearchExtendedResponse(BaseResponse):
+class SearchExtendedResponse(Model):
     response: Optional["SearchExtendedResponseModel"] = None
 
 
-class SearchResponse(BaseResponse):
+class SearchResponse(Model):
     response: Optional["SearchResponseModel"] = None
 
 
-class AddAlbumResponseModel(BaseResponse):
+class AddAlbumResponseModel(Model):
     album_id: Optional[int] = None
 
 
@@ -82,7 +82,7 @@ CreateCommentResponseModel = int
 GetAlbumByIdResponseModel = Optional[VideoVideoAlbumFull]
 
 
-class GetAlbumsByVideoExtendedResponseModel(BaseResponse):
+class GetAlbumsByVideoExtendedResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["VideoVideoAlbumFull"]] = None
 
@@ -90,36 +90,36 @@ class GetAlbumsByVideoExtendedResponseModel(BaseResponse):
 GetAlbumsByVideoResponseModel = List[int]
 
 
-class GetAlbumsExtendedResponseModel(BaseResponse):
+class GetAlbumsExtendedResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["VideoVideoAlbumFull"]] = None
 
 
-class GetAlbumsResponseModel(BaseResponse):
+class GetAlbumsResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["VideoVideoAlbumFull"]] = None
 
 
-class GetCommentsExtendedResponseModel(BaseResponse):
+class GetCommentsExtendedResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["WallWallComment"]] = None
     profiles: Optional[List["UsersUserMin"]] = None
     groups: Optional[List["GroupsGroupFull"]] = None
 
 
-class GetCommentsResponseModel(BaseResponse):
+class GetCommentsResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["WallWallComment"]] = None
 
 
-class GetExtendedResponseModel(BaseResponse):
+class GetExtendedResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["VideoVideoFull"]] = None
     profiles: Optional[List["UsersUserMin"]] = None
     groups: Optional[List["GroupsGroupFull"]] = None
 
 
-class GetResponseModel(BaseResponse):
+class GetResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["VideoVideo"]] = None
 
@@ -129,14 +129,14 @@ RestoreCommentResponseModel = Optional[BaseBoolInt]
 SaveResponseModel = Optional[VideoSaveResult]
 
 
-class SearchExtendedResponseModel(BaseResponse):
+class SearchExtendedResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["VideoVideo"]] = None
     profiles: Optional[List["UsersUserMin"]] = None
     groups: Optional[List["GroupsGroupFull"]] = None
 
 
-class SearchResponseModel(BaseResponse):
+class SearchResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["VideoVideo"]] = None
 

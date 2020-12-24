@@ -1,26 +1,26 @@
 from typing import Optional, List
 
 from ..objects import NotesNoteComment, NotesNote
-from .base_response import BaseResponse
+from ..abc import Model
 
 
-class AddResponse(BaseResponse):
+class AddResponse(Model):
     response: Optional["AddResponseModel"] = None
 
 
-class CreateCommentResponse(BaseResponse):
+class CreateCommentResponse(Model):
     response: Optional["CreateCommentResponseModel"] = None
 
 
-class GetByIdResponse(BaseResponse):
+class GetByIdResponse(Model):
     response: Optional["GetByIdResponseModel"] = None
 
 
-class GetCommentsResponse(BaseResponse):
+class GetCommentsResponse(Model):
     response: Optional["GetCommentsResponseModel"] = None
 
 
-class GetResponse(BaseResponse):
+class GetResponse(Model):
     response: Optional["GetResponseModel"] = None
 
 
@@ -31,12 +31,12 @@ CreateCommentResponseModel = int
 GetByIdResponseModel = Optional[NotesNote]
 
 
-class GetCommentsResponseModel(BaseResponse):
+class GetCommentsResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["NotesNoteComment"]] = None
 
 
-class GetResponseModel(BaseResponse):
+class GetResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["NotesNote"]] = None
 

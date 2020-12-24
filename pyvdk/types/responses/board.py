@@ -10,30 +10,30 @@ from ..objects import (
     BoardDefaultOrder,
     BoardTopic,
 )
-from .base_response import BaseResponse
+from ..abc import Model
 
 
-class AddTopicResponse(BaseResponse):
+class AddTopicResponse(Model):
     response: Optional["AddTopicResponseModel"] = None
 
 
-class CreateCommentResponse(BaseResponse):
+class CreateCommentResponse(Model):
     response: Optional["CreateCommentResponseModel"] = None
 
 
-class GetCommentsExtendedResponse(BaseResponse):
+class GetCommentsExtendedResponse(Model):
     response: Optional["GetCommentsExtendedResponseModel"] = None
 
 
-class GetCommentsResponse(BaseResponse):
+class GetCommentsResponse(Model):
     response: Optional["GetCommentsResponseModel"] = None
 
 
-class GetTopicsExtendedResponse(BaseResponse):
+class GetTopicsExtendedResponse(Model):
     response: Optional["GetTopicsExtendedResponseModel"] = None
 
 
-class GetTopicsResponse(BaseResponse):
+class GetTopicsResponse(Model):
     response: Optional["GetTopicsResponseModel"] = None
 
 
@@ -42,7 +42,7 @@ AddTopicResponseModel = int
 CreateCommentResponseModel = int
 
 
-class GetCommentsExtendedResponseModel(BaseResponse):
+class GetCommentsExtendedResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["BoardTopicComment"]] = None
     poll: Optional["BoardTopicPoll"] = None
@@ -50,13 +50,13 @@ class GetCommentsExtendedResponseModel(BaseResponse):
     groups: Optional[List["GroupsGroup"]] = None
 
 
-class GetCommentsResponseModel(BaseResponse):
+class GetCommentsResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["BoardTopicComment"]] = None
     poll: Optional["BoardTopicPoll"] = None
 
 
-class GetTopicsExtendedResponseModel(BaseResponse):
+class GetTopicsExtendedResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["BoardTopic"]] = None
     default_order: Optional["BoardDefaultOrder"] = None
@@ -64,7 +64,7 @@ class GetTopicsExtendedResponseModel(BaseResponse):
     profiles: Optional[List["UsersUserMin"]] = None
 
 
-class GetTopicsResponseModel(BaseResponse):
+class GetTopicsResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["BoardTopic"]] = None
     default_order: Optional["BoardDefaultOrder"] = None

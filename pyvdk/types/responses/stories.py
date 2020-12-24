@@ -11,82 +11,82 @@ from ..objects import (
     StoriesFeedItem,
     StoriesPromoBlock,
 )
-from .base_response import BaseResponse
+from ..abc import Model
 
 
-class GetBannedExtendedResponse(BaseResponse):
+class GetBannedExtendedResponse(Model):
     response: Optional["GetBannedExtendedResponseModel"] = None
 
 
-class GetBannedResponse(BaseResponse):
+class GetBannedResponse(Model):
     response: Optional["GetBannedResponseModel"] = None
 
 
-class GetByIdExtendedResponse(BaseResponse):
+class GetByIdExtendedResponse(Model):
     response: Optional["GetByIdExtendedResponseModel"] = None
 
 
-class GetByIdResponse(BaseResponse):
+class GetByIdResponse(Model):
     response: Optional["GetByIdResponseModel"] = None
 
 
-class GetPhotoUploadServerResponse(BaseResponse):
+class GetPhotoUploadServerResponse(Model):
     response: Optional["GetPhotoUploadServerResponseModel"] = None
 
 
-class GetStatsResponse(BaseResponse):
+class GetStatsResponse(Model):
     response: Optional["GetStatsResponseModel"] = None
 
 
-class GetVideoUploadServerResponse(BaseResponse):
+class GetVideoUploadServerResponse(Model):
     response: Optional["GetVideoUploadServerResponseModel"] = None
 
 
-class GetViewersExtendedV5115Response(BaseResponse):
+class GetViewersExtendedV5115Response(Model):
     response: Optional["GetViewersExtendedV5115ResponseModel"] = None
 
 
-class GetViewersExtendedResponse(BaseResponse):
+class GetViewersExtendedResponse(Model):
     response: Optional["GetViewersExtendedResponseModel"] = None
 
 
-class GetV5113Response(BaseResponse):
+class GetV5113Response(Model):
     response: Optional["GetV5113ResponseModel"] = None
 
 
-class GetResponse(BaseResponse):
+class GetResponse(Model):
     response: Optional["GetResponseModel"] = None
 
 
-class UploadResponse(BaseResponse):
+class UploadResponse(Model):
     response: Optional["UploadResponseModel"] = None
 
 
-class GetBannedExtendedResponseModel(BaseResponse):
+class GetBannedExtendedResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List[int]] = None
     profiles: Optional[List["UsersUserFull"]] = None
     groups: Optional[List["GroupsGroupFull"]] = None
 
 
-class GetBannedResponseModel(BaseResponse):
+class GetBannedResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List[int]] = None
 
 
-class GetByIdExtendedResponseModel(BaseResponse):
+class GetByIdExtendedResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["StoriesStory"]] = None
     profiles: Optional[List["UsersUserFull"]] = None
     groups: Optional[List["GroupsGroupFull"]] = None
 
 
-class GetByIdResponseModel(BaseResponse):
+class GetByIdResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["StoriesStory"]] = None
 
 
-class GetPhotoUploadServerResponseModel(BaseResponse):
+class GetPhotoUploadServerResponseModel(Model):
     upload_url: Optional[str] = None
     user_ids: Optional[List[int]] = None
 
@@ -94,23 +94,23 @@ class GetPhotoUploadServerResponseModel(BaseResponse):
 GetStatsResponseModel = Optional[StoriesStoryStats]
 
 
-class GetVideoUploadServerResponseModel(BaseResponse):
+class GetVideoUploadServerResponseModel(Model):
     upload_url: Optional[str] = None
     user_ids: Optional[List[int]] = None
 
 
-class GetViewersExtendedV5115ResponseModel(BaseResponse):
+class GetViewersExtendedV5115ResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["StoriesViewersItem"]] = None
     hidden_reason: Optional[str] = None
 
 
-class GetViewersExtendedResponseModel(BaseResponse):
+class GetViewersExtendedResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["UsersUserFull"]] = None
 
 
-class GetV5113ResponseModel(BaseResponse):
+class GetV5113ResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List["StoriesFeedItem"]] = None
     profiles: Optional[List["UsersUser"]] = None
@@ -118,7 +118,7 @@ class GetV5113ResponseModel(BaseResponse):
     need_upload_screen: Optional[bool] = None
 
 
-class GetResponseModel(BaseResponse):
+class GetResponseModel(Model):
     count: Optional[int] = None
     items: Optional[List[List["StoriesStory"]]] = None
     promo_data: Optional["StoriesPromoBlock"] = None
@@ -127,7 +127,7 @@ class GetResponseModel(BaseResponse):
     need_upload_screen: Optional[bool] = None
 
 
-class UploadResponseModel(BaseResponse):
+class UploadResponseModel(Model):
     upload_result: Optional[str] = None
 
 

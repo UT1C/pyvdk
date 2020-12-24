@@ -7,30 +7,30 @@ from ..objects import (
     LeadsLead,
     LeadsEntry,
 )
-from .base_response import BaseResponse
+from ..abc import Model
 
 
-class CheckUserResponse(BaseResponse):
+class CheckUserResponse(Model):
     response: Optional["CheckUserResponseModel"] = None
 
 
-class CompleteResponse(BaseResponse):
+class CompleteResponse(Model):
     response: Optional["CompleteResponseModel"] = None
 
 
-class GetStatsResponse(BaseResponse):
+class GetStatsResponse(Model):
     response: Optional["GetStatsResponseModel"] = None
 
 
-class GetUsersResponse(BaseResponse):
+class GetUsersResponse(Model):
     response: Optional["GetUsersResponseModel"] = None
 
 
-class MetricHitResponse(BaseResponse):
+class MetricHitResponse(Model):
     response: Optional["MetricHitResponseModel"] = None
 
 
-class StartResponse(BaseResponse):
+class StartResponse(Model):
     response: Optional["StartResponseModel"] = None
 
 
@@ -43,7 +43,7 @@ GetStatsResponseModel = Optional[LeadsLead]
 GetUsersResponseModel = List[LeadsEntry]
 
 
-class MetricHitResponseModel(BaseResponse):
+class MetricHitResponseModel(Model):
     result: Optional[bool] = None
     redirect_link: Optional[str] = None
 

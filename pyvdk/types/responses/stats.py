@@ -1,14 +1,14 @@
 from typing import Optional, List
 
 from ..objects import StatsWallpostStat, StatsPeriod
-from .base_response import BaseResponse
+from ..abc import Model
 
 
-class GetPostReachResponse(BaseResponse):
+class GetPostReachResponse(Model):
     response: Optional["GetPostReachResponseModel"] = None
 
 
-class GetResponse(BaseResponse):
+class GetResponse(Model):
     response: Optional["GetResponseModel"] = None
 
 

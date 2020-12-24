@@ -1,26 +1,26 @@
 from typing import Optional, List
 
 from ..objects import PollsVoters, PollsPoll, BaseBoolInt
-from .base_response import BaseResponse
+from ..abc import Model
 
 
-class AddVoteResponse(BaseResponse):
+class AddVoteResponse(Model):
     response: Optional["AddVoteResponseModel"] = None
 
 
-class CreateResponse(BaseResponse):
+class CreateResponse(Model):
     response: Optional["CreateResponseModel"] = None
 
 
-class DeleteVoteResponse(BaseResponse):
+class DeleteVoteResponse(Model):
     response: Optional["DeleteVoteResponseModel"] = None
 
 
-class GetByIdResponse(BaseResponse):
+class GetByIdResponse(Model):
     response: Optional["GetByIdResponseModel"] = None
 
 
-class GetVotersResponse(BaseResponse):
+class GetVotersResponse(Model):
     response: Optional["GetVotersResponseModel"] = None
 
 

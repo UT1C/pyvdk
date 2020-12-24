@@ -1,10 +1,10 @@
 from typing import Optional
 
 from ..objects import StatusStatus
-from .base_response import BaseResponse
+from ..abc import Model
 
 
-class GetResponse(BaseResponse):
+class GetResponse(Model):
     response: Optional["GetResponseModel"] = None
 
 

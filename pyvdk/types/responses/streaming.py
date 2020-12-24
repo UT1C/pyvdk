@@ -1,13 +1,13 @@
 from typing import Optional
 
-from .base_response import BaseResponse
+from ..abc import Model
 
 
-class GetServerUrlResponse(BaseResponse):
+class GetServerUrlResponse(Model):
     response: Optional["GetServerUrlResponseModel"] = None
 
 
-class GetServerUrlResponseModel(BaseResponse):
+class GetServerUrlResponseModel(Model):
     endpoint: Optional[str] = None
     key: Optional[str] = None
 

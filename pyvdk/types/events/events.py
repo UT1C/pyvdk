@@ -1,8 +1,9 @@
+from pydantic import BaseModel
+from typing import Optional, Any, TYPE_CHECKING
+
 from .enum import GroupEventType
 from . import objects
 from .events_base import EventsBase
-from pydantic import BaseModel
-from typing import Optional, Any, TYPE_CHECKING
 
 if TYPE_CHECKING:
     from ...api import ABCAPI
