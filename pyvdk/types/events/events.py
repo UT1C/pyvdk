@@ -1,17 +1,17 @@
-from pydantic import BaseModel
 from typing import Optional, Any, TYPE_CHECKING
 
 from .enum import GroupEventType
 from . import objects
 from .events_base import EventsBase
+from ..abc import Model
 
 if TYPE_CHECKING:
     from ...api import ABCAPI
 
 
-class BaseGroupEvent(BaseModel):
+class BaseGroupEvent(Model):
     type: Optional[GroupEventType] = None
-    object: Optional[BaseModel] = None
+    object: Optional[Model] = None
     group_id: Optional[int] = None
     unprepared_ctx_api: Optional[Any] = None
 

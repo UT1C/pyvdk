@@ -2,7 +2,6 @@ from typing import Optional, List, Union
 
 from ..objects import (
     DatabaseUniversity,
-    BaseObject,
     DatabaseSchool,
     BaseCountry,
     DatabaseCity,
@@ -63,10 +62,10 @@ class GetUniversitiesResponse(Model):
 
 class GetChairsResponseModel(Model):
     count: Optional[int] = None
-    items: Optional[List["BaseObject"]] = None
+    items: Optional[List[Model]] = None
 
 
-GetCitiesByIdResponseModel = List[BaseObject]
+GetCitiesByIdResponseModel = List[Model]
 
 
 class GetCitiesResponseModel(Model):
