@@ -1,14 +1,11 @@
 from typing import Optional, Union, Any, List
 import typing
 import enum
-from pydantic import BaseModel
+
+from .abc import Model
 
 
-class BaseObject(BaseModel):
-    pass
-
-
-class AccountAccountCounters(BaseObject):
+class AccountAccountCounters(Model):
     """VK Object Account/AccountAccountCounters
 
     app_requests - New app requests number
@@ -45,7 +42,7 @@ class AccountAccountCounters(BaseObject):
     sdk: Optional[int] = None
 
 
-class AccountInfo(BaseObject):
+class AccountInfo(Model):
     """VK Object Account/AccountInfo
 
     2fa_required - Two factor authentication is enabled
@@ -73,7 +70,7 @@ class AccountInfo(BaseObject):
     subscriptions: Optional[List[int]] = None
 
 
-class AccountNameRequest(BaseObject):
+class AccountNameRequest(Model):
     """VK Object Account/AccountNameRequest"""
 
     first_name: Optional[str] = None
@@ -98,7 +95,7 @@ class AccountNameRequestStatus(enum.Enum):
     RESPONSE_WITH_LINK = "response_with_link"
 
 
-class AccountOffer(BaseObject):
+class AccountOffer(Model):
     """VK Object Account/AccountOffer
 
     description - Offer description
@@ -129,7 +126,7 @@ class AccountOffer(BaseObject):
     link_type: Optional[str] = None
 
 
-class AccountPushConversations(BaseObject):
+class AccountPushConversations(Model):
     """VK Object Account/AccountPushConversations
 
     count - Items count
@@ -139,7 +136,7 @@ class AccountPushConversations(BaseObject):
     items: Optional[List["AccountPushConversationsItem"]] = None
 
 
-class AccountPushConversationsItem(BaseObject):
+class AccountPushConversationsItem(Model):
     """VK Object Account/AccountPushConversationsItem
 
     disabled_until - Time until that notifications are disabled in seconds
@@ -152,7 +149,7 @@ class AccountPushConversationsItem(BaseObject):
     sound: Optional["BaseBoolInt"] = None
 
 
-class AccountPushParams(BaseObject):
+class AccountPushParams(Model):
     """VK Object Account/AccountPushParams"""
 
     msg: Optional[List["AccountPushParamsMode"]] = None
@@ -200,7 +197,7 @@ class AccountPushParamsSettings(enum.Enum):
     FR_OF_FR = "fr_of_fr"
 
 
-class AccountPushSettings(BaseObject):
+class AccountPushSettings(Model):
     """VK Object Account/AccountPushSettings
 
     disabled - Information whether notifications are disabled
@@ -213,14 +210,14 @@ class AccountPushSettings(BaseObject):
     conversations: Optional["AccountPushConversations"] = None
 
 
-class AccountUserSettingsInterest(BaseObject):
+class AccountUserSettingsInterest(Model):
     """VK Object Account/AccountUserSettingsInterest"""
 
     title: Optional[str] = None
     value: Optional[str] = None
 
 
-class AccountUserSettingsInterests(BaseObject):
+class AccountUserSettingsInterests(Model):
     """VK Object Account/AccountUserSettingsInterests"""
 
     activities: Optional["AccountUserSettingsInterest"] = None
@@ -261,7 +258,7 @@ class AdsAccessRole(enum.Enum):
     REPORTS = "reports"
 
 
-class AdsAccesses(BaseObject):
+class AdsAccesses(Model):
     """VK Object Ads/AdsAccesses
 
     client_id - Client ID
@@ -271,7 +268,7 @@ class AdsAccesses(BaseObject):
     role: Optional["AdsAccessRole"] = None
 
 
-class AdsAccount(BaseObject):
+class AdsAccount(Model):
     """VK Object Ads/AdsAccount"""
 
     access_role: Optional["AdsAccessRole"] = None
@@ -288,7 +285,7 @@ class AdsAccountType(enum.Enum):
     AGENCY = "agency"
 
 
-class AdsAd(BaseObject):
+class AdsAd(Model):
     """VK Object Ads/AdsAd"""
 
     ad_format: Optional[int] = None
@@ -333,7 +330,7 @@ class AdsAdCostType(enum.IntEnum):
     per_impressions_optimized = 3
 
 
-class AdsAdLayout(BaseObject):
+class AdsAdLayout(Model):
     """VK Object Ads/AdsAdLayout"""
 
     ad_format: Optional[int] = None
@@ -358,7 +355,7 @@ class AdsAdStatus(enum.IntEnum):
     deleted = 2
 
 
-class AdsCampaign(BaseObject):
+class AdsCampaign(Model):
     """VK Object Ads/AdsCampaign"""
 
     all_limit: Optional[str] = None
@@ -388,7 +385,7 @@ class AdsCampaignType(enum.Enum):
     PROMOTED_POSTS = "promoted_posts"
 
 
-class AdsCategory(BaseObject):
+class AdsCategory(Model):
     """VK Object Ads/AdsCategory
 
     id - Category ID
@@ -397,10 +394,10 @@ class AdsCategory(BaseObject):
 
     id: Optional[int] = None
     name: Optional[str] = None
-    subcategories: Optional[List["BaseObjectWithName"]] = None
+    subcategories: Optional[List["ModelWithName"]] = None
 
 
-class AdsClient(BaseObject):
+class AdsClient(Model):
     """VK Object Ads/AdsClient
 
     all_limit - Client's total limit, rubles
@@ -415,7 +412,7 @@ class AdsClient(BaseObject):
     name: Optional[str] = None
 
 
-class AdsCriteria(BaseObject):
+class AdsCriteria(Model):
     """VK Object Ads/AdsCriteria"""
 
     age_from: Optional[int] = None
@@ -458,7 +455,7 @@ class AdsCriteriaSex(enum.IntEnum):
     female = 2
 
 
-class AdsDemoStats(BaseObject):
+class AdsDemoStats(Model):
     """VK Object Ads/AdsDemoStats
 
     id - Object ID
@@ -469,7 +466,7 @@ class AdsDemoStats(BaseObject):
     type: Optional["AdsObjectType"] = None
 
 
-class AdsDemostatsFormat(BaseObject):
+class AdsDemostatsFormat(Model):
     """VK Object Ads/AdsDemostatsFormat
 
     day - Day as YYYY-MM-DD
@@ -486,7 +483,7 @@ class AdsDemostatsFormat(BaseObject):
     sex_age: Optional[List["AdsStatsSexAge"]] = None
 
 
-class AdsFloodStats(BaseObject):
+class AdsFloodStats(Model):
     """VK Object Ads/AdsFloodStats
 
     left - Requests left
@@ -497,7 +494,7 @@ class AdsFloodStats(BaseObject):
     refresh: Optional[int] = None
 
 
-class AdsLinkStatus(BaseObject):
+class AdsLinkStatus(Model):
     """VK Object Ads/AdsLinkStatus
 
     description - Reject reason
@@ -510,7 +507,7 @@ class AdsLinkStatus(BaseObject):
     status: Optional[str] = None
 
 
-class AdsLookalikeRequest(BaseObject):
+class AdsLookalikeRequest(Model):
     """VK Object Ads/AdsLookalikeRequest
 
     id - Lookalike request ID
@@ -536,7 +533,7 @@ class AdsLookalikeRequest(BaseObject):
     save_audience_levels: Optional[List["AdsLookalikeRequestSaveAudienceLevel"]] = None
 
 
-class AdsLookalikeRequestSaveAudienceLevel(BaseObject):
+class AdsLookalikeRequestSaveAudienceLevel(Model):
     """VK Object Ads/AdsLookalikeRequestSaveAudienceLevel
 
     level - Save audience level id, which is used in save audience queries
@@ -547,7 +544,7 @@ class AdsLookalikeRequestSaveAudienceLevel(BaseObject):
     audience_count: Optional[int] = None
 
 
-class AdsMusician(BaseObject):
+class AdsMusician(Model):
     """VK Object Ads/AdsMusician"""
 
     id: Optional[int] = None
@@ -563,7 +560,7 @@ class AdsObjectType(enum.Enum):
     OFFICE = "office"
 
 
-class AdsParagraphs(BaseObject):
+class AdsParagraphs(Model):
     """VK Object Ads/AdsParagraphs
 
     paragraph - Rules paragraph
@@ -572,7 +569,7 @@ class AdsParagraphs(BaseObject):
     paragraph: Optional[str] = None
 
 
-class AdsPromotedPostReach(BaseObject):
+class AdsPromotedPostReach(Model):
     """VK Object Ads/AdsPromotedPostReach
 
     hide - Hides amount
@@ -609,7 +606,7 @@ class AdsPromotedPostReach(BaseObject):
     video_views_start: Optional[int] = None
 
 
-class AdsRejectReason(BaseObject):
+class AdsRejectReason(Model):
     """VK Object Ads/AdsRejectReason
 
     comment - Comment text
@@ -619,7 +616,7 @@ class AdsRejectReason(BaseObject):
     rules: Optional[List["AdsRules"]] = None
 
 
-class AdsRules(BaseObject):
+class AdsRules(Model):
     """VK Object Ads/AdsRules
 
     title - Comment
@@ -629,7 +626,7 @@ class AdsRules(BaseObject):
     title: Optional[str] = None
 
 
-class AdsStats(BaseObject):
+class AdsStats(Model):
     """VK Object Ads/AdsStats
 
     id - Object ID
@@ -641,7 +638,7 @@ class AdsStats(BaseObject):
     views_times: Optional["AdsStatsViewsTimes"] = None
 
 
-class AdsStatsAge(BaseObject):
+class AdsStatsAge(Model):
     """VK Object Ads/AdsStatsAge
 
     clicks_rate - Clicks rate
@@ -654,7 +651,7 @@ class AdsStatsAge(BaseObject):
     value: Optional[str] = None
 
 
-class AdsStatsCities(BaseObject):
+class AdsStatsCities(Model):
     """VK Object Ads/AdsStatsCities
 
     clicks_rate - Clicks rate
@@ -669,7 +666,7 @@ class AdsStatsCities(BaseObject):
     value: Optional[int] = None
 
 
-class AdsStatsFormat(BaseObject):
+class AdsStatsFormat(Model):
     """VK Object Ads/AdsStatsFormat
 
     clicks - Clicks number
@@ -700,7 +697,7 @@ class AdsStatsFormat(BaseObject):
     video_views_half: Optional[int] = None
 
 
-class AdsStatsSex(BaseObject):
+class AdsStatsSex(Model):
     """VK Object Ads/AdsStatsSex
 
     clicks_rate - Clicks rate
@@ -712,7 +709,7 @@ class AdsStatsSex(BaseObject):
     value: Optional["AdsStatsSexValue"] = None
 
 
-class AdsStatsSexAge(BaseObject):
+class AdsStatsSexAge(Model):
     """VK Object Ads/AdsStatsSexAge"""
 
     clicks_rate: Optional[float] = None
@@ -727,7 +724,7 @@ class AdsStatsSexValue(enum.Enum):
     M = "m"
 
 
-class AdsStatsViewsTimes(BaseObject):
+class AdsStatsViewsTimes(Model):
     """VK Object Ads/AdsStatsViewsTimes"""
 
     views_ads_times_1: Optional[int] = None
@@ -754,7 +751,7 @@ class AdsTargSettings(AdsCriteria):
     campaign_id: Optional[int] = None
 
 
-class AdsTargStats(BaseObject):
+class AdsTargStats(Model):
     """VK Object Ads/AdsTargStats
 
     audience_count - Audience
@@ -779,7 +776,7 @@ class AdsTargStats(BaseObject):
     recommended_cpm_90: Optional[float] = None
 
 
-class AdsTargSuggestions(BaseObject):
+class AdsTargSuggestions(Model):
     """VK Object Ads/AdsTargSuggestions
 
     id - Object ID
@@ -790,7 +787,7 @@ class AdsTargSuggestions(BaseObject):
     name: Optional[str] = None
 
 
-class AdsTargSuggestionsCities(BaseObject):
+class AdsTargSuggestionsCities(Model):
     """VK Object Ads/AdsTargSuggestionsCities
 
     id - Object ID
@@ -803,7 +800,7 @@ class AdsTargSuggestionsCities(BaseObject):
     parent: Optional[str] = None
 
 
-class AdsTargSuggestionsRegions(BaseObject):
+class AdsTargSuggestionsRegions(Model):
     """VK Object Ads/AdsTargSuggestionsRegions
 
     id - Object ID
@@ -816,7 +813,7 @@ class AdsTargSuggestionsRegions(BaseObject):
     type: Optional[str] = None
 
 
-class AdsTargSuggestionsSchools(BaseObject):
+class AdsTargSuggestionsSchools(Model):
     """VK Object Ads/AdsTargSuggestionsSchools"""
 
     desc: Optional[str] = None
@@ -835,7 +832,7 @@ class AdsTargSuggestionsSchoolsType(enum.Enum):
     CHAIR = "chair"
 
 
-class AdsTargetGroup(BaseObject):
+class AdsTargetGroup(Model):
     """VK Object Ads/AdsTargetGroup
 
     audience_count - Audience
@@ -854,7 +851,7 @@ class AdsTargetGroup(BaseObject):
     pixel: Optional[str] = None
 
 
-class AdsUsers(BaseObject):
+class AdsUsers(Model):
     """VK Object Ads/AdsUsers
 
     user_id - User ID
@@ -872,7 +869,7 @@ class AppsAppLeaderboardType(enum.IntEnum):
     points = 2
 
 
-class AppsAppMin(BaseObject):
+class AppsAppMin(Model):
     """VK Object Apps/AppsAppMin"""
 
     type: Optional["AppsAppType"] = None
@@ -927,7 +924,7 @@ class AppsAppType(enum.Enum):
     MINI_APP = "mini_app"
 
 
-class AppsLeaderboard(BaseObject):
+class AppsLeaderboard(Model):
     """VK Object Apps/AppsLeaderboard
 
     level - Level
@@ -942,7 +939,7 @@ class AppsLeaderboard(BaseObject):
     user_id: Optional[int] = None
 
 
-class AppsScope(BaseObject):
+class AppsScope(Model):
     """VK Object Apps/AppsScope
 
     name - Scope name
@@ -953,7 +950,7 @@ class AppsScope(BaseObject):
     title: Optional[str] = None
 
 
-class AudioAudio(BaseObject):
+class AudioAudio(Model):
     """VK Object Audio/AudioAudio"""
 
     artist: Optional[str] = None
@@ -974,7 +971,7 @@ class BaseBoolInt(enum.IntEnum):
     yes = 1
 
 
-class BaseCity(BaseObject):
+class BaseCity(Model):
     """VK Object Base/BaseCity
 
     id - City ID
@@ -985,7 +982,7 @@ class BaseCity(BaseObject):
     title: Optional[str] = None
 
 
-class BaseCommentsInfo(BaseObject):
+class BaseCommentsInfo(Model):
     """VK Object Base/BaseCommentsInfo
 
     can_post - Information whether current user can comment the post
@@ -998,7 +995,7 @@ class BaseCommentsInfo(BaseObject):
     groups_can_post: Optional[bool] = None
 
 
-class BaseCountry(BaseObject):
+class BaseCountry(Model):
     """VK Object Base/BaseCountry
 
     id - Country ID
@@ -1009,7 +1006,7 @@ class BaseCountry(BaseObject):
     title: Optional[str] = None
 
 
-class BaseCropPhoto(BaseObject):
+class BaseCropPhoto(Model):
     """VK Object Base/BaseCropPhoto"""
 
     photo: Optional["PhotosPhoto"] = None
@@ -1017,7 +1014,7 @@ class BaseCropPhoto(BaseObject):
     rect: Optional["BaseCropPhotoRect"] = None
 
 
-class BaseCropPhotoCrop(BaseObject):
+class BaseCropPhotoCrop(Model):
     """VK Object Base/BaseCropPhotoCrop
 
     x - Coordinate X of the left upper corner
@@ -1032,7 +1029,7 @@ class BaseCropPhotoCrop(BaseObject):
     y2: Optional[float] = None
 
 
-class BaseCropPhotoRect(BaseObject):
+class BaseCropPhotoRect(Model):
     """VK Object Base/BaseCropPhotoRect
 
     x - Coordinate X of the left upper corner
@@ -1047,7 +1044,7 @@ class BaseCropPhotoRect(BaseObject):
     y2: Optional[float] = None
 
 
-class BaseError(BaseObject):
+class BaseError(Model):
     """VK Object Base/BaseError
 
     error_code - Error code
@@ -1061,7 +1058,7 @@ class BaseError(BaseObject):
     request_params: Optional[List["BaseRequestParam"]] = None
 
 
-class BaseGeo(BaseObject):
+class BaseGeo(Model):
     """VK Object Base/BaseGeo
 
     showmap - Information whether a map is showed
@@ -1074,14 +1071,14 @@ class BaseGeo(BaseObject):
     type: Optional[str] = None
 
 
-class BaseGeoCoordinates(BaseObject):
+class BaseGeoCoordinates(Model):
     """VK Object Base/BaseGeoCoordinates"""
 
     latitude: Optional[float] = None
     longitude: Optional[float] = None
 
 
-class BaseGradientPoint(BaseObject):
+class BaseGradientPoint(Model):
     """VK Object Base/BaseGradientPoint
 
     color - Hex color code without #
@@ -1092,7 +1089,7 @@ class BaseGradientPoint(BaseObject):
     position: Optional[float] = None
 
 
-class BaseImage(BaseObject):
+class BaseImage(Model):
     """VK Object Base/BaseImage
 
     height - Image height
@@ -1106,7 +1103,7 @@ class BaseImage(BaseObject):
     width: Optional[int] = None
 
 
-class BaseLikes(BaseObject):
+class BaseLikes(Model):
     """VK Object Base/BaseLikes
 
     count - Likes number
@@ -1117,7 +1114,7 @@ class BaseLikes(BaseObject):
     user_likes: Optional["BaseBoolInt"] = None
 
 
-class BaseLikesInfo(BaseObject):
+class BaseLikesInfo(Model):
     """VK Object Base/BaseLikesInfo
 
     can_like - Information whether current user can like the post
@@ -1132,7 +1129,7 @@ class BaseLikesInfo(BaseObject):
     user_likes: Optional[int] = None
 
 
-class BaseLink(BaseObject):
+class BaseLink(Model):
     """VK Object Base/BaseLink
 
     caption - Link caption
@@ -1164,7 +1161,7 @@ class BaseLink(BaseObject):
     video: Optional["VideoVideo"] = None
 
 
-class BaseLinkApplication(BaseObject):
+class BaseLinkApplication(Model):
     """VK Object Base/BaseLinkApplication
 
     app_id - Application Id
@@ -1174,7 +1171,7 @@ class BaseLinkApplication(BaseObject):
     store: Optional["BaseLinkApplicationStore"] = None
 
 
-class BaseLinkApplicationStore(BaseObject):
+class BaseLinkApplicationStore(Model):
     """VK Object Base/BaseLinkApplicationStore
 
     id - Store Id
@@ -1185,7 +1182,7 @@ class BaseLinkApplicationStore(BaseObject):
     name: Optional[str] = None
 
 
-class BaseLinkButton(BaseObject):
+class BaseLinkButton(Model):
     """VK Object Base/BaseLinkButton
 
     action - Button action
@@ -1205,7 +1202,7 @@ class BaseLinkButton(BaseObject):
     style: Optional["BaseLinkButtonStyle"] = None
 
 
-class BaseLinkButtonAction(BaseObject):
+class BaseLinkButtonAction(Model):
     """VK Object Base/BaseLinkButtonAction"""
 
     type: Optional["BaseLinkButtonActionType"] = None
@@ -1223,7 +1220,7 @@ class BaseLinkButtonStyle(enum.Enum):
     """ Button style """
 
 
-class BaseLinkProduct(BaseObject):
+class BaseLinkProduct(Model):
     """VK Object Base/BaseLinkProduct"""
 
     price: Optional["MarketPrice"] = None
@@ -1231,7 +1228,7 @@ class BaseLinkProduct(BaseObject):
     orders_count: Optional[int] = None
 
 
-class BaseLinkRating(BaseObject):
+class BaseLinkRating(Model):
     """VK Object Base/BaseLinkRating
 
     reviews_count - Count of reviews
@@ -1242,7 +1239,7 @@ class BaseLinkRating(BaseObject):
     stars: Optional[float] = None
 
 
-class BaseMessageError(BaseObject):
+class BaseMessageError(Model):
     """VK Object Base/BaseMessageError
 
     code - Error code
@@ -1253,8 +1250,8 @@ class BaseMessageError(BaseObject):
     description: Optional[str] = None
 
 
-class BaseObject(BaseObject):
-    """VK Object Base/BaseObject
+class Model(Model):
+    """VK Object Base/Model
 
     id - Object ID
     title - Object title
@@ -1264,8 +1261,8 @@ class BaseObject(BaseObject):
     title: Optional[str] = None
 
 
-class BaseObjectCount(BaseObject):
-    """VK Object Base/BaseObjectCount
+class ModelCount(Model):
+    """VK Object Base/ModelCount
 
     count - Items count
     """
@@ -1273,8 +1270,8 @@ class BaseObjectCount(BaseObject):
     count: Optional[int] = None
 
 
-class BaseObjectWithName(BaseObject):
-    """VK Object Base/BaseObjectWithName
+class ModelWithName(Model):
+    """VK Object Base/ModelWithName
 
     id - Object ID
     name - Object name
@@ -1284,7 +1281,7 @@ class BaseObjectWithName(BaseObject):
     name: Optional[str] = None
 
 
-class BasePlace(BaseObject):
+class BasePlace(Model):
     """VK Object Base/BasePlace"""
 
     address: Optional[str] = None
@@ -1306,7 +1303,7 @@ class BasePropertyExists(enum.IntEnum):
     property_exists = 1
 
 
-class BaseRepostsInfo(BaseObject):
+class BaseRepostsInfo(Model):
     """VK Object Base/BaseRepostsInfo
 
     count - Reposts number
@@ -1317,7 +1314,7 @@ class BaseRepostsInfo(BaseObject):
     user_reposted: Optional[int] = None
 
 
-class BaseRequestParam(BaseObject):
+class BaseRequestParam(Model):
     """VK Object Base/BaseRequestParam"""
 
     key: Optional[str] = None
@@ -1332,7 +1329,7 @@ class BaseSex(enum.IntEnum):
     male = 2
 
 
-class BaseSticker(BaseObject):
+class BaseSticker(Model):
     """VK Object Base/BaseSticker
 
     sticker_id - Sticker ID
@@ -1351,7 +1348,7 @@ class BaseSticker(BaseObject):
     is_allowed: Optional[bool] = None
 
 
-class BaseStickerAnimation(BaseObject):
+class BaseStickerAnimation(Model):
     """VK Object Base/BaseStickerAnimation
 
     type - Type of animation script
@@ -1362,7 +1359,7 @@ class BaseStickerAnimation(BaseObject):
     url: Optional[str] = None
 
 
-class BaseUploadServer(BaseObject):
+class BaseUploadServer(Model):
     """VK Object Base/BaseUploadServer"""
 
     upload_url: Optional[str] = None
@@ -1473,7 +1470,7 @@ class BaseUserGroupFields(enum.Enum):
     VK_ADMIN_STATUS = "vk_admin_status"
 
 
-class BaseUserId(BaseObject):
+class BaseUserId(Model):
     """VK Object Base/BaseUserId"""
 
     user_id: Optional[int] = None
@@ -1488,7 +1485,7 @@ class BoardDefaultOrder(enum.IntEnum):
     asc_created = -2
 
 
-class BoardTopic(BaseObject):
+class BoardTopic(Model):
     """VK Object Board/BoardTopic
 
     comments - Comments number
@@ -1513,7 +1510,7 @@ class BoardTopic(BaseObject):
     updated_by: Optional[int] = None
 
 
-class BoardTopicComment(BaseObject):
+class BoardTopicComment(Model):
     """VK Object Board/BoardTopicComment
 
     date - Date when the comment has been added in Unixtime
@@ -1534,7 +1531,7 @@ class BoardTopicComment(BaseObject):
     likes: Optional["BaseLikesInfo"] = None
 
 
-class BoardTopicPoll(BaseObject):
+class BoardTopicPoll(Model):
     """VK Object Board/BoardTopicPoll
 
     answer_id - Current user's answer ID
@@ -1556,7 +1553,7 @@ class BoardTopicPoll(BaseObject):
     votes: Optional[str] = None
 
 
-class CallbackBoardPostDelete(BaseObject):
+class CallbackBoardPostDelete(Model):
     """VK Object Callback/CallbackBoardPostDelete"""
 
     topic_owner_id: Optional[int] = None
@@ -1564,7 +1561,7 @@ class CallbackBoardPostDelete(BaseObject):
     id: Optional[int] = None
 
 
-class CallbackConfirmationMessage(BaseObject):
+class CallbackConfirmationMessage(Model):
     """VK Object Callback/CallbackConfirmationMessage"""
 
     type: Optional["CallbackMessageType"] = None
@@ -1572,21 +1569,21 @@ class CallbackConfirmationMessage(BaseObject):
     secret: Optional[str] = None
 
 
-class CallbackGroupChangePhoto(BaseObject):
+class CallbackGroupChangePhoto(Model):
     """VK Object Callback/CallbackGroupChangePhoto"""
 
     user_id: Optional[int] = None
     photo: Optional["PhotosPhoto"] = None
 
 
-class CallbackGroupChangeSettings(BaseObject):
+class CallbackGroupChangeSettings(Model):
     """VK Object Callback/CallbackGroupChangeSettings"""
 
     user_id: Optional[int] = None
     self: Optional["BaseBoolInt"] = None
 
 
-class CallbackGroupJoin(BaseObject):
+class CallbackGroupJoin(Model):
     """VK Object Callback/CallbackGroupJoin"""
 
     user_id: Optional[int] = None
@@ -1603,7 +1600,7 @@ class CallbackGroupJoinType(enum.Enum):
     REQUEST = "request"
 
 
-class CallbackGroupLeave(BaseObject):
+class CallbackGroupLeave(Model):
     """VK Object Callback/CallbackGroupLeave"""
 
     user_id: Optional[int] = None
@@ -1626,7 +1623,7 @@ class CallbackGroupOfficerRole(enum.IntEnum):
     administrator = 3
 
 
-class CallbackGroupOfficersEdit(BaseObject):
+class CallbackGroupOfficersEdit(Model):
     """VK Object Callback/CallbackGroupOfficersEdit"""
 
     admin_id: Optional[int] = None
@@ -1635,7 +1632,7 @@ class CallbackGroupOfficersEdit(BaseObject):
     level_new: Optional["CallbackGroupOfficerRole"] = None
 
 
-class CallbackGroupSettingsChanges(BaseObject):
+class CallbackGroupSettingsChanges(Model):
     """VK Object Callback/CallbackGroupSettingsChanges"""
 
     title: Optional[str] = None
@@ -1653,7 +1650,7 @@ class CallbackGroupSettingsChanges(BaseObject):
     enable_market: Optional["CallbackGroupMarket"] = None
 
 
-class CallbackLikeAddRemove(BaseObject):
+class CallbackLikeAddRemove(Model):
     """VK Object Callback/CallbackLikeAddRemove"""
 
     liker_id: Optional[int] = None
@@ -1664,7 +1661,7 @@ class CallbackLikeAddRemove(BaseObject):
     thread_reply_id: Optional[int] = None
 
 
-class CallbackMarketComment(BaseObject):
+class CallbackMarketComment(Model):
     """VK Object Callback/CallbackMarketComment"""
 
     id: Optional[int] = None
@@ -1675,7 +1672,7 @@ class CallbackMarketComment(BaseObject):
     photo_id: Optional[int] = None
 
 
-class CallbackMarketCommentDelete(BaseObject):
+class CallbackMarketCommentDelete(Model):
     """VK Object Callback/CallbackMarketCommentDelete"""
 
     owner_id: Optional[int] = None
@@ -1684,14 +1681,14 @@ class CallbackMarketCommentDelete(BaseObject):
     item_id: Optional[int] = None
 
 
-class CallbackMessageAllow(BaseObject):
+class CallbackMessageAllow(Model):
     """VK Object Callback/CallbackMessageAllow"""
 
     user_id: Optional[int] = None
     key: Optional[str] = None
 
 
-class CallbackMessageBase(BaseObject):
+class CallbackMessageBase(Model):
     """VK Object Callback/CallbackMessageBase"""
 
     type: Optional["CallbackMessageType"] = None
@@ -1699,7 +1696,7 @@ class CallbackMessageBase(BaseObject):
     group_id: Optional[int] = None
 
 
-class CallbackMessageDeny(BaseObject):
+class CallbackMessageDeny(Model):
     """VK Object Callback/CallbackMessageDeny"""
 
     user_id: Optional[int] = None
@@ -1736,7 +1733,7 @@ class CallbackMessageType(enum.Enum):
     WALL_REPOST = "wall_repost"
 
 
-class CallbackPhotoComment(BaseObject):
+class CallbackPhotoComment(Model):
     """VK Object Callback/CallbackPhotoComment"""
 
     id: Optional[int] = None
@@ -1746,7 +1743,7 @@ class CallbackPhotoComment(BaseObject):
     photo_owner_od: Optional[int] = None
 
 
-class CallbackPhotoCommentDelete(BaseObject):
+class CallbackPhotoCommentDelete(Model):
     """VK Object Callback/CallbackPhotoCommentDelete"""
 
     id: Optional[int] = None
@@ -1755,7 +1752,7 @@ class CallbackPhotoCommentDelete(BaseObject):
     photo_id: Optional[int] = None
 
 
-class CallbackPollVoteNew(BaseObject):
+class CallbackPollVoteNew(Model):
     """VK Object Callback/CallbackPollVoteNew"""
 
     owner_id: Optional[int] = None
@@ -1764,7 +1761,7 @@ class CallbackPollVoteNew(BaseObject):
     user_id: Optional[int] = None
 
 
-class CallbackQrScan(BaseObject):
+class CallbackQrScan(Model):
     """VK Object Callback/CallbackQrScan"""
 
     user_id: Optional[int] = None
@@ -1774,7 +1771,7 @@ class CallbackQrScan(BaseObject):
     reread: Optional[bool] = None
 
 
-class CallbackUserBlock(BaseObject):
+class CallbackUserBlock(Model):
     """VK Object Callback/CallbackUserBlock"""
 
     admin_id: Optional[int] = None
@@ -1784,7 +1781,7 @@ class CallbackUserBlock(BaseObject):
     comment: Optional[str] = None
 
 
-class CallbackUserUnblock(BaseObject):
+class CallbackUserUnblock(Model):
     """VK Object Callback/CallbackUserUnblock"""
 
     admin_id: Optional[int] = None
@@ -1792,7 +1789,7 @@ class CallbackUserUnblock(BaseObject):
     by_end_date: Optional[int] = None
 
 
-class CallbackVideoComment(BaseObject):
+class CallbackVideoComment(Model):
     """VK Object Callback/CallbackVideoComment"""
 
     id: Optional[int] = None
@@ -1802,7 +1799,7 @@ class CallbackVideoComment(BaseObject):
     video_owner_od: Optional[int] = None
 
 
-class CallbackVideoCommentDelete(BaseObject):
+class CallbackVideoCommentDelete(Model):
     """VK Object Callback/CallbackVideoCommentDelete"""
 
     id: Optional[int] = None
@@ -1811,7 +1808,7 @@ class CallbackVideoCommentDelete(BaseObject):
     video_id: Optional[int] = None
 
 
-class CallbackWallCommentDelete(BaseObject):
+class CallbackWallCommentDelete(Model):
     """VK Object Callback/CallbackWallCommentDelete"""
 
     owner_id: Optional[int] = None
@@ -1820,7 +1817,7 @@ class CallbackWallCommentDelete(BaseObject):
     post_id: Optional[int] = None
 
 
-class CommentThread(BaseObject):
+class CommentThread(Model):
     """VK Object Comment/CommentThread
 
     can_post - Information whether current user can comment the post
@@ -1836,7 +1833,7 @@ class CommentThread(BaseObject):
     show_reply_button: Optional[bool] = None
 
 
-class DatabaseCity(BaseObject):
+class DatabaseCity(Model):
     """VK Object Database/DatabaseCity
 
     area - Area title
@@ -1849,7 +1846,7 @@ class DatabaseCity(BaseObject):
     important: Optional["BaseBoolInt"] = None
 
 
-class DatabaseFaculty(BaseObject):
+class DatabaseFaculty(Model):
     """VK Object Database/DatabaseFaculty
 
     id - Faculty ID
@@ -1860,7 +1857,7 @@ class DatabaseFaculty(BaseObject):
     title: Optional[str] = None
 
 
-class DatabaseRegion(BaseObject):
+class DatabaseRegion(Model):
     """VK Object Database/DatabaseRegion
 
     id - Region ID
@@ -1871,7 +1868,7 @@ class DatabaseRegion(BaseObject):
     title: Optional[str] = None
 
 
-class DatabaseSchool(BaseObject):
+class DatabaseSchool(Model):
     """VK Object Database/DatabaseSchool
 
     id - School ID
@@ -1882,7 +1879,7 @@ class DatabaseSchool(BaseObject):
     title: Optional[str] = None
 
 
-class DatabaseStation(BaseObject):
+class DatabaseStation(Model):
     """VK Object Database/DatabaseStation
 
     city_id - City ID
@@ -1897,7 +1894,7 @@ class DatabaseStation(BaseObject):
     name: Optional[str] = None
 
 
-class DatabaseUniversity(BaseObject):
+class DatabaseUniversity(Model):
     """VK Object Database/DatabaseUniversity
 
     id - University ID
@@ -1908,7 +1905,7 @@ class DatabaseUniversity(BaseObject):
     title: Optional[str] = None
 
 
-class DocsDoc(BaseObject):
+class DocsDoc(Model):
     """VK Object Docs/DocsDoc"""
 
     id: Optional[int] = None
@@ -1933,7 +1930,7 @@ class DocsDocAttachmentType(enum.Enum):
     AUDIO_MESSAGE = "audio_message"
 
 
-class DocsDocPreview(BaseObject):
+class DocsDocPreview(Model):
     """VK Object Docs/DocsDocPreview"""
 
     audio_msg: Optional["DocsDocPreviewAudioMsg"] = None
@@ -1942,7 +1939,7 @@ class DocsDocPreview(BaseObject):
     video: Optional["DocsDocPreviewVideo"] = None
 
 
-class DocsDocPreviewAudioMsg(BaseObject):
+class DocsDocPreviewAudioMsg(Model):
     """VK Object Docs/DocsDocPreviewAudioMsg
 
     duration - Audio message duration in seconds
@@ -1956,7 +1953,7 @@ class DocsDocPreviewAudioMsg(BaseObject):
     waveform: Optional[List[int]] = None
 
 
-class DocsDocPreviewGraffiti(BaseObject):
+class DocsDocPreviewGraffiti(Model):
     """VK Object Docs/DocsDocPreviewGraffiti
 
     src - Graffiti file URL
@@ -1969,13 +1966,13 @@ class DocsDocPreviewGraffiti(BaseObject):
     height: Optional[int] = None
 
 
-class DocsDocPreviewPhoto(BaseObject):
+class DocsDocPreviewPhoto(Model):
     """VK Object Docs/DocsDocPreviewPhoto"""
 
     sizes: Optional[List["DocsDocPreviewPhotoSizes"]] = None
 
 
-class DocsDocPreviewPhotoSizes(BaseObject):
+class DocsDocPreviewPhotoSizes(Model):
     """VK Object Docs/DocsDocPreviewPhotoSizes
 
     src - URL of the image
@@ -1989,7 +1986,7 @@ class DocsDocPreviewPhotoSizes(BaseObject):
     type: Optional["PhotosPhotoSizesType"] = None
 
 
-class DocsDocPreviewVideo(BaseObject):
+class DocsDocPreviewVideo(Model):
     """VK Object Docs/DocsDocPreviewVideo
 
     src - Video URL
@@ -2004,7 +2001,7 @@ class DocsDocPreviewVideo(BaseObject):
     file_size: Optional[int] = None
 
 
-class DocsDocTypes(BaseObject):
+class DocsDocTypes(Model):
     """VK Object Docs/DocsDocTypes
 
     id - Doc type ID
@@ -2017,7 +2014,7 @@ class DocsDocTypes(BaseObject):
     count: Optional[int] = None
 
 
-class DocsDocUploadResponse(BaseObject):
+class DocsDocUploadResponse(Model):
     """VK Object Docs/DocsDocUploadResponse
 
     file - Uploaded file data
@@ -2026,7 +2023,7 @@ class DocsDocUploadResponse(BaseObject):
     file: Optional[str] = None
 
 
-class EventsEventAttach(BaseObject):
+class EventsEventAttach(Model):
     """VK Object Events/EventsEventAttach
 
     address - address of event
@@ -2049,7 +2046,7 @@ class EventsEventAttach(BaseObject):
     time: Optional[int] = None
 
 
-class FaveBookmark(BaseObject):
+class FaveBookmark(Model):
     """VK Object Fave/FaveBookmark"""
 
     added_date: Optional[int] = None
@@ -2072,7 +2069,7 @@ class FaveBookmarkType(enum.Enum):
     LINK = "link"
 
 
-class FavePage(BaseObject):
+class FavePage(Model):
     """VK Object Fave/FavePage"""
 
     description: Optional[str] = None
@@ -2091,7 +2088,7 @@ class FavePageType(enum.Enum):
     HINTS = "hints"
 
 
-class FaveTag(BaseObject):
+class FaveTag(Model):
     """VK Object Fave/FaveTag
 
     id - Tag id
@@ -2102,7 +2099,7 @@ class FaveTag(BaseObject):
     name: Optional[str] = None
 
 
-class FriendsFriendStatus(BaseObject):
+class FriendsFriendStatus(Model):
     """VK Object Friends/FriendsFriendStatus"""
 
     friend_status: Optional["FriendsFriendStatusStatus"] = None
@@ -2128,7 +2125,7 @@ class FriendsFriendStatusStatus(enum.IntEnum):
     is_friend = 3
 
 
-class FriendsFriendsList(BaseObject):
+class FriendsFriendsList(Model):
     """VK Object Friends/FriendsFriendsList
 
     id - List ID
@@ -2139,7 +2136,7 @@ class FriendsFriendsList(BaseObject):
     name: Optional[str] = None
 
 
-class FriendsMutualFriend(BaseObject):
+class FriendsMutualFriend(Model):
     """VK Object Friends/FriendsMutualFriend
 
     common_count - Total mutual friends number
@@ -2151,7 +2148,7 @@ class FriendsMutualFriend(BaseObject):
     id: Optional[int] = None
 
 
-class FriendsRequests(BaseObject):
+class FriendsRequests(Model):
     """VK Object Friends/FriendsRequests
 
     from - ID of the user by whom friend has been suggested
@@ -2163,7 +2160,7 @@ class FriendsRequests(BaseObject):
     user_id: Optional[int] = None
 
 
-class FriendsRequestsMutual(BaseObject):
+class FriendsRequestsMutual(Model):
     """VK Object Friends/FriendsRequestsMutual
 
     count - Total mutual friends number
@@ -2173,7 +2170,7 @@ class FriendsRequestsMutual(BaseObject):
     users: Optional[List[int]] = None
 
 
-class FriendsRequestsXtrMessage(BaseObject):
+class FriendsRequestsXtrMessage(Model):
     """VK Object Friends/FriendsRequestsXtrMessage
 
     from - ID of the user by whom friend has been suggested
@@ -2187,7 +2184,7 @@ class FriendsRequestsXtrMessage(BaseObject):
     user_id: Optional[int] = None
 
 
-class GiftsGift(BaseObject):
+class GiftsGift(Model):
     """VK Object Gifts/GiftsGift"""
 
     date: Optional[int] = None
@@ -2207,7 +2204,7 @@ class GiftsGiftPrivacy(enum.IntEnum):
     name_and_message_for_recipient_only = 2
 
 
-class GiftsLayout(BaseObject):
+class GiftsLayout(Model):
     """VK Object Gifts/GiftsLayout
 
     id - Gift ID
@@ -2230,7 +2227,7 @@ class GiftsLayout(BaseObject):
     keywords: Optional[str] = None
 
 
-class GroupsAddress(BaseObject):
+class GroupsAddress(Model):
     """VK Object Groups/GroupsAddress
 
     additional_address - Additional address to the place (6 floor, left door)
@@ -2265,7 +2262,7 @@ class GroupsAddress(BaseObject):
     work_info_status: Optional["GroupsAddressWorkInfoStatus"] = None
 
 
-class GroupsAddressTimetable(BaseObject):
+class GroupsAddressTimetable(Model):
     """VK Object Groups/GroupsAddressTimetable
 
     fri - Timetable for friday
@@ -2286,7 +2283,7 @@ class GroupsAddressTimetable(BaseObject):
     wed: Optional["GroupsAddressTimetableDay"] = None
 
 
-class GroupsAddressTimetableDay(BaseObject):
+class GroupsAddressTimetableDay(Model):
     """VK Object Groups/GroupsAddressTimetableDay"""
 
     break_close_time: Optional[int] = None
@@ -2305,7 +2302,7 @@ class GroupsAddressWorkInfoStatus(enum.Enum):
     FOREVER_CLOSED = "forever_closed"
 
 
-class GroupsAddressesInfo(BaseObject):
+class GroupsAddressesInfo(Model):
     """VK Object Groups/GroupsAddressesInfo
 
     is_enabled - Information whether addresses is enabled
@@ -2316,7 +2313,7 @@ class GroupsAddressesInfo(BaseObject):
     main_address_id: Optional[int] = None
 
 
-class GroupsBanInfo(BaseObject):
+class GroupsBanInfo(Model):
     """VK Object Groups/GroupsBanInfo"""
 
     admin_id: Optional[int] = None
@@ -2338,7 +2335,7 @@ class GroupsBanInfoReason(enum.IntEnum):
     flood = 4
 
 
-class GroupsCallbackServer(BaseObject):
+class GroupsCallbackServer(Model):
     """VK Object Groups/GroupsCallbackServer"""
 
     id: Optional[int] = None
@@ -2349,7 +2346,7 @@ class GroupsCallbackServer(BaseObject):
     status: Optional[str] = None
 
 
-class GroupsCallbackSettings(BaseObject):
+class GroupsCallbackSettings(Model):
     """VK Object Groups/GroupsCallbackSettings
 
     api_version - API version used for the events
@@ -2359,7 +2356,7 @@ class GroupsCallbackSettings(BaseObject):
     events: Optional["GroupsLongPollEvents"] = None
 
 
-class GroupsContactsItem(BaseObject):
+class GroupsContactsItem(Model):
     """VK Object Groups/GroupsContactsItem
 
     desc - Contact description
@@ -2374,7 +2371,7 @@ class GroupsContactsItem(BaseObject):
     user_id: Optional[int] = None
 
 
-class GroupsCountersGroup(BaseObject):
+class GroupsCountersGroup(Model):
     """VK Object Groups/GroupsCountersGroup
 
     addresses - Addresses number
@@ -2399,7 +2396,7 @@ class GroupsCountersGroup(BaseObject):
     videos: Optional[int] = None
 
 
-class GroupsCover(BaseObject):
+class GroupsCover(Model):
     """VK Object Groups/GroupsCover"""
 
     enabled: Optional["BaseBoolInt"] = None
@@ -2473,7 +2470,7 @@ class GroupsFilter(enum.Enum):
     HAS_ADDRESSES = "has_addresses"
 
 
-class GroupsGroup(BaseObject):
+class GroupsGroup(Model):
     """VK Object Groups/GroupsGroup"""
 
     admin_level: Optional["GroupsGroupAdminLevel"] = None
@@ -2517,7 +2514,7 @@ class GroupsGroupAgeLimits(enum.IntEnum):
     plus_18 = 3
 
 
-class GroupsGroupAttach(BaseObject):
+class GroupsGroupAttach(Model):
     """VK Object Groups/GroupsGroupAttach"""
 
     id: Optional[int] = None
@@ -2535,7 +2532,7 @@ class GroupsGroupAudio(enum.IntEnum):
     limited = 2
 
 
-class GroupsGroupBanInfo(BaseObject):
+class GroupsGroupBanInfo(Model):
     """VK Object Groups/GroupsGroupBanInfo
 
     comment - Ban comment
@@ -2547,7 +2544,7 @@ class GroupsGroupBanInfo(BaseObject):
     reason: Optional["GroupsBanInfoReason"] = None
 
 
-class GroupsGroupCategory(BaseObject):
+class GroupsGroupCategory(Model):
     """VK Object Groups/GroupsGroupCategory
 
     id - Category ID
@@ -2556,10 +2553,10 @@ class GroupsGroupCategory(BaseObject):
 
     id: Optional[int] = None
     name: Optional[str] = None
-    subcategories: Optional[List["BaseObjectWithName"]] = None
+    subcategories: Optional[List["ModelWithName"]] = None
 
 
-class GroupsGroupCategoryFull(BaseObject):
+class GroupsGroupCategoryFull(Model):
     """VK Object Groups/GroupsGroupCategoryFull
 
     id - Category ID
@@ -2574,7 +2571,7 @@ class GroupsGroupCategoryFull(BaseObject):
     subcategories: Optional[List["GroupsGroupCategory"]] = None
 
 
-class GroupsGroupCategoryType(BaseObject):
+class GroupsGroupCategoryType(Model):
     """VK Object Groups/GroupsGroupCategoryType"""
 
     id: Optional[int] = None
@@ -2598,7 +2595,7 @@ class GroupsGroupFull(GroupsGroup):
     is_hidden_from_feed: Optional["BaseBoolInt"] = None
     is_favorite: Optional["BaseBoolInt"] = None
     is_subscribed: Optional["BaseBoolInt"] = None
-    city: Optional["BaseObject"] = None
+    city: Optional["Model"] = None
     country: Optional["BaseCountry"] = None
     verified: Optional["BaseBoolInt"] = None
     description: Optional[str] = None
@@ -2678,7 +2675,7 @@ class GroupsGroupIsClosed(enum.IntEnum):
     private = 2
 
 
-class GroupsGroupLink(BaseObject):
+class GroupsGroupLink(Model):
     """VK Object Groups/GroupsGroupLink"""
 
     name: Optional[str] = None
@@ -2707,7 +2704,7 @@ class GroupsGroupPhotos(enum.IntEnum):
     limited = 2
 
 
-class GroupsGroupPublicCategoryList(BaseObject):
+class GroupsGroupPublicCategoryList(Model):
     """VK Object Groups/GroupsGroupPublicCategoryList"""
 
     id: Optional[int] = None
@@ -2812,7 +2809,7 @@ class GroupsGroupWiki(enum.IntEnum):
     limited = 2
 
 
-class GroupsGroupXtrInvitedBy(BaseObject):
+class GroupsGroupXtrInvitedBy(Model):
     """VK Object Groups/GroupsGroupXtrInvitedBy"""
 
     admin_level: Optional["GroupsGroupXtrInvitedByAdminLevel"] = None
@@ -2846,7 +2843,7 @@ class GroupsGroupXtrInvitedByType(enum.Enum):
     EVENT = "event"
 
 
-class GroupsGroupsArray(BaseObject):
+class GroupsGroupsArray(Model):
     """VK Object Groups/GroupsGroupsArray
 
     count - Communities number
@@ -2856,7 +2853,7 @@ class GroupsGroupsArray(BaseObject):
     items: Optional[List[int]] = None
 
 
-class GroupsLinksItem(BaseObject):
+class GroupsLinksItem(Model):
     """VK Object Groups/GroupsLinksItem
 
     desc - Link description
@@ -2877,7 +2874,7 @@ class GroupsLinksItem(BaseObject):
     url: Optional[str] = None
 
 
-class GroupsLiveCovers(BaseObject):
+class GroupsLiveCovers(Model):
     """VK Object Groups/GroupsLiveCovers
 
     is_enabled - Information whether live covers is enabled
@@ -2889,7 +2886,7 @@ class GroupsLiveCovers(BaseObject):
     story_ids: Optional[List[str]] = None
 
 
-class GroupsLongPollEvents(BaseObject):
+class GroupsLongPollEvents(Model):
     """VK Object Groups/GroupsLongPollEvents"""
 
     audio_new: Optional["BaseBoolInt"] = None
@@ -2935,7 +2932,7 @@ class GroupsLongPollEvents(BaseObject):
     wall_repost: Optional["BaseBoolInt"] = None
 
 
-class GroupsLongPollServer(BaseObject):
+class GroupsLongPollServer(Model):
     """VK Object Groups/GroupsLongPollServer
 
     key - Long Poll key
@@ -2948,7 +2945,7 @@ class GroupsLongPollServer(BaseObject):
     ts: Optional[str] = None
 
 
-class GroupsLongPollSettings(BaseObject):
+class GroupsLongPollSettings(Model):
     """VK Object Groups/GroupsLongPollSettings
 
     api_version - API version used for the events
@@ -2960,7 +2957,7 @@ class GroupsLongPollSettings(BaseObject):
     is_enabled: Optional[bool] = None
 
 
-class GroupsMarketInfo(BaseObject):
+class GroupsMarketInfo(Model):
     """VK Object Groups/GroupsMarketInfo
 
     contact_id - Contact person ID
@@ -2980,7 +2977,7 @@ class GroupsMarketInfo(BaseObject):
     price_min: Optional[str] = None
 
 
-class GroupsMemberRole(BaseObject):
+class GroupsMemberRole(Model):
     """VK Object Groups/GroupsMemberRole"""
 
     id: Optional[int] = None
@@ -3003,7 +3000,7 @@ class GroupsMemberRoleStatus(enum.Enum):
     CREATOR = "creator"
 
 
-class GroupsMemberStatus(BaseObject):
+class GroupsMemberStatus(Model):
     """VK Object Groups/GroupsMemberStatus
 
     member - Information whether user is a member of the group
@@ -3014,7 +3011,7 @@ class GroupsMemberStatus(BaseObject):
     user_id: Optional[int] = None
 
 
-class GroupsMemberStatusFull(BaseObject):
+class GroupsMemberStatusFull(Model):
     """VK Object Groups/GroupsMemberStatusFull
 
     can_invite - Information whether user can be invited
@@ -3033,7 +3030,7 @@ class GroupsMemberStatusFull(BaseObject):
     user_id: Optional[int] = None
 
 
-class GroupsOnlineStatus(BaseObject):
+class GroupsOnlineStatus(Model):
     """VK Object Groups/GroupsOnlineStatus"""
 
     minutes: Optional[int] = None
@@ -3048,7 +3045,7 @@ class GroupsOnlineStatusType(enum.Enum):
     ANSWER_MARK = "answer_mark"
 
 
-class GroupsOwnerXtrBanInfo(BaseObject):
+class GroupsOwnerXtrBanInfo(Model):
     """VK Object Groups/GroupsOwnerXtrBanInfo"""
 
     ban_info: Optional["GroupsBanInfo"] = None
@@ -3073,14 +3070,14 @@ class GroupsRoleOptions(enum.Enum):
     CREATOR = "creator"
 
 
-class GroupsSettingsTwitter(BaseObject):
+class GroupsSettingsTwitter(Model):
     """VK Object Groups/GroupsSettingsTwitter"""
 
     status: Optional[str] = None
     name: Optional[str] = None
 
 
-class GroupsSubjectItem(BaseObject):
+class GroupsSubjectItem(Model):
     """VK Object Groups/GroupsSubjectItem
 
     id - Subject ID
@@ -3091,14 +3088,14 @@ class GroupsSubjectItem(BaseObject):
     name: Optional[str] = None
 
 
-class GroupsTokenPermissionSetting(BaseObject):
+class GroupsTokenPermissionSetting(Model):
     """VK Object Groups/GroupsTokenPermissionSetting"""
 
     name: Optional[str] = None
     setting: Optional[int] = None
 
 
-class LeadsChecked(BaseObject):
+class LeadsChecked(Model):
     """VK Object Leads/LeadsChecked"""
 
     reason: Optional[str] = None
@@ -3114,7 +3111,7 @@ class LeadsCheckedResult(enum.Enum):
     FALSE = "false"
 
 
-class LeadsComplete(BaseObject):
+class LeadsComplete(Model):
     """VK Object Leads/LeadsComplete
 
     cost - Offer cost
@@ -3130,7 +3127,7 @@ class LeadsComplete(BaseObject):
     test_mode: Optional["BaseBoolInt"] = None
 
 
-class LeadsEntry(BaseObject):
+class LeadsEntry(Model):
     """VK Object Leads/LeadsEntry
 
     aid - Application ID
@@ -3153,7 +3150,7 @@ class LeadsEntry(BaseObject):
     uid: Optional[int] = None
 
 
-class LeadsLead(BaseObject):
+class LeadsLead(Model):
     """VK Object Leads/LeadsLead
 
     completed - Completed offers number
@@ -3173,7 +3170,7 @@ class LeadsLead(BaseObject):
     started: Optional[int] = None
 
 
-class LeadsLeadDays(BaseObject):
+class LeadsLeadDays(Model):
     """VK Object Leads/LeadsLeadDays
 
     completed - Completed offers number
@@ -3188,7 +3185,7 @@ class LeadsLeadDays(BaseObject):
     started: Optional[int] = None
 
 
-class LeadsStart(BaseObject):
+class LeadsStart(Model):
     """VK Object Leads/LeadsStart"""
 
     test_mode: Optional["BaseBoolInt"] = None
@@ -3212,7 +3209,7 @@ class LikesType(enum.Enum):
     SITEPAGE = "sitepage"
 
 
-class LinkTargetObject(BaseObject):
+class LinkTargetObject(Model):
     """VK Object Link/LinkTargetObject
 
     type - Object type
@@ -3225,7 +3222,7 @@ class LinkTargetObject(BaseObject):
     item_id: Optional[int] = None
 
 
-class MarketCurrency(BaseObject):
+class MarketCurrency(Model):
     """VK Object Market/MarketCurrency
 
     id - Currency ID
@@ -3236,7 +3233,7 @@ class MarketCurrency(BaseObject):
     name: Optional[str] = None
 
 
-class MarketMarketAlbum(BaseObject):
+class MarketMarketAlbum(Model):
     """VK Object Market/MarketMarketAlbum
 
     count - Items number
@@ -3254,7 +3251,7 @@ class MarketMarketAlbum(BaseObject):
     updated_time: Optional[int] = None
 
 
-class MarketMarketCategory(BaseObject):
+class MarketMarketCategory(Model):
     """VK Object Market/MarketMarketCategory
 
     id - Category ID
@@ -3266,7 +3263,7 @@ class MarketMarketCategory(BaseObject):
     section: Optional["MarketSection"] = None
 
 
-class MarketMarketItem(BaseObject):
+class MarketMarketItem(Model):
     """VK Object Market/MarketMarketItem"""
 
     access_key: Optional[str] = None
@@ -3312,7 +3309,7 @@ class MarketMarketItemFull(MarketMarketItem):
     views_count: Optional[int] = None
 
 
-class MarketPrice(BaseObject):
+class MarketPrice(Model):
     """VK Object Market/MarketPrice
 
     amount - Amount
@@ -3326,7 +3323,7 @@ class MarketPrice(BaseObject):
     text: Optional[str] = None
 
 
-class PropertyValue(BaseObject):
+class PropertyValue(Model):
     variant_id: Optional[int] = None
     variant_name: Optional[str] = None
     property_name: Optional[str] = None
@@ -3342,7 +3339,7 @@ class MarketStatus(enum.IntEnum):
     RETURNED = 6
 
 
-class MarketDelivery(BaseObject):
+class MarketDelivery(Model):
     address: Optional[str] = None
     type: Optional[str] = None
     track_number: Optional[str] = None
@@ -3350,13 +3347,13 @@ class MarketDelivery(BaseObject):
     delivery_point: Optional[dict] = None
 
 
-class MarketRecipient(BaseObject):
+class MarketRecipient(Model):
     name: Optional[str] = None
     phone: Optional[str] = None
     display_text: Optional[str] = None
 
 
-class MarketOrder(BaseObject):
+class MarketOrder(Model):
     id: Optional[int] = None
     group_id: Optional[int] = None
     user_id: Optional[int] = None
@@ -3375,7 +3372,7 @@ class MarketOrder(BaseObject):
     recipient: Optional[MarketRecipient] = None
 
 
-class MarketSection(BaseObject):
+class MarketSection(Model):
     """VK Object Market/MarketSection
 
     id - Section ID
@@ -3386,7 +3383,7 @@ class MarketSection(BaseObject):
     name: Optional[str] = None
 
 
-class MediaRestriction(BaseObject):
+class MediaRestriction(Model):
     """VK Object Media/MediaRestriction
 
     always_shown - Need show restriction always or not
@@ -3406,7 +3403,7 @@ class MediaRestriction(BaseObject):
     list_icon: Optional[List["BaseImage"]] = None
 
 
-class MessageChatPreview(BaseObject):
+class MessageChatPreview(Model):
     """VK Object Message/MessageChatPreview"""
 
     admin_id: Optional[int] = None
@@ -3417,7 +3414,7 @@ class MessageChatPreview(BaseObject):
     title: Optional[str] = None
 
 
-class MessagesAudioMessage(BaseObject):
+class MessagesAudioMessage(Model):
     """VK Object Messages/MessagesAudioMessage
 
     access_key - Access key for audio message
@@ -3437,7 +3434,7 @@ class MessagesAudioMessage(BaseObject):
     waveform: Optional[List[int]] = None
 
 
-class MessagesChat(BaseObject):
+class MessagesChat(Model):
     """VK Object Messages/MessagesChat
 
     admin_id - Chat creator ID
@@ -3466,7 +3463,7 @@ class MessagesChat(BaseObject):
     is_default_photo: Optional[bool] = None
 
 
-class MessagesChatFull(BaseObject):
+class MessagesChatFull(Model):
     """VK Object Messages/MessagesChatFull
 
     admin_id - Chat creator ID
@@ -3493,7 +3490,7 @@ class MessagesChatFull(BaseObject):
     users: Optional[List["MessagesUserXtrInvitedBy"]] = None
 
 
-class MessagesChatPushSettings(BaseObject):
+class MessagesChatPushSettings(Model):
     """VK Object Messages/MessagesChatPushSettings
 
     disabled_until - Time until that notifications are disabled
@@ -3504,7 +3501,7 @@ class MessagesChatPushSettings(BaseObject):
     sound: Optional["BaseBoolInt"] = None
 
 
-class MessagesChatRestrictions(BaseObject):
+class MessagesChatRestrictions(Model):
     """VK Object Messages/MessagesChatRestrictions
 
     admins_promote_users - Only admins can promote users to admins
@@ -3521,7 +3518,7 @@ class MessagesChatRestrictions(BaseObject):
     only_admins_kick: Optional[bool] = None
 
 
-class MessagesConversation(BaseObject):
+class MessagesConversation(Model):
     """VK Object Messages/MessagesConversation
 
     last_message_id - ID of the last message in conversation
@@ -3550,7 +3547,7 @@ class MessagesConversation(BaseObject):
     current_keyboard: Optional["MessagesKeyboard"] = None
 
 
-class MessagesConversationMember(BaseObject):
+class MessagesConversationMember(Model):
     """VK Object Messages/MessagesConversationMember
 
     can_kick - Is it possible for user to kick this member
@@ -3567,7 +3564,7 @@ class MessagesConversationMember(BaseObject):
     member_id: Optional[int] = None
 
 
-class MessagesConversationPeer(BaseObject):
+class MessagesConversationPeer(Model):
     """VK Object Messages/MessagesConversationPeer"""
 
     id: Optional[int] = None
@@ -3584,14 +3581,14 @@ class MessagesConversationPeerType(enum.Enum):
     GROUP = "group"
 
 
-class MessagesConversationWithMessage(BaseObject):
+class MessagesConversationWithMessage(Model):
     """VK Object Messages/MessagesConversationWithMessage"""
 
     conversation: Optional["MessagesConversation"] = None
     last_message: Optional["MessagesMessage"] = None
 
 
-class MessagesConversationCanWrite(BaseObject):
+class MessagesConversationCanWrite(Model):
     """VK Object Messages/MessagesConversationCanWrite
 
     allowed - Can the user write to the dialog
@@ -3602,7 +3599,7 @@ class MessagesConversationCanWrite(BaseObject):
     reason: Optional[int] = None
 
 
-class MessagesConversationChatSettings(BaseObject):
+class MessagesConversationChatSettings(Model):
     """VK Object Messages/MessagesConversationChatSettings
 
     members_count - Number of chat members
@@ -3623,7 +3620,7 @@ class MessagesConversationChatSettings(BaseObject):
     is_group_channel: Optional[bool] = None
 
 
-class MessagesForeignMessage(BaseObject):
+class MessagesForeignMessage(Model):
     """VK Object Messages/MessagesForeignMessage
 
     conversation_message_id - Conversation message ID
@@ -3652,7 +3649,7 @@ class MessagesForeignMessage(BaseObject):
     payload: Optional[str] = None
 
 
-class MessagesGraffiti(BaseObject):
+class MessagesGraffiti(Model):
     """VK Object Messages/MessagesGraffiti
 
     access_key - Access key for graffiti
@@ -3671,7 +3668,7 @@ class MessagesGraffiti(BaseObject):
     width: Optional[int] = None
 
 
-class MessagesHistoryAttachment(BaseObject):
+class MessagesHistoryAttachment(Model):
     """VK Object Messages/MessagesHistoryAttachment
 
     message_id - Message ID
@@ -3683,7 +3680,7 @@ class MessagesHistoryAttachment(BaseObject):
     from_id: Optional[int] = None
 
 
-class MessagesHistoryMessageAttachment(BaseObject):
+class MessagesHistoryMessageAttachment(Model):
     """VK Object Messages/MessagesHistoryMessageAttachment"""
 
     audio: Optional["AudioAudio"] = None
@@ -3714,7 +3711,7 @@ class MessagesHistoryMessageAttachmentType(enum.Enum):
     AUDIO_MESSAGE = "audio_message"
 
 
-class MessagesKeyboard(BaseObject):
+class MessagesKeyboard(Model):
     """VK Object Messages/MessagesKeyboard
 
     author_id - Community or bot, which set this keyboard
@@ -3727,7 +3724,7 @@ class MessagesKeyboard(BaseObject):
     inline: Optional[bool] = None
 
 
-class MessagesKeyboardButton(BaseObject):
+class MessagesKeyboardButton(Model):
     """VK Object Messages/MessagesKeyboardButton
 
     color - Button color
@@ -3737,7 +3734,7 @@ class MessagesKeyboardButton(BaseObject):
     color: Optional[str] = None
 
 
-class MessagesKeyboardButtonAction(BaseObject):
+class MessagesKeyboardButtonAction(Model):
     """VK Object Messages/MessagesKeyboardButtonAction
 
     app_id - Fragment value in app link like vk.com/app{app_id}_-654321#hash
@@ -3758,7 +3755,7 @@ class MessagesKeyboardButtonAction(BaseObject):
     type: Optional["MessagesTemplateActionTypeNames"] = None
 
 
-class MessagesLastActivity(BaseObject):
+class MessagesLastActivity(Model):
     """VK Object Messages/MessagesLastActivity
 
     online - Information whether user is online
@@ -3769,7 +3766,7 @@ class MessagesLastActivity(BaseObject):
     time: Optional[int] = None
 
 
-class MessagesLongpollMessages(BaseObject):
+class MessagesLongpollMessages(Model):
     """VK Object Messages/MessagesLongpollMessages
 
     count - Total number
@@ -3779,7 +3776,7 @@ class MessagesLongpollMessages(BaseObject):
     items: Optional[List["MessagesMessage"]] = None
 
 
-class MessagesLongpollParams(BaseObject):
+class MessagesLongpollParams(Model):
     """VK Object Messages/MessagesLongpollParams
 
     key - Key
@@ -3794,7 +3791,7 @@ class MessagesLongpollParams(BaseObject):
     ts: Optional[str] = None
 
 
-class MessagesMessage(BaseObject):
+class MessagesMessage(Model):
     """VK Object Messages/MessagesMessage
 
     admin_author_id - Only for messages from community. Contains user ID of community admin, who sent this message.
@@ -3892,7 +3889,7 @@ class MessagesMessage(BaseObject):
         return unpack_failure(self.payload)
 
 
-class MessagesMessageAction(BaseObject):
+class MessagesMessageAction(Model):
     """VK Object Messages/MessagesMessageAction
 
     conversation_message_id - Message ID
@@ -3911,7 +3908,7 @@ class MessagesMessageAction(BaseObject):
     type: Optional["MessagesMessageActionStatus"] = None
 
 
-class MessagesMessageActionPhoto(BaseObject):
+class MessagesMessageActionPhoto(Model):
     """VK Object Messages/MessagesMessageActionPhoto"""
 
     photo_100: Optional[str] = None
@@ -3933,7 +3930,7 @@ class MessagesMessageActionStatus(enum.Enum):
     CHAT_INVITE_USER_BY_LINK = "chat_invite_user_by_link"
 
 
-class MessagesMessageAttachment(BaseObject):
+class MessagesMessageAttachment(Model):
     """VK Object Messages/MessagesMessageAttachment"""
 
     audio: Optional["AudioAudio"] = None
@@ -3974,7 +3971,7 @@ class MessagesMessageAttachmentType(enum.Enum):
     AUDIO_MESSAGE = "audio_message"
 
 
-class MessagesMessageRequestData(BaseObject):
+class MessagesMessageRequestData(Model):
     """VK Object Messages/MessagesMessageRequestData
 
     status - Status of message request
@@ -3987,7 +3984,7 @@ class MessagesMessageRequestData(BaseObject):
     request_date: Optional[int] = None
 
 
-class MessagesPinnedMessage(BaseObject):
+class MessagesPinnedMessage(Model):
     """VK Object Messages/MessagesPinnedMessage"""
 
     attachments: Optional[List["MessagesMessageAttachment"]] = None
@@ -4025,7 +4022,7 @@ class NewsfeedCommentsFilters(enum.Enum):
     NOTE = "note"
 
 
-class NewsfeedEventActivity(BaseObject):
+class NewsfeedEventActivity(Model):
     """VK Object Newsfeed/NewsfeedEventActivity"""
 
     address: Optional[str] = None
@@ -4063,7 +4060,7 @@ class NewsfeedIgnoreItemType(enum.Enum):
     AUDIO = "audio"
 
 
-class NewsfeedItemAudioAudio(BaseObject):
+class NewsfeedItemAudioAudio(Model):
     """VK Object Newsfeed/NewsfeedItemAudioAudio
 
     count - Audios number
@@ -4073,7 +4070,7 @@ class NewsfeedItemAudioAudio(BaseObject):
     items: Optional[List["AudioAudio"]] = None
 
 
-class NewsfeedItemBase(BaseObject):
+class NewsfeedItemBase(Model):
     """VK Object Newsfeed/NewsfeedItemBase
 
     source_id - Item source ID
@@ -4107,7 +4104,7 @@ class NewsfeedItemFriend(NewsfeedItemBase):
     friends: Optional["NewsfeedItemFriendFriends"] = None
 
 
-class NewsfeedItemFriendFriends(BaseObject):
+class NewsfeedItemFriendFriends(Model):
     """VK Object Newsfeed/NewsfeedItemFriendFriends
 
     count - Number of friends has been added
@@ -4117,7 +4114,7 @@ class NewsfeedItemFriendFriends(BaseObject):
     items: Optional[List["BaseUserId"]] = None
 
 
-class NewsfeedItemHolidayRecommendationsBlockHeader(BaseObject):
+class NewsfeedItemHolidayRecommendationsBlockHeader(Model):
     """VK Object Newsfeed/NewsfeedItemHolidayRecommendationsBlockHeader
 
     title - Title of the header
@@ -4136,7 +4133,7 @@ class NewsfeedItemNote(NewsfeedItemBase):
     notes: Optional["NewsfeedItemNoteNotes"] = None
 
 
-class NewsfeedItemNoteNotes(BaseObject):
+class NewsfeedItemNoteNotes(Model):
     """VK Object Newsfeed/NewsfeedItemNoteNotes
 
     count - Notes number
@@ -4146,7 +4143,7 @@ class NewsfeedItemNoteNotes(BaseObject):
     items: Optional[List["NewsfeedNewsfeedNote"]] = None
 
 
-class NewsfeedItemPhotoPhotos(BaseObject):
+class NewsfeedItemPhotoPhotos(Model):
     """VK Object Newsfeed/NewsfeedItemPhotoPhotos
 
     count - Photos number
@@ -4156,7 +4153,7 @@ class NewsfeedItemPhotoPhotos(BaseObject):
     items: Optional[List["NewsfeedNewsfeedPhoto"]] = None
 
 
-class NewsfeedItemPhotoTagPhotoTags(BaseObject):
+class NewsfeedItemPhotoTagPhotoTags(Model):
     """VK Object Newsfeed/NewsfeedItemPhotoTagPhotoTags
 
     count - Tags number
@@ -4176,7 +4173,7 @@ class NewsfeedItemPromoButton(NewsfeedItemBase):
     track_code: Optional[str] = None
 
 
-class NewsfeedItemPromoButtonAction(BaseObject):
+class NewsfeedItemPromoButtonAction(Model):
     """VK Object Newsfeed/NewsfeedItemPromoButtonAction"""
 
     url: Optional[str] = None
@@ -4184,7 +4181,7 @@ class NewsfeedItemPromoButtonAction(BaseObject):
     target: Optional[str] = None
 
 
-class NewsfeedItemPromoButtonImage(BaseObject):
+class NewsfeedItemPromoButtonImage(Model):
     """VK Object Newsfeed/NewsfeedItemPromoButtonImage"""
 
     width: Optional[int] = None
@@ -4205,7 +4202,7 @@ class NewsfeedItemTopic(NewsfeedItemBase):
     text: Optional[str] = None
 
 
-class NewsfeedItemVideoVideo(BaseObject):
+class NewsfeedItemVideoVideo(Model):
     """VK Object Newsfeed/NewsfeedItemVideoVideo
 
     count - Tags number
@@ -4215,7 +4212,7 @@ class NewsfeedItemVideoVideo(BaseObject):
     items: Optional[List["VideoVideo"]] = None
 
 
-class NewsfeedItemWallpostFeedback(BaseObject):
+class NewsfeedItemWallpostFeedback(Model):
     """VK Object Newsfeed/NewsfeedItemWallpostFeedback"""
 
     type: Optional["NewsfeedItemWallpostFeedbackType"] = None
@@ -4225,7 +4222,7 @@ class NewsfeedItemWallpostFeedback(BaseObject):
     gratitude: Optional[str] = None
 
 
-class NewsfeedItemWallpostFeedbackAnswer(BaseObject):
+class NewsfeedItemWallpostFeedbackAnswer(Model):
     """VK Object Newsfeed/NewsfeedItemWallpostFeedbackAnswer"""
 
     title: Optional[str] = None
@@ -4247,7 +4244,7 @@ class NewsfeedItemWallpostType(enum.Enum):
     REPLY = "reply"
 
 
-class NewsfeedList(BaseObject):
+class NewsfeedList(Model):
     """VK Object Newsfeed/NewsfeedList
 
     id - List ID
@@ -4268,7 +4265,7 @@ class NewsfeedListFull(NewsfeedList):
     source_ids: Optional[List[int]] = None
 
 
-class NewsfeedNewsfeedItem(BaseObject):
+class NewsfeedNewsfeedItem(Model):
     """VK Object Newsfeed/NewsfeedNewsfeedItem"""
 
 
@@ -4289,7 +4286,7 @@ class NewsfeedNewsfeedItemType(enum.Enum):
     TAGS_SUGGESTIONS = "tags_suggestions"
 
 
-class NewsfeedNewsfeedNote(BaseObject):
+class NewsfeedNewsfeedNote(Model):
     """VK Object Newsfeed/NewsfeedNewsfeedNote
 
     comments - Comments Number
@@ -4304,7 +4301,7 @@ class NewsfeedNewsfeedNote(BaseObject):
     title: Optional[str] = None
 
 
-class NotesNote(BaseObject):
+class NotesNote(Model):
     """VK Object Notes/NotesNote
 
     can_comment - Information whether current user can comment the note
@@ -4330,7 +4327,7 @@ class NotesNote(BaseObject):
     view_url: Optional[str] = None
 
 
-class NotesNoteComment(BaseObject):
+class NotesNoteComment(Model):
     """VK Object Notes/NotesNoteComment
 
     date - Date when the comment has beed added in Unixtime
@@ -4351,7 +4348,7 @@ class NotesNoteComment(BaseObject):
     uid: Optional[int] = None
 
 
-class NotificationsFeedback(BaseObject):
+class NotificationsFeedback(Model):
     """VK Object Notifications/NotificationsFeedback
 
     from_id - Reply author's ID
@@ -4369,7 +4366,7 @@ class NotificationsFeedback(BaseObject):
     to_id: Optional[int] = None
 
 
-class NotificationsNotification(BaseObject):
+class NotificationsNotification(Model):
     """VK Object Notifications/NotificationsNotification
 
     date - Date when the event has been occurred
@@ -4383,11 +4380,11 @@ class NotificationsNotification(BaseObject):
     type: Optional[str] = None
 
 
-class NotificationsNotificationItem(BaseObject):
+class NotificationsNotificationItem(Model):
     """VK Object Notifications/NotificationsNotificationItem"""
 
 
-class NotificationsNotificationsComment(BaseObject):
+class NotificationsNotificationsComment(Model):
     """VK Object Notifications/NotificationsNotificationsComment
 
     date - Date when the comment has been added in Unixtime
@@ -4406,7 +4403,7 @@ class NotificationsNotificationsComment(BaseObject):
     video: Optional["VideoVideo"] = None
 
 
-class NotificationsReply(BaseObject):
+class NotificationsReply(Model):
     """VK Object Notifications/NotificationsReply
 
     date - Date when the reply has been created in Unixtime
@@ -4419,7 +4416,7 @@ class NotificationsReply(BaseObject):
     text: Optional[int] = None
 
 
-class NotificationsSendMessageError(BaseObject):
+class NotificationsSendMessageError(Model):
     """VK Object Notifications/NotificationsSendMessageError
 
     code - Error code
@@ -4430,7 +4427,7 @@ class NotificationsSendMessageError(BaseObject):
     description: Optional[str] = None
 
 
-class NotificationsSendMessageItem(BaseObject):
+class NotificationsSendMessageItem(Model):
     """VK Object Notifications/NotificationsSendMessageItem
 
     user_id - User ID
@@ -4442,7 +4439,7 @@ class NotificationsSendMessageItem(BaseObject):
     error: Optional["NotificationsSendMessageError"] = None
 
 
-class OauthError(BaseObject):
+class OauthError(Model):
     """VK Object Oauth/OauthError
 
     error - Error type
@@ -4455,7 +4452,7 @@ class OauthError(BaseObject):
     redirect_uri: Optional[str] = None
 
 
-class OrdersAmount(BaseObject):
+class OrdersAmount(Model):
     """VK Object Orders/OrdersAmount
 
     currency - Currency name
@@ -4465,7 +4462,7 @@ class OrdersAmount(BaseObject):
     currency: Optional[str] = None
 
 
-class OrdersAmountItem(BaseObject):
+class OrdersAmountItem(Model):
     """VK Object Orders/OrdersAmountItem
 
     amount - Votes amount in user's currency
@@ -4478,7 +4475,7 @@ class OrdersAmountItem(BaseObject):
     votes: Optional[str] = None
 
 
-class OrdersOrder(BaseObject):
+class OrdersOrder(Model):
     """VK Object Orders/OrdersOrder
 
     amount - Amount
@@ -4505,7 +4502,7 @@ class OrdersOrder(BaseObject):
     user_id: Optional[int] = None
 
 
-class OrdersSubscription(BaseObject):
+class OrdersSubscription(Model):
     """VK Object Orders/OrdersSubscription
 
     cancel_reason - Cancel reason
@@ -4538,7 +4535,7 @@ class OrdersSubscription(BaseObject):
     update_time: Optional[int] = None
 
 
-class OwnerState(BaseObject):
+class OwnerState(Model):
     """VK Object Owner/OwnerState"""
 
     state: Optional[int] = None
@@ -4553,7 +4550,7 @@ class PagesPrivacySettings(enum.IntEnum):
     everyone = 2
 
 
-class PagesWikipage(BaseObject):
+class PagesWikipage(Model):
     """VK Object Pages/PagesWikipage
 
     creator_id - Page creator ID
@@ -4580,7 +4577,7 @@ class PagesWikipage(BaseObject):
     who_can_view: Optional["PagesPrivacySettings"] = None
 
 
-class PagesWikipageFull(BaseObject):
+class PagesWikipageFull(Model):
     """VK Object Pages/PagesWikipageFull
 
     created - Date when the page has been created in Unixtime
@@ -4617,7 +4614,7 @@ class PagesWikipageFull(BaseObject):
     who_can_view: Optional["PagesPrivacySettings"] = None
 
 
-class PagesWikipageHistory(BaseObject):
+class PagesWikipageHistory(Model):
     """VK Object Pages/PagesWikipageHistory
 
     id - Version ID
@@ -4634,7 +4631,7 @@ class PagesWikipageHistory(BaseObject):
     editor_name: Optional[str] = None
 
 
-class PhotosCommentXtrPid(BaseObject):
+class PhotosCommentXtrPid(Model):
     """VK Object Photos/PhotosCommentXtrPid
 
     date - Date when the comment has been added in Unixtime
@@ -4659,7 +4656,7 @@ class PhotosCommentXtrPid(BaseObject):
     thread: Optional["CommentThread"] = None
 
 
-class PhotosImage(BaseObject):
+class PhotosImage(Model):
     """VK Object Photos/PhotosImage"""
 
     height: Optional[int] = None
@@ -4684,7 +4681,7 @@ class PhotosImageType(enum.Enum):
     W = "w"
 
 
-class PhotosMarketAlbumUploadResponse(BaseObject):
+class PhotosMarketAlbumUploadResponse(Model):
     """VK Object Photos/PhotosMarketAlbumUploadResponse
 
     gid - Community ID
@@ -4699,7 +4696,7 @@ class PhotosMarketAlbumUploadResponse(BaseObject):
     server: Optional[int] = None
 
 
-class PhotosMarketUploadResponse(BaseObject):
+class PhotosMarketUploadResponse(Model):
     """VK Object Photos/PhotosMarketUploadResponse
 
     crop_data - Crop data
@@ -4718,7 +4715,7 @@ class PhotosMarketUploadResponse(BaseObject):
     server: Optional[int] = None
 
 
-class PhotosMessageUploadResponse(BaseObject):
+class PhotosMessageUploadResponse(Model):
     """VK Object Photos/PhotosMessageUploadResponse
 
     hash - Uploading hash
@@ -4731,7 +4728,7 @@ class PhotosMessageUploadResponse(BaseObject):
     server: Optional[int] = None
 
 
-class PhotosOwnerUploadResponse(BaseObject):
+class PhotosOwnerUploadResponse(Model):
     """VK Object Photos/PhotosOwnerUploadResponse
 
     hash - Uploading hash
@@ -4744,7 +4741,7 @@ class PhotosOwnerUploadResponse(BaseObject):
     server: Optional[int] = None
 
 
-class PhotosPhoto(BaseObject):
+class PhotosPhoto(Model):
     """VK Object Photos/PhotosPhoto
 
     access_key - Access key for the photo
@@ -4785,7 +4782,7 @@ class PhotosPhoto(BaseObject):
     restrictions: Optional["MediaRestriction"] = None
 
 
-class PhotosPhotoAlbum(BaseObject):
+class PhotosPhotoAlbum(Model):
     """VK Object Photos/PhotosPhotoAlbum
 
     created - Date when the album has been created in Unixtime
@@ -4807,7 +4804,7 @@ class PhotosPhotoAlbum(BaseObject):
     updated: Optional[int] = None
 
 
-class PhotosPhotoAlbumFull(BaseObject):
+class PhotosPhotoAlbumFull(Model):
     """VK Object Photos/PhotosPhotoAlbumFull
 
     can_upload - Information whether current user can upload photo to the album
@@ -4841,7 +4838,7 @@ class PhotosPhotoAlbumFull(BaseObject):
     upload_by_admins_only: Optional["BaseBoolInt"] = None
 
 
-class PhotosPhotoFull(BaseObject):
+class PhotosPhotoFull(Model):
     """VK Object Photos/PhotosPhotoFull
 
     access_key - Access key for the photo
@@ -4862,7 +4859,7 @@ class PhotosPhotoFull(BaseObject):
     access_key: Optional[str] = None
     album_id: Optional[int] = None
     can_comment: Optional["BaseBoolInt"] = None
-    comments: Optional["BaseObjectCount"] = None
+    comments: Optional["ModelCount"] = None
     date: Optional[int] = None
     height: Optional[int] = None
     id: Optional[int] = None
@@ -4872,14 +4869,14 @@ class PhotosPhotoFull(BaseObject):
     long: Optional[float] = None
     owner_id: Optional[int] = None
     post_id: Optional[int] = None
-    reposts: Optional["BaseObjectCount"] = None
-    tags: Optional["BaseObjectCount"] = None
+    reposts: Optional["ModelCount"] = None
+    tags: Optional["ModelCount"] = None
     text: Optional[str] = None
     user_id: Optional[int] = None
     width: Optional[int] = None
 
 
-class PhotosPhotoFullXtrRealOffset(BaseObject):
+class PhotosPhotoFullXtrRealOffset(Model):
     """VK Object Photos/PhotosPhotoFullXtrRealOffset
 
     access_key - Access key for the photo
@@ -4907,7 +4904,7 @@ class PhotosPhotoFullXtrRealOffset(BaseObject):
     access_key: Optional[str] = None
     album_id: Optional[int] = None
     can_comment: Optional["BaseBoolInt"] = None
-    comments: Optional["BaseObjectCount"] = None
+    comments: Optional["ModelCount"] = None
     date: Optional[int] = None
     height: Optional[int] = None
     hidden: Optional["BasePropertyExists"] = None
@@ -4924,15 +4921,15 @@ class PhotosPhotoFullXtrRealOffset(BaseObject):
     photo_807: Optional[str] = None
     post_id: Optional[int] = None
     real_offset: Optional[int] = None
-    reposts: Optional["BaseObjectCount"] = None
+    reposts: Optional["ModelCount"] = None
     sizes: Optional[List["PhotosPhotoSizes"]] = None
-    tags: Optional["BaseObjectCount"] = None
+    tags: Optional["ModelCount"] = None
     text: Optional[str] = None
     user_id: Optional[int] = None
     width: Optional[int] = None
 
 
-class PhotosPhotoSizes(BaseObject):
+class PhotosPhotoSizes(Model):
     """VK Object Photos/PhotosPhotoSizes"""
 
     height: Optional[int] = None
@@ -4962,7 +4959,7 @@ class PhotosPhotoSizesType(enum.Enum):
     D = "d"
 
 
-class PhotosPhotoTag(BaseObject):
+class PhotosPhotoTag(Model):
     """VK Object Photos/PhotosPhotoTag
 
     date - Date when tag has been added in Unixtime
@@ -4989,7 +4986,7 @@ class PhotosPhotoTag(BaseObject):
     y2: Optional[float] = None
 
 
-class PhotosPhotoUpload(BaseObject):
+class PhotosPhotoUpload(Model):
     """VK Object Photos/PhotosPhotoUpload
 
     album_id - Album ID
@@ -5006,7 +5003,7 @@ class PhotosPhotoUpload(BaseObject):
     group_id: Optional[int] = None
 
 
-class PhotosPhotoUploadResponse(BaseObject):
+class PhotosPhotoUploadResponse(Model):
     """VK Object Photos/PhotosPhotoUploadResponse
 
     aid - Album ID
@@ -5021,7 +5018,7 @@ class PhotosPhotoUploadResponse(BaseObject):
     server: Optional[int] = None
 
 
-class PhotosPhotoXtrRealOffset(BaseObject):
+class PhotosPhotoXtrRealOffset(Model):
     """VK Object Photos/PhotosPhotoXtrRealOffset
 
     access_key - Access key for the photo
@@ -5069,7 +5066,7 @@ class PhotosPhotoXtrRealOffset(BaseObject):
     width: Optional[int] = None
 
 
-class PhotosPhotoXtrTagInfo(BaseObject):
+class PhotosPhotoXtrTagInfo(Model):
     """VK Object Photos/PhotosPhotoXtrTagInfo
 
     access_key - Access key for the photo
@@ -5119,7 +5116,7 @@ class PhotosPhotoXtrTagInfo(BaseObject):
     width: Optional[int] = None
 
 
-class PhotosTagsSuggestionItem(BaseObject):
+class PhotosTagsSuggestionItem(Model):
     """VK Object Photos/PhotosTagsSuggestionItem"""
 
     title: Optional[str] = None
@@ -5129,7 +5126,7 @@ class PhotosTagsSuggestionItem(BaseObject):
     tags: Optional[List["PhotosPhotoTag"]] = None
 
 
-class PhotosTagsSuggestionItemButton(BaseObject):
+class PhotosTagsSuggestionItemButton(Model):
     """VK Object Photos/PhotosTagsSuggestionItemButton"""
 
     title: Optional[str] = None
@@ -5137,7 +5134,7 @@ class PhotosTagsSuggestionItemButton(BaseObject):
     style: Optional[str] = None
 
 
-class PhotosWallUploadResponse(BaseObject):
+class PhotosWallUploadResponse(Model):
     """VK Object Photos/PhotosWallUploadResponse
 
     hash - Uploading hash
@@ -5150,7 +5147,7 @@ class PhotosWallUploadResponse(BaseObject):
     server: Optional[int] = None
 
 
-class PollsAnswer(BaseObject):
+class PollsAnswer(Model):
     """VK Object Polls/PollsAnswer
 
     id - Answer ID
@@ -5165,7 +5162,7 @@ class PollsAnswer(BaseObject):
     votes: Optional[int] = None
 
 
-class PollsBackground(BaseObject):
+class PollsBackground(Model):
     """VK Object Polls/PollsBackground
 
     angle - Gradient angle with 0 on positive X axis
@@ -5187,13 +5184,13 @@ class PollsBackground(BaseObject):
     width: Optional[int] = None
 
 
-class PollsFriend(BaseObject):
+class PollsFriend(Model):
     """VK Object Polls/PollsFriend"""
 
     id: Optional[int] = None
 
 
-class PollsPoll(BaseObject):
+class PollsPoll(Model):
     """VK Object Polls/PollsPoll"""
 
     anonymous: Optional["PollsPollAnonymous"] = None
@@ -5223,7 +5220,7 @@ class PollsPoll(BaseObject):
 PollsPollAnonymous = Optional[bool]  # Information whether the field is anonymous
 
 
-class PollsVoters(BaseObject):
+class PollsVoters(Model):
     """VK Object Polls/PollsVoters
 
     answer_id - Answer ID
@@ -5233,7 +5230,7 @@ class PollsVoters(BaseObject):
     users: Optional["PollsVotersUsers"] = None
 
 
-class PollsVotersUsers(BaseObject):
+class PollsVotersUsers(Model):
     """VK Object Polls/PollsVotersUsers
 
     count - Votes number
@@ -5243,7 +5240,7 @@ class PollsVotersUsers(BaseObject):
     items: Optional[List[int]] = None
 
 
-class PrettyCardsPrettyCard(BaseObject):
+class PrettyCardsPrettyCard(Model):
     """VK Object PrettyCards/PrettyCardsPrettyCard
 
     button - Button key
@@ -5267,7 +5264,7 @@ class PrettyCardsPrettyCard(BaseObject):
     title: Optional[str] = None
 
 
-class SearchHint(BaseObject):
+class SearchHint(Model):
     """VK Object Search/SearchHint"""
 
     app: Optional["AppsApp"] = None
@@ -5301,7 +5298,7 @@ class SearchHintType(enum.Enum):
     HTML5_GAME = "html5_game"
 
 
-class SecureLevel(BaseObject):
+class SecureLevel(Model):
     """VK Object Secure/SecureLevel
 
     level - Level
@@ -5312,7 +5309,7 @@ class SecureLevel(BaseObject):
     uid: Optional[int] = None
 
 
-class SecureSmsNotification(BaseObject):
+class SecureSmsNotification(Model):
     """VK Object Secure/SecureSmsNotification
 
     app_id - Application ID
@@ -5329,7 +5326,7 @@ class SecureSmsNotification(BaseObject):
     user_id: Optional[str] = None
 
 
-class SecureTokenChecked(BaseObject):
+class SecureTokenChecked(Model):
     """VK Object Secure/SecureTokenChecked
 
     date - Date when access_token has been generated in Unixtime
@@ -5344,7 +5341,7 @@ class SecureTokenChecked(BaseObject):
     user_id: Optional[int] = None
 
 
-class SecureTransaction(BaseObject):
+class SecureTransaction(Model):
     """VK Object Secure/SecureTransaction
 
     date - Transaction date in Unixtime
@@ -5361,7 +5358,7 @@ class SecureTransaction(BaseObject):
     votes: Optional[int] = None
 
 
-class StatsActivity(BaseObject):
+class StatsActivity(Model):
     """VK Object Stats/StatsActivity
 
     comments - Comments number
@@ -5380,7 +5377,7 @@ class StatsActivity(BaseObject):
     unsubscribed: Optional[int] = None
 
 
-class StatsCity(BaseObject):
+class StatsCity(Model):
     """VK Object Stats/StatsCity
 
     count - Visitors number
@@ -5393,7 +5390,7 @@ class StatsCity(BaseObject):
     value: Optional[int] = None
 
 
-class StatsCountry(BaseObject):
+class StatsCountry(Model):
     """VK Object Stats/StatsCountry
 
     code - Country code
@@ -5408,7 +5405,7 @@ class StatsCountry(BaseObject):
     value: Optional[int] = None
 
 
-class StatsPeriod(BaseObject):
+class StatsPeriod(Model):
     """VK Object Stats/StatsPeriod
 
     period_from - Unix timestamp
@@ -5422,7 +5419,7 @@ class StatsPeriod(BaseObject):
     visitors: Optional["StatsViews"] = None
 
 
-class StatsReach(BaseObject):
+class StatsReach(Model):
     """VK Object Stats/StatsReach
 
     mobile_reach - Reach count from mobile devices
@@ -5440,7 +5437,7 @@ class StatsReach(BaseObject):
     sex_age: Optional[List["StatsSexAge"]] = None
 
 
-class StatsSexAge(BaseObject):
+class StatsSexAge(Model):
     """VK Object Stats/StatsSexAge
 
     count - Visitors number
@@ -5454,7 +5451,7 @@ class StatsSexAge(BaseObject):
     count_subscribers: Optional[int] = None
 
 
-class StatsViews(BaseObject):
+class StatsViews(Model):
     """VK Object Stats/StatsViews
 
     mobile_views - Number of views from mobile devices
@@ -5472,7 +5469,7 @@ class StatsViews(BaseObject):
     visitors: Optional[int] = None
 
 
-class StatsWallpostStat(BaseObject):
+class StatsWallpostStat(Model):
     """VK Object Stats/StatsWallpostStat
 
     hide - Hidings number
@@ -5501,7 +5498,7 @@ class StatsWallpostStat(BaseObject):
     sex_age: Optional[List["StatsSexAge"]] = None
 
 
-class StatusStatus(BaseObject):
+class StatusStatus(Model):
     """VK Object Status/StatusStatus
 
     text - Status text
@@ -5511,21 +5508,21 @@ class StatusStatus(BaseObject):
     audio: Optional["AudioAudio"] = None
 
 
-class StorageValue(BaseObject):
+class StorageValue(Model):
     """VK Object Storage/StorageValue"""
 
     key: Optional[str] = None
     value: Optional[str] = None
 
 
-class StoriesClickableArea(BaseObject):
+class StoriesClickableArea(Model):
     """VK Object Stories/StoriesClickableArea"""
 
     x: Optional[int] = None
     y: Optional[int] = None
 
 
-class StoriesClickableSticker(BaseObject):
+class StoriesClickableSticker(Model):
     """VK Object Stories/StoriesClickableSticker
 
     id - Clickable sticker ID
@@ -5566,7 +5563,7 @@ class StoriesClickableSticker(BaseObject):
     is_broadcast_notify_allowed: Optional[bool] = None
 
 
-class StoriesClickableStickers(BaseObject):
+class StoriesClickableStickers(Model):
     """VK Object Stories/StoriesClickableStickers"""
 
     clickable_stickers: Optional[List["StoriesClickableSticker"]] = None
@@ -5574,7 +5571,7 @@ class StoriesClickableStickers(BaseObject):
     original_width: Optional[int] = None
 
 
-class StoriesFeedItem(BaseObject):
+class StoriesFeedItem(Model):
     """VK Object Stories/StoriesFeedItem
 
     type - Type of Feed Item
@@ -5591,7 +5588,7 @@ class StoriesFeedItem(BaseObject):
     promo_data: Optional["StoriesPromoBlock"] = None
 
 
-class StoriesPromoBlock(BaseObject):
+class StoriesPromoBlock(Model):
     """VK Object Stories/StoriesPromoBlock
 
     name - Promo story title
@@ -5606,7 +5603,7 @@ class StoriesPromoBlock(BaseObject):
     not_animated: Optional[bool] = None
 
 
-class StoriesReplies(BaseObject):
+class StoriesReplies(Model):
     """VK Object Stories/StoriesReplies
 
     count - Replies number.
@@ -5617,7 +5614,7 @@ class StoriesReplies(BaseObject):
     new: Optional[int] = None
 
 
-class StoriesStatLine(BaseObject):
+class StoriesStatLine(Model):
     """VK Object Stories/StoriesStatLine"""
 
     name: Optional[str] = None
@@ -5625,7 +5622,7 @@ class StoriesStatLine(BaseObject):
     is_unavailable: Optional[bool] = None
 
 
-class StoriesStory(BaseObject):
+class StoriesStory(Model):
     """VK Object Stories/StoriesStory
 
     access_key - Access key for private object.
@@ -5683,7 +5680,7 @@ class StoriesStory(BaseObject):
     birthday_wish_user_id: Optional[int] = None
 
 
-class StoriesStoryLink(BaseObject):
+class StoriesStoryLink(Model):
     """VK Object Stories/StoriesStoryLink
 
     text - Link text
@@ -5694,7 +5691,7 @@ class StoriesStoryLink(BaseObject):
     url: Optional[str] = None
 
 
-class StoriesStoryStats(BaseObject):
+class StoriesStoryStats(Model):
     """VK Object Stories/StoriesStoryStats"""
 
     answer: Optional["StoriesStoryStatsStat"] = None
@@ -5707,7 +5704,7 @@ class StoriesStoryStats(BaseObject):
     likes: Optional["StoriesStoryStatsStat"] = None
 
 
-class StoriesStoryStatsStat(BaseObject):
+class StoriesStoryStatsStat(Model):
     """VK Object Stories/StoriesStoryStatsStat"""
 
     count: Optional[int] = None
@@ -5757,7 +5754,7 @@ class StoriesUploadLinkText(enum.Enum):
     CALENDAR = "calendar"
 
 
-class StoriesViewersItem(BaseObject):
+class StoriesViewersItem(Model):
     """VK Object Stories/StoriesViewersItem
 
     is_liked - user has like for this object
@@ -5769,7 +5766,7 @@ class StoriesViewersItem(BaseObject):
     user: Optional["UsersUserFull"] = None
 
 
-class UsersCareer(BaseObject):
+class UsersCareer(Model):
     """VK Object Users/UsersCareer
 
     city_id - City ID
@@ -5792,7 +5789,7 @@ class UsersCareer(BaseObject):
     until: Optional[int] = None
 
 
-class UsersExports(BaseObject):
+class UsersExports(Model):
     """VK Object Users/UsersExports"""
 
     facebook: Optional[int] = None
@@ -5878,7 +5875,7 @@ class UsersFields(enum.Enum):
     CLIPS_COUNT = "clips_count"
 
 
-class UsersLastSeen(BaseObject):
+class UsersLastSeen(Model):
     """VK Object Users/UsersLastSeen
 
     platform - Type of the platform that used for the last authorization
@@ -5889,7 +5886,7 @@ class UsersLastSeen(BaseObject):
     time: Optional[int] = None
 
 
-class UsersMilitary(BaseObject):
+class UsersMilitary(Model):
     """VK Object Users/UsersMilitary
 
     country_id - Country ID
@@ -5908,7 +5905,7 @@ class UsersMilitary(BaseObject):
     until: Optional[int] = None
 
 
-class UsersOccupation(BaseObject):
+class UsersOccupation(Model):
     """VK Object Users/UsersOccupation
 
     id - ID of school, university, company group
@@ -5921,7 +5918,7 @@ class UsersOccupation(BaseObject):
     type: Optional[str] = None
 
 
-class UsersOnlineInfo(BaseObject):
+class UsersOnlineInfo(Model):
     """VK Object Users/UsersOnlineInfo
 
     visible - Whether you can see real online status of user or not
@@ -5940,7 +5937,7 @@ class UsersOnlineInfo(BaseObject):
     status: Optional[str] = None
 
 
-class UsersPersonal(BaseObject):
+class UsersPersonal(Model):
     """VK Object Users/UsersPersonal
 
     alcohol - User's views on alcohol
@@ -5964,7 +5961,7 @@ class UsersPersonal(BaseObject):
     smoking: Optional[int] = None
 
 
-class UsersRelative(BaseObject):
+class UsersRelative(Model):
     """VK Object Users/UsersRelative
 
     birth_date - Date of child birthday (format dd.mm.yyyy)
@@ -5979,7 +5976,7 @@ class UsersRelative(BaseObject):
     type: Optional[str] = None
 
 
-class UsersSchool(BaseObject):
+class UsersSchool(Model):
     """VK Object Users/UsersSchool
 
     city - City ID
@@ -6006,11 +6003,11 @@ class UsersSchool(BaseObject):
     year_to: Optional[int] = None
 
 
-class UsersSubscriptionsItem(BaseObject):
+class UsersSubscriptionsItem(Model):
     """VK Object Users/UsersSubscriptionsItem"""
 
 
-class UsersUniversity(BaseObject):
+class UsersUniversity(Model):
     """VK Object Users/UsersUniversity
 
     chair - Chair ID
@@ -6039,7 +6036,7 @@ class UsersUniversity(BaseObject):
     name: Optional[str] = None
 
 
-class UsersUserConnections(BaseObject):
+class UsersUserConnections(Model):
     """VK Object Users/UsersUserConnections
 
     skype - User's Skype nickname
@@ -6058,7 +6055,7 @@ class UsersUserConnections(BaseObject):
     instagram: Optional[str] = None
 
 
-class UsersUserCounters(BaseObject):
+class UsersUserCounters(Model):
     """VK Object Users/UsersUserCounters
 
     albums - Albums number
@@ -6093,7 +6090,7 @@ class UsersUserCounters(BaseObject):
     videos: Optional[int] = None
 
 
-class UsersUserMin(BaseObject):
+class UsersUserMin(Model):
     """VK Object Users/UsersUserMin"""
 
     deactivated: Optional[str] = None
@@ -6212,7 +6209,7 @@ class UsersUserFull(UsersUser):
     maiden_name: Optional[str] = None
     domain: Optional[str] = None
     bdate: Optional[str] = None
-    city: Optional["BaseObject"] = None
+    city: Optional["Model"] = None
     country: Optional["BaseCountry"] = None
     timezone: Optional[int] = None
     owner_state: Optional["OwnerState"] = None
@@ -6285,7 +6282,7 @@ class UsersUserRelation(enum.IntEnum):
     in_a_civil_union = 8
 
 
-class UsersUserSettingsXtr(BaseObject):
+class UsersUserSettingsXtr(Model):
     """VK Object Users/UsersUserSettingsXtr"""
 
     connections: Optional["UsersUserConnections"] = None
@@ -6330,7 +6327,7 @@ class UsersUserXtrType(UsersUser):
     type: Optional["UsersUserType"] = None
 
 
-class UsersUsersArray(BaseObject):
+class UsersUsersArray(Model):
     """VK Object Users/UsersUsersArray
 
     count - Users number
@@ -6340,7 +6337,7 @@ class UsersUsersArray(BaseObject):
     items: Optional[List[int]] = None
 
 
-class UtilsDomainResolved(BaseObject):
+class UtilsDomainResolved(Model):
     """VK Object Utils/UtilsDomainResolved"""
 
     object_id: Optional[int] = None
@@ -6357,7 +6354,7 @@ class UtilsDomainResolvedType(enum.Enum):
     PAGE = "page"
 
 
-class UtilsLastShortenedLink(BaseObject):
+class UtilsLastShortenedLink(Model):
     """VK Object Utils/UtilsLastShortenedLink
 
     access_key - Access key for private stats
@@ -6376,7 +6373,7 @@ class UtilsLastShortenedLink(BaseObject):
     views: Optional[int] = None
 
 
-class UtilsLinkChecked(BaseObject):
+class UtilsLinkChecked(Model):
     """VK Object Utils/UtilsLinkChecked"""
 
     link: Optional[str] = None
@@ -6399,7 +6396,7 @@ class UsersBlockReason(enum.IntEnum):
     IRRELEVANT_MESSAGES = 4
 
 
-class UtilsLinkStats(BaseObject):
+class UtilsLinkStats(Model):
     """VK Object Utils/UtilsLinkStats
 
     key - Link key (characters after vk.cc/)
@@ -6409,7 +6406,7 @@ class UtilsLinkStats(BaseObject):
     stats: Optional[List["UtilsStats"]] = None
 
 
-class UtilsLinkStatsExtended(BaseObject):
+class UtilsLinkStatsExtended(Model):
     """VK Object Utils/UtilsLinkStatsExtended
 
     key - Link key (characters after vk.cc/)
@@ -6419,7 +6416,7 @@ class UtilsLinkStatsExtended(BaseObject):
     stats: Optional[List["UtilsStatsExtended"]] = None
 
 
-class UtilsShortLink(BaseObject):
+class UtilsShortLink(Model):
     """VK Object Utils/UtilsShortLink
 
     access_key - Access key for private stats
@@ -6434,7 +6431,7 @@ class UtilsShortLink(BaseObject):
     url: Optional[str] = None
 
 
-class UtilsStats(BaseObject):
+class UtilsStats(Model):
     """VK Object Utils/UtilsStats
 
     timestamp - Start time
@@ -6445,7 +6442,7 @@ class UtilsStats(BaseObject):
     views: Optional[int] = None
 
 
-class UtilsStatsCity(BaseObject):
+class UtilsStatsCity(Model):
     """VK Object Utils/UtilsStatsCity
 
     city_id - City ID
@@ -6456,7 +6453,7 @@ class UtilsStatsCity(BaseObject):
     views: Optional[int] = None
 
 
-class UtilsStatsCountry(BaseObject):
+class UtilsStatsCountry(Model):
     """VK Object Utils/UtilsStatsCountry
 
     country_id - Country ID
@@ -6467,7 +6464,7 @@ class UtilsStatsCountry(BaseObject):
     views: Optional[int] = None
 
 
-class UtilsStatsExtended(BaseObject):
+class UtilsStatsExtended(Model):
     """VK Object Utils/UtilsStatsExtended
 
     timestamp - Start time
@@ -6481,7 +6478,7 @@ class UtilsStatsExtended(BaseObject):
     views: Optional[int] = None
 
 
-class UtilsStatsSexAge(BaseObject):
+class UtilsStatsSexAge(Model):
     """VK Object Utils/UtilsStatsSexAge
 
     age_range - Age denotation
@@ -6494,7 +6491,7 @@ class UtilsStatsSexAge(BaseObject):
     male: Optional[int] = None
 
 
-class VideoLiveSettings(BaseObject):
+class VideoLiveSettings(Model):
     """VK Object Video/VideoLiveSettings
 
     can_rewind - If user car rewind live or not
@@ -6507,14 +6504,14 @@ class VideoLiveSettings(BaseObject):
     max_duration: Optional[int] = None
 
 
-class VideoRestrictionButton(BaseObject):
+class VideoRestrictionButton(Model):
     """VK Object Video/VideoRestrictionButton"""
 
     action: Optional[str] = None
     title: Optional[str] = None
 
 
-class VideoSaveResult(BaseObject):
+class VideoSaveResult(Model):
     """VK Object Video/VideoSaveResult
 
     access_key - Video access key
@@ -6533,7 +6530,7 @@ class VideoSaveResult(BaseObject):
     video_id: Optional[int] = None
 
 
-class VideoVideo(BaseObject):
+class VideoVideo(Model):
     """VK Object Video/VideoVideo
 
     access_key - Video access key
@@ -6623,7 +6620,7 @@ class VideoVideo(BaseObject):
     reposts: Optional["BaseRepostsInfo"] = None
 
 
-class VideoVideoAlbumFull(BaseObject):
+class VideoVideoAlbumFull(Model):
     """VK Object Video/VideoVideoAlbumFull
 
     count - Total number of videos in album
@@ -6646,7 +6643,7 @@ class VideoVideoAlbumFull(BaseObject):
     updated_time: Optional[int] = None
 
 
-class VideoVideoFiles(BaseObject):
+class VideoVideoFiles(Model):
     """VK Object Video/VideoVideoFiles
 
     external - URL of the external player
@@ -6683,7 +6680,7 @@ class VideoVideoImage(BaseImage):
     with_padding: Optional["BasePropertyExists"] = None
 
 
-class WallAppPost(BaseObject):
+class WallAppPost(Model):
     """VK Object Wall/WallAppPost
 
     id - Application ID
@@ -6698,7 +6695,7 @@ class WallAppPost(BaseObject):
     photo_604: Optional[str] = None
 
 
-class WallAttachedNote(BaseObject):
+class WallAttachedNote(Model):
     """VK Object Wall/WallAttachedNote
 
     comments - Comments number
@@ -6719,7 +6716,7 @@ class WallAttachedNote(BaseObject):
     view_url: Optional[str] = None
 
 
-class WallCarouselBase(BaseObject):
+class WallCarouselBase(Model):
     """VK Object Wall/WallCarouselBase
 
     carousel_offset - Index of current carousel element
@@ -6728,7 +6725,7 @@ class WallCarouselBase(BaseObject):
     carousel_offset: Optional[int] = None
 
 
-class WallCommentAttachment(BaseObject):
+class WallCommentAttachment(Model):
     """VK Object Wall/WallCommentAttachment"""
 
     audio: Optional["AudioAudio"] = None
@@ -6759,7 +6756,7 @@ class WallCommentAttachmentType(enum.Enum):
     STICKER = "sticker"
 
 
-class WallGeo(BaseObject):
+class WallGeo(Model):
     """VK Object Wall/WallGeo
 
     coordinates - Coordinates as string. <latitude> <longtitude>
@@ -6773,7 +6770,7 @@ class WallGeo(BaseObject):
     type: Optional[str] = None
 
 
-class WallGraffiti(BaseObject):
+class WallGraffiti(Model):
     """VK Object Wall/WallGraffiti
 
     id - Graffiti ID
@@ -6788,7 +6785,7 @@ class WallGraffiti(BaseObject):
     photo_586: Optional[str] = None
 
 
-class WallPostCopyright(BaseObject):
+class WallPostCopyright(Model):
     """VK Object Wall/WallPostCopyright"""
 
     id: Optional[int] = None
@@ -6797,7 +6794,7 @@ class WallPostCopyright(BaseObject):
     type: Optional[str] = None
 
 
-class WallPostSource(BaseObject):
+class WallPostSource(Model):
     """VK Object Wall/WallPostSource"""
 
     data: Optional[str] = None
@@ -6827,7 +6824,7 @@ class WallPostType(enum.Enum):
     SUGGEST = "suggest"
 
 
-class WallPostedPhoto(BaseObject):
+class WallPostedPhoto(Model):
     """VK Object Wall/WallPostedPhoto
 
     id - Photo ID
@@ -6842,7 +6839,7 @@ class WallPostedPhoto(BaseObject):
     photo_604: Optional[str] = None
 
 
-class WallViews(BaseObject):
+class WallViews(Model):
     """VK Object Wall/WallViews
 
     count - Count
@@ -6851,7 +6848,7 @@ class WallViews(BaseObject):
     count: Optional[int] = None
 
 
-class WallWallComment(BaseObject):
+class WallWallComment(Model):
     """VK Object Wall/WallWallComment
 
     date - Date when the comment has been added in Unixtime
@@ -6879,7 +6876,7 @@ class WallWallComment(BaseObject):
     deleted: Optional[bool] = None
 
 
-class WallWallpost(BaseObject):
+class WallWallpost(Model):
     """VK Object Wall/WallWallpost
 
     access_key - Access key to private object
@@ -6918,7 +6915,7 @@ class WallWallpost(BaseObject):
     views: Optional["WallViews"] = None
 
 
-class WallWallpostAttachment(BaseObject):
+class WallWallpostAttachment(Model):
     """VK Object Wall/WallWallpostAttachment"""
 
     access_key: Optional[str] = None
@@ -6986,7 +6983,7 @@ class WallWallpostFull(WallCarouselBase, WallWallpost):
     short_text_rate: Optional[float] = None
 
 
-class WallWallpostToId(BaseObject):
+class WallWallpostToId(Model):
     """VK Object Wall/WallWallpostToId
 
     copy_owner_id - ID of the source post owner
@@ -7020,7 +7017,7 @@ class WallWallpostToId(BaseObject):
     to_id: Optional[int] = None
 
 
-class WidgetsCommentMedia(BaseObject):
+class WidgetsCommentMedia(Model):
     """VK Object Widgets/WidgetsCommentMedia"""
 
     item_id: Optional[int] = None
@@ -7037,7 +7034,7 @@ class WidgetsCommentMediaType(enum.Enum):
     VIDEO = "video"
 
 
-class WidgetsCommentReplies(BaseObject):
+class WidgetsCommentReplies(Model):
     """VK Object Widgets/WidgetsCommentReplies
 
     can_post - Information whether current user can comment the post
@@ -7049,7 +7046,7 @@ class WidgetsCommentReplies(BaseObject):
     replies: Optional[List["WidgetsCommentRepliesItem"]] = None
 
 
-class WidgetsCommentRepliesItem(BaseObject):
+class WidgetsCommentRepliesItem(Model):
     """VK Object Widgets/WidgetsCommentRepliesItem
 
     cid - Comment ID
@@ -7066,7 +7063,7 @@ class WidgetsCommentRepliesItem(BaseObject):
     user: Optional["UsersUserFull"] = None
 
 
-class WidgetsWidgetComment(BaseObject):
+class WidgetsWidgetComment(Model):
     """VK Object Widgets/WidgetsWidgetComment
 
     can_delete - Information whether current user can delete the comment
@@ -7094,7 +7091,7 @@ class WidgetsWidgetComment(BaseObject):
     user: Optional["UsersUserFull"] = None
 
 
-class WidgetsWidgetLikes(BaseObject):
+class WidgetsWidgetLikes(Model):
     """VK Object Widgets/WidgetsWidgetLikes
 
     count - Likes number
@@ -7103,7 +7100,7 @@ class WidgetsWidgetLikes(BaseObject):
     count: Optional[int] = None
 
 
-class WidgetsWidgetPage(BaseObject):
+class WidgetsWidgetPage(Model):
     """VK Object Widgets/WidgetsWidgetPage
 
     date - Date when widgets on the page has been initialized firstly in Unixtime
@@ -7115,11 +7112,11 @@ class WidgetsWidgetPage(BaseObject):
     url - Page absolute URL
     """
 
-    comments: Optional["BaseObjectCount"] = None
+    comments: Optional["ModelCount"] = None
     date: Optional[int] = None
     description: Optional[str] = None
     id: Optional[int] = None
-    likes: Optional["BaseObjectCount"] = None
+    likes: Optional["ModelCount"] = None
     page_id: Optional[str] = None
     photo: Optional[str] = None
     title: Optional[str] = None
@@ -7181,7 +7178,7 @@ class NewsfeedNewsfeedPhoto(PhotosPhoto):
     """
 
     likes: Optional["BaseLikes"] = None
-    comments: Optional["BaseObjectCount"] = None
+    comments: Optional["ModelCount"] = None
     can_repost: Optional["BaseBoolInt"] = None
 
 
@@ -7270,7 +7267,7 @@ class ClientInfoButtonActions(enum.Enum):
     INTENT_UNSUBSCRIBE = "intent_unsubscribe"
 
 
-class MessagesClientInfo(BaseObject):
+class MessagesClientInfo(Model):
     button_actions: Optional[List[ClientInfoButtonActions]] = None
     keyboard: Optional[bool] = None
     inline_keyboard: Optional[bool] = None
@@ -7361,9 +7358,9 @@ BaseLinkButtonAction.update_forward_refs()
 BaseLinkProduct.update_forward_refs()
 BaseLinkRating.update_forward_refs()
 BaseMessageError.update_forward_refs()
-BaseObject.update_forward_refs()
-BaseObjectCount.update_forward_refs()
-BaseObjectWithName.update_forward_refs()
+Model.update_forward_refs()
+ModelCount.update_forward_refs()
+ModelWithName.update_forward_refs()
 BasePlace.update_forward_refs()
 BaseRepostsInfo.update_forward_refs()
 BaseRequestParam.update_forward_refs()

@@ -1,7 +1,7 @@
 from typing import Optional, Any, Union, Callable
 import enum
-from ..abc import Model
 
+from ..abc import Model
 from ..objects import (
     WallWallComment,
     WallWallpost,
