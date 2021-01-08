@@ -13,8 +13,7 @@ class DictToObject:
     def __init__(self, dict_object: dict) -> None:
         self._data = dict_object
         for k, v in dict_object.items():
-            selected = self.type_handle(v)
-            self.__setattr__(k, selected)
+            self.__setattr__(k, self.type_handle(v))
 
     def __repr__(self) -> str:
         return f"<DictToObject: {self._raw_data}>"
