@@ -45,4 +45,4 @@ def form_render(path: str, **kwargs) -> str:
 def get_chat_id(peer_id: int) -> int:
     """ Получает chat_id из peer_id """
 
-    return peer_id - 2e9
+    return peer_id - 2_000_000_000

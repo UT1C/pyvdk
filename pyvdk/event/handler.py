@@ -53,7 +53,7 @@ class Handler(ABCHandler):
 
         self.rules.append(rule)
 
-    def check_rules(self, obj: Any) -> Tuple[bool, List[Any]]:
+    def filter(self, obj: Any) -> Tuple[bool, List[Any]]:
         """Метод пропускающий объект через правила
         Не использовать извне
 
@@ -94,7 +94,7 @@ class Handler(ABCHandler):
         """
 
         logger.debug(f"called {self}")
-        flag, args = self.check_rules(obj)
+        flag, args = self.filter(obj)
 
         if flag:
             try:

@@ -15,10 +15,10 @@ bot = Bot(config)
 
 @app.route('/', methods=['POST'])
 def bot_route():
-    return bot.request_handle(request.get_json())
+    return bot.process(request.get_json())
 
 
-@bot.on.message_new(text='/test')
+@bot.on.message(text='/test')
 def test_func(msg: types.Message):
     msg('brrrrrrr')
 

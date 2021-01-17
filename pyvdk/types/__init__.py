@@ -1,3 +1,3 @@
 from .abc import Model
-from .custom import Callback, Message
+from .custom import Message
 from .events import GroupTypes

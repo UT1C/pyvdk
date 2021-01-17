@@ -1,4 +1,4 @@
-from typing import Any, Callable, List, Union
+from typing import Any, Callable, List, Union, Dict
 
 from ..logging import log
 from ..rules import (
@@ -7,7 +7,9 @@ from ..rules import (
     TextRule,
     VBMLRule,
 )
+from ..api import ABCAPI
 from .abc import ABCHandler, ABCLabeler, ABCView
+from .view import MessageView, RawView
 from ..types.events import GroupEventType
 from .handler import Handler
 
@@ -17,11 +19,12 @@ logger = log.getLogger("event/labeler")
 class Labeler(ABCLabeler):
     """  """
 
-    def __init__(self, view: ABCView, endpoint_default: bool):
-        self._view = view
+    def __init__(self, api: ABCAPI, endpoint_default: bool):
+        self._message_view = MessageView(api)
+        self._raw_view = RawView(api)
         self._endpoint_default = endpoint_default
 
-    def message_new(
+    def message(
         self,
         *rules,
         text: str = None,
@@ -30,7 +33,7 @@ class Labeler(ABCLabeler):
         pattern: Union[str, List[str]] = None,
         level: int = 0,
         endpoint: bool = None
-    ) -> Callable:
+    ) -> Callable[[Callable], ABCHandler]:
         def decorator(func) -> ABCHandler:
 
             _rules = list(i for i in rules if isinstance(i, ABCRule))
@@ -56,7 +59,50 @@ class Labeler(ABCLabeler):
                 level=level,
                 endpoint=_endpoint
             )
-            self._view.add(handler)
+            self._message_view.add(handler)
             return handler
 
         return decorator
+
+    def raw(
+        self,
+        event_type: Union[str, GroupEventType],
+        dataclass: Callable = dict,
+        *rules: ABCRule,
+        level: int = 0,
+        endpoint: bool = None
+    ) -> Callable[[Callable], ABCHandler]:
+
+        if not isinstance(event_type, GroupEventType):
+            event_type = GroupEventType(event_type)
+
+        def decorator(func) -> ABCHandler:
+            _rules = list(i for i in rules if isinstance(i, ABCRule))
+
+            if endpoint is None:
+                _endpoint = self._endpoint_default
+            else:
+                _endpoint = endpoint
+
+            handler = Handler(
+                func,
+                GroupEventType.MESSAGE_NEW,
+                *_rules,
+                level=level,
+                endpoint=_endpoint
+            )
+            self._raw_view.add(handler, dataclass)
+            return handler
+
+        return decorator
+
+    def process(self, event: dict):
+        for view in self.views().values():
+            try:
+                if view.processible(event):
+                    view.process(event)
+            except Exception:
+                logger.exception("error during forwarding event in views")
+
+    def views(self) -> Dict[str, "ABCView"]:
+        return {"message": self._message_view, "raw": self._raw_view}

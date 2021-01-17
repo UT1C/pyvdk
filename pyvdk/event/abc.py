@@ -1,6 +1,6 @@
 import typing
 from abc import ABC, abstractmethod
-from typing import Any, Callable, List
+from typing import Any, Callable, Dict, List, Tuple, Union
 
 from ..api import ABCAPI
 from ..types.events import GroupEventType
@@ -18,6 +18,10 @@ class ABCHandler(ABC):
     endpoint: bool
 
     @abstractmethod
+    def filter(self, obj: Any) -> Tuple[bool, List[Any]]:
+        ...
+
+    @abstractmethod
     def handle(self, obj: Any) -> bool:
         ...
 
@@ -27,26 +31,33 @@ class ABCHandler(ABC):
 
 
 class ABCView(ABC):
-
     api: ABCAPI
     handlers: List[ABCHandler]
 
     @abstractmethod
-    def __init__(self, api: ABCAPI):
+    def __init__(self, api: ABCAPI) -> None:
         ...
 
     @abstractmethod
-    def process(self, event: dict):
+    def processible(self, event: dict) -> bool:
+        ...
+
+    @abstractmethod
+    def process(self, event: dict) -> None:
         ...
 
     @abstractmethod
     def add(self, handler: ABCHandler):
         ...
 
+    @abstractmethod
+    def extend(self, other: "ABCView"):
+        ...
+
 
 class ABCLabeler(ABC):
 
-    _view: ABCView
+    api: ABCAPI
     _endpoint_default: bool
 
     @abstractmethod
@@ -54,7 +65,24 @@ class ABCLabeler(ABC):
         ...
 
     @abstractmethod
-    def message_new(self, *rules, **kwargs):
+    def message(self, *rules, **kwargs) -> Callable[[Callable], ABCHandler]:
+        ...
+
+    @abstractmethod
+    def raw(
+        self,
+        event: Union[str, List[str]],
+        dataclass: Callable = dict,
+        *rules: "ABCRule",
+    ) -> Callable[[Callable], ABCHandler]:
+        ...
+
+    @abstractmethod
+    def views(self) -> Dict[str, "ABCView"]:
+        ...
+
+    @abstractmethod
+    def process(self, event: dict):
         ...
 
     # @abstractmethod

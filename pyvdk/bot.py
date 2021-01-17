@@ -4,12 +4,10 @@ from . import logging
 from .event import (
     ABCView,
     ABCLabeler,
-    View,
     Labeler
 )
 from .config import Config
 from .api import API, ABCAPI
-from .types import Callback
 
 logger = logging.log.getLogger('bot')
 
@@ -18,8 +16,7 @@ class Bot:
     """ Основной класс бота """
 
     api: ABCAPI
-    view: ABCView
-    on: ABCLabeler
+    labeler: ABCLabeler
     __config: Config
 
     def __init__(
@@ -34,36 +31,42 @@ class Bot:
 
         self.__config = config
         self.api = API(self.__config)
-        self.view = View(self.api)
-        self.on = Labeler(self.view, endpoint_default)
+        # self.view = View(self.api)
+        self.labeler = Labeler(self.api, endpoint_default)
+        # self.on = Labeler(self.view, endpoint_default)
+
+    @property
+    def on(self) -> ABCLabeler:
+        return self.labeler
 
     def add(self, *blueprints: "Blueprint"):
         """ Добавляет хендлеры из блюпринтов в бота """
 
         for bp in blueprints:
             bp.api = self.api
-            self.view.handlers.extend(bp.view.handlers)
+            views = self.labeler.views()
+            for k, v in bp.labeler.views().items():
+                views[k].extend(v)
 
     def process(self, request: dict) -> str:
         """ Обрабатывает запрос """
 
         logger.debug(f'new request: {request}')
-        callback = Callback(**request)
-        response = self.__check(callback)
+        response = self.__check(request)
         if response == 'ok':
-            logger.info(f"new event, type: {callback.type}")
-            self.view.process(callback)
+            logger.info(f"new event, type: {request.get('type')}")
+            self.labeler.process(request)
 
         return response
 
-    def __check(self, callback: Callback) -> str:
+    def __check(self, request: dict) -> str:
         """ Проверяет данные реквеста """
 
-        if callback.secret != self.__config.secret:
+        if request.get("secret") != self.__config.secret:
             logger.debug('secret key is invalid')
             return 'not ok'
 
-        elif callback.type == 'confirmation':
+        elif request.get("type") == 'confirmation':
             logger.info('confirmation request')
             return self.__config.confcode
 
@@ -75,10 +78,12 @@ class Blueprint:
     """  """
 
     api: Optional[ABCAPI]
-    view: ABCView
-    on: ABCLabeler
+    labeler: ABCLabeler
 
     def __init__(self, endpoint_default: bool = False) -> None:
         self.api = None
-        self.view = View(None)
-        self.on = Labeler(self.view, endpoint_default)
+        self.labeler = Labeler(self.api, endpoint_default)
+
+    @property
+    def on(self) -> ABCLabeler:
+        return self.labeler
