@@ -1,13 +1,26 @@
+from typing import List, Optional
+
 from requests import Session
 
 from ..config import Config
+from ..logging import log
+from ..tools import prepare_params
 from . import categories
 from .abc import ABCAPI
-from ..tools import prepare_params
-from ..logging import log
-
 
 logger = log.getLogger("api")
+
+
+class APIError(Exception):
+    code: Optional[int]
+    msg: str
+    params: dict
+
+    def __init__(self, message: str, code: int, params: List[dict]):
+
+        super().__init__(message)
+        self.code = code
+        self.params = {i["key"]: i["value"] for i in params}
 
 
 class RawAPI(ABCAPI):
@@ -41,14 +54,20 @@ class RawAPI(ABCAPI):
             }
             logger.debug(f"request {method} {params}")
             with self.session.post(url, params=_params, data=params) as r:
-                # TODO: find & throw vk error there
                 result = r.json()
-                logger.debug(f"response: [{r.status_code}] {result}")
-                return result
+            e = result.get("error")
+            if e is not None:
+                raise APIError(
+                    e.get("error_msg"),
+                    e.get("error_code"),
+                    e.get("request_params"),
+                )
+            logger.debug(f"response: [{r.status_code}] {result}")
+            return result
 
         # TODO: catch network exceptions there
         except Exception as e:
-            print(e)  # FIXME: log.exception()  (Возможно, я не уверен)
+            logger.exception("error")
             # NOTE: не сетевые ошибки - поднимать выше
             raise
 
