@@ -16,8 +16,7 @@ class FakeAPI(ABCAPI):
             id=1,
             out=1,
             peer_id=1,
-            api=self,
-            raw_data={'foo': 'bar'}
+            api=self
         )
 
 

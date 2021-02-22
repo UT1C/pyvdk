@@ -42,7 +42,7 @@ class View(ABCView):
         etype = GroupEventType(event.type)
         if etype == GroupEventType.MESSAGE_NEW:
             data = event.object["message"]
-            return Message(api=self.api, raw_data=data, **data)
+            return Message(api=self.api, **data)
         # FIXME: больше обрабатываемых типов
         elif etype == GroupEventType.GROUP_JOIN:
             raise NotImplementedError()
