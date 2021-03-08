@@ -1,7 +1,7 @@
-from typing import Any, Callable, Dict, List, Optional, Tuple, Union
 import random
-import time
 import re
+import time
+from typing import Any, Callable, Dict, Iterable, List, Optional, Set, Union
 
 import vbml
 
@@ -22,7 +22,7 @@ class Rule(ABCRule):
             alternative_operation_type="or"
         )
 
-    def __xor__(self, rule: "ABCRule") -> "ABCRulesBunch":
+    def __xor__(self, rule: ABCRule) -> ABCRulesBunch:
         return RulesBunch(
             self,
             alternative_rule=rule,
@@ -141,6 +141,22 @@ class VBMLRule(MessageRule):
                 return self.ok()
             if isinstance(result, dict):
                 return self.ok(*result.values())
+
+
+class FromIdRule(MessageRule):
+    ids: Set[int]
+
+    def __init__(self, ids: Union[int, Iterable[int]]):
+        if isinstance(ids, int):
+            self.ids = {ids, }
+        elif isinstance(ids, set):
+            self.ids = ids
+        else:
+            self.ids = set(ids)
+
+    def check(self, msg: Message) -> Optional[RuleResult]:
+        if msg.from_id in self.ids:
+            return self.ok()
 
 
 class PayloadRule(MessageRule):
