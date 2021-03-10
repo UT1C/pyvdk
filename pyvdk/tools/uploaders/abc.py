@@ -3,7 +3,7 @@ from typing import Optional, Union
 from pathlib import Path
 from io import BytesIO
 
-from ..api import ABCAPI
+from ...api import ABCAPI
 
 
 class Result:
@@ -77,5 +77,5 @@ class ABCUploader(ABC):
 
 __all__ = (
     "Result",
-    "ABCUploader",
+    "ABCUploader"
 )
