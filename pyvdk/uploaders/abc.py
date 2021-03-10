@@ -62,7 +62,7 @@ class ABCUploader(ABC):
             if thing.seekable():
                 thing.seek(0)
             if getattr(thing, "name", None) is None and self.filename:
-                thing.name = self.NAME
+                thing.name = self.filename
             uploaded = self._post(url, thing)
 
         else:

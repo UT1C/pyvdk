@@ -7,7 +7,7 @@ from .abc import ABCUploader
 
 
 class PhotoUploader(ABCUploader, ABC):
-    NAME = "picture.jpg"
+    filename = "picture.jpg"
 
 
 class PhotoToAlbumUploader(PhotoUploader):
