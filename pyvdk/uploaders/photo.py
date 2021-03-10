@@ -32,20 +32,20 @@ class PhotoMessageUploader(PhotoUploader):
 
     def get_server(self, **kwargs) -> dict:
         return self.api.request(
-            "photos.getMessagesUploadServer",
-            kwargs
+            "photos.getMessagesUploadServer", kwargs
         )["response"]
 
     def upload(self, thing: Union[str, Path, BytesIO], **params):
         server = self.get_server(**params)
         uploaded = self._upload(thing, server["upload_url"])
+        print(f"\tuploaded: {uploaded}")
 
         result = self.api.request(
-            "photos.saveMessagesPhoto",
-            {**uploaded, **params}
+            "photos.saveMessagesPhoto", uploaded
         )["response"]
+        print(f"\tresult: {result}")
 
-        return self.Result("photo", result)
+        return self.Result("photo", result[0])
 
 
 class PhotoChatFaviconUploader(PhotoUploader):

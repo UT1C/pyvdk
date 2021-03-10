@@ -17,10 +17,11 @@ class Result:
 
         try:
             self.attachstr = (
-                self.type + self.json["owner_id"] + "_"
-                + self.json["id"]
+                f"{self.type}{self.json['owner_id']}"
+                f"_{self.json['id']}"
             )
-        except Exception:
+        except Exception as e:
+            print(f"{e.__class__.__name__}: {e}")
             self.attachstr = None
 
 
@@ -47,23 +48,23 @@ class ABCUploader(ABC):
         ...
     # main public method
 
-    def _post(self, url: str, file):
-        with self.api.session.post(url, {"files": file}) as res:
+    def _post(self, url: str, **kwargs) -> dict:
+        with self.api.session.post(url, **kwargs) as res:
             uploaded = res.json()
         return uploaded
 
-    def _upload(self, thing: Union[str, Path, BytesIO], url):
+    def _upload(self, thing: Union[str, Path, BytesIO], url: str):
 
         if isinstance(thing, (str, Path)):
             with Path(thing).open("rb") as fp:
-                uploaded = self._post(url, fp)
+                uploaded = self._post(url, files={"photo": fp})
 
         elif isinstance(thing, BytesIO):
             if thing.seekable():
                 thing.seek(0)
             if getattr(thing, "name", None) is None and self.filename:
                 thing.name = self.filename
-            uploaded = self._post(url, thing)
+            uploaded = self._post(url, files={"photo": thing})
 
         else:
             raise Exception(f"unexpected {thing!r} with type {thing.__class__}")
