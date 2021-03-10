@@ -21,5 +21,6 @@ __all__ = (
     "VKPayButton",
     "AppButton",
     "CallbackButton",
-    "Mention"
+    "Mention",
+    "uploaders"
 )
