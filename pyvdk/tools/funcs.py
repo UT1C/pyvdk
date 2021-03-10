@@ -18,9 +18,8 @@ def prepare_params(params: dict) -> dict:
         if v is None:
             continue
         if isinstance(v, (tuple, list)):
-            # NOTE: возможно вместо repr нужен str, я пока не уверен
-            # объединение списков "[1, 2, 3]" к виду "1,2,3"
-            params[k] = ",".join(repr(i) for i in v)
+            # convert `[1, "2", 3]` to `"1,2,3"`
+            params[k] = ",".join(str(i) for i in v)
         elif isinstance(v, bool):
             params[k] = int(v)
 
