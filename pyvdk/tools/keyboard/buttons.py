@@ -3,40 +3,41 @@ from urllib.parse import urlencode
 from dataclasses import dataclass
 import json
 
-from .abc import ABCButton
+from .abc import ABCButton, ColorData
 
 
-@dataclass
-class Button(ABCButton):
+class Button(ABCButton, ColorData):
     """ Объект кнопки """
 
-    color: str
+    def __init__(self, payload: Optional[Union[str, dict]] = None) -> None:
+        if payload is None:
+            payload = dict()
+        elif not isinstance(payload, dict):
+            payload = {'command': payload}
 
-    def __post_init__(self) -> None:
-        color = self.color
-        payload = self.payload
-
-        self.color = self._colors.get(color, color)
-
-        if payload is not None:
-            if not isinstance(payload, dict):
-                payload = {'command': payload}
-            self.payload = json.dumps(payload)
+        self.payload = json.dumps(payload)
 
     def __call__(self) -> dict:
         action = self.get_action()
-        action.update({'payload': self.payload})
 
         return {
-            'color': self.color,
             'action': action
         }
 
 
-@dataclass
 class TextButton(Button):
     label: str
-    payload: Optional[Union[str, dict]] = None
+    color: str
+
+    def __init__(
+        self,
+        label: str,
+        color: str,
+        payload: Optional[Union[str, dict]] = None
+    ) -> None:
+        self.label = label
+        self.color = self._colors.get(color, color)
+        super().__init__(payload)
 
     def get_action(self) -> dict:
         return {

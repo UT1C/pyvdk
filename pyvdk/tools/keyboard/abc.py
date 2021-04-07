@@ -24,7 +24,7 @@ class ColorData:
     }
 
 
-class ABCKeyboard(ABC, ColorData):
+class ABCKeyboard(ABC):
     one_time: bool
     inline: bool
     buttons: List[Deque["ABCButton"]]
@@ -68,13 +68,13 @@ class ABCKeyboard(ABC, ColorData):
         ...
 
 
-class ABCButton(ABC, ColorData):
-    color: str
-    payload: Optional[Union[str, dict]] = None
+class ABCButton(ABC):
+    payload: dict
 
     @abstractmethod
     def __call__(self) -> dict:
         ...
 
+    @abstractmethod
     def get_action(self) -> dict:
         ...

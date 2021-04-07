@@ -1,11 +1,11 @@
-from typing import Iterable, Optional, Union, List
+from typing import Iterable, Optional, List
 from collections import deque
 import json
 
-from .abc import ABCButton, ABCKeyboard
+from .abc import ABCButton, ABCKeyboard, ColorData
 
 
-class Keyboard(ABCKeyboard):
+class Keyboard(ABCKeyboard, ColorData):
     """ Объект клавиатуры """
 
     __selected_row: Optional[int] = None
@@ -48,7 +48,7 @@ class Keyboard(ABCKeyboard):
         }
         return json.dumps(data)
 
-    def append(self, button: ABCButton, row: Optional[int] = 0):
+    def append(self, button: ABCButton, row: int = 0):
         self._get_row(row).append(button)
         self._check_count()
 
@@ -64,7 +64,7 @@ class Keyboard(ABCKeyboard):
         self._get_row(row).extendleft(buttons)
         self._check_count()
 
-    def _get_row(self, row: Union[int, None]) -> deque:
+    def _get_row(self, row: Optional[int]) -> deque:
         if row == 0 and self.__selected_row is not None:
             row = self.__selected_row
             self.__selected_row = None
