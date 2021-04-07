@@ -98,7 +98,7 @@ class Handler(ABCHandler):
 
         if flag:
             try:
-                logger.debug(f"processing {obj} with {self}")
+                logger.debug(f"processing {repr(obj)} with {self}")
                 self.function(obj, *args)
             except Exception:
                 logger.exception("exception occured in handler!")
