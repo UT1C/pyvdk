@@ -9,7 +9,7 @@ from ..rules import (
 )
 from ..api import ABCAPI
 from .abc import ABCHandler, ABCLabeler, ABCView
-from .view import MessageView, RawView
+from .view import MessageView, RawView, AnyView
 from ..types.events import GroupEventType
 from .handler import Handler
 
@@ -22,6 +22,7 @@ class Labeler(ABCLabeler):
     def __init__(self, api: ABCAPI, endpoint_default: bool):
         self._message_view = MessageView(api)
         self._raw_view = RawView(api)
+        self._any_view = AnyView(api)
         self._endpoint_default = endpoint_default
 
     def message(
@@ -96,6 +97,33 @@ class Labeler(ABCLabeler):
 
         return decorator
 
+    def any(
+        self,
+        *rules: ABCRule,
+        level: int = 0,
+        endpoint: bool = None
+    ) -> Callable[[Callable], ABCHandler]:
+
+        def decorator(func) -> ABCHandler:
+            _rules = list(i for i in rules if isinstance(i, ABCRule))
+
+            if endpoint is None:
+                _endpoint = self._endpoint_default
+            else:
+                _endpoint = endpoint
+
+            handler = Handler(
+                func,
+                GroupEventType.MESSAGE_NEW,  # FIXME: any event type
+                *_rules,
+                level=level,
+                endpoint=_endpoint
+            )
+            self._any_view.add(handler)
+            return handler
+
+        return decorator
+
     def process(self, event: dict):
         for view in self.views().values():
             try:
@@ -105,4 +133,8 @@ class Labeler(ABCLabeler):
                 logger.exception("error during forwarding event in views")
 
     def views(self) -> Dict[str, "ABCView"]:
-        return {"message": self._message_view, "raw": self._raw_view}
+        return {
+            "message": self._message_view,
+            "raw": self._raw_view,
+            "any": self._any_view,
+        }

@@ -40,6 +40,7 @@ class MessageView(ABCView):
         self.handlers.append(handler)
 
     def extend(self, other: "MessageView"):
+        """ extend self with other """
         self.handlers.extend(other.handlers)
 
 
@@ -72,5 +73,38 @@ class RawView(ABCView):
         self.handlers[handler.type].append((handler, dataclass))
 
     def extend(self, other: "RawView"):
+        """ extend self with other """
         for k, v in other.handlers.items():
             self.handlers[k].extend(v)
+
+
+class AnyView(ABCView):
+
+    def __init__(self, api: ABCAPI) -> None:
+        self.api = api
+        self.handlers = []
+
+    def processible(self, event: dict) -> bool:
+        return True
+
+    def process(self, event: dict) -> None:
+        logger.debug("creating object")
+
+        obj = event["object"]
+
+        logger.debug(f"forwarding {repr(obj)} in handlers")
+        self.handlers.sort(key=lambda handler: handler.level)
+
+        for handler in self.handlers:
+            handled = handler.handle(obj)
+            if handled and handler.endpoint:
+                break
+
+        logger.debug("forwarding done")
+
+    def add(self, handler: ABCHandler):
+        self.handlers.append(handler)
+
+    def extend(self, other: "AnyView"):
+        """ extend self with other """
+        self.handlers.extend(other.handlers)
